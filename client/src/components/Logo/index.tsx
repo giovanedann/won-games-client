@@ -2,11 +2,12 @@ import * as S from './styles'
 
 export type LogoProps = {
   color?: 'white' | 'black'
+  size?: 'normal' | 'large'
 }
 
-function Logo({ color }: LogoProps) {
+function Logo({ color = 'white', size = 'normal' }: LogoProps) {
   return (
-    <S.Wrapper color={color}>
+    <S.Wrapper color={color} size={size}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
