@@ -13,6 +13,13 @@ export default {
       control: {
         type: 'radio'
       }
+    },
+    size: {
+      name: 'color',
+      options: ['normal', 'large'],
+      control: {
+        type: 'select'
+      }
     }
   }
 } as ComponentMeta<typeof Logo>
@@ -22,5 +29,6 @@ const Template: ComponentStory<typeof Logo> = (args) => <Logo {...args} />
 export const Basic = Template.bind({})
 
 Basic.args = {
-  color: 'white'
+  color: 'white',
+  size: 'normal'
 }
