@@ -3,12 +3,16 @@ import * as S from './styles'
 export type LogoProps = {
   color?: 'white' | 'black'
   size?: 'normal' | 'large'
-  hidden?: boolean
+  hideOnMobile?: boolean
 }
 
-function Logo({ color = 'white', size = 'normal', hidden = false }: LogoProps) {
+function Logo({
+  color = 'white',
+  size = 'normal',
+  hideOnMobile = false
+}: LogoProps) {
   return (
-    <S.Wrapper color={color} size={size} hidden={hidden}>
+    <S.Wrapper color={color} size={size} hideOnMobile={hideOnMobile}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
