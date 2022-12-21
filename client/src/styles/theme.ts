@@ -27,9 +27,11 @@ export default {
     mainBg: '#06092B',
     white: '#FAFAFA',
     black: '#030517',
-    lightGray: '#EAEAEA',
-    gray: '#8F8F8F',
-    darkGray: '#2E2F42'
+    gray: {
+      100: '#EAEAEA',
+      400: '#8F8F8F',
+      600: '#2E2f42'
+    }
   },
   spacings: {
     xxsmall: '0.8rem',
