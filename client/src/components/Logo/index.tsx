@@ -1,8 +1,12 @@
 import * as S from './styles'
 
-function Logo() {
+export type LogoProps = {
+  color?: 'white' | 'black'
+}
+
+function Logo({ color }: LogoProps) {
   return (
-    <S.Wrapper>
+    <S.Wrapper color={color}>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 158 48">
         <path
           fill="url(#a)"
