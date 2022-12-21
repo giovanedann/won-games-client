@@ -7,11 +7,20 @@ export default {
   title: 'Logo',
   component: Logo,
   argTypes: {
-    // place your args types here
+    color: {
+      name: 'color',
+      options: ['white', 'black'],
+      control: {
+        type: 'radio'
+      }
+    }
   }
 } as ComponentMeta<typeof Logo>
 
-const Template: ComponentStory<typeof Logo> = () => <Logo />
+const Template: ComponentStory<typeof Logo> = (args) => <Logo {...args} />
 
 export const Basic = Template.bind({})
-Basic.args = {} // default values for your props
+
+Basic.args = {
+  color: 'white'
+}
