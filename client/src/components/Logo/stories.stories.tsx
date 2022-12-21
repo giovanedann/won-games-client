@@ -20,6 +20,10 @@ export default {
       control: {
         type: 'select'
       }
+    },
+    hideOnMobile: {
+      name: 'hidden',
+      type: 'boolean'
     }
   }
 } as ComponentMeta<typeof Logo>
@@ -30,5 +34,6 @@ export const Basic = Template.bind({})
 
 Basic.args = {
   color: 'white',
-  size: 'normal'
+  size: 'normal',
+  hideOnMobile: false
 }
