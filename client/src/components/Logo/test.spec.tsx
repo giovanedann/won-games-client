@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import Logo from '.'
 import theme from 'styles/theme'
@@ -30,5 +30,22 @@ describe('<Logo />', () => {
     rerender(<Logo size="normal" />)
     svgWrapper = screen.getByLabelText(/won games/i).parentElement
     expect(svgWrapper).toHaveStyle({ width: '11rem', height: '3.3rem' })
+  })
+
+  it('should render the logo without text on small screens if hideOnMobile is true', () => {
+    renderWithTheme(<Logo hideOnMobile />)
+    const svgWrapper = screen.getByLabelText(/won games/i).parentElement
+    expect(svgWrapper).toHaveStyleRule('width', '5.8rem', {
+      media: '(max-width: 768px)'
+    })
+  })
+
+  it('should render the logo with text on small screens if hideOnMobile is false', () => {
+    renderWithTheme(<Logo hideOnMobile={false} />)
+    const svgWrapper = screen.getByLabelText(/won games/i).parentElement
+    const svgText = svgWrapper?.getElementsByClassName('text')
+    expect(svgText).not.toHaveStyleRule('display', 'none', {
+      media: '(max-width: 768px)'
+    })
   })
 })
