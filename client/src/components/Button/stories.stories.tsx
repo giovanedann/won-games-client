@@ -7,11 +7,26 @@ export default {
   title: 'Button',
   component: Button,
   argTypes: {
-    // place your args types here
+    children: {
+      type: 'string',
+      control: {
+        type: 'text'
+      }
+    },
+    size: {
+      type: 'string',
+      options: ['small', 'medium', 'large'],
+      control: {
+        type: 'select'
+      }
+    }
   }
 } as ComponentMeta<typeof Button>
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
 
 export const Basic = Template.bind({})
-Basic.args = {} // default values for your props
+Basic.args = {
+  children: 'Button',
+  size: 'medium'
+}
