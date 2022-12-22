@@ -13,6 +13,19 @@ export default {
       control: {
         type: 'text'
       }
+    },
+    color: {
+      type: 'string',
+      options: ['white', 'black'],
+      control: {
+        type: 'radio'
+      }
+    },
+    lineBottom: {
+      type: 'boolean'
+    },
+    lineLeft: {
+      type: 'boolean'
     }
   }
 } as ComponentMeta<typeof Heading>
@@ -21,5 +34,8 @@ const Template: ComponentStory<typeof Heading> = (args) => <Heading {...args} />
 
 export const Basic = Template.bind({})
 Basic.args = {
-  children: 'Heading'
+  children: 'Heading',
+  color: 'black',
+  lineBottom: false,
+  lineLeft: false
 } // default values for your props
