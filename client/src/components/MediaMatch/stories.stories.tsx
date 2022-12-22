@@ -1,17 +1,30 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import MediaMatch from '.'
 
 export default {
   title: 'MediaMatch',
   component: MediaMatch,
-  argTypes: {
-    // place your args types here
+  parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'desktop'
+    }
   }
 } as ComponentMeta<typeof MediaMatch>
 
-const Template: ComponentStory<typeof MediaMatch> = (args) => <MediaMatch {...args} />
+export const Desktop: ComponentStory<typeof MediaMatch> = () => (
+  <MediaMatch greaterThan="medium">Desktop</MediaMatch>
+)
 
-export const Basic = Template.bind({})
-Basic.args = {} // default values for your props
+export const Mobile: ComponentStory<typeof MediaMatch> = () => (
+  <MediaMatch lessThan="medium">Mobile</MediaMatch>
+)
+
+Mobile.parameters = {
+  viewport: {
+    defaultViewport: 'mobile1'
+  }
+}
