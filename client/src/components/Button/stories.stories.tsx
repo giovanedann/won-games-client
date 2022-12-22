@@ -19,6 +19,9 @@ export default {
       control: {
         type: 'select'
       }
+    },
+    fullWidth: {
+      type: 'boolean'
     }
   }
 } as ComponentMeta<typeof Button>
@@ -28,5 +31,6 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
 export const Basic = Template.bind({})
 Basic.args = {
   children: 'Button',
-  size: 'medium'
+  size: 'medium',
+  fullWidth: false
 }
