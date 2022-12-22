@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import renderWithTheme from 'utils/tests/renderWithTheme'
+import { MdOutlineAddShoppingCart } from 'react-icons/md'
 import theme from 'styles/theme'
 import Button from '.'
 
@@ -39,6 +40,58 @@ describe('<Button />', () => {
 
     expect(screen.getByRole('button', { name: /buy now/i })).toHaveStyle({
       width: '100%'
+    })
+  })
+
+  it('should render an icon on left side of the text', () => {
+    renderWithTheme(
+      <Button icon={<MdOutlineAddShoppingCart title="shopping cart icon" />}>
+        Buy now
+      </Button>
+    )
+
+    expect(screen.getByText(/buy now/i)).toBeInTheDocument()
+    expect(screen.getByTitle(/shopping cart icon/i)).toBeInTheDocument()
+  })
+
+  it('should render the right svg variants', () => {
+    const { rerender } = renderWithTheme(
+      <Button icon={<MdOutlineAddShoppingCart title="shopping cart icon" />}>
+        Buy now
+      </Button>
+    )
+
+    expect(screen.getByTitle(/shopping cart icon/i).parentElement).toHaveStyle({
+      width: '1.7rem',
+      height: '1.7rem'
+    })
+
+    rerender(
+      <Button
+        icon={<MdOutlineAddShoppingCart title="shopping cart icon" />}
+        size="small"
+      >
+        Buy now
+      </Button>
+    )
+
+    expect(screen.getByTitle(/shopping cart icon/i).parentElement).toHaveStyle({
+      width: '1.5rem',
+      height: '1.5rem'
+    })
+
+    rerender(
+      <Button
+        icon={<MdOutlineAddShoppingCart title="shopping cart icon" />}
+        size="large"
+      >
+        Buy now
+      </Button>
+    )
+
+    expect(screen.getByTitle(/shopping cart icon/i).parentElement).toHaveStyle({
+      width: '2rem',
+      height: '2rem'
     })
   })
 })
