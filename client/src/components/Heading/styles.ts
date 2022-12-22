@@ -18,7 +18,7 @@ const wrapperVariants = {
       bottom: -1rem;
       content: '';
       width: 5rem;
-      border: 0.5rem solid ${({ theme }) => theme.colors.primary};
+      border-bottom: 0.7rem solid ${({ theme }) => theme.colors.primary};
     }
   `
 }
