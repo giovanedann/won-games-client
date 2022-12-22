@@ -3,7 +3,7 @@ import * as S from './styles'
 
 export type HeadingProps = {
   children: ReactNode
-  color: 'white' | 'black'
+  color?: 'white' | 'black'
   lineLeft?: boolean
   lineBottom?: boolean
 }
