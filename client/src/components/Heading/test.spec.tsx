@@ -22,7 +22,7 @@ describe('<Heading />', () => {
     renderWithTheme(<Heading lineLeft>Heading</Heading>)
     const header = screen.getByRole('heading', { level: 2, name: /heading/i })
     expect(header).toHaveStyle({
-      'border-left': `0.7rem solid ${theme.colors.secondary}`
+      'border-left': `0.7rem solid ${theme.colors.primary}`
     })
   })
 
@@ -34,5 +34,49 @@ describe('<Heading />', () => {
       `0.7rem solid ${theme.colors.primary}`,
       { modifier: '::after' }
     )
+  })
+
+  it('should render a heading with a small size', () => {
+    renderWithTheme(<Heading size="small">Heading</Heading>)
+    const header = screen.getByRole('heading', { level: 2, name: /heading/i })
+
+    expect(header).toHaveStyle({ 'font-size': theme.font.sizes.medium })
+    expect(header).toHaveStyleRule('width', '3rem', { modifier: '::after' })
+  })
+
+  it('should render the bottom and left line according to lineColor', () => {
+    let header
+    const { rerender } = renderWithTheme(
+      <Heading lineBottom lineLeft lineColor="primary">
+        Heading
+      </Heading>
+    )
+    header = screen.getByRole('heading', { level: 2, name: /heading/i })
+
+    expect(header).toHaveStyleRule(
+      'border-bottom',
+      `0.7rem solid ${theme.colors.primary}`,
+      { modifier: '::after' }
+    )
+    expect(header).toHaveStyle({
+      'border-left': `0.7rem solid ${theme.colors.primary}`
+    })
+
+    rerender(
+      <Heading lineBottom lineLeft lineColor="secondary">
+        Heading
+      </Heading>
+    )
+
+    header = screen.getByRole('heading', { level: 2, name: /heading/i })
+
+    expect(header).toHaveStyleRule(
+      'border-bottom',
+      `0.7rem solid ${theme.colors.secondary}`,
+      { modifier: '::after' }
+    )
+    expect(header).toHaveStyle({
+      'border-left': `0.7rem solid ${theme.colors.secondary}`
+    })
   })
 })
