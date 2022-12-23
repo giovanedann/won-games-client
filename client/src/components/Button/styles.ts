@@ -66,6 +66,11 @@ export const Wrapper = styled.button<WrapperProps>`
   background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
   border: none;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 0.9;
+  }
 
   ${({ theme, size, fullWidth, hasIcon }) => css`
     font-weight: ${theme.font.bold};
