@@ -52,3 +52,17 @@ WithIcon.args = {
   icon: <MdOutlineAddShoppingCart />,
   fullWidth: false
 }
+
+const LinkTemplate: ComponentStory<typeof Button> = (args) => (
+  <Button {...args} />
+)
+
+export const AsLink = LinkTemplate.bind({})
+
+AsLink.args = {
+  children: 'As link',
+  size: 'medium',
+  fullWidth: false,
+  as: 'a',
+  href: '/link'
+}
