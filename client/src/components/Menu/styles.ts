@@ -104,8 +104,8 @@ export const OpenedMenu = styled.nav<OpenedMenuProps>`
       right: 0;
       margin: ${theme.spacings.xsmall};
       cursor: pointer;
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 3rem;
+      height: 3rem;
     }
 
     ${MenuNav} {
