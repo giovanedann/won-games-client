@@ -21,6 +21,20 @@ export default {
         type: 'radio'
       }
     },
+    size: {
+      type: 'string',
+      options: ['small', 'medium'],
+      control: {
+        type: 'select'
+      }
+    },
+    lineColor: {
+      type: 'string',
+      options: ['primary', 'secondary'],
+      control: {
+        type: 'select'
+      }
+    },
     lineBottom: {
       type: 'boolean'
     },
@@ -37,5 +51,7 @@ Basic.args = {
   children: 'Heading',
   color: 'black',
   lineBottom: false,
-  lineLeft: false
-} // default values for your props
+  lineLeft: false,
+  size: 'medium',
+  lineColor: 'primary'
+}
