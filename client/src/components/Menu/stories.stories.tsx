@@ -6,10 +6,17 @@ import Menu from '.'
 export default {
   title: 'Menu',
   component: Menu,
-  argTypes: {}
+  argTypes: {
+    username: {
+      type: 'string',
+      control: {
+        type: 'text'
+      }
+    }
+  }
 } as ComponentMeta<typeof Menu>
 
-const Template: ComponentStory<typeof Menu> = () => <Menu />
+const Template: ComponentStory<typeof Menu> = (args) => <Menu {...args} />
 
 export const Basic = Template.bind({})
 
