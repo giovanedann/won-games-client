@@ -65,10 +65,10 @@ const wrapperVariants = {
 export const Wrapper = styled.button<WrapperProps>`
   background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
   border: none;
-  font-weight: 600;
   cursor: pointer;
 
   ${({ theme, size, fullWidth, hasIcon }) => css`
+    font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
     border-radius: ${theme.border.radius};
     padding: ${theme.spacings.xxsmall};
