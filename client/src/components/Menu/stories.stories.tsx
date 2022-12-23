@@ -6,12 +6,17 @@ import Menu from '.'
 export default {
   title: 'Menu',
   component: Menu,
-  argTypes: {
-    // place your args types here
-  }
+  argTypes: {}
 } as ComponentMeta<typeof Menu>
 
-const Template: ComponentStory<typeof Menu> = (args) => <Menu {...args} />
+const Template: ComponentStory<typeof Menu> = () => <Menu />
 
 export const Basic = Template.bind({})
-Basic.args = {} // default values for your props
+
+Basic.args = {}
+Basic.parameters = {
+  layout: 'fullscreen',
+  backgrounds: {
+    default: 'dark'
+  }
+}
