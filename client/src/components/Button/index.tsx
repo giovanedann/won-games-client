@@ -1,12 +1,15 @@
-import { MouseEvent, ReactNode } from 'react'
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, ElementType } from 'react'
 import * as S from './styles'
 
-export type ButtonProps = {
-  children?: ReactNode
+type ButtonTypes =
+  | AnchorHTMLAttributes<HTMLAnchorElement>
+  | ButtonHTMLAttributes<HTMLButtonElement>
+
+export type ButtonProps = ButtonTypes & {
   size?: 'small' | 'medium' | 'large'
   fullWidth?: boolean
   icon?: JSX.Element
-  onClick?: () => (event: MouseEvent<HTMLButtonElement>) => void
+  as?: ElementType
 }
 
 function Button({
@@ -14,14 +17,14 @@ function Button({
   size = 'medium',
   fullWidth = false,
   icon,
-  onClick
+  ...props
 }: ButtonProps) {
   return (
     <S.Wrapper
       size={size}
       fullWidth={fullWidth}
       hasIcon={Boolean(icon)}
-      onClick={onClick}
+      {...props}
     >
       {icon && icon}
       {!!children && <span>{children}</span>}
