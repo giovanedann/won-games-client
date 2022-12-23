@@ -5,7 +5,11 @@ import Logo from 'components/Logo'
 import { useState } from 'react'
 import Button from 'components/Button'
 
-function Menu() {
+type MenuProps = {
+  username?: string
+}
+
+function Menu({ username }: MenuProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
@@ -29,20 +33,24 @@ function Menu() {
         <S.MenuNav>
           <S.MenuLink href="#">Home</S.MenuLink>
           <S.MenuLink href="#">Explore</S.MenuLink>
-          <>
-            <S.MenuLink href="#">My account</S.MenuLink>
-            <S.MenuLink href="#">Wishlist</S.MenuLink>
-          </>
+          {Boolean(username) && (
+            <>
+              <S.MenuLink href="#">My account</S.MenuLink>
+              <S.MenuLink href="#">Wishlist</S.MenuLink>
+            </>
+          )}
         </S.MenuNav>
-        <S.RegisterBox>
-          <Button fullWidth size="large">
-            Log in now
-          </Button>
-          <span>or</span>
-          <S.SignUp href="#" title="Sign Up">
-            Sign Up
-          </S.SignUp>
-        </S.RegisterBox>
+        {!username && (
+          <S.RegisterBox>
+            <Button fullWidth size="large">
+              Log in now
+            </Button>
+            <span>or</span>
+            <S.SignUp href="#" title="Sign Up">
+              Sign Up
+            </S.SignUp>
+          </S.RegisterBox>
+        )}
       </S.OpenedMenu>
     </S.Wrapper>
   )
