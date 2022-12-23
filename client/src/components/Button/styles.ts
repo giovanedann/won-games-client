@@ -26,10 +26,6 @@ const wrapperVariants = {
     width: 100%;
   `,
   hasIcon: (size: 'small' | 'medium' | 'large') => css`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
     svg {
       & + span {
         margin-left: ${({ theme }) => theme.spacings.xxsmall};
@@ -63,10 +59,14 @@ const wrapperVariants = {
 }
 
 export const Wrapper = styled.button<WrapperProps>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
   border: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  text-decoration: none;
 
   &:hover {
     opacity: 0.9;
