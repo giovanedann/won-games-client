@@ -35,3 +35,11 @@ export const IconWrapper = styled.div`
     cursor: pointer;
   `}
 `
+
+type OpenedMenuProps = { isOpen: boolean }
+
+export const OpenedMenu = styled.nav<OpenedMenuProps>`
+  ${({ isOpen }) => css`
+    opacity: ${isOpen ? 1 : 0};
+  `}
+`
