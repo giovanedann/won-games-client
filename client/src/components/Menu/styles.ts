@@ -17,7 +17,7 @@ export const Wrapper = styled.menu`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    padding: ${theme.spacings.small} 0;
+    padding: ${theme.spacings.small} ${theme.spacings.xxsmall};
     position: relative;
   `}
 `
@@ -46,6 +46,11 @@ export const IconWrapper = styled.div`
     width: 2.4rem;
     height: 2.4rem;
     cursor: pointer;
+
+    > svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
   `}
 `
 
