@@ -94,4 +94,23 @@ describe('<Button />', () => {
       height: '2rem'
     })
   })
+
+  it('should render the button as a link', () => {
+    renderWithTheme(
+      <Button as="a" href="/mylink">
+        Buy now
+      </Button>
+    )
+
+    expect(
+      screen.queryByRole('button', {
+        name: /buy now/i
+      })
+    ).not.toBeInTheDocument()
+
+    expect(screen.getByRole('link', { name: /buy now/i })).toHaveAttribute(
+      'href',
+      '/mylink'
+    )
+  })
 })
