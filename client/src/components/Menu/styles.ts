@@ -34,6 +34,7 @@ export const MenuGroup = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-grow: 1;
+    align-items: center;
     justify-content: flex-end;
     gap: ${theme.spacings.xsmall};
   `}
@@ -48,12 +49,17 @@ export const IconWrapper = styled.div`
   `}
 `
 
-export const MenuNav = styled.div``
+export const MenuNav = styled.div`
+  ${({ theme }) => media.greaterThan('medium')`
+    margin-left: ${theme.spacings.small}
+  `}
+`
 
 export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
     font-size: ${theme.font.sizes.medium};
+    color: ${theme.colors.white};
     margin: 0.3rem ${theme.spacings.small} 0;
     text-decoration: none;
     text-align: center;
