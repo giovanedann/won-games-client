@@ -7,7 +7,15 @@ import styled from 'styled-components'
 export default {
   title: 'Highlight',
   component: Highlight,
-  argTypes: {}
+  argTypes: {
+    alignment: {
+      type: 'string',
+      options: ['left', 'right'],
+      control: {
+        type: 'select'
+      }
+    }
+  }
 } as ComponentMeta<typeof Highlight>
 
 const Wrapper = styled.div`
