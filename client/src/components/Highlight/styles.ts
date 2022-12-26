@@ -2,15 +2,63 @@ import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 import { HighlightProps } from '.'
 
-type WrapperProps = Pick<HighlightProps, 'backgroundImage'>
+type WrapperProps = Pick<HighlightProps, 'backgroundImage' | 'alignment'>
+
+export const Content = styled.div`
+  ${({ theme }) => css`
+    z-index: ${theme.layers.base};
+    text-align: right;
+    padding: ${theme.spacings.xsmall};
+    grid-area: content;
+
+    ${media.greaterThan('medium')`
+      align-self: end;
+      padding: ${theme.spacings.large};
+    `}
+  `}
+`
+
+export const FloatImage = styled.img`
+  ${({ theme }) => css`
+    grid-area: floatimage;
+    z-index: ${theme.layers.base};
+    max-height: 23rem;
+    max-width: 100%;
+    align-self: end;
+
+    ${media.greaterThan('medium')`
+      max-height: 32rem;
+    `}
+  `}
+`
+
+const wrapperVariants = {
+  right: css`
+    grid-template-areas: 'floatimage content';
+    grid-template-columns: 1.3fr 2fr;
+
+    ${Content} {
+      text-align: right;
+    }
+  `,
+
+  left: css`
+    grid-template-areas: 'content floatimage';
+    grid-template-columns: 2fr 1.3fr;
+    ${Content} {
+      text-align: left;
+    }
+    ${FloatImage} {
+      justify-self: end;
+    }
+  `
+}
 
 export const Wrapper = styled.section<WrapperProps>`
   position: relative;
   background-position: center center;
   height: 23rem;
   display: grid;
-  grid-template-areas: 'floatimage content';
-  grid-template-columns: 1.3fr 2fr;
 
   ${({ backgroundImage }) => css`
     background-image: url(${backgroundImage});
@@ -27,20 +75,8 @@ export const Wrapper = styled.section<WrapperProps>`
   ${media.greaterThan('medium')`
     height: 32rem;
   `}
-`
 
-export const Content = styled.div`
-  ${({ theme }) => css`
-    z-index: ${theme.layers.base};
-    text-align: right;
-    padding: ${theme.spacings.xsmall};
-    grid-area: content;
-
-    ${media.greaterThan('medium')`
-      align-self: end;
-      padding: ${theme.spacings.large};
-    `}
-  `}
+  ${({ alignment }) => wrapperVariants[alignment!]}
 `
 
 export const Title = styled.h2`
@@ -64,20 +100,6 @@ export const SubTitle = styled.h3`
 
     ${media.greaterThan('medium')`
       font-size: ${theme.font.sizes.large};
-    `}
-  `}
-`
-
-export const FloatImage = styled.img`
-  ${({ theme }) => css`
-    grid-area: floatimage;
-    z-index: ${theme.layers.base};
-    max-height: 23rem;
-    max-width: 100%;
-    align-self: end;
-
-    ${media.greaterThan('medium')`
-      max-height: 32rem;
     `}
   `}
 `
