@@ -6,6 +6,7 @@ const props = {
   title: 'Title',
   subtitle: 'Subtitle',
   buttonLabel: 'Buy now',
+  backgroundImage: '/img/red-dead-img.jpg',
   buttonLink: '/reddeadredemption2'
 }
 
