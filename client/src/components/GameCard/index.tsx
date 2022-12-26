@@ -7,28 +7,38 @@ export type GameCardProps = {
   developer: string
   img: string
   price: string
+  promotionalPrice?: string
 }
 
-function GameCard({ developer, img, price, title }: GameCardProps) {
+function GameCard({
+  developer,
+  img,
+  price,
+  title,
+  promotionalPrice
+}: GameCardProps) {
   return (
     <S.Wrapper>
       <S.ImageBox>
         <img src={img} alt={title} />
       </S.ImageBox>
 
-      <S.Info>
-        <S.Title>{title}</S.Title>
-        <S.Developer>{developer}</S.Developer>
-      </S.Info>
+      <S.Content>
+        <S.Info>
+          <S.Title>{title}</S.Title>
+          <S.Developer>{developer}</S.Developer>
+        </S.Info>
 
-      <S.FavButton role="button">
-        <MdFavoriteBorder aria-label="add to wishlist" />
-      </S.FavButton>
+        <S.FavButton role="button">
+          <MdFavoriteBorder aria-label="add to wishlist" />
+        </S.FavButton>
 
-      <S.BuyBox>
-        <S.Price>{price}</S.Price>
-        <Button icon={<MdAddShoppingCart />} size="small" />
-      </S.BuyBox>
+        <S.BuyBox>
+          {promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
+          <S.Price>{promotionalPrice || price}</S.Price>
+          <Button icon={<MdAddShoppingCart />} size="small" />
+        </S.BuyBox>
+      </S.Content>
     </S.Wrapper>
   )
 }
