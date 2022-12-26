@@ -1,4 +1,6 @@
 import Button from 'components/Button'
+import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
+import { ReactNode } from 'react'
 import { MdAddShoppingCart, MdFavoriteBorder, MdFavorite } from 'react-icons/md'
 import * as S from './styles'
 
@@ -10,6 +12,9 @@ export type GameCardProps = {
   promotionalPrice?: string
   favorite?: boolean
   onFav?: () => void
+  ribbon?: ReactNode
+  ribbonColor?: RibbonColors
+  ribbonSize?: RibbonSizes
 }
 
 function GameCard({
@@ -19,10 +24,19 @@ function GameCard({
   title,
   favorite = false,
   onFav,
-  promotionalPrice
+  promotionalPrice,
+  ribbon,
+  ribbonColor = 'primary',
+  ribbonSize = 'small'
 }: GameCardProps) {
   return (
     <S.Wrapper>
+      {ribbon && (
+        <Ribbon color={ribbonColor} size={ribbonSize}>
+          {ribbon}
+        </Ribbon>
+      )}
+
       <S.ImageBox>
         <img src={img} alt={title} />
       </S.ImageBox>
