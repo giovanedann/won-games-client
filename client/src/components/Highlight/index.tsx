@@ -23,7 +23,7 @@ function Highlight({
       {floatImage && <S.FloatImage src={floatImage} alt={title} />}
       <S.Content>
         <S.Title>{title}</S.Title>
-        <S.Subtitle>{subtitle}</S.Subtitle>
+        <S.SubTitle>{subtitle}</S.SubTitle>
         <Button as="a" href={buttonLink}>
           {buttonLabel}
         </Button>
