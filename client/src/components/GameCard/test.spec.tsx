@@ -78,4 +78,17 @@ describe('<GameCard />', () => {
     expect(favoriteHandler).toBeCalled()
     expect(favoriteHandler).toBeCalledTimes(1)
   })
+
+  it('should render a ribbon', () => {
+    renderWithTheme(
+      <GameCard
+        {...props}
+        ribbon="Ribbon"
+        ribbonColor="primary"
+        ribbonSize="small"
+      />
+    )
+
+    expect(screen.getByText(/ribbon/i)).toBeInTheDocument()
+  })
 })
