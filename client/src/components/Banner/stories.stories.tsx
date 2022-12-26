@@ -2,16 +2,24 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 import Banner from '.'
+import styled from 'styled-components'
 
 export default {
   title: 'Banner',
   component: Banner,
-  argTypes: {
-    // place your args types here
-  }
+  argTypes: {}
 } as ComponentMeta<typeof Banner>
 
-const Template: ComponentStory<typeof Banner> = (args) => <Banner {...args} />
+const BannerWrapper = styled.div`
+  max-width: 104rem;
+  margin: 0 auto;
+`
+
+const Template: ComponentStory<typeof Banner> = (args) => (
+  <BannerWrapper>
+    <Banner {...args} />
+  </BannerWrapper>
+)
 
 export const Basic = Template.bind({})
 
@@ -21,4 +29,8 @@ Basic.args = {
   subtitle: '<p>Can you defeat <strong>Hades</strong> in this journey?</p>',
   buttonLabel: 'Buy now',
   buttonLink: 'https://store.steampowered.com/app/1145360/Hades/'
+}
+
+Basic.parameters = {
+  layout: 'fullscreen'
 }
