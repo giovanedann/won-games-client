@@ -2,6 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 import Highlight from '.'
+import styled from 'styled-components'
 
 export default {
   title: 'Highlight',
@@ -9,8 +10,14 @@ export default {
   argTypes: {}
 } as ComponentMeta<typeof Highlight>
 
+const Wrapper = styled.div`
+  max-width: 104rem;
+`
+
 const Template: ComponentStory<typeof Highlight> = (args) => (
-  <Highlight {...args} />
+  <Wrapper>
+    <Highlight {...args} />
+  </Wrapper>
 )
 
 export const Basic = Template.bind({})
@@ -20,4 +27,11 @@ Basic.args = {
   backgroundImage: '/img/red-dead-img.jpg',
   buttonLabel: 'Buy now',
   buttonLink: '/reddeadredemption2'
+}
+
+export const WithFloatImage = Template.bind({})
+
+WithFloatImage.args = {
+  ...Basic.args,
+  floatImage: '/img/red-dead-float.png'
 }
