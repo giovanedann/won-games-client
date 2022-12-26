@@ -7,7 +7,19 @@ import styled from 'styled-components'
 export default {
   title: 'GameCard',
   component: GameCard,
-  argTypes: {}
+  argTypes: {
+    onFav: {
+      action: 'clicked',
+      type: 'symbol'
+    },
+    favorite: {
+      type: 'boolean',
+      control: {
+        options: [true, false],
+        type: 'boolean'
+      }
+    }
+  }
 } as ComponentMeta<typeof GameCard>
 
 const Wrapper = styled.div`
@@ -26,15 +38,25 @@ Basic.args = {
   title: 'Devil May Cry 5',
   developer: 'Capcom',
   img: 'https://images6.alphacoders.com/926/thumb-1920-926723.jpg',
-  price: 'R$ 235,00'
+  price: 'R$ 235,00',
+  favorite: false
+}
+
+Basic.parameters = {
+  controls: {
+    exclude: ['promotionalPrice', 'onFav']
+  }
 }
 
 export const Promotional = Template.bind({})
 
 Promotional.args = {
-  title: 'Devil May Cry 5',
-  developer: 'Capcom',
-  img: 'https://images6.alphacoders.com/926/thumb-1920-926723.jpg',
-  price: 'R$ 235,00',
+  ...Basic.args,
   promotionalPrice: 'R$ 130,00'
+}
+
+Promotional.parameters = {
+  controls: {
+    exclude: ['onFav']
+  }
 }
