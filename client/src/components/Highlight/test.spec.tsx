@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import Highlight from '.'
+import * as S from './styles'
 
 const props = {
   title: 'Title',
@@ -40,5 +41,29 @@ describe('<Highlight />', () => {
     const titleRegExp = new RegExp(props.title, 'i')
 
     expect(screen.getByRole('img', { name: titleRegExp })).toBeInTheDocument()
+  })
+
+  it('should change alignment accordingly to alignment prop', () => {
+    const { rerender, container } = renderWithTheme(<Highlight {...props} />)
+
+    expect(container.firstChild).toHaveStyleRule(
+      'grid-template-areas',
+      "'floatimage content'"
+    )
+
+    expect(container.firstChild).toHaveStyleRule('text-align', 'right', {
+      modifier: `${S.Content}`
+    })
+
+    rerender(<Highlight {...props} alignment="left" />)
+
+    expect(container.firstChild).toHaveStyleRule(
+      'grid-template-areas',
+      "'content floatimage'"
+    )
+
+    expect(container.firstChild).toHaveStyleRule('text-align', 'left', {
+      modifier: `${S.Content}`
+    })
   })
 })
