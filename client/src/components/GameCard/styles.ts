@@ -84,6 +84,7 @@ export const FavButton = styled.div`
 
     svg {
       width: 2.5rem;
+      height: 2.5rem;
     }
   `}
 `
