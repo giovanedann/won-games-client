@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import GameCard from '.'
 
@@ -58,5 +59,23 @@ describe('<GameCard />', () => {
 
     const promotionalPrice = screen.getByText(/R\$ 235,00/i)
     expect(promotionalPrice).toBeInTheDocument()
+  })
+
+  it('should render a filled heart icon when favorite is true', () => {
+    renderWithTheme(<GameCard {...props} favorite />)
+
+    expect(screen.getByLabelText(/remove from wishlist/i)).toBeInTheDocument()
+  })
+
+  it('should call onFav function on heart icon click', async () => {
+    const user = userEvent.setup()
+    const favoriteHandler = jest.fn()
+
+    renderWithTheme(<GameCard {...props} onFav={favoriteHandler} />)
+
+    await user.click(screen.getByLabelText(/favorite button/i))
+
+    expect(favoriteHandler).toBeCalled()
+    expect(favoriteHandler).toBeCalledTimes(1)
   })
 })
