@@ -21,7 +21,9 @@ const Template: ComponentStory<typeof Footer> = () => (
 )
 
 export const Basic = Template.bind({})
-Basic.args = {} // default values for your props
+
+Basic.args = {}
+
 Basic.parameters = {
   backgrounds: {
     default: 'light'
