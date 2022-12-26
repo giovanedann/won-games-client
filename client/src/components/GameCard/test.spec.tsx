@@ -30,4 +30,33 @@ describe('<GameCard />', () => {
 
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()
   })
+
+  it('should render the normal price without text decoration if no promotionalPrice', () => {
+    renderWithTheme(<GameCard {...props} />)
+
+    expect(screen.getByText(/R\$ 235,00/i)).not.toHaveStyle({
+      textDecoration: 'line-through'
+    })
+  })
+
+  it('should render the normal price with a line through if promotionalPrice', () => {
+    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 120,00" />)
+
+    expect(screen.getByText(/R\$ 235,00/i)).toHaveStyle({
+      textDecoration: 'line-through'
+    })
+  })
+
+  it('should render the card with both prices', () => {
+    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 120,00" />)
+
+    const fullPrice = screen.getByText(/R\$ 235,00/i)
+    expect(fullPrice).toBeInTheDocument()
+    expect(fullPrice).toHaveStyle({
+      textDecoration: 'line-through'
+    })
+
+    const promotionalPrice = screen.getByText(/R\$ 235,00/i)
+    expect(promotionalPrice).toBeInTheDocument()
+  })
 })
