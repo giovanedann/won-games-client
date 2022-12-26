@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
+import theme from 'styles/theme'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import Banner from '.'
 
@@ -23,5 +24,21 @@ describe('<Banner />', () => {
     ).toBeInTheDocument()
 
     expect(screen.getByRole('img', { name: /defy death/i })).toBeInTheDocument()
+  })
+
+  it('should render a ribbon', () => {
+    renderWithTheme(
+      <Banner
+        {...props}
+        ribbon="Ribbon"
+        ribbonSize="small"
+        ribbonColor="secondary"
+      />
+    )
+
+    const ribbon = screen.getByText(/ribbon/i)
+    expect(ribbon).toBeInTheDocument()
+    expect(ribbon).toHaveStyle({ 'background-color': theme.colors.secondary })
+    expect(ribbon).toHaveStyle({ height: '2.6rem', 'font-size': '1.2rem' })
   })
 })
