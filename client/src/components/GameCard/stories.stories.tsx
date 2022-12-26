@@ -44,7 +44,13 @@ Basic.args = {
 
 Basic.parameters = {
   controls: {
-    exclude: ['promotionalPrice', 'onFav']
+    exclude: [
+      'promotionalPrice',
+      'onFav',
+      'ribbon',
+      'ribbonColor',
+      'ribbonSize'
+    ]
   }
 }
 
@@ -56,6 +62,22 @@ Promotional.args = {
 }
 
 Promotional.parameters = {
+  controls: {
+    exclude: ['onFav']
+  }
+}
+
+export const WithRibbon = Template.bind({})
+
+WithRibbon.args = {
+  ...Basic.args,
+  promotionalPrice: 'R$ 130,00',
+  ribbon: '55% OFF',
+  ribbonColor: 'primary',
+  ribbonSize: 'small'
+}
+
+WithRibbon.parameters = {
   controls: {
     exclude: ['onFav']
   }
