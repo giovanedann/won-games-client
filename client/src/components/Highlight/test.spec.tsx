@@ -7,7 +7,8 @@ const props = {
   subtitle: 'Subtitle',
   buttonLabel: 'Buy now',
   backgroundImage: '/img/red-dead-img.jpg',
-  buttonLink: '/reddeadredemption2'
+  floatImage: '/img/red-dead-float.png',
+  buttonLink: '/games/rdr2'
 }
 
 describe('<Highlight />', () => {
@@ -23,5 +24,21 @@ describe('<Highlight />', () => {
     ).toBeInTheDocument()
 
     expect(screen.getByRole('link', { name: /buy now/i })).toBeInTheDocument()
+  })
+
+  it('should render the background image', () => {
+    const { container } = renderWithTheme(<Highlight {...props} />)
+
+    expect(container.firstChild).toHaveStyle({
+      backgroundImage: `${props.backgroundImage}`
+    })
+  })
+
+  it('should render the float image', () => {
+    renderWithTheme(<Highlight {...props} />)
+
+    const titleRegExp = new RegExp(props.title, 'i')
+
+    expect(screen.getByRole('img', { name: titleRegExp })).toBeInTheDocument()
   })
 })
