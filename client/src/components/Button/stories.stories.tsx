@@ -40,11 +40,7 @@ Basic.args = {
   fullWidth: false
 }
 
-const IconTemplate: ComponentStory<typeof Button> = (args) => (
-  <Button icon={<MdOutlineAddShoppingCart />} {...args} />
-)
-
-export const WithIcon = IconTemplate.bind({})
+export const WithIcon = Template.bind({})
 
 WithIcon.args = {
   children: 'With icon',
@@ -53,11 +49,7 @@ WithIcon.args = {
   fullWidth: false
 }
 
-const LinkTemplate: ComponentStory<typeof Button> = (args) => (
-  <Button {...args} />
-)
-
-export const AsLink = LinkTemplate.bind({})
+export const AsLink = Template.bind({})
 
 AsLink.args = {
   children: 'As link',
