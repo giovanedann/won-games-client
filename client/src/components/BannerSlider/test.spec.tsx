@@ -29,9 +29,8 @@ describe('<BannerSlider />', () => {
   })
 
   it('should render with 1 active item', () => {
-    const { debug, container } = renderWithTheme(<BannerSlider items={items} />)
+    const { container } = renderWithTheme(<BannerSlider items={items} />)
 
-    debug()
     expect(container.getElementsByClassName('slick-slide')).toHaveLength(2)
     expect(container.querySelectorAll('li.slick-active')).toHaveLength(1)
 
@@ -50,5 +49,11 @@ describe('<BannerSlider />', () => {
         hidden: true
       })
     ).toBeInTheDocument()
+  })
+
+  it('should render the dots', () => {
+    const { container } = renderWithTheme(<BannerSlider items={items} />)
+
+    expect(container.querySelector('.slick-dots')).toBeInTheDocument()
   })
 })
