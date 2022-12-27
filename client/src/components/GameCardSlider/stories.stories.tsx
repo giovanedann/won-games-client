@@ -69,7 +69,8 @@ const Template: ComponentStory<typeof GameCardSlider> = (args) => (
 export const Basic = Template.bind({})
 
 Basic.args = {
-  items: items
+  items: items,
+  color: 'white'
 }
 
 Basic.parameters = {
