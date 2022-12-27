@@ -1,7 +1,7 @@
 const config = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
-  moduleDirectories: ['node_modules', 'src'],
+  moduleDirectories: ['node_modules', '<rootDir>/src', '<rootDir>/.jest'],
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/**/*.tsx',
