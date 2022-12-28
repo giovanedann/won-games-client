@@ -113,4 +113,24 @@ describe('<Button />', () => {
       '/mylink'
     )
   })
+
+  it('should render the minimal styles', () => {
+    renderWithTheme(
+      <Button
+        icon={<MdOutlineAddShoppingCart title="shopping cart icon" />}
+        minimal
+      >
+        Buy now
+      </Button>
+    )
+
+    expect(screen.getByRole('button')).toHaveStyle({
+      background: theme.colors.white,
+      color: theme.colors.primary,
+      border: `1px solid ${theme.colors.white}`
+    })
+
+    expect(screen.getByText(/buy now/i)).toBeInTheDocument()
+    expect(screen.getByTitle(/shopping cart icon/i)).toBeInTheDocument()
+  })
 })
