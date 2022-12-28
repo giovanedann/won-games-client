@@ -69,6 +69,19 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
       font-family: ${theme.font.family};
       font-size: ${theme.font.sizes.medium};
 
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: ${({ theme }) => theme.colors.primary};
+        border-radius: 3px;
+      }
+
       ${!removeBg &&
       css`
         background-color: ${theme.colors.mainBg};
