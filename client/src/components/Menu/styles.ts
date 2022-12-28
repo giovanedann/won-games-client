@@ -90,7 +90,8 @@ export const OpenedMenu = styled.nav<OpenedMenuProps>`
     flex-direction: column;
     justify-content: space-between;
     background: ${theme.colors.white};
-    position: absolute;
+    position: fixed;
+    z-index: ${theme.layers.menu};
     inset: 0;
     height: 100vh;
     overflow: hidden;
