@@ -26,6 +26,12 @@ export default {
     },
     icon: {
       type: 'symbol'
+    },
+    minimal: {
+      type: 'boolean',
+      control: {
+        type: 'boolean'
+      }
     }
   }
 } as ComponentMeta<typeof Button>
@@ -57,4 +63,20 @@ AsLink.args = {
   fullWidth: false,
   as: 'a',
   href: '/link'
+}
+
+export const Minimal = Template.bind({})
+
+Minimal.args = {
+  children: 'Button',
+  size: 'medium',
+  icon: <MdOutlineAddShoppingCart />,
+  fullWidth: false,
+  minimal: true
+}
+
+Minimal.parameters = {
+  backgrounds: {
+    default: 'won-dark'
+  }
 }
