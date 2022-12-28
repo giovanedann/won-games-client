@@ -10,21 +10,25 @@ const wrapperVariants = {
     height: 3rem;
     font-size: ${({ theme }) => theme.font.sizes.xsmall};
   `,
+
   medium: css`
     height: 4rem;
     font-size: ${({ theme }) => theme.font.sizes.small};
     padding: ${({ theme }) =>
       `${theme.spacings.xxsmall} ${theme.spacings.medium}`};
   `,
+
   large: css`
     height: 5rem;
     font-size: ${({ theme }) => theme.font.sizes.medium};
     padding: ${({ theme }) =>
       `${theme.spacings.xxsmall} ${theme.spacings.xlarge}`};
   `,
+
   fullWidth: css`
     width: 100%;
   `,
+
   hasIcon: (size: 'small' | 'medium' | 'large') => css`
     svg {
       & + span {
@@ -55,6 +59,21 @@ const wrapperVariants = {
         height: 2rem;
       }
     `}
+  `,
+
+  minimal: css`
+    background: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.primary};
+    border: 1px solid ${({ theme }) => theme.colors.white};
+
+    &:hover {
+      opacity: 1;
+      border: 1px solid ${({ theme }) => theme.colors.primary};
+    }
+
+    svg {
+      color: ${({ theme }) => theme.colors.primary};
+    }
   `
 }
 
@@ -72,7 +91,7 @@ export const Wrapper = styled.button<WrapperProps>`
     opacity: 0.9;
   }
 
-  ${({ theme, size, fullWidth, hasIcon }) => css`
+  ${({ theme, size, fullWidth, hasIcon, minimal }) => css`
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
     border-radius: ${theme.border.radius};
@@ -80,5 +99,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${wrapperVariants[size!]};
     ${fullWidth && wrapperVariants.fullWidth};
     ${hasIcon && wrapperVariants.hasIcon(size!)};
+    ${minimal && wrapperVariants.minimal};
   `}
 `
