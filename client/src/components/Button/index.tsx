@@ -10,6 +10,7 @@ export type ButtonProps = ButtonTypes & {
   fullWidth?: boolean
   icon?: JSX.Element
   as?: ElementType
+  minimal?: boolean
 }
 
 function Button({
@@ -17,6 +18,7 @@ function Button({
   size = 'medium',
   fullWidth = false,
   icon,
+  minimal = false,
   ...props
 }: ButtonProps) {
   return (
@@ -24,6 +26,7 @@ function Button({
       size={size}
       fullWidth={fullWidth}
       hasIcon={Boolean(icon)}
+      minimal={minimal}
       {...props}
     >
       {icon && icon}
