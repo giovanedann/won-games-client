@@ -1,4 +1,4 @@
-export default [
+const items = [
   {
     title: 'Population Zero',
     developer: 'Rockstar Games',
@@ -42,3 +42,5 @@ export default [
     promotionalPrice: 'R$ 215,00'
   }
 ]
+
+export default items

@@ -1,4 +1,4 @@
-export default [
+const items = [
   {
     img: 'https://source.unsplash.com/user/willianjusten/1042x580',
     title: 'Defy death 1',
@@ -22,3 +22,5 @@ export default [
     buttonLink: '/games/defy-death'
   }
 ]
+
+export default items
