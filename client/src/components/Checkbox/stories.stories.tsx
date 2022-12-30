@@ -7,11 +7,16 @@ export default {
   title: 'Checkbox',
   component: Checkbox,
   argTypes: {
-    // place your args types here
+    onCheck: { action: 'checked' }
   }
 } as ComponentMeta<typeof Checkbox>
 
-const Template: ComponentStory<typeof Checkbox> = (args) => <Checkbox {...args} />
+const Template: ComponentStory<typeof Checkbox> = (args) => (
+  <Checkbox {...args} />
+)
 
 export const Basic = Template.bind({})
-Basic.args = {} // default values for your props
+Basic.args = {
+  label: '',
+  labelFor: 'mycheckbox'
+}
