@@ -13,7 +13,7 @@ function Checkbox({
 }: CheckboxProps) {
   return (
     <S.Wrapper>
-      <input type="checkbox" id={labelFor} />
+      <S.Input type="checkbox" id={labelFor} />
 
       {label && (
         <S.Label htmlFor={labelFor} role="label" labelColor={labelColor}>
