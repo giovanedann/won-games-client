@@ -51,6 +51,7 @@ describe('<Checkbox />', () => {
     await user.click(screen.getByRole('checkbox'))
 
     expect(checkHandler).toBeCalled()
+    expect(checkHandler).toBeCalledWith(true)
     expect(checkHandler).toBeCalledTimes(1)
   })
 
@@ -65,5 +66,25 @@ describe('<Checkbox />', () => {
     await user.click(screen.getByRole('checkbox'))
 
     expect(checkHandler).not.toBeCalled()
+  })
+
+  it('if isChecked is true, the value should be false', async () => {
+    const user = userEvent.setup()
+    const checkHandler = jest.fn()
+
+    renderWithTheme(
+      <Checkbox
+        label="My label"
+        labelFor="mycheckbox"
+        labelColor="black"
+        onCheck={checkHandler}
+        isChecked
+      />
+    )
+
+    await user.click(screen.getByRole('checkbox'))
+
+    expect(checkHandler).toBeCalled()
+    expect(checkHandler).toBeCalledWith(false)
   })
 })
