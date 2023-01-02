@@ -16,7 +16,15 @@ const Template: ComponentStory<typeof Checkbox> = (args) => (
 )
 
 export const Basic = Template.bind({})
+
+Basic.parameters = {
+  backgrounds: {
+    default: 'won-dark'
+  }
+}
+
 Basic.args = {
-  label: '',
-  labelFor: 'mycheckbox'
+  label: 'Checkbox',
+  labelFor: 'mycheckbox',
+  color: 'white'
 }
