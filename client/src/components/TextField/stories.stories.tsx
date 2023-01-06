@@ -14,7 +14,8 @@ export default {
   title: 'TextInput',
   component: TextField,
   argTypes: {
-    onInput: { action: 'changed' }
+    onInput: { action: 'changed' },
+    icon: { type: 'symbol' }
   }
 } as ComponentMeta<typeof TextField>
 
