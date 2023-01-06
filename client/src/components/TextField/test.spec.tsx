@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MdEmail } from 'react-icons/md'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import TextField from '.'
 
@@ -61,5 +62,21 @@ describe('<TextField />', () => {
     await user.tab()
 
     expect(screen.getByRole('textbox')).toHaveFocus()
+  })
+
+  it('should render with an icon', () => {
+    renderWithTheme(
+      <TextField
+        labelFor="text"
+        id="text"
+        placeholder="jane.doe@mail.com"
+        icon={<MdEmail title="email icon" />}
+      />
+    )
+
+    expect(screen.getByTitle(/email icon/)).toBeInTheDocument()
+    expect(screen.getByTitle(/email icon/).parentElement).toBeInstanceOf(
+      SVGElement
+    )
   })
 })
