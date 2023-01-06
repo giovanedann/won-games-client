@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components'
 import { TextFieldProps } from '.'
 
-export const Wrapper = styled.div``
-
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
@@ -49,7 +47,7 @@ export const Icon = styled.div<IconProps>`
   ${({ theme, iconPosition }) => css`
     display: flex;
     width: 2.2rem;
-    color: ${theme.colors.gray[400]};
+    color: ${theme.colors.gray[600]};
     align-items: center;
     order: ${iconPosition === 'right' ? 1 : 0};
 
@@ -57,4 +55,25 @@ export const Icon = styled.div<IconProps>`
       width: 100%;
     }
   `}
+`
+
+type WrapperProps = Pick<TextFieldProps, 'disabled'>
+
+const wrapperVariants = {
+  disabled: css`
+    ${Label},
+    ${Input},
+    ${Icon} {
+      cursor: not-allowed;
+      color: ${({ theme }) => theme.colors.gray[400]};
+
+      &::placeholder {
+        color: currentColor;
+      }
+    }
+  `
+}
+
+export const Wrapper = styled.div<WrapperProps>`
+  ${({ disabled }) => disabled && wrapperVariants.disabled};
 `
