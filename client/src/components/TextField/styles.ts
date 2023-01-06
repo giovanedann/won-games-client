@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+export const Wrapper = styled.div``
+
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
@@ -8,6 +10,7 @@ export const InputWrapper = styled.div`
     padding: 0 ${theme.spacings.xsmall};
     border: 0.2rem solid;
     border-color: ${theme.colors.gray[100]};
+
     &:focus-within {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};
     }
@@ -35,4 +38,14 @@ export const Label = styled.label`
   `}
 `
 
-export const Wrapper = styled.div``
+export const Icon = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    width: 2.2rem;
+    color: ${theme.colors.gray[400]};
+
+    & > svg {
+      width: 100%;
+    }
+  `}
+`
