@@ -113,4 +113,47 @@ describe('<TextField />', () => {
 
     expect(screen.getByRole('textbox')).toHaveStyle({ order: 0 })
   })
+
+  it('should not change the value when typing if disabled', async () => {
+    const user = userEvent.setup()
+    const inputHandler = jest.fn()
+
+    renderWithTheme(
+      <TextField
+        label="text"
+        labelFor="text"
+        id="text"
+        placeholder="jane.doe@mail.com"
+        onInputChange={inputHandler}
+        disabled
+      />
+    )
+
+    const text = 'typing...'
+    await user.type(screen.getByRole('textbox'), text)
+
+    expect(screen.getByRole('textbox')).toBeDisabled()
+
+    expect(inputHandler).not.toBeCalled()
+    expect(inputHandler).not.toBeCalledWith(text)
+  })
+
+  it('should not be accessible by tab if disabled', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(
+      <TextField
+        labelFor="text"
+        id="text"
+        placeholder="jane.doe@mail.com"
+        disabled
+      />
+    )
+
+    expect(document.body).toHaveFocus()
+
+    await user.tab()
+
+    expect(document.body).toHaveFocus()
+    expect(screen.getByRole('textbox')).not.toHaveFocus()
+  })
 })
