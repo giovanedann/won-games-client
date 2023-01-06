@@ -22,7 +22,7 @@ export const Input = styled.input`
     color: ${theme.colors.black};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xxsmall} 0;
+    padding: ${theme.spacings.xxsmall};
     background: transparent;
     border: 0;
     outline: none;
@@ -43,6 +43,7 @@ export const Icon = styled.div`
     display: flex;
     width: 2.2rem;
     color: ${theme.colors.gray[400]};
+    align-items: center;
 
     & > svg {
       width: 100%;
