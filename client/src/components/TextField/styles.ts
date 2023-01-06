@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { TextFieldProps } from '.'
 
 export const Wrapper = styled.div``
 
@@ -17,16 +18,20 @@ export const InputWrapper = styled.div`
   `}
 `
 
-export const Input = styled.input`
-  ${({ theme }) => css`
+type InputProps = Pick<TextFieldProps, 'iconPosition'>
+
+export const Input = styled.input<InputProps>`
+  ${({ theme, iconPosition }) => css`
     color: ${theme.colors.black};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xxsmall};
+    padding: ${theme.spacings.xxsmall} 0;
+    padding-${iconPosition}: ${theme.spacings.xsmall};
     background: transparent;
     border: 0;
     outline: none;
     width: 100%;
+    order: ${iconPosition === 'right' ? 0 : 1};
   `}
 `
 
@@ -38,12 +43,15 @@ export const Label = styled.label`
   `}
 `
 
-export const Icon = styled.div`
-  ${({ theme }) => css`
+type IconProps = Pick<TextFieldProps, 'iconPosition'>
+
+export const Icon = styled.div<IconProps>`
+  ${({ theme, iconPosition }) => css`
     display: flex;
     width: 2.2rem;
     color: ${theme.colors.gray[400]};
     align-items: center;
+    order: ${iconPosition === 'right' ? 1 : 0};
 
     & > svg {
       width: 100%;
