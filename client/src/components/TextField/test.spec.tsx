@@ -79,4 +79,38 @@ describe('<TextField />', () => {
       SVGElement
     )
   })
+
+  it('should switch the order of elements based on the iconPosition prop', () => {
+    const { rerender } = renderWithTheme(
+      <TextField
+        labelFor="text"
+        id="text"
+        placeholder="jane.doe@mail.com"
+        icon={<MdEmail title="email icon" />}
+        iconPosition="left"
+      />
+    )
+
+    expect(
+      screen.getByTitle(/email icon/).parentElement?.parentElement
+    ).toHaveStyle({ order: 0 })
+
+    expect(screen.getByRole('textbox')).toHaveStyle({ order: 1 })
+
+    rerender(
+      <TextField
+        labelFor="text"
+        id="text"
+        placeholder="jane.doe@mail.com"
+        icon={<MdEmail title="email icon" />}
+        iconPosition="right"
+      />
+    )
+
+    expect(
+      screen.getByTitle(/email icon/).parentElement?.parentElement
+    ).toHaveStyle({ order: 1 })
+
+    expect(screen.getByRole('textbox')).toHaveStyle({ order: 0 })
+  })
 })
