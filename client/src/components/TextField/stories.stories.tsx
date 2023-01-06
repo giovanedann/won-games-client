@@ -15,7 +15,10 @@ export default {
   component: TextField,
   argTypes: {
     onInput: { action: 'changed' },
-    icon: { type: 'symbol' }
+    icon: { type: 'symbol' },
+    disabled: {
+      type: 'boolean'
+    }
   }
 } as ComponentMeta<typeof TextField>
 
@@ -34,7 +37,8 @@ Basic.args = {
   placeholder: 'jane.doe@email.com',
   id: 'email',
   initialValue: '',
-  labelFor: 'email'
+  labelFor: 'email',
+  disabled: false
 }
 
 WithIcon.args = {
