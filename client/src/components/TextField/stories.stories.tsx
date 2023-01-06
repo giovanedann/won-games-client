@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import styled from 'styled-components'
 
 import TextField from '.'
+import { MdEmail } from 'react-icons/md'
 
 const Container = styled.div`
   padding: 1.5rem;
@@ -25,10 +26,17 @@ const Template: ComponentStory<typeof TextField> = (args) => (
 
 export const Basic = Template.bind({})
 
+export const WithIcon = Template.bind({})
+
 Basic.args = {
   label: 'E-mail',
   placeholder: 'jane.doe@email.com',
   id: 'email',
   initialValue: '',
   labelFor: 'email'
+}
+
+WithIcon.args = {
+  ...Basic.args,
+  icon: <MdEmail />
 }
