@@ -6,6 +6,7 @@ export type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
   labelFor?: string
   initialValue?: string
+  iconPosition?: 'left' | 'right'
   icon?: ReactNode
 }
 
@@ -14,6 +15,7 @@ function TextField({
   label,
   labelFor,
   initialValue,
+  iconPosition = 'left',
   icon,
   ...props
 }: TextFieldProps) {
@@ -30,8 +32,14 @@ function TextField({
     <S.Wrapper>
       {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
       <S.InputWrapper>
-        <S.Input type="text" onChange={onChange} value={value} {...props} />
-        {!!icon && <S.Icon>{icon}</S.Icon>}
+        <S.Input
+          type="text"
+          onChange={onChange}
+          value={value}
+          iconPosition={iconPosition}
+          {...props}
+        />
+        {!!icon && <S.Icon iconPosition={iconPosition}>{icon}</S.Icon>}
       </S.InputWrapper>
     </S.Wrapper>
   )
