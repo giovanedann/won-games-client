@@ -13,7 +13,7 @@ function Auth({ children, formTitle }: AuthProps) {
     <S.Wrapper>
       <S.BannerBlock>
         <S.BannerContent>
-          <Logo />
+          <Logo id="banner-content" />
 
           <>
             <Heading color="white">
@@ -33,7 +33,7 @@ function Auth({ children, formTitle }: AuthProps) {
 
       <S.Content>
         <S.ContentWrapper>
-          <Logo color="black" size="large" />
+          <Logo color="black" size="large" id="content" />
           <Heading lineColor="secondary" lineLeft>
             {formTitle}
           </Heading>
