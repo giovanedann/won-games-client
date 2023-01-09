@@ -48,4 +48,12 @@ describe('<Logo />', () => {
       media: '(max-width: 768px)'
     })
   })
+
+  it('should render the logo with with the id passed', () => {
+    const { container } = renderWithTheme(
+      <Logo hideOnMobile={false} id="test-id" />
+    )
+
+    expect(container.querySelector('#paint_linear_test-id')).toBeInTheDocument()
+  })
 })
