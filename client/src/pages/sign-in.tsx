@@ -1,5 +1,5 @@
 import Auth from 'templates/Auth'
 
 export default function SignIn() {
-  return <Auth />
+  return <Auth formTitle="Sign in">Sign in</Auth>
 }
