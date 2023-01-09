@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MdEmail } from 'react-icons/md'
+import theme from 'styles/theme'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import TextField from '.'
 
@@ -155,5 +156,21 @@ describe('<TextField />', () => {
 
     expect(document.body).toHaveFocus()
     expect(screen.getByRole('textbox')).not.toHaveFocus()
+  })
+
+  it('should render with an error', () => {
+    renderWithTheme(
+      <TextField
+        labelFor="text"
+        id="text"
+        placeholder="jane.doe@mail.com"
+        error="Something got wrong"
+      />
+    )
+
+    expect(screen.getByText(/something got wrong/i)).toBeInTheDocument()
+    expect(screen.getByText(/something got wrong/i)).toHaveStyle({
+      color: theme.colors.error
+    })
   })
 })
