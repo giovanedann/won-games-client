@@ -32,6 +32,8 @@ export const Basic = Template.bind({})
 
 export const WithIcon = Template.bind({})
 
+export const WithError = Template.bind({})
+
 Basic.args = {
   label: 'E-mail',
   placeholder: 'jane.doe@email.com',
@@ -44,4 +46,9 @@ Basic.args = {
 WithIcon.args = {
   ...Basic.args,
   icon: <MdEmail />
+}
+
+WithError.args = {
+  ...WithIcon.args,
+  error: 'This e-mail already exists'
 }
