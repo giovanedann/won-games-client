@@ -23,6 +23,7 @@ const theme = {
   },
   colors: {
     primary: '#F231A5',
+    error: '#FF6347',
     secondary: '#3CD3C1',
     mainBg: '#06092B',
     lightBg: '#F2F2F2',
