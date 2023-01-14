@@ -11,10 +11,7 @@ const Container = styled.div`
 
 export default {
   title: 'Form/FormSignIn',
-  component: FormSignIn,
-  argTypes: {
-    // place your args types here
-  }
+  component: FormSignIn
 } as ComponentMeta<typeof FormSignIn>
 
 const Template: ComponentStory<typeof FormSignIn> = () => (
