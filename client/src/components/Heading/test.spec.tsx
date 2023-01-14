@@ -46,6 +46,7 @@ describe('<Heading />', () => {
 
   it('should render the bottom and left line according to lineColor', () => {
     let header
+
     const { rerender } = renderWithTheme(
       <Heading lineBottom lineLeft lineColor="primary">
         Heading
@@ -77,6 +78,16 @@ describe('<Heading />', () => {
     )
     expect(header).toHaveStyle({
       'border-left': `0.7rem solid ${theme.colors.secondary}`
+    })
+  })
+
+  it('should render a huge heading', () => {
+    renderWithTheme(<Heading size="huge">Huge</Heading>)
+
+    expect(
+      screen.getByRole('heading', { level: 2, name: /huge/i })
+    ).toHaveStyle({
+      'font-size': '5.2rem'
     })
   })
 })
