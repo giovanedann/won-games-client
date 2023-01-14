@@ -5,7 +5,7 @@ import Checkbox from '.'
 import styled from 'styled-components'
 
 export default {
-  title: 'Checkbox',
+  title: 'Form/Checkbox',
   component: Checkbox,
   argTypes: {
     onCheck: { action: 'checked' }

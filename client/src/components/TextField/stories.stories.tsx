@@ -11,7 +11,7 @@ const Container = styled.div`
 `
 
 export default {
-  title: 'TextInput',
+  title: 'Form/TextInput',
   component: TextField,
   argTypes: {
     onInput: { action: 'changed' },

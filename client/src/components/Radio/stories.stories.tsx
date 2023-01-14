@@ -5,7 +5,7 @@ import Radio from '.'
 import styled from 'styled-components'
 
 export default {
-  title: 'Radio',
+  title: 'Form/Radio',
   component: Radio,
   argTypes: {
     onCheck: { action: 'checked' }
