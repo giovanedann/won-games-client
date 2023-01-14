@@ -40,6 +40,10 @@ const wrapperVariants = {
     ${media.greaterThan('medium')`
       font-size: ${({ theme }) => theme.font.sizes.xxlarge};
     `}
+  `,
+
+  huge: css`
+    font-size: ${({ theme }) => theme.font.sizes.huge};
   `
 }
 
