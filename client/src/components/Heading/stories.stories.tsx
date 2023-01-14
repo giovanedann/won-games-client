@@ -23,7 +23,7 @@ export default {
     },
     size: {
       type: 'string',
-      options: ['small', 'medium'],
+      options: ['small', 'medium', 'huge'],
       control: {
         type: 'select'
       }
@@ -47,6 +47,7 @@ export default {
 const Template: ComponentStory<typeof Heading> = (args) => <Heading {...args} />
 
 export const Basic = Template.bind({})
+
 Basic.args = {
   children: 'Heading',
   color: 'black',

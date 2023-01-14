@@ -50,11 +50,6 @@ const wrapperVariants = {
 export const Wrapper = styled.h2<HeadingProps>`
   ${({ theme, color, lineLeft, lineBottom, size, lineColor }) => css`
     color: ${theme.colors[color!]};
-    font-size: ${theme.font.sizes.xlarge};
-
-    ${media.greaterThan('medium')`
-      font-size: ${theme.font.sizes.xxlarge};
-    `};
 
     ${lineLeft && wrapperVariants.lineLeft(lineColor!)}
     ${lineBottom && wrapperVariants.lineBottom(lineColor!)}
