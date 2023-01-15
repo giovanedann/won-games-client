@@ -5,6 +5,7 @@ import Logo from 'components/Logo'
 import { useState } from 'react'
 import Button from 'components/Button'
 import MediaMatch from 'components/MediaMatch'
+import Link from 'next/link'
 
 type MenuProps = {
   username?: string
@@ -26,7 +27,7 @@ function Menu({ username }: MenuProps) {
       </S.LogoWrapper>
 
       <MediaMatch greaterThan="medium">
-        <S.MenuLink href="#">Home</S.MenuLink>
+        <S.MenuLink href="/">Home</S.MenuLink>
         <S.MenuLink href="#">Explore</S.MenuLink>
       </MediaMatch>
 
@@ -38,7 +39,11 @@ function Menu({ username }: MenuProps) {
           <MdOutlineShoppingCart aria-label="open shopping cart" />
         </S.IconWrapper>
         <MediaMatch greaterThan="medium">
-          {!username && <Button>Sign in</Button>}
+          {!username && (
+            <Link href="/sign-in">
+              <Button>Sign in</Button>
+            </Link>
+          )}
         </MediaMatch>
       </S.MenuGroup>
 
@@ -46,7 +51,7 @@ function Menu({ username }: MenuProps) {
         <MdClose aria-label="close menu" onClick={() => setIsOpen(false)} />
 
         <S.MenuNav>
-          <S.MenuLink href="#">Home</S.MenuLink>
+          <S.MenuLink href="/">Home</S.MenuLink>
           <S.MenuLink href="#">Explore</S.MenuLink>
           {Boolean(username) && (
             <>
@@ -58,11 +63,13 @@ function Menu({ username }: MenuProps) {
 
         {!username && (
           <S.RegisterBox>
-            <Button fullWidth size="large">
-              Log in now
-            </Button>
+            <Link href="/sign-in">
+              <Button fullWidth size="large">
+                Log in now
+              </Button>
+            </Link>
             <span>or</span>
-            <S.SignUp href="#" title="Sign Up">
+            <S.SignUp href="/sign-up" title="Sign Up">
               Sign Up
             </S.SignUp>
           </S.RegisterBox>

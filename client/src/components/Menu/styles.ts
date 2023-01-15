@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled, { css, keyframes } from 'styled-components'
 import media from 'styled-media-query'
 
@@ -38,6 +39,10 @@ export const MenuGroup = styled.div`
     justify-content: flex-end;
     gap: ${theme.spacings.xsmall};
   `}
+
+  a {
+    text-decoration: none;
+  }
 `
 
 export const IconWrapper = styled.div`
@@ -60,7 +65,7 @@ export const MenuNav = styled.div`
   `}
 `
 
-export const MenuLink = styled.a`
+export const MenuLink = styled(Link)`
   ${({ theme }) => css`
     position: relative;
     font-size: ${theme.font.sizes.medium};
@@ -140,10 +145,14 @@ export const RegisterBox = styled.div`
       margin: ${theme.spacings.xxsmall} 0;
       font-size: ${theme.font.sizes.xsmall};
     }
+
+    a {
+      text-decoration: none;
+    }
   `}
 `
 
-export const SignUp = styled.a`
+export const SignUp = styled(Link)`
   ${({ theme }) => css`
     text-decoration: none;
     color: ${theme.colors.primary};
