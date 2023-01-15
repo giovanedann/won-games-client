@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Button from 'components/Button'
+import { FormLink, FormWrapper } from 'components/Form'
 import TextField from 'components/TextField'
 import Link from 'next/link'
 import { MdLockOutline, MdOutlineMail } from 'react-icons/md'
@@ -7,7 +8,7 @@ import * as S from './styles'
 
 function FormSignIn() {
   return (
-    <S.Wrapper>
+    <FormWrapper>
       <S.Form>
         <TextField
           name="email"
@@ -28,11 +29,11 @@ function FormSignIn() {
           Sign in now
         </Button>
 
-        <S.FormLink>
+        <FormLink>
           Don't have an account? <Link href="/sign-up">Sign up</Link>
-        </S.FormLink>
+        </FormLink>
       </S.Form>
-    </S.Wrapper>
+    </FormWrapper>
   )
 }
 
