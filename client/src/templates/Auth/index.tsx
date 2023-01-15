@@ -1,5 +1,6 @@
 import Heading from 'components/Heading'
 import Logo from 'components/Logo'
+import Link from 'next/link'
 import { ReactNode } from 'react'
 import * as S from './styles'
 
@@ -13,7 +14,9 @@ function Auth({ children, formTitle }: AuthProps) {
     <S.Wrapper>
       <S.BannerBlock>
         <S.BannerContent>
-          <Logo id="banner-content" />
+          <Link href="/">
+            <Logo id="banner-content" />
+          </Link>
 
           <>
             <Heading color="white" size="huge">
@@ -33,7 +36,9 @@ function Auth({ children, formTitle }: AuthProps) {
 
       <S.Content>
         <S.ContentWrapper>
-          <Logo color="black" size="large" id="content" />
+          <Link href="/">
+            <Logo color="black" size="large" id="content" />
+          </Link>
           <Heading lineColor="secondary" lineLeft>
             {formTitle}
           </Heading>
