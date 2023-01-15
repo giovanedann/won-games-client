@@ -26,7 +26,7 @@ function FormSignIn() {
         <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
 
         <Button size="large" fullWidth>
-          Sign in now
+          Sign In
         </Button>
 
         <FormLink>
