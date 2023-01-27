@@ -11,7 +11,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 16.x
+          node-version: 18.x
 
       - name: Install dependencies
         run: yarn install
@@ -23,7 +23,10 @@ jobs:
         run: yarn typecheck
 
       - name: Test
-        run: yarn test
+        run: yarn test:coverage
 
       - name: Build
         run: yarn build
+
+      - name: Storybook
+        run: yarn build-storybook
