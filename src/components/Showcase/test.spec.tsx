@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'match-media-mock'
 import { screen } from '@testing-library/react'
 import Showcase from '.'
