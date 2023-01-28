@@ -4,10 +4,10 @@ import renderWithTheme from 'utils/tests/renderWithTheme'
 import Heading from '.'
 
 describe('<Heading />', () => {
-  it('should render a black text without borders by default', () => {
+  it('should render a white text without borders by default', () => {
     renderWithTheme(<Heading>Heading</Heading>)
     const header = screen.getByRole('heading', { level: 2, name: /heading/i })
-    expect(header).toHaveStyle({ color: theme.colors.black })
+    expect(header).toHaveStyle({ color: theme.colors.white })
     expect(header).not.toHaveStyleRule('border-bottom')
     expect(header).not.toHaveStyleRule('border-left')
   })

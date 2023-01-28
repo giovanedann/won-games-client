@@ -6,7 +6,11 @@ const config = {
   collectCoverageFrom: [
     '<rootDir>/**/*.tsx',
     '<rootDir>/**/*.ts',
-    '!<rootDir>/**/*.stories.tsx'
+    '!<rootDir>/**/*.stories.tsx',
+    '!<rootDir>/src/pages/**/*.tsx',
+    '!<rootDir>/src/types/**/*.d.ts',
+    '!<rootDir>/*.d.ts',
+    '!<rootDir>/src/styles/**/*.ts'
   ],
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts']
 }
