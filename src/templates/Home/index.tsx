@@ -47,26 +47,22 @@ function Home({
         <Showcase title="News" games={newGames} />
       </S.SectionNews>
 
-      <S.SectionMostPopular>
-        <Showcase
-          title="Most popular"
-          games={mostPopularGames}
-          highlight={mostPopularHighlight}
-        />
-      </S.SectionMostPopular>
+      <Showcase
+        title="Most popular"
+        games={mostPopularGames}
+        highlight={mostPopularHighlight}
+      />
 
       <S.SectionUpcoming>
         <Showcase title="Upcoming" games={upcomingGames} />
         <Showcase highlight={upcomingHighlight} games={upcomingMoreGames} />
       </S.SectionUpcoming>
 
-      <S.SectionFreeGames>
-        <Showcase
-          title="Free Games"
-          games={freeGames}
-          highlight={freeHighlight}
-        />
-      </S.SectionFreeGames>
+      <Showcase
+        title="Free Games"
+        games={freeGames}
+        highlight={freeHighlight}
+      />
 
       <S.SectionFooter>
         <Container>
