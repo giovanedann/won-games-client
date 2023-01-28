@@ -17,24 +17,6 @@ const props = {
   freeHighlight: highlightMock
 }
 
-jest.mock('components/Menu', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="menu-mock"></div>
-    }
-  }
-})
-
-jest.mock('components/Footer', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <footer data-testid="footer-mock"></footer>
-    }
-  }
-})
-
 jest.mock('components/Showcase', () => {
   return {
     __esModule: true,
@@ -58,10 +40,8 @@ describe('<Home />', () => {
     renderWithTheme(<Home {...props} />)
   })
 
-  it('should render the elements', () => {
-    expect(screen.getByTestId('menu-mock')).toBeInTheDocument()
+  it('should render the showcases and banner slider', () => {
     expect(screen.getByTestId('banner-slider-mock')).toBeInTheDocument()
     expect(screen.getAllByTestId('showcase-mock')).toHaveLength(5)
-    expect(screen.getByTestId('footer-mock')).toBeInTheDocument()
   })
 })
