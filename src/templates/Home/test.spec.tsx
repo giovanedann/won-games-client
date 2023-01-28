@@ -1,4 +1,3 @@
-import 'match-media-mock'
 import { screen } from '@testing-library/react'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import Home from '.'
@@ -18,35 +17,51 @@ const props = {
   freeHighlight: highlightMock
 }
 
+jest.mock('components/Menu', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="menu-mock"></div>
+    }
+  }
+})
+
+jest.mock('components/Footer', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <footer data-testid="footer-mock"></footer>
+    }
+  }
+})
+
+jest.mock('components/Showcase', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="showcase-mock"></div>
+    }
+  }
+})
+
+jest.mock('components/BannerSlider', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="banner-slider-mock"></div>
+    }
+  }
+})
+
 describe('<Home />', () => {
   beforeEach(() => {
     renderWithTheme(<Home {...props} />)
   })
 
-  it('should render menu and footer', () => {
-    expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('heading', { level: 2, name: /contact/i })
-    ).toBeInTheDocument()
-  })
-
-  it('should render the right section headings', () => {
-    const headings = ['news', 'most popular', 'upcoming', 'free games']
-
-    headings.forEach((heading) => {
-      const headingRegExp = new RegExp(heading, 'i')
-      expect(
-        screen.getByRole('heading', { level: 2, name: headingRegExp })
-      ).toBeInTheDocument()
-    })
-  })
-
-  it('should render sections elements', () => {
-    expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
-
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(20)
-
-    expect(screen.getAllByText(/red dead redemption 2/i)).toHaveLength(3)
+  it('should render the elements', () => {
+    expect(screen.getByTestId('menu-mock')).toBeInTheDocument()
+    expect(screen.getByTestId('banner-slider-mock')).toBeInTheDocument()
+    expect(screen.getAllByTestId('showcase-mock')).toHaveLength(5)
+    expect(screen.getByTestId('footer-mock')).toBeInTheDocument()
   })
 })
