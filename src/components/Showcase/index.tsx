@@ -8,7 +8,7 @@ import * as S from './styles'
 export type ShowcaseProps = {
   title?: string
   highlight?: HighlightProps
-  games: GameCardProps[]
+  games?: GameCardProps[]
 }
 
 function Showcase({ games, highlight, title }: ShowcaseProps) {
