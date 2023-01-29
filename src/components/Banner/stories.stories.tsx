@@ -28,7 +28,7 @@ const Template: ComponentStory<typeof Banner> = (args) => (
 export const Basic = Template.bind({})
 
 Basic.args = {
-  img: 'https://scontent-gru2-2.xx.fbcdn.net/v/t1.6435-9/53586680_10157148115137560_7809745321596026880_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=973b4a&_nc_ohc=mu1Xy6YVknEAX-mRTNj&_nc_ht=scontent-gru2-2.xx&oh=00_AfDfBXMX0ha4lPSACdVOwZ9OZorxI7HW6X0kN9fzD3Z-3g&oe=63D13CAF',
+  img: 'https://1.bp.blogspot.com/-yzGDxC63L_4/X3_UhnSwYiI/AAAAAAAABzI/nISlzkfbHz0e64PVl9aA2RCzjQcFFE2kwCLcBGAsYHQ/w1200-h630-p-k-no-nu/H2x1_NSwitchDS_Hades.png',
   title: 'Hades',
   subtitle: '<p>Can you defeat <strong>Hades</strong> in this journey?</p>',
   buttonLabel: 'Buy now',
@@ -42,7 +42,7 @@ Basic.parameters = {
 export const WithRibbon = Template.bind({})
 
 WithRibbon.args = {
-  img: 'https://scontent-gru2-2.xx.fbcdn.net/v/t1.6435-9/53586680_10157148115137560_7809745321596026880_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=973b4a&_nc_ohc=mu1Xy6YVknEAX-mRTNj&_nc_ht=scontent-gru2-2.xx&oh=00_AfDfBXMX0ha4lPSACdVOwZ9OZorxI7HW6X0kN9fzD3Z-3g&oe=63D13CAF',
+  img: 'https://1.bp.blogspot.com/-yzGDxC63L_4/X3_UhnSwYiI/AAAAAAAABzI/nISlzkfbHz0e64PVl9aA2RCzjQcFFE2kwCLcBGAsYHQ/w1200-h630-p-k-no-nu/H2x1_NSwitchDS_Hades.png',
   title: 'Hades',
   subtitle: '<p>Can you defeat <strong>Hades</strong> in this journey?</p>',
   buttonLabel: 'Buy now',
