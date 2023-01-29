@@ -7,11 +7,24 @@ import * as S from './styles'
 
 export type Platform = 'linux' | 'windows' | 'mac'
 
+type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
+
 export type GameDetailsProps = {
   platforms: Platform[]
+  rating: Rating
+  developer: string
+  publisher: string
+  genres: string[]
+  releaseDate: string
 }
 
-const GameDetails = ({ platforms }: GameDetailsProps) => {
+const GameDetails = ({
+  platforms,
+  developer,
+  genres,
+  rating,
+  releaseDate
+}: GameDetailsProps) => {
   const platformIcons = useMemo(
     () => ({
       linux: <SiLinux title="linux" size={18} />,
@@ -20,6 +33,14 @@ const GameDetails = ({ platforms }: GameDetailsProps) => {
     }),
     []
   )
+
+  const formattedDate = useMemo(() => {
+    return new Intl.DateTimeFormat('en-US', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    }).format(new Date(releaseDate))
+  }, [releaseDate])
 
   return (
     <S.Wrapper>
@@ -32,12 +53,12 @@ const GameDetails = ({ platforms }: GameDetailsProps) => {
       <S.Content>
         <S.Block>
           <S.Label>Developer</S.Label>
-          <S.Description>Gearbox Software</S.Description>
+          <S.Description>{developer}</S.Description>
         </S.Block>
 
         <S.Block>
           <S.Label>Release Date</S.Label>
-          <S.Description>Nov 16, 2019</S.Description>
+          <S.Description>{formattedDate}</S.Description>
         </S.Block>
 
         <S.Block>
@@ -56,12 +77,14 @@ const GameDetails = ({ platforms }: GameDetailsProps) => {
 
         <S.Block>
           <S.Label>Rating</S.Label>
-          <S.Description>18+</S.Description>
+          <S.Description>
+            {rating === 'BR0' ? 'FREE' : `${rating.replace('BR', '')}+`}
+          </S.Description>
         </S.Block>
 
         <S.Block>
           <S.Label>Genres</S.Label>
-          <S.Description>Action / Adventure</S.Description>
+          <S.Description>{genres.join(' / ')}</S.Description>
         </S.Block>
       </S.Content>
     </S.Wrapper>
