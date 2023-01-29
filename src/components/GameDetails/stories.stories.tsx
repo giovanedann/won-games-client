@@ -4,12 +4,12 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import GameDetails, { Platform } from '.'
 import styled from 'styled-components'
 
+import gameDetailsMock from './data.mock'
+
 const Container = styled.div`
   max-width: 130rem;
   margin: 0 auto;
 `
-
-const platforms: Platform[] = ['windows', 'linux', 'mac']
 
 export default {
   title: 'GameDetails',
@@ -19,6 +19,17 @@ export default {
       control: {
         type: 'inline-check',
         options: ['windows', 'linux', 'mac']
+      }
+    },
+    genres: {
+      control: {
+        type: 'inline-check',
+        options: ['RPG', 'Action', 'Horror', 'MMORPG', 'Battle Royale']
+      }
+    },
+    releaseDate: {
+      control: {
+        type: 'date'
       }
     }
   }
@@ -39,5 +50,5 @@ Basic.parameters = {
 }
 
 Basic.args = {
-  platforms
+  ...gameDetailsMock
 }
