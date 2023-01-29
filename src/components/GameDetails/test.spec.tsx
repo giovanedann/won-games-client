@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import renderWithTheme from 'utils/tests/renderWithTheme'
-import GameDetails, { Platform } from '.'
+import GameDetails from '.'
 
 import gameDetailsMock from './data.mock'
 

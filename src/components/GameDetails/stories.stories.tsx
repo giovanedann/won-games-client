@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import GameDetails, { Platform } from '.'
+import GameDetails from '.'
 import styled from 'styled-components'
 
 import gameDetailsMock from './data.mock'
