@@ -1,24 +1,25 @@
 import { screen } from '@testing-library/react'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import GameInfo from '.'
-
-const props = {
-  title: 'Hades',
-  description: 'Hades description',
-  price: '210,00'
-}
+import gameInfoMock from './data.mock'
 
 describe('<GameInfo />', () => {
   it('should render the game info', () => {
-    renderWithTheme(<GameInfo {...props} />)
+    renderWithTheme(<GameInfo {...gameInfoMock} />)
 
-    expect(screen.getByRole('heading', { name: /hades/i })).toBeInTheDocument()
-    expect(screen.getByText(/hades description/i)).toBeInTheDocument()
-    expect(screen.getByText(/\$210,00/i)).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /borderlands 3/i })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        /Control your fleet and build an armada across more than 30 single-player missions/i
+      )
+    ).toBeInTheDocument()
+    expect(screen.getByText(/\$215,00/i)).toBeInTheDocument()
   })
 
   it('should render the action buttons', () => {
-    renderWithTheme(<GameInfo {...props} />)
+    renderWithTheme(<GameInfo {...gameInfoMock} />)
 
     expect(
       screen.getByRole('button', { name: /wishlist/i })
