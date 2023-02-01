@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 import { HeadingProps, LineColors } from '.'
 
-const wrapperVariants = {
+export const wrapperVariants = {
   lineLeft: (lineColor: LineColors) => css`
     padding-left: ${({ theme }) => theme.spacings.xxsmall};
     border-left: 0.7rem solid ${({ theme }) => theme.colors[lineColor]};
