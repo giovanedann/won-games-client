@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 import * as S from './styles'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import theme from 'styles/theme'
 
 export type GalleryImageProps = {
@@ -53,6 +53,20 @@ const settings: SliderSettings = {
 
 function Gallery({ items }: GalleryProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+
+  function handleKeyUp({ key }: KeyboardEvent) {
+    if (key === 'Escape') {
+      setIsModalOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyUp)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyUp)
+    }
+  }, [])
 
   return (
     <S.Wrapper>
