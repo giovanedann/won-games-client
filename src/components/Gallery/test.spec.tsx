@@ -32,7 +32,7 @@ describe('<Gallery />', () => {
     ).toHaveAttribute('src', galleryMock[1].src)
   })
 
-  it('should handle open modal', async () => {
+  it('should open and close modal on click', async () => {
     renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
@@ -52,5 +52,44 @@ describe('<Gallery />', () => {
 
     expect(modal).toHaveAttribute('aria-hidden', 'true')
     expect(modal).toHaveStyle({ opacity: 0 })
+  })
+
+  it('should not close modal on any other key than ESC press', async () => {
+    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+
+    const modal = screen.getByLabelText('modal')
+    const user = userEvent.setup()
+
+    expect(modal).toHaveAttribute('aria-hidden', 'true')
+
+    await user.click(
+      screen.getByRole('button', { name: /Thumb - Gallery Image 1/i })
+    )
+
+    expect(modal).toHaveAttribute('aria-hidden', 'false')
+
+    await user.keyboard('[Shift]')
+
+    expect(modal).toHaveAttribute('aria-hidden', 'false')
+  })
+
+  it('should close modal on ESC key press', async () => {
+    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+
+    const modal = screen.getByLabelText('modal')
+    const user = userEvent.setup()
+
+    expect(modal).toHaveAttribute('aria-hidden', 'true')
+
+    await user.click(
+      screen.getByRole('button', { name: /Thumb - Gallery Image 1/i })
+    )
+
+    expect(modal).toHaveAttribute('aria-hidden', 'false')
+
+    await user.keyboard('[Escape]')
+    await user.keyboard('{Shift}{f}{o}{o}{a}{b}')
+
+    expect(modal).toHaveAttribute('aria-hidden', 'true')
   })
 })
