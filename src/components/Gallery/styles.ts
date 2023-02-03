@@ -94,3 +94,24 @@ export const CloseButton = styled.div`
     text-align: right;
   `}
 `
+
+export const Content = styled.div`
+  width: 120rem;
+  height: 70rem;
+
+  ${media.lessThan('medium')`
+    width: 100%;
+    height: 20rem;
+  `}
+`
+
+export const ModalImageContainer = styled.div`
+  width: 120rem;
+  height: 70rem;
+  position: relative;
+
+  ${media.lessThan('medium')`
+    width: 100%;
+    height: 20rem;
+  `}
+`

@@ -42,5 +42,6 @@ export const settings: SliderSettings = {
 
 export const modalSettings: SliderSettings = {
   ...commonSettings,
-  slidesToShow: 1
+  slidesToShow: 1,
+  adaptiveHeight: true
 }
