@@ -1,11 +1,11 @@
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
-import Slider, { SliderSettings } from 'components/Slider'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import theme from 'styles/theme'
 import { AiOutlineClose } from 'react-icons/ai'
 
+import Slider from 'components/Slider'
 import * as S from './styles'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import theme from 'styles/theme'
+import { settings } from './data'
 
 export type GalleryImageProps = {
   src: string
@@ -14,41 +14,6 @@ export type GalleryImageProps = {
 
 export type GalleryProps = {
   items: GalleryImageProps[]
-}
-
-const settings: SliderSettings = {
-  arrows: true,
-  slidesToShow: 4,
-  infinite: false,
-  lazyLoad: 'ondemand',
-  responsive: [
-    {
-      breakpoint: 1375,
-      settings: {
-        arrows: false,
-        slidesToShow: 3.2,
-        draggable: true
-      }
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        arrows: false,
-        slidesToShow: 2.2,
-        draggable: true
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        arrows: false,
-        slidesToShow: 2.2,
-        draggable: true
-      }
-    }
-  ],
-  nextArrow: <MdArrowForwardIos aria-label="next image" />,
-  prevArrow: <MdArrowBackIos aria-label="previous image" />
 }
 
 function Gallery({ items }: GalleryProps) {
