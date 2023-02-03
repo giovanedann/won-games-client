@@ -66,13 +66,31 @@ const modalVariants = {
 }
 
 export const Modal = styled.div<ModalProps>`
-  transition: all 0.3s ease-in-out;
-  width: 100px;
-  height: 100px;
-  background: red;
+  ${({ theme, isOpen }) => css`
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: ${theme.layers.modal};
+    transition: opacity ${theme.transitions.normal};
+    ${isOpen && modalVariants.open};
+    ${!isOpen && modalVariants.close};
+  `}
+`
 
-  ${({ isOpen }) => css`
-    ${isOpen && modalVariants.open}
-    ${!isOpen && modalVariants.close}
+export const CloseButton = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    text-align: right;
   `}
 `
