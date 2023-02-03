@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import theme from 'styles/theme'
 import { AiOutlineClose } from 'react-icons/ai'
+import SlickSlider from 'react-slick'
 
 import Slider from 'components/Slider'
 import * as S from './styles'
-import { settings } from './data'
+import { modalSettings, settings } from './data'
 
 export type GalleryImageProps = {
   src: string
@@ -18,6 +19,7 @@ export type GalleryProps = {
 
 function Gallery({ items }: GalleryProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const sliderRef = useRef<SlickSlider>(null)
 
   function handleKeyUp({ key }: KeyboardEvent) {
     if (key === 'Escape') {
@@ -33,6 +35,11 @@ function Gallery({ items }: GalleryProps) {
     }
   }, [])
 
+  const handleImageClick = useCallback((index: number) => {
+    setIsModalOpen(true)
+    sliderRef.current!.slickGoTo(index, true)
+  }, [])
+
   return (
     <S.Wrapper>
       <Slider settings={settings}>
@@ -44,7 +51,7 @@ function Gallery({ items }: GalleryProps) {
               alt={`Thumb - ${item.label}`}
               fill
               style={{ objectFit: 'contain' }}
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => handleImageClick(index)}
             />
           </S.ImageContainer>
         ))}
@@ -63,6 +70,16 @@ function Gallery({ items }: GalleryProps) {
         >
           <AiOutlineClose size={30} title="close modal" />
         </S.CloseButton>
+
+        <S.Content>
+          <Slider ref={sliderRef} settings={modalSettings}>
+            {items.map((item, index) => (
+              <S.ModalImageContainer key={`thumb-${index}`}>
+                <Image src={item.src} alt={`Thumb - ${item.label}`} fill />
+              </S.ModalImageContainer>
+            ))}
+          </Slider>
+        </S.Content>
       </S.Modal>
     </S.Wrapper>
   )
