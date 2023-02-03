@@ -49,3 +49,30 @@ export const ImageContainer = styled.div`
   height: 16.3rem;
   position: relative;
 `
+
+type ModalProps = {
+  isOpen: boolean
+}
+
+const modalVariants = {
+  open: css`
+    opacity: 1;
+  `,
+
+  close: css`
+    opacity: 0;
+    pointer-events: none;
+  `
+}
+
+export const Modal = styled.div<ModalProps>`
+  transition: all 0.3s ease-in-out;
+  width: 100px;
+  height: 100px;
+  background: red;
+
+  ${({ isOpen }) => css`
+    ${isOpen && modalVariants.open}
+    ${!isOpen && modalVariants.close}
+  `}
+`

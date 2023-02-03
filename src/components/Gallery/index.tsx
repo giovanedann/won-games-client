@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
 import Slider, { SliderSettings } from 'components/Slider'
 
 import * as S from './styles'
 import Image from 'next/image'
+import { useState } from 'react'
 
 export type GalleryImageProps = {
   src: string
@@ -50,6 +50,8 @@ const settings: SliderSettings = {
 }
 
 function Gallery({ items }: GalleryProps) {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+
   return (
     <S.Wrapper>
       <Slider settings={settings}>
@@ -60,10 +62,17 @@ function Gallery({ items }: GalleryProps) {
               src={item.src}
               alt={`Thumb - ${item.label}`}
               fill
+              onClick={() => setIsModalOpen(true)}
             />
           </S.ImageContainer>
         ))}
       </Slider>
+
+      <S.Modal
+        isOpen={isModalOpen}
+        aria-label="modal"
+        aria-hidden={!isModalOpen}
+      ></S.Modal>
     </S.Wrapper>
   )
 }
