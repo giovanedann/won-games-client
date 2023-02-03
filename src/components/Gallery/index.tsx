@@ -82,7 +82,7 @@ function Gallery({ items }: GalleryProps) {
           color={theme.colors.white}
           onClick={() => setIsModalOpen(false)}
         >
-          <AiOutlineClose size={30} />
+          <AiOutlineClose size={30} title="close modal" />
         </S.CloseButton>
       </S.Modal>
     </S.Wrapper>

@@ -47,5 +47,10 @@ describe('<Gallery />', () => {
 
     expect(modal).toHaveAttribute('aria-hidden', 'false')
     expect(modal).toHaveStyle({ opacity: 1 })
+
+    await user.click(screen.getByTitle(/close modal/i))
+
+    expect(modal).toHaveAttribute('aria-hidden', 'true')
+    expect(modal).toHaveStyle({ opacity: 0 })
   })
 })
