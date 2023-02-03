@@ -92,4 +92,25 @@ describe('<Gallery />', () => {
 
     expect(modal).toHaveAttribute('aria-hidden', 'true')
   })
+
+  it('should open modal with selected image', async () => {
+    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+
+    const user = userEvent.setup()
+
+    await user.click(
+      screen.getByRole('button', { name: /Thumb - Gallery Image 2/i })
+    )
+
+    const selectedImg = await screen.findByRole('button', {
+      name: /^Gallery Image 2$/i
+    })
+
+    const notSelectedImg = screen.queryByRole('button', {
+      name: /^Gallery Image 1$/i
+    })
+
+    expect(selectedImg).toBeVisible()
+    expect(notSelectedImg).not.toBeInTheDocument()
+  })
 })

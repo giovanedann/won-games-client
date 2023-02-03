@@ -75,7 +75,7 @@ function Gallery({ items }: GalleryProps) {
           <Slider ref={sliderRef} settings={modalSettings}>
             {items.map((item, index) => (
               <S.ModalImageContainer key={`thumb-${index}`}>
-                <Image src={item.src} alt={`Thumb - ${item.label}`} fill />
+                <Image src={item.src} alt={item.label} fill />
               </S.ModalImageContainer>
             ))}
           </Slider>
