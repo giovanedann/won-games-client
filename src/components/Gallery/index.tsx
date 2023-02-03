@@ -1,9 +1,11 @@
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
 import Slider, { SliderSettings } from 'components/Slider'
+import { AiOutlineClose } from 'react-icons/ai'
 
 import * as S from './styles'
 import Image from 'next/image'
 import { useState } from 'react'
+import theme from 'styles/theme'
 
 export type GalleryImageProps = {
   src: string
@@ -62,6 +64,7 @@ function Gallery({ items }: GalleryProps) {
               src={item.src}
               alt={`Thumb - ${item.label}`}
               fill
+              style={{ objectFit: 'contain' }}
               onClick={() => setIsModalOpen(true)}
             />
           </S.ImageContainer>
@@ -72,7 +75,16 @@ function Gallery({ items }: GalleryProps) {
         isOpen={isModalOpen}
         aria-label="modal"
         aria-hidden={!isModalOpen}
-      ></S.Modal>
+      >
+        <S.CloseButton
+          role="button"
+          arial-label="close modal"
+          color={theme.colors.white}
+          onClick={() => setIsModalOpen(false)}
+        >
+          <AiOutlineClose size={30} />
+        </S.CloseButton>
+      </S.Modal>
     </S.Wrapper>
   )
 }
