@@ -20,6 +20,7 @@ export const Wrapper = styled.menu`
     align-items: center;
     padding: ${theme.spacings.small} ${theme.spacings.xxsmall};
     position: relative;
+    z-index: ${theme.layers.menu};
   `}
 `
 

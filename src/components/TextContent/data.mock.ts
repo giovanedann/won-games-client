@@ -1,5 +1,7 @@
+import { TextContentProps } from '.'
+
 /* istanbul ignore file */
-const textMock = {
+const textMock: TextContentProps = {
   title: 'Description',
   content: `<h1>Heading</h1>
 <h2>Heading</h2>
