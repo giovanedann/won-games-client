@@ -1,15 +1,23 @@
+import GameInfo, { GameInfoProps } from 'components/GameInfo'
 import Base from 'templates/Base'
 
 import * as S from './styles'
 
-function Game() {
+export type GameTemplateProps = {
+  coverImg: string
+  gameInfo: GameInfoProps
+}
+
+function Game({ coverImg, gameInfo }: GameTemplateProps) {
   return (
     <Base>
-      <S.Cover
-        src="https://images.gog-statics.com/5643a7c831df452d29005caeca24c28cdbfaa6fbea5a9556b147ee26d325fa70_bg_crop_1366x655.jpg"
-        role="img"
-        aria-label="cover"
-      />
+      <S.Cover src={coverImg} role="img" aria-label="cover" />
+
+      <S.Main>
+        <S.SectionGameInfo>
+          <GameInfo {...gameInfo} />
+        </S.SectionGameInfo>
+      </S.Main>
     </Base>
   )
 }

@@ -1,6 +1,15 @@
+import Container from 'components/Container'
 import styled, { css } from 'styled-components'
 
 import media from 'styled-media-query'
+
+export const Main = styled.main`
+  margin-top: 20rem;
+
+  ${media.greaterThan('medium')`
+    margin-top: 58rem;
+  `}
+`
 
 type CoverProps = {
   src: string
@@ -24,3 +33,15 @@ export const Cover = styled.div<CoverProps>`
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
     `}
 `
+
+export const Section = styled(Container).attrs({ as: 'section' })`
+  ${({ theme }) => css`
+    margin-bottom: ${theme.spacings.xlarge};
+
+    ${media.greaterThan('medium')`
+      margin-bottom: calc(${theme.spacings.xlarge} * 2);
+    `}
+  `}
+`
+
+export const SectionGameInfo = styled(Section)``
