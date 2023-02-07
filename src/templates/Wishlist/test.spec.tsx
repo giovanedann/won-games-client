@@ -9,7 +9,8 @@ import renderWithTheme from 'utils/tests/renderWithTheme'
 
 const props = {
   recommendedHighlight: highlightMock,
-  recommendedGames: gamesMock
+  recommendedGames: gamesMock,
+  games: gamesMock
 }
 
 jest.mock('components/Showcase', () => ({
@@ -28,5 +29,6 @@ describe('<Wishlist />', () => {
     ).toBeInTheDocument()
 
     expect(screen.getByText(/showcase mock/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/population zero/i)).toHaveLength(6)
   })
 })
