@@ -37,9 +37,8 @@ export const WithError = Template.bind({})
 Basic.args = {
   label: 'E-mail',
   placeholder: 'jane.doe@email.com',
-  id: 'email',
   initialValue: '',
-  labelFor: 'email',
+  name: 'email',
   disabled: false
 }
 
