@@ -1,24 +1,30 @@
 import Base from 'templates/Base'
 import Container from 'components/Container'
 import Heading from 'components/Heading'
-import { GameCardProps } from 'components/GameCard'
+import GameCard, { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
 import Showcase from 'components/Showcase'
 
 export type WishlistTemplateProps = {
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
+  games?: GameCardProps[]
 }
 
 const Wishlist = ({
   recommendedGames,
-  recommendedHighlight
+  recommendedHighlight,
+  games
 }: WishlistTemplateProps) => (
   <Base>
     <Container>
       <Heading lineLeft lineColor="secondary">
         Wishlist
       </Heading>
+
+      {games?.map((game) => (
+        <GameCard key={`wishlist-${game.title}`} {...game} />
+      ))}
     </Container>
 
     <Showcase
