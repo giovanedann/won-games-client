@@ -23,7 +23,9 @@ function Menu({ username }: MenuProps) {
       </MediaMatch>
 
       <S.LogoWrapper>
-        <Logo hideOnMobile />
+        <S.MenuLink href="/">
+          <Logo hideOnMobile />
+        </S.MenuLink>
       </S.LogoWrapper>
 
       <MediaMatch greaterThan="medium">
