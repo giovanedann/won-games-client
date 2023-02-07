@@ -10,7 +10,7 @@ export const Nav = styled.nav`
     ${media.greaterThan('medium')`
       flex-direction: column;
       border: 0;
-      
+
       a:not(:last-child) {
         border-bottom: 0.1rem solid ${theme.colors.gray};
       }
@@ -18,10 +18,23 @@ export const Nav = styled.nav`
   `}
 `
 
-export const StyledLink = styled(Link)`
-  ${({ theme }) => css`
-    background: ${theme.colors.white};
-    color: ${theme.colors.black};
+const styledLinkVariants = {
+  default: css`
+    background: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.black};
+  `,
+  active: css`
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.white};
+  `
+}
+
+type StyledLinkProps = {
+  isActive?: boolean
+}
+
+export const StyledLink = styled(Link)<StyledLinkProps>`
+  ${({ theme, isActive }) => css`
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -45,5 +58,8 @@ export const StyledLink = styled(Link)`
         display: none;
       }
     `}
+
+    ${isActive && styledLinkVariants.active}
+    ${!isActive && styledLinkVariants.default}
   `}
 `
