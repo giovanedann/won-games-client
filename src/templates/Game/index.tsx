@@ -8,6 +8,7 @@ import Showcase from 'components/Showcase'
 import Base from 'templates/Base'
 
 import * as S from './styles'
+import Divider from 'components/Divider'
 
 export type GameTemplateProps = {
   coverImg: string
@@ -51,6 +52,7 @@ function Game({
 
         <S.SectionGameDetails>
           <GameDetails {...details} />
+          <Divider />
         </S.SectionGameDetails>
       </S.Main>
 
