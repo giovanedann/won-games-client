@@ -7,21 +7,19 @@ import TextField from '.'
 
 describe('<TextField />', () => {
   it('should render the label', () => {
-    renderWithTheme(<TextField label="text" labelFor="text" id="text" />)
+    renderWithTheme(<TextField label="text" name="text" />)
 
     expect(screen.getByLabelText(/text/i)).toBeInTheDocument()
   })
 
   it('should render without the label', () => {
-    renderWithTheme(<TextField labelFor="text" id="text" />)
+    renderWithTheme(<TextField name="text" />)
 
     expect(screen.queryByLabelText(/text/i)).not.toBeInTheDocument()
   })
 
   it('should render the placeholder', () => {
-    renderWithTheme(
-      <TextField labelFor="text" id="text" placeholder="jane.doe@mail.com" />
-    )
+    renderWithTheme(<TextField name="text" placeholder="jane.doe@mail.com" />)
 
     expect(
       screen.getByPlaceholderText(/jane.doe@mail.com/i)
@@ -35,8 +33,7 @@ describe('<TextField />', () => {
     renderWithTheme(
       <TextField
         label="text"
-        labelFor="text"
-        id="text"
+        name="text"
         placeholder="jane.doe@mail.com"
         onInputChange={inputHandler}
       />
@@ -54,9 +51,7 @@ describe('<TextField />', () => {
 
   it('should be accessible by tab', async () => {
     const user = userEvent.setup()
-    renderWithTheme(
-      <TextField labelFor="text" id="text" placeholder="jane.doe@mail.com" />
-    )
+    renderWithTheme(<TextField name="text" placeholder="jane.doe@mail.com" />)
 
     expect(document.body).toHaveFocus()
 
@@ -68,8 +63,7 @@ describe('<TextField />', () => {
   it('should render with an icon', () => {
     renderWithTheme(
       <TextField
-        labelFor="text"
-        id="text"
+        name="text"
         placeholder="jane.doe@mail.com"
         icon={<MdEmail title="email icon" />}
       />
@@ -84,8 +78,7 @@ describe('<TextField />', () => {
   it('should switch the order of elements based on the iconPosition prop', () => {
     const { rerender } = renderWithTheme(
       <TextField
-        labelFor="text"
-        id="text"
+        name="text"
         placeholder="jane.doe@mail.com"
         icon={<MdEmail title="email icon" />}
         iconPosition="left"
@@ -100,8 +93,7 @@ describe('<TextField />', () => {
 
     rerender(
       <TextField
-        labelFor="text"
-        id="text"
+        name="text"
         placeholder="jane.doe@mail.com"
         icon={<MdEmail title="email icon" />}
         iconPosition="right"
@@ -122,8 +114,7 @@ describe('<TextField />', () => {
     renderWithTheme(
       <TextField
         label="text"
-        labelFor="text"
-        id="text"
+        name="text"
         placeholder="jane.doe@mail.com"
         onInputChange={inputHandler}
         disabled
@@ -142,12 +133,7 @@ describe('<TextField />', () => {
   it('should not be accessible by tab if disabled', async () => {
     const user = userEvent.setup()
     renderWithTheme(
-      <TextField
-        labelFor="text"
-        id="text"
-        placeholder="jane.doe@mail.com"
-        disabled
-      />
+      <TextField name="text" placeholder="jane.doe@mail.com" disabled />
     )
 
     expect(document.body).toHaveFocus()
@@ -161,8 +147,7 @@ describe('<TextField />', () => {
   it('should render with an error', () => {
     renderWithTheme(
       <TextField
-        labelFor="text"
-        id="text"
+        name="text"
         placeholder="jane.doe@mail.com"
         error="Something got wrong"
       />
