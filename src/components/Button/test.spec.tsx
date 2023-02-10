@@ -133,4 +133,16 @@ describe('<Button />', () => {
     expect(screen.getByText(/buy now/i)).toBeInTheDocument()
     expect(screen.getByTitle(/shopping cart icon/i)).toBeInTheDocument()
   })
+
+  it('should render a disabled Button', () => {
+    renderWithTheme(<Button disabled>Buy now</Button>)
+
+    expect(screen.getByRole('button', { name: /buy now/i })).toHaveStyleRule(
+      'cursor',
+      'not-allowed',
+      {
+        modifier: ':disabled'
+      }
+    )
+  })
 })
