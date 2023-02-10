@@ -5,9 +5,9 @@ RED='\033[0;31m'
 LIGHTPURPLE='\033[1;35m'
 NOCOLOR='\e[0m'
 
-if ! npx --no-install lint-staged; then
+if ! yarn test; then
   # If the command fails, print an error message and exit with code 1
-  echo "${RED}ERROR: Something got wrong, perhaps your changes failed a test! Check with ${LIGHTPURPLE}npm run test${RED} before commiting again${NOCOLOR}"
+  echo "${RED}ERROR: Something got wrong, perhaps your changes failed a test! Check with ${LIGHTPURPLE}npm run test${RED} before pushing again${NOCOLOR}"
   exit 1
 else
   # If the command succeeds, exit with code 0
