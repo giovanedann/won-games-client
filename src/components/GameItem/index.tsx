@@ -1,13 +1,16 @@
 import Image from 'next/image'
+import { HiDownload } from 'react-icons/hi'
+
 import * as S from './styles'
 
 export type GameItemProps = {
   img: string
   title: string
   price: string
+  downloadLink?: string
 }
 
-const GameItem = ({ img, title, price }: GameItemProps) => (
+const GameItem = ({ img, title, price, downloadLink }: GameItemProps) => (
   <S.Wrapper>
     <S.GameContent>
       <S.ImageBox>
@@ -15,7 +18,18 @@ const GameItem = ({ img, title, price }: GameItemProps) => (
       </S.ImageBox>
 
       <S.Content>
-        <S.Title>{title}</S.Title>
+        <S.Title>
+          {title}
+          {downloadLink && (
+            <S.DownloadLink
+              href={downloadLink}
+              target="_blank"
+              aria-label={`Get ${title} here`}
+            >
+              <HiDownload size={22} title="download icon" />
+            </S.DownloadLink>
+          )}
+        </S.Title>
         <S.Price>{price}</S.Price>
       </S.Content>
     </S.GameContent>
