@@ -74,6 +74,13 @@ const wrapperVariants = {
     svg {
       color: ${({ theme }) => theme.colors.primary};
     }
+  `,
+
+  disabled: () => css`
+    &:disabled {
+      cursor: not-allowed;
+      filter: saturate(30%);
+    }
   `
 }
 
@@ -91,7 +98,7 @@ export const Wrapper = styled.button<WrapperProps>`
     opacity: 0.9;
   }
 
-  ${({ theme, size, fullWidth, hasIcon, minimal }) => css`
+  ${({ theme, size, fullWidth, hasIcon, minimal, disabled }) => css`
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
     border-radius: ${theme.border.radius};
@@ -100,5 +107,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${fullWidth && wrapperVariants.fullWidth};
     ${hasIcon && wrapperVariants.hasIcon(size!)};
     ${minimal && wrapperVariants.minimal};
+    ${disabled && wrapperVariants.disabled};
   `}
 `
