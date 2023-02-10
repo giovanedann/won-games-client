@@ -57,7 +57,7 @@ export const SectionGallery = styled(Section)`
 export const SectionDescription = styled(Section)`
   ${({ theme }) => css`
     .description__copyrights {
-      color: ${theme.colors.gray};
+      color: ${theme.colors.gray[400]};
       font-size: ${theme.font.sizes.xsmall};
       margin-top: ${theme.spacings.medium};
     }
