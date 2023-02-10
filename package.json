@@ -16,12 +16,6 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "lint-staged": {
-    "src/**/*": [
-      "yarn lint --fix",
-      "yarn test --findRelatedTests --passWithNoTests --bail"
-    ]
-  },
   "dependencies": {
     "framer-motion": "^9.0.0",
     "next": "13.1.6",
