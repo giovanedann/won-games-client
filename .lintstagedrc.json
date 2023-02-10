@@ -1,6 +1,6 @@
 {
   "*.{ts,tsx}": [
-    "yarn test",
+    "yarn test --passWithNoTests",
     "yarn lint --fix"
   ]
 }
