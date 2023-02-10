@@ -2,7 +2,6 @@ import { tint } from 'polished'
 import styled, { css, DefaultTheme } from 'styled-components'
 
 import * as ButtonStyles from 'components/Button/styles'
-import media from 'styled-media-query'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
