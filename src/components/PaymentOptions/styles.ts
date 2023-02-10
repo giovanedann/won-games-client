@@ -75,6 +75,10 @@ export const CardItem = styled.div`
   `}
 `
 
+export const RadioLabel = styled.label`
+  cursor: pointer;
+`
+
 export const AddCard = styled.div`
   ${({ theme }) => css`
     ${commonStyles(theme)};
