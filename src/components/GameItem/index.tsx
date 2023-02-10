@@ -28,7 +28,13 @@ const GameItem = ({
   <S.Wrapper>
     <S.GameContent>
       <S.ImageBox>
-        <Image src={img} alt={title} fill style={{ objectFit: 'cover' }} />
+        <Image
+          src={img}
+          alt={title}
+          fill
+          style={{ objectFit: 'cover' }}
+          loader={() => img}
+        />
       </S.ImageBox>
 
       <S.Content>
@@ -54,7 +60,12 @@ const GameItem = ({
         <S.CardInfo>
           <span>{paymentInfo.number}</span>
           <S.PaymentCardImageBox>
-            <Image src={paymentInfo.img} alt={paymentInfo.flag} fill />
+            <Image
+              src={paymentInfo.img}
+              alt={paymentInfo.flag}
+              fill
+              loader={() => paymentInfo.img}
+            />
           </S.PaymentCardImageBox>
         </S.CardInfo>
       </S.PaymentContent>
