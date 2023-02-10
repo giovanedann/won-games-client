@@ -17,6 +17,8 @@ export const GameContent = styled.div`
 `
 
 export const ImageBox = styled.div`
+  position: relative;
+
   ${({ theme }) => css`
     flex-shrink: 0;
     margin-right: 1.2rem;
