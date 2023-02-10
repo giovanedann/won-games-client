@@ -29,10 +29,11 @@ const PaymentOptions = ({ cards, handlePayment }: PaymentOptionsProps) => (
           <S.CardItem key={card.number}>
             <S.CardInfo>
               <S.CardImageBox>
-                <Image src={card.img} alt={card.flag} />
+                <Image src={card.img} alt={card.flag} fill />
               </S.CardImageBox>
               {card.number}
             </S.CardInfo>
+
             <Radio
               name="credit-card"
               id={card.number}
@@ -47,6 +48,7 @@ const PaymentOptions = ({ cards, handlePayment }: PaymentOptionsProps) => (
         </S.AddCard>
       </S.CardsList>
     </S.Body>
+
     <S.Footer>
       <Button as="a" fullWidth minimal>
         Continue shopping
