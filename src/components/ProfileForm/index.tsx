@@ -6,7 +6,7 @@ import * as S from './styles'
 
 function ProfileForm() {
   return (
-    <S.Wrapper>
+    <>
       <Heading lineBottom color="black" size="small">
         My profile
       </Heading>
@@ -43,7 +43,7 @@ function ProfileForm() {
 
         <Button size="large">Save changes</Button>
       </S.Form>
-    </S.Wrapper>
+    </>
   )
 }
 
