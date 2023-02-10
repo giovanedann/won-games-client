@@ -37,4 +37,19 @@ describe('<GameItem />', () => {
 
     expect(screen.getByText('R$ 215,00')).toBeInTheDocument()
   })
+
+  it('should render the item with download link and icon', () => {
+    const downloadLink = 'https://link'
+
+    renderWithTheme(<GameItem {...props} downloadLink={downloadLink} />)
+
+    expect(
+      screen.getByRole('link', { name: `Get ${props.title} here` })
+    ).toHaveAttribute('href', downloadLink)
+
+    expect(screen.getByTitle(/download icon/i)).toBeInTheDocument()
+    expect(screen.getByTitle(/download icon/i).parentElement).toBeInstanceOf(
+      SVGElement
+    )
+  })
 })
