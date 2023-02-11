@@ -5,10 +5,7 @@ import GameItem from '.'
 
 export default {
   title: 'GameItem',
-  component: GameItem,
-  argTypes: {
-    // place your args types here
-  }
+  component: GameItem
 } as ComponentMeta<typeof GameItem>
 
 const Template: ComponentStory<typeof GameItem> = (args) => (

@@ -88,6 +88,14 @@ export const PaymentContent = styled.div`
       justify-content: space-between;
       align-items: flex-end;
     `}
+
+    ${media.lessThan('medium')`
+      > p {
+        font-size: 1.2rem;
+      }
+
+      overflow-wrap: break-word;
+    `}
   `}
 `
 
