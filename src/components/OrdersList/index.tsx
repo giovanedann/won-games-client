@@ -4,11 +4,11 @@ import Heading from 'components/Heading'
 
 import * as S from './styles'
 
-export type OrdersListMock = {
+export type OrdersListProps = {
   items?: GameItemProps[]
 }
 
-function OrdersList({ items }: OrdersListMock) {
+function OrdersList({ items }: OrdersListProps) {
   return (
     <S.Wrapper>
       <Heading lineBottom lineColor="primary" color="black" size="small">
