@@ -7,8 +7,10 @@ import {
 
 import * as S from './styles'
 
+export type ActiveLinks = '/profile/me' | '/profile/cards' | '/profile/orders'
+
 export type ProfileMenuProps = {
-  activeLink?: '/profile/me' | '/profile/cards' | '/profile/orders'
+  activeLink?: ActiveLinks
 }
 
 function ProfileMenu({ activeLink }: ProfileMenuProps) {
