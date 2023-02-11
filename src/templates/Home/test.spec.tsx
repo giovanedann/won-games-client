@@ -36,11 +36,8 @@ jest.mock('components/BannerSlider', () => {
 })
 
 describe('<Home />', () => {
-  beforeEach(() => {
-    renderWithTheme(<Home {...props} />)
-  })
-
   it('should render the showcases and banner slider', () => {
+    renderWithTheme(<Home {...props} />)
     expect(screen.getByTestId('banner-slider-mock')).toBeInTheDocument()
     expect(screen.getAllByTestId('showcase-mock')).toHaveLength(5)
   })
