@@ -12,11 +12,6 @@ jest.mock('components/ProfileMenu', () => {
   }
 })
 
-jest.mock('next/router', () => ({
-  __esModules: true,
-  useRouter: jest.fn(() => ({ asPath: '/profile/orders' }))
-}))
-
 describe('<Profile />', () => {
   it('should render the right elements', () => {
     renderWithTheme(
