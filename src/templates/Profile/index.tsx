@@ -1,7 +1,7 @@
 import Container from 'components/Container'
 import Heading from 'components/Heading'
 import ProfileMenu, { ActiveLinks } from 'components/ProfileMenu'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import Base from 'templates/Base'
 
 import * as S from './styles'
@@ -11,7 +11,7 @@ export type ProfileTemplateProps = {
 }
 
 const Profile = ({ children }: ProfileTemplateProps) => {
-  const { asPath } = useRouter()
+  const pathname = usePathname()
 
   return (
     <Base>
@@ -21,7 +21,7 @@ const Profile = ({ children }: ProfileTemplateProps) => {
         </Heading>
 
         <S.Main>
-          <ProfileMenu activeLink={asPath as ActiveLinks} />
+          <ProfileMenu activeLink={pathname as ActiveLinks} />
           <S.Content>{children}</S.Content>
         </S.Main>
       </Container>
