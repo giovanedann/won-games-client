@@ -79,6 +79,7 @@ export const Footer = styled.div`
       position: absolute;
       inset: 0;
       width: 90%;
+      height: 0;
       transform: translateX(5%);
       border-top: 2px solid ${rgba(theme.colors.black, 0.2)};
     }
