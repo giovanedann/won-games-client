@@ -98,7 +98,7 @@ const wrapperModifiers = {
 
     ${Overlay} {
       z-index: ${theme.layers.modal};
-      background-color: #fff;
+      background-color: ${theme.colors.white};
       top: 0;
       left: 0;
       position: fixed;
@@ -133,6 +133,7 @@ const wrapperModifiers = {
         width: 30px;
         right: 0.8rem;
         top: 0.8rem;
+
         &:first-child {
           display: none;
         }
@@ -143,14 +144,22 @@ const wrapperModifiers = {
   close: (theme: DefaultTheme) => css`
     ${IconWrapper} {
       color: ${theme.colors.white};
+
       > svg:last-child {
         display: none;
       }
     }
+
     ${Content} {
       transform: translateY(3rem);
       height: 0;
     }
+
+    ${RadioStyles.Label},
+    ${CheckboxStyles.Label} {
+      color: ${theme.colors.white} !important;
+    }
+
     ${Content}, ${Footer} {
       visibility: hidden;
       position: absolute;
@@ -166,7 +175,7 @@ type WrapperProps = {
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, isOpen }) => css`
     ${media.lessThan('medium')`
-      ${!!isOpen && wrapperModifiers.open(theme)}
+      ${isOpen && wrapperModifiers.open(theme)}
       ${!isOpen && wrapperModifiers.close(theme)}
     `}
   `}

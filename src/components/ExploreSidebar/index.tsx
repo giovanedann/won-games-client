@@ -92,6 +92,7 @@ function ExploreSidebar({
                   id={field.name}
                   name={item.name}
                   label={field.label}
+                  labelColor="white"
                   labelFor={field.name}
                   value={field.name}
                   defaultChecked={field.name === values[item.name]}
