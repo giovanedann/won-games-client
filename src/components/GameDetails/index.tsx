@@ -35,6 +35,8 @@ const GameDetails = ({
   )
 
   const formattedDate = useMemo(() => {
+    if (!releaseDate) return
+
     return new Intl.DateTimeFormat('en-US', {
       day: 'numeric',
       month: 'short',
@@ -64,7 +66,7 @@ const GameDetails = ({
         <S.Block>
           <S.Label>Platforms</S.Label>
           <S.IconsWrapper>
-            {platforms.map((platform: Platform) => (
+            {platforms?.map((platform: Platform) => (
               <S.Icon key={platform}>{platformIcons[platform]}</S.Icon>
             ))}
           </S.IconsWrapper>
@@ -78,13 +80,13 @@ const GameDetails = ({
         <S.Block>
           <S.Label>Rating</S.Label>
           <S.Description>
-            {rating === 'BR0' ? 'FREE' : `${rating.replace('BR', '')}+`}
+            {rating === 'BR0' ? 'FREE' : `${rating?.replace('BR', '')}+`}
           </S.Description>
         </S.Block>
 
         <S.Block>
           <S.Label>Genres</S.Label>
-          <S.Description>{genres.join(' / ')}</S.Description>
+          <S.Description>{genres?.join(' / ')}</S.Description>
         </S.Block>
       </S.Content>
     </S.Wrapper>
