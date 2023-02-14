@@ -1,4 +1,4 @@
-const items = [
+const gameCardSliderMock = [
   {
     title: 'Population Zero',
     developer: 'Rockstar Games',
@@ -43,4 +43,4 @@ const items = [
   }
 ]
 
-export default items
+export default gameCardSliderMock
