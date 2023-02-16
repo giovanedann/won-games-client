@@ -38,3 +38,16 @@ Basic.args = {
   total: 'R$ 330,00',
   hasButton: false
 }
+
+export const Empty = Template.bind({})
+
+Empty.parameters = {
+  backgrounds: {
+    default: 'won-dark'
+  }
+}
+
+Empty.args = {
+  items: [],
+  hasButton: false
+}
