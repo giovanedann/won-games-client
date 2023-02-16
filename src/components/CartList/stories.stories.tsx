@@ -35,5 +35,6 @@ Basic.parameters = {
 
 Basic.args = {
   items: cartListMock,
-  total: 'R$ 330,00'
+  total: 'R$ 330,00',
+  hasButton: false
 }
