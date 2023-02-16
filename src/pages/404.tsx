@@ -8,7 +8,7 @@ export default function NotFound() {
       <Container>
         <Empty
           title="404 - Not Found"
-          description="Ops... Seems like this page doesn't exist."
+          description="Oops... Seems like this page doesn't exist."
           hasLink
         />
       </Container>
