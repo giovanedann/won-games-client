@@ -21,8 +21,8 @@ function Empty({ description, title, hasLink }: EmptyProps) {
       <S.Description>{description}</S.Description>
 
       {hasLink && (
-        <Link href="/" passHref>
-          <Button as="a">Go back to store</Button>
+        <Link href="/">
+          <Button>Go back to store</Button>
         </Link>
       )}
     </S.Wrapper>
