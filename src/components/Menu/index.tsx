@@ -1,11 +1,14 @@
 import * as S from './styles'
-import { MdSearch, MdOutlineShoppingCart, MdClose } from 'react-icons/md'
+import { MdSearch, MdClose } from 'react-icons/md'
 import { HiOutlineMenuAlt1 } from 'react-icons/hi'
 import Logo from 'components/Logo'
 import { useState } from 'react'
 import Button from 'components/Button'
 import MediaMatch from 'components/MediaMatch'
 import Link from 'next/link'
+import UserDropdown from 'components/UserDropdown'
+import CartDropdown from 'components/CartDropdown'
+import CartIcon from 'components/CartIcon'
 
 type MenuProps = {
   username?: string
@@ -37,15 +40,25 @@ function Menu({ username }: MenuProps) {
         <S.IconWrapper>
           <MdSearch aria-label="search" />
         </S.IconWrapper>
+
         <S.IconWrapper>
-          <MdOutlineShoppingCart aria-label="open shopping cart" />
+          <MediaMatch greaterThan="medium">
+            <CartDropdown />
+          </MediaMatch>
+
+          <MediaMatch lessThan="medium">
+            <CartIcon aria-label="open shopping cart" />
+          </MediaMatch>
         </S.IconWrapper>
+
         <MediaMatch greaterThan="medium">
           {!username && (
             <Link href="/sign-in">
               <Button>Sign in</Button>
             </Link>
           )}
+
+          {username && <UserDropdown username={username} />}
         </MediaMatch>
       </S.MenuGroup>
 
@@ -54,11 +67,11 @@ function Menu({ username }: MenuProps) {
 
         <S.MenuNav>
           <S.MenuLink href="/">Home</S.MenuLink>
-          <S.MenuLink href="#">Explore</S.MenuLink>
+          <S.MenuLink href="/games">Explore</S.MenuLink>
           {Boolean(username) && (
             <>
-              <S.MenuLink href="#">My account</S.MenuLink>
-              <S.MenuLink href="#">Wishlist</S.MenuLink>
+              <S.MenuLink href="/profile/me">My profile</S.MenuLink>
+              <S.MenuLink href="/profile/wishlist">Wishlist</S.MenuLink>
             </>
           )}
         </S.MenuNav>
