@@ -79,7 +79,7 @@ export function addApolloState(
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useApollo(pageProps: any) {
-  const state = pageProps[APOLLO_STATE_PROP_NAME]
+  const state = pageProps?.[APOLLO_STATE_PROP_NAME]
   const store = useMemo(() => initializeApollo(state), [state])
   return store
 }
