@@ -14,13 +14,14 @@
     "test:coverage": "yarn test --collect-coverage",
     "generate": "yarn plop --plopfile ./generators/plopfile.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "schema:download": "apollo client:download-schema --endpoint=http://localhost:1337/graphql schema-temp.gql"
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
     "@types/lodash": "^4.14.191",
     "framer-motion": "^10.0.0",
-    "graphql": "^16.6.0",
+    "graphql": "^15.5.0",
     "lodash": "^4.17.21",
     "next": "13.2.1",
     "next-pwa": "^5.6.0",
