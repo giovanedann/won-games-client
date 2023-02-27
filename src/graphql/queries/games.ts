@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const GET_GAMES = gql`
-  query getGames {
-    games {
+  query getGames($limit: Int!) {
+    games(limit: $limit) {
       name
       slug
       cover {
