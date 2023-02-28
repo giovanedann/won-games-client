@@ -36,6 +36,7 @@ export const Basic = Template.bind({})
 
 Basic.args = {
   title: 'Devil May Cry 5',
+  slug: 'devil-may-cry-5',
   developer: 'Capcom',
   img: 'https://images6.alphacoders.com/926/thumb-1920-926723.jpg',
   price: 'R$ 235,00',

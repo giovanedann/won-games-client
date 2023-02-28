@@ -8,7 +8,6 @@ import Showcase from 'components/Showcase'
 import Base from 'templates/Base'
 
 import * as S from './styles'
-import Divider from 'components/Divider'
 
 export type GameTemplateProps = {
   coverImg: string
@@ -16,8 +15,8 @@ export type GameTemplateProps = {
   gallery?: GalleryImageProps[]
   description: string
   details: GameDetailsProps
-  upcomingGames: GameCardProps[]
-  upcomingHighlight: HighlightProps
+  upcommingGames: GameCardProps[]
+  upcommingHighlight: HighlightProps
   recommendedGames: GameCardProps[]
 }
 
@@ -28,8 +27,8 @@ function Game({
   description,
   details,
   recommendedGames,
-  upcomingGames,
-  upcomingHighlight
+  upcommingGames,
+  upcommingHighlight
 }: GameTemplateProps) {
   return (
     <Base>
@@ -52,14 +51,13 @@ function Game({
 
         <S.SectionGameDetails>
           <GameDetails {...details} />
-          <Divider />
         </S.SectionGameDetails>
       </S.Main>
 
       <Showcase
         title="Upcoming"
-        games={upcomingGames}
-        highlight={upcomingHighlight}
+        games={upcommingGames}
+        highlight={upcommingHighlight}
       />
 
       <Showcase title="You may like these games" games={recommendedGames} />

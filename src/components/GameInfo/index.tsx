@@ -18,7 +18,7 @@ function GameInfo({ description, price, title }: GameInfoProps) {
         {title}
       </Heading>
 
-      <Ribbon color="secondary">{`$${price}`}</Ribbon>
+      <Ribbon color="secondary">{`${price}`}</Ribbon>
 
       <S.Description>{description}</S.Description>
 

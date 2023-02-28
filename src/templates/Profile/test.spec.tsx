@@ -12,7 +12,17 @@ jest.mock('components/ProfileMenu', () => {
   }
 })
 
+jest.mock('next/router', () => ({
+  ...jest.requireActual('next/router'),
+  useRouter: () => jest.fn()
+}))
+
 describe('<Profile />', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+    jest.restoreAllMocks()
+  })
+
   it('should render the right elements', () => {
     renderWithTheme(
       <Profile>

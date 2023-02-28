@@ -15,8 +15,16 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
-  experimental: {
-    forceSwcTransforms: true
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads'
+      }
+    ],
+    formats: ['image/avif', 'image/webp']
   }
 }
 

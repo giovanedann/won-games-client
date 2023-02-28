@@ -49,6 +49,7 @@ function Gallery({ items }: GalleryProps) {
               role="button"
               src={item.src}
               alt={`Thumb - ${item.label}`}
+              loader={() => item.src}
               fill
               style={{ objectFit: 'contain' }}
               onClick={() => handleImageClick(index)}
@@ -75,7 +76,12 @@ function Gallery({ items }: GalleryProps) {
           <Slider ref={sliderRef} settings={modalSettings}>
             {items.map((item, index) => (
               <S.ModalImageContainer key={`thumb-${index}`}>
-                <Image src={item.src} alt={item.label} fill />
+                <Image
+                  src={item.src}
+                  alt={item.label}
+                  fill
+                  loader={() => item.src}
+                />
               </S.ModalImageContainer>
             ))}
           </Slider>
