@@ -4,32 +4,32 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getGames
+// GraphQL query operation: GetGames
 // ====================================================
 
-export interface getGames_games_cover {
+export interface GetGames_games_cover {
   __typename: "UploadFile";
   url: string;
 }
 
-export interface getGames_games_developers {
+export interface GetGames_games_developers {
   __typename: "Developer";
   name: string;
 }
 
-export interface getGames_games {
+export interface GetGames_games {
   __typename: "Game";
   name: string;
   slug: string;
-  cover: getGames_games_cover | null;
-  developers: getGames_games_developers[];
+  cover: GetGames_games_cover | null;
+  developers: GetGames_games_developers[];
   price: number;
 }
 
-export interface getGames {
-  games: getGames_games[];
+export interface GetGames {
+  games: GetGames_games[];
 }
 
-export interface getGamesVariables {
+export interface GetGamesVariables {
   limit: number;
 }
