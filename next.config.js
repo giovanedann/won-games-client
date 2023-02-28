@@ -14,6 +14,17 @@ const nextConfig = {
   reactStrictMode: true,
   compiler: {
     styledComponents: true
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads'
+      }
+    ],
+    formats: ['image/avif', 'image/webp']
   }
 }
 
