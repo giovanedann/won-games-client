@@ -22,12 +22,12 @@ export interface getGames_games {
   name: string;
   slug: string;
   cover: getGames_games_cover | null;
-  developers: (getGames_games_developers | null)[] | null;
+  developers: getGames_games_developers[];
   price: number;
 }
 
 export interface getGames {
-  games: (getGames_games | null)[] | null;
+  games: getGames_games[];
 }
 
 export interface getGamesVariables {
