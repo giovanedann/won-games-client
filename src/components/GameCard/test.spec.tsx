@@ -4,6 +4,7 @@ import renderWithTheme from 'utils/tests/renderWithTheme'
 import GameCard from '.'
 
 const props = {
+  slug: 'devil-may-cry-5',
   title: 'Devil May Cry 5',
   developer: 'Capcom',
   img: 'https://images6.alphacoders.com/926/thumb-1920-926723.jpg',
@@ -23,6 +24,11 @@ describe('<GameCard />', () => {
     ).toBeInTheDocument()
 
     expect(screen.getByText(/R\$ 235,00/i)).toBeInTheDocument()
+
+    expect(screen.getByRole('link', { name: props.title })).toHaveAttribute(
+      'href',
+      `game/${props.slug}`
+    )
 
     expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
       'src',
