@@ -17,7 +17,8 @@
     "build-storybook": "build-storybook",
     "schema:download": "apollo client:download-schema --endpoint=http://localhost:1337/graphql schema-temp.gql",
     "schema:convert": "node ./src/utils/convertToNonNull.js",
-    "codegen": "apollo codegen:generate --target typescript --excludes=node_modules/ --includes=src/graphql/**/*.ts --localSchemaFile schema-temp.gql --tagName=gql --outputFlat src/graphql/generated"
+    "codegen": "apollo codegen:generate --target typescript --excludes=node_modules/ --includes=src/graphql/**/*.ts --localSchemaFile schema.gql --tagName=gql --outputFlat src/graphql/generated",
+    "generate-gql-types": "yarn schema:download && yarn schema:convert && yarn codegen"
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
