@@ -15,7 +15,7 @@ describe('<GameInfo />', () => {
         /Control your fleet and build an armada across more than 30 single-player missions/i
       )
     ).toBeInTheDocument()
-    expect(screen.getByText(/\$215,00/i)).toBeInTheDocument()
+    expect(screen.getByText(/\$215\.00/i)).toBeInTheDocument()
   })
 
   it('should render the action buttons', () => {
