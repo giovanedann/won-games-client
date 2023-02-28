@@ -1,10 +1,12 @@
 import Button from 'components/Button'
 import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
+import Image from 'next/image'
 import { ReactNode } from 'react'
 import { MdAddShoppingCart, MdFavoriteBorder, MdFavorite } from 'react-icons/md'
 import * as S from './styles'
 
 export type GameCardProps = {
+  slug: string
   title: string
   developer: string
   img: string
@@ -18,6 +20,7 @@ export type GameCardProps = {
 }
 
 function GameCard({
+  slug,
   developer,
   img,
   price,
@@ -37,16 +40,19 @@ function GameCard({
         </Ribbon>
       )}
 
-      <S.ImageBox>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={img} alt={title} />
-      </S.ImageBox>
+      <S.StyledNextLink href={`game/${slug}`}>
+        <S.ImageBox>
+          <Image fill src={img} alt={title} loader={() => img} />
+        </S.ImageBox>
+      </S.StyledNextLink>
 
       <S.Content>
-        <S.Info>
-          <S.Title>{title}</S.Title>
-          <S.Developer>{developer}</S.Developer>
-        </S.Info>
+        <S.StyledNextLink href={`game/${slug}`}>
+          <S.Info>
+            <S.Title>{title}</S.Title>
+            <S.Developer>{developer}</S.Developer>
+          </S.Info>
+        </S.StyledNextLink>
 
         <S.FavButton role="button" aria-label="favorite button" onClick={onFav}>
           {favorite ? (

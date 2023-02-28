@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled, { css, keyframes } from 'styled-components'
 
 export const Wrapper = styled.article`
@@ -45,16 +46,23 @@ export const ImageBox = styled.div`
   );
   background-size: 80rem 14rem;
   animation: ${placeholderShimmer} 1s linear infinite forwards;
+  width: 100%;
+  height: 14rem;
+  position: relative;
+  transition: 0.2s ease-in-out;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  &:hover {
+    transform: scale(1.05);
   }
 `
 
 export const Info = styled.div`
   max-width: calc(100% - 2.5rem);
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `
 
 export const Title = styled.h3`
@@ -124,4 +132,8 @@ export const Price = styled.div<PriceProps>`
 
   ${({ isPromotional }) => isPromotional && priceVariants.promotional}
   ${({ isPromotional }) => !isPromotional && priceVariants.default}
+`
+
+export const StyledNextLink = styled(Link)`
+  text-decoration: none;
 `
