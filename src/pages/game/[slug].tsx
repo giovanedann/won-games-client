@@ -10,6 +10,7 @@ import { GET_GAMES, GET_GAME_BY_SLUG } from 'graphql/queries/games'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Game, { GameTemplateProps } from 'templates/Game'
+import formatPrice from 'utils/formatPrice'
 
 const apolloClient = initializeApollo()
 
@@ -54,10 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       coverImg: `http://localhost:1337${game.cover?.src || ''}`,
       gameInfo: {
         title: game.name,
-        price: new Intl.NumberFormat('en', {
-          style: 'currency',
-          currency: 'USD'
-        }).format(game.price),
+        price: formatPrice(game.price),
         description: game.short_description
       },
       gallery: game.gallery.map(({ src, label }) => ({

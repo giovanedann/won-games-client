@@ -3,6 +3,7 @@ import { initializeApollo } from 'graphql/client'
 import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
 import { GET_GAMES } from 'graphql/queries/games'
 import GamesTemplate, { GameTemplateProps } from 'templates/Games'
+import formatPrice from 'utils/formatPrice'
 
 export default function GamesPage(props: GameTemplateProps) {
   return <GamesTemplate {...props} />
@@ -23,10 +24,7 @@ export async function getStaticProps() {
         slug: game.slug,
         developer: game.developers[0].name,
         img: `http://localhost:1337${game.cover!.url}`,
-        price: new Intl.NumberFormat('en', {
-          style: 'currency',
-          currency: 'USD'
-        }).format(game.price)
+        price: formatPrice(game.price)
       })),
       filterItems: exploreSidebarMocks
     }
