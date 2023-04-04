@@ -24,11 +24,15 @@ export async function getStaticProps() {
     props: {
       revalidate: 60,
       banners: bannerAdapter(data.banners),
+      newGamesTitle: data.sections?.newGames?.title,
       newGames: newGamesAdapter(data.newGames),
+      mostPopularGamesTitle: data.sections?.popularGames?.title,
       mostPopularHighlight: highlightMock,
       mostPopularGames: mostPopularGames,
+      upcomingGamesTitle: data.sections?.upcomingGames?.title,
       upcomingGames: upcomingGamesAdapter(data.upcomingGames),
       upcomingHighlight: highlightMock,
+      freeGamesTitle: data.sections?.freeGames?.title,
       freeGames: freeGamesAdapter(data.freeGames),
       freeHighlight: highlightMock
     }
