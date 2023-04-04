@@ -56,6 +56,25 @@ export interface QueryHome_newGames {
   price: number;
 }
 
+export interface QueryHome_upcomingGames_cover {
+  __typename: "UploadFile";
+  url: string;
+}
+
+export interface QueryHome_upcomingGames_developers {
+  __typename: "Developer";
+  name: string;
+}
+
+export interface QueryHome_upcomingGames {
+  __typename: "Game";
+  name: string;
+  slug: string;
+  cover: QueryHome_upcomingGames_cover | null;
+  developers: QueryHome_upcomingGames_developers[];
+  price: number;
+}
+
 export interface QueryHome_freeGames_cover {
   __typename: "UploadFile";
   url: string;
@@ -78,5 +97,6 @@ export interface QueryHome_freeGames {
 export interface QueryHome {
   banners: QueryHome_banners[];
   newGames: QueryHome_newGames[];
+  upcomingGames: QueryHome_upcomingGames[];
   freeGames: QueryHome_freeGames[];
 }
