@@ -9,6 +9,11 @@ export const BannerFragment = gql`
       url
     }
 
+    button {
+      label
+      link
+    }
+
     ribbon {
       id
       text

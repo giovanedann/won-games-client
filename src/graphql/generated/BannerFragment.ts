@@ -14,6 +14,12 @@ export interface BannerFragment_image {
   url: string;
 }
 
+export interface BannerFragment_button {
+  __typename: "ComponentPageButton";
+  label: string;
+  link: string;
+}
+
 export interface BannerFragment_ribbon {
   __typename: "ComponentPageRibbon";
   id: string;
@@ -27,5 +33,6 @@ export interface BannerFragment {
   title: string;
   subtitle: string;
   image: BannerFragment_image | null;
+  button: BannerFragment_button | null;
   ribbon: BannerFragment_ribbon | null;
 }
