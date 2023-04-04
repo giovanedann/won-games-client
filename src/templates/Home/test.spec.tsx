@@ -12,7 +12,6 @@ const props = {
   mostPopularGames: gamesMock,
   upcomingGames: gamesMock,
   upcomingHighlight: highlightMock,
-  upcomingMoreGames: gamesMock,
   freeGames: gamesMock,
   freeHighlight: highlightMock
 }
@@ -39,6 +38,6 @@ describe('<Home />', () => {
   it('should render the showcases and banner slider', () => {
     renderWithTheme(<Home {...props} />)
     expect(screen.getByTestId('banner-slider-mock')).toBeInTheDocument()
-    expect(screen.getAllByTestId('showcase-mock')).toHaveLength(5)
+    expect(screen.getAllByTestId('showcase-mock')).toHaveLength(4)
   })
 })
