@@ -16,7 +16,9 @@ export default function freeGamesAdapter(
     title: game.name,
     slug: game.slug,
     developer: game.developers[0].name,
-    img: getImageUrl(game.cover?.url ?? '/uploads/diablo_4_55aedfef91.jpg'),
+    img: getImageUrl(
+      game.cover?.url ?? '/uploads/No_image_available_38adfae762.png'
+    ),
     price: game.price
   }))
 }
