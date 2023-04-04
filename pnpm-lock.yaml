@@ -20,6 +20,7 @@ specifiers:
   '@types/react': 18.0.33
   '@types/react-slick': ^0.23.10
   '@types/styled-components': ^5.1.26
+  '@types/testing-library__jest-dom': ^5.14.5
   '@typescript-eslint/eslint-plugin': ^5.57.1
   '@typescript-eslint/parser': ^5.57.1
   apollo: ^2.34.0
@@ -89,6 +90,7 @@ devDependencies:
   '@types/react': 18.0.33
   '@types/react-slick': 0.23.10
   '@types/styled-components': 5.1.26
+  '@types/testing-library__jest-dom': 5.14.5
   '@typescript-eslint/eslint-plugin': 5.57.1_jwd5v5vphzanfmajybkjq25ld4
   '@typescript-eslint/parser': 5.57.1_vwh6htx42aidho2qgfca5u5rwm
   apollo: 2.34.0_typescript@5.0.3
