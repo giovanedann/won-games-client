@@ -4,8 +4,10 @@ import highlightMock from 'components/Highlight/data.mock'
 import { initializeApollo } from 'graphql/client'
 import { GET_HOME } from 'graphql/queries/home'
 import { QueryHome } from 'graphql/generated/QueryHome'
-import BannerAdapter from 'adapters/banners.adapter'
-import NewGamesAdapter from 'adapters/new-games.adapter'
+import bannerAdapter from 'adapters/banners.adapter'
+import newGamesAdapter from 'adapters/new-games.adapter'
+import upcomingGamesAdapter from 'adapters/upcoming-games.adapter'
+import freeGamesAdapter from 'adapters/free-games.adapter'
 
 export default function Index(props: HomeTemplateProps) {
   return <Home {...props} />
@@ -19,14 +21,13 @@ export async function getStaticProps() {
   return {
     props: {
       revalidate: 60,
-      banners: BannerAdapter(data.banners),
-      newGames: NewGamesAdapter(data.newGames),
+      banners: bannerAdapter(data.banners),
+      newGames: newGamesAdapter(data.newGames),
       mostPopularHighlight: highlightMock,
       mostPopularGames: gamesMock,
-      upcomingGames: gamesMock,
+      upcomingGames: upcomingGamesAdapter(data.upcomingGames),
       upcomingHighlight: highlightMock,
-      upcomingMoreGames: gamesMock,
-      freeGames: data.freeGames,
+      freeGames: freeGamesAdapter(data.freeGames),
       freeHighlight: highlightMock
     }
   }
