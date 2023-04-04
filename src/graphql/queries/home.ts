@@ -48,6 +48,13 @@ export const GET_HOME = gql`
         }
       }
 
+      upcomingGames {
+        title
+        highlight {
+          ...HighlightFragment
+        }
+      }
+
       freeGames {
         title
         highlight {
