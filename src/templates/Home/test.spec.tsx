@@ -8,10 +8,14 @@ import highlightMock from 'components/Highlight/data.mock'
 const props = {
   banners: bannersMock,
   newGames: gamesMock,
+  newGamesTitle: 'New games',
   mostPopularHighlight: highlightMock,
+  mostPopularGamesTitle: 'Most popular',
   mostPopularGames: gamesMock,
   upcomingGames: gamesMock,
+  upcomingGamesTitle: 'Upcoming games',
   upcomingHighlight: highlightMock,
+  freeGamesTitle: 'Free games',
   freeGames: gamesMock,
   freeHighlight: highlightMock
 }
