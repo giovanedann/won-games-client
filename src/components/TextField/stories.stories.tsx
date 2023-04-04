@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import styled from 'styled-components'
 
 import TextField from '.'
@@ -20,9 +20,9 @@ export default {
       type: 'boolean'
     }
   }
-} as ComponentMeta<typeof TextField>
+} as Meta<typeof TextField>
 
-const Template: ComponentStory<typeof TextField> = (args) => (
+const Template: StoryFn<typeof TextField> = (args) => (
   <Container>
     <TextField {...args} />
   </Container>

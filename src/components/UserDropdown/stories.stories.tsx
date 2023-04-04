@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import UserDropdown from '.'
 import styled from 'styled-components'
@@ -13,9 +13,9 @@ const Container = styled.div`
 export default {
   title: 'UserDropdown',
   component: UserDropdown
-} as ComponentMeta<typeof UserDropdown>
+} as Meta<typeof UserDropdown>
 
-const Template: ComponentStory<typeof UserDropdown> = (args) => (
+const Template: StoryFn<typeof UserDropdown> = (args) => (
   <Container>
     <UserDropdown {...args} />
   </Container>

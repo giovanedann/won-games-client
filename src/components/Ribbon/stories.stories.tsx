@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Ribbon from '.'
 import styled from 'styled-components'
@@ -26,7 +26,7 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof Ribbon>
+} as Meta<typeof Ribbon>
 
 const RibbonWrapper = styled.div`
   width: 40rem;
@@ -35,7 +35,7 @@ const RibbonWrapper = styled.div`
   background-color: #888;
 `
 
-const Template: ComponentStory<typeof Ribbon> = (args) => (
+const Template: StoryFn<typeof Ribbon> = (args) => (
   <RibbonWrapper>
     <Ribbon {...args}>Best seller</Ribbon>
   </RibbonWrapper>

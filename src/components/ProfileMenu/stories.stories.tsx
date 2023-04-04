@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import ProfileMenu from '.'
 
@@ -13,9 +13,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof ProfileMenu>
+} as Meta<typeof ProfileMenu>
 
-const Template: ComponentStory<typeof ProfileMenu> = (args) => (
+const Template: StoryFn<typeof ProfileMenu> = (args) => (
   <ProfileMenu {...args} />
 )
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import PaymentOptions from '.'
 import paymentOptionsMock from './data.mock'
@@ -27,9 +27,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof PaymentOptions>
+} as Meta<typeof PaymentOptions>
 
-const Template: ComponentStory<typeof PaymentOptions> = (args) => (
+const Template: StoryFn<typeof PaymentOptions> = (args) => (
   <Container>
     <PaymentOptions {...args} />
   </Container>

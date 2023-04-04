@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import TextContent from '.'
 import textMock from './data.mock'
@@ -7,9 +7,9 @@ import textMock from './data.mock'
 export default {
   title: 'TextContent',
   component: TextContent
-} as ComponentMeta<typeof TextContent>
+} as Meta<typeof TextContent>
 
-const Template: ComponentStory<typeof TextContent> = (args) => (
+const Template: StoryFn<typeof TextContent> = (args) => (
   <TextContent {...args} />
 )
 

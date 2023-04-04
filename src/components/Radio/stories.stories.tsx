@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Radio from '.'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ export default {
   argTypes: {
     onCheck: { action: 'checked' }
   }
-} as ComponentMeta<typeof Radio>
+} as Meta<typeof Radio>
 
 const Container = styled.div`
   padding: 1rem;
@@ -19,7 +19,7 @@ const Container = styled.div`
   gap: 1rem;
 `
 
-const Template: ComponentStory<typeof Radio> = (args) => (
+const Template: StoryFn<typeof Radio> = (args) => (
   <Container>
     <Radio
       label="first"

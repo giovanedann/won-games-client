@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Showcase from '.'
 import gamesMock from 'components/GameCardSlider/data.mock'
@@ -20,11 +20,9 @@ export default {
       </Container>
     )
   ]
-} as ComponentMeta<typeof Showcase>
+} as Meta<typeof Showcase>
 
-const Template: ComponentStory<typeof Showcase> = (args) => (
-  <Showcase {...args} />
-)
+const Template: StoryFn<typeof Showcase> = (args) => <Showcase {...args} />
 
 Template.parameters = {
   layout: 'fullscreen',

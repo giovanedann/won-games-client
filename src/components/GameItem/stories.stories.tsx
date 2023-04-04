@@ -1,16 +1,14 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import GameItem from '.'
 
 export default {
   title: 'GameItem',
   component: GameItem
-} as ComponentMeta<typeof GameItem>
+} as Meta<typeof GameItem>
 
-const Template: ComponentStory<typeof GameItem> = (args) => (
-  <GameItem {...args} />
-)
+const Template: StoryFn<typeof GameItem> = (args) => <GameItem {...args} />
 
 export const Basic = Template.bind({})
 

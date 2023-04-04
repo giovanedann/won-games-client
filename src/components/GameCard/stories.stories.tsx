@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import GameCard from '.'
 import styled from 'styled-components'
@@ -20,13 +20,13 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof GameCard>
+} as Meta<typeof GameCard>
 
 const Wrapper = styled.div`
   width: 30rem;
 `
 
-const Template: ComponentStory<typeof GameCard> = (args) => (
+const Template: StoryFn<typeof GameCard> = (args) => (
   <Wrapper>
     <GameCard {...args} />
   </Wrapper>

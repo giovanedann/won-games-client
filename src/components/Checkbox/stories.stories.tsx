@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Checkbox from '.'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ export default {
   argTypes: {
     onCheck: { action: 'checked' }
   }
-} as ComponentMeta<typeof Checkbox>
+} as Meta<typeof Checkbox>
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const Container = styled.div`
   padding: 1.5rem;
 `
 
-const Template: ComponentStory<typeof Checkbox> = (args) => (
+const Template: StoryFn<typeof Checkbox> = (args) => (
   <Container>
     <Checkbox
       name="category"

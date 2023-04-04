@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import item from './data.mock'
 
 import Highlight from '.'
@@ -17,13 +17,13 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof Highlight>
+} as Meta<typeof Highlight>
 
 const Wrapper = styled.div`
   max-width: 104rem;
 `
 
-const Template: ComponentStory<typeof Highlight> = (args) => (
+const Template: StoryFn<typeof Highlight> = (args) => (
   <Wrapper>
     <Highlight {...args} />
   </Wrapper>

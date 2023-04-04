@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import FormSignUp from '.'
 
@@ -12,9 +12,9 @@ const Container = styled.div`
 export default {
   title: 'Form/FormSignUp',
   component: FormSignUp
-} as ComponentMeta<typeof FormSignUp>
+} as Meta<typeof FormSignUp>
 
-const Template: ComponentStory<typeof FormSignUp> = () => (
+const Template: StoryFn<typeof FormSignUp> = () => (
   <Container>
     <FormSignUp />
   </Container>
