@@ -9,7 +9,7 @@ export type Game = {
   price: number
 }
 
-export default function NewGamesAdapter(
+export default function newGamesAdapter(
   apiNewGames: QueryHome_newGames[]
 ): Game[] {
   return apiNewGames.map((game) => ({

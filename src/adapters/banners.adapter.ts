@@ -1,7 +1,7 @@
 import { BannerProps } from 'components/Banner'
 import { QueryHome_banners } from 'graphql/generated/QueryHome'
 
-export default function BannerAdapter(
+export default function bannerAdapter(
   apiBanners: QueryHome_banners[]
 ): BannerProps[] {
   return apiBanners.map((banner) => ({
