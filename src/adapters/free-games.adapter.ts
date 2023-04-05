@@ -6,7 +6,7 @@ export type Game = {
   slug: string
   developer: string
   img: string
-  price: number
+  price: string
 }
 
 export default function freeGamesAdapter(
@@ -19,6 +19,6 @@ export default function freeGamesAdapter(
     img: getImageUrl(
       game.cover?.url ?? '/uploads/No_image_available_38adfae762.png'
     ),
-    price: game.price
+    price: game.price === 0 ? 'Free' : `$${game.price}`
   }))
 }

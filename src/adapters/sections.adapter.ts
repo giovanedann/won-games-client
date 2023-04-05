@@ -9,7 +9,7 @@ export default function sectionsAdapter(apiSections: QueryHome_sections) {
     img: getImageUrl(
       game.cover?.url ?? '/uploads/No_image_available_38adfae762.png'
     ),
-    price: game.price
+    price: game.price === 0 ? 'Free' : `$${game.price}`
   }))
 
   return { mostPopularGames }
