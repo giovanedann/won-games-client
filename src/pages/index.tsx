@@ -1,7 +1,7 @@
 import Home, { HomeTemplateProps } from 'templates/Home'
 import { initializeApollo } from 'graphql/client'
 import { GET_HOME } from 'graphql/queries/home'
-import { QueryHome } from 'graphql/generated/QueryHome'
+import { QueryHome, QueryHomeVariables } from 'graphql/generated/QueryHome'
 import bannerAdapter from 'adapters/banners.adapter'
 import newGamesAdapter from 'adapters/new-games.adapter'
 import upcomingGamesAdapter from 'adapters/upcoming-games.adapter'
@@ -15,8 +15,12 @@ export default function Index(props: HomeTemplateProps) {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
+  const today = new Date().toISOString().slice(0, 10)
 
-  const { data } = await apolloClient.query<QueryHome>({ query: GET_HOME })
+  const { data } = await apolloClient.query<QueryHome, QueryHomeVariables>({
+    query: GET_HOME,
+    variables: { date: today }
+  })
 
   const { mostPopularGames } = sectionsAdapter(data.sections!)
 
