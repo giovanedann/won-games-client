@@ -26,6 +26,7 @@ specifiers:
   apollo: ^2.34.0
   babel-loader: ^9.1.2
   babel-plugin-styled-components: ^2.0.7
+  deepmerge: ^4.3.1
   eslint: 8.37.0
   eslint-config-next: 13.2.4
   eslint-config-prettier: ^8.8.0
@@ -60,6 +61,7 @@ specifiers:
 dependencies:
   '@apollo/client': 3.7.11_wxfjnvblbhu4ianu4f2qg722fu
   '@types/lodash': 4.14.192
+  deepmerge: 4.3.1
   framer-motion: 10.10.0_biqbaboplfbrettd7655fr4n2y
   fs-extra: 11.1.1
   graphql: 15.8.0
