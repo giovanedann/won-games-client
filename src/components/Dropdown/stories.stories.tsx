@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Dropdown from '.'
 
@@ -11,11 +11,9 @@ export default {
       type: 'symbol'
     }
   }
-} as ComponentMeta<typeof Dropdown>
+} as Meta<typeof Dropdown>
 
-const Template: ComponentStory<typeof Dropdown> = (args) => (
-  <Dropdown {...args} />
-)
+const Template: StoryFn<typeof Dropdown> = (args) => <Dropdown {...args} />
 
 export const Basic = Template.bind({})
 

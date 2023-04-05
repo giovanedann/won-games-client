@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import Footer from '.'
 
@@ -12,9 +12,9 @@ export default {
   title: 'Footer',
   component: Footer,
   argTypes: {}
-} as ComponentMeta<typeof Footer>
+} as Meta<typeof Footer>
 
-const Template: ComponentStory<typeof Footer> = () => (
+const Template: StoryFn<typeof Footer> = () => (
   <StoryContainer>
     <Footer />
   </StoryContainer>

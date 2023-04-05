@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import GameDetails from '.'
 import styled from 'styled-components'
@@ -33,9 +33,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof GameDetails>
+} as Meta<typeof GameDetails>
 
-const Template: ComponentStory<typeof GameDetails> = (args) => (
+const Template: StoryFn<typeof GameDetails> = (args) => (
   <Container>
     <GameDetails {...args} />
   </Container>

@@ -1,14 +1,14 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Empty from '.'
 
 export default {
   title: 'Empty',
   component: Empty
-} as ComponentMeta<typeof Empty>
+} as Meta<typeof Empty>
 
-const Template: ComponentStory<typeof Empty> = (args) => <Empty {...args} />
+const Template: StoryFn<typeof Empty> = (args) => <Empty {...args} />
 
 export const Basic = Template.bind({})
 

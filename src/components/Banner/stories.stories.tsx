@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Banner from '.'
 import styled from 'styled-components'
@@ -12,14 +12,14 @@ export default {
       type: 'string'
     }
   }
-} as ComponentMeta<typeof Banner>
+} as Meta<typeof Banner>
 
 const BannerWrapper = styled.div`
   max-width: 104rem;
   margin: 0 auto;
 `
 
-const Template: ComponentStory<typeof Banner> = (args) => (
+const Template: StoryFn<typeof Banner> = (args) => (
   <BannerWrapper>
     <Banner {...args} />
   </BannerWrapper>

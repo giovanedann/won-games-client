@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import ExploreSidebar from '.'
 import exploreSidebarMocks from './data.mock'
@@ -13,9 +13,9 @@ const Container = styled.div`
 export default {
   title: 'ExploreSidebar',
   component: ExploreSidebar
-} as ComponentMeta<typeof ExploreSidebar>
+} as Meta<typeof ExploreSidebar>
 
-const Template: ComponentStory<typeof ExploreSidebar> = (args) => (
+const Template: StoryFn<typeof ExploreSidebar> = (args) => (
   <Container>
     <ExploreSidebar {...args} />
   </Container>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import GameInfo from '.'
 import gameInfoMock from './data.mock'
@@ -7,11 +7,9 @@ import gameInfoMock from './data.mock'
 export default {
   title: 'GameInfo',
   component: GameInfo
-} as ComponentMeta<typeof GameInfo>
+} as Meta<typeof GameInfo>
 
-const Template: ComponentStory<typeof GameInfo> = (args) => (
-  <GameInfo {...args} />
-)
+const Template: StoryFn<typeof GameInfo> = (args) => <GameInfo {...args} />
 
 export const Basic = Template.bind({})
 

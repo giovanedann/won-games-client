@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Menu from '.'
 
@@ -14,9 +14,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof Menu>
+} as Meta<typeof Menu>
 
-const Template: ComponentStory<typeof Menu> = (args) => <Menu {...args} />
+const Template: StoryFn<typeof Menu> = (args) => <Menu {...args} />
 
 export const Basic = Template.bind({})
 

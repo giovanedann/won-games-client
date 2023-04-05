@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import OrdersList from '.'
 import ordersListMock from './data.mock'
@@ -20,9 +20,9 @@ export default {
       type: 'symbol'
     }
   }
-} as ComponentMeta<typeof OrdersList>
+} as Meta<typeof OrdersList>
 
-const Template: ComponentStory<typeof OrdersList> = (args) => (
+const Template: StoryFn<typeof OrdersList> = (args) => (
   <Container>
     <OrdersList {...args} />
   </Container>

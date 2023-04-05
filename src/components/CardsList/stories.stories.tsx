@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import CardsList from '.'
 import paymentOptionsMock from 'components/PaymentOptions/data.mock'
@@ -13,9 +13,9 @@ const Container = styled.div`
 export default {
   title: 'CardsList',
   component: CardsList
-} as ComponentMeta<typeof CardsList>
+} as Meta<typeof CardsList>
 
-const Template: ComponentStory<typeof CardsList> = (args) => (
+const Template: StoryFn<typeof CardsList> = (args) => (
   <Container>
     <CardsList {...args} />
   </Container>

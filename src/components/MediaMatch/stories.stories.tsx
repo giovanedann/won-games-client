@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import MediaMatch from '.'
@@ -13,13 +13,13 @@ export default {
       defaultViewport: 'desktop'
     }
   }
-} as ComponentMeta<typeof MediaMatch>
+} as Meta<typeof MediaMatch>
 
-export const Desktop: ComponentStory<typeof MediaMatch> = () => (
+export const Desktop: StoryFn<typeof MediaMatch> = () => (
   <MediaMatch greaterThan="medium">Desktop</MediaMatch>
 )
 
-export const Mobile: ComponentStory<typeof MediaMatch> = () => (
+export const Mobile: StoryFn<typeof MediaMatch> = () => (
   <MediaMatch lessThan="medium">Mobile</MediaMatch>
 )
 

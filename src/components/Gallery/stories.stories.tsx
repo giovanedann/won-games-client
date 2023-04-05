@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Gallery from '.'
 import galleryMock from './data.mock'
@@ -13,9 +13,9 @@ const Container = styled.div`
 export default {
   title: 'Gallery',
   component: Gallery
-} as ComponentMeta<typeof Gallery>
+} as Meta<typeof Gallery>
 
-const Template: ComponentStory<typeof Gallery> = (args) => (
+const Template: StoryFn<typeof Gallery> = (args) => (
   <Container>
     <Gallery {...args} />
   </Container>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import CartIcon from '.'
 
@@ -14,11 +14,9 @@ export default {
       }
     }
   }
-} as ComponentMeta<typeof CartIcon>
+} as Meta<typeof CartIcon>
 
-const Template: ComponentStory<typeof CartIcon> = (args) => (
-  <CartIcon {...args} />
-)
+const Template: StoryFn<typeof CartIcon> = (args) => <CartIcon {...args} />
 
 export const Basic = Template.bind({})
 

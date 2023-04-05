@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Heading from '.'
 
@@ -42,9 +42,9 @@ export default {
       type: 'boolean'
     }
   }
-} as ComponentMeta<typeof Heading>
+} as Meta<typeof Heading>
 
-const Template: ComponentStory<typeof Heading> = (args) => <Heading {...args} />
+const Template: StoryFn<typeof Heading> = (args) => <Heading {...args} />
 
 export const Basic = Template.bind({})
 

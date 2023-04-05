@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import GameCardSlider from '.'
 import styled from 'styled-components'
@@ -14,9 +14,9 @@ export default {
   title: 'GameCardSlider',
   component: GameCardSlider,
   argTypes: {}
-} as ComponentMeta<typeof GameCardSlider>
+} as Meta<typeof GameCardSlider>
 
-const Template: ComponentStory<typeof GameCardSlider> = (args) => (
+const Template: StoryFn<typeof GameCardSlider> = (args) => (
   <Container>
     <GameCardSlider {...args} />
   </Container>

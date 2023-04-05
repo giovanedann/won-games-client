@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import CartDropdown from '.'
 import styled from 'styled-components'
@@ -14,9 +14,9 @@ const Container = styled.div`
 export default {
   title: 'CartDropdown',
   component: CartDropdown
-} as ComponentMeta<typeof CartDropdown>
+} as Meta<typeof CartDropdown>
 
-const Template: ComponentStory<typeof CartDropdown> = (args) => (
+const Template: StoryFn<typeof CartDropdown> = (args) => (
   <Container>
     <CartDropdown {...args} />
   </Container>

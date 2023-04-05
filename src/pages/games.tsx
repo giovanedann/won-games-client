@@ -4,6 +4,7 @@ import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
 import { GET_GAMES } from 'graphql/queries/games'
 import GamesTemplate, { GameTemplateProps } from 'templates/Games'
 import formatPrice from 'utils/formatPrice'
+import getImageUrl from 'utils/getImageUrl'
 
 export default function GamesPage(props: GameTemplateProps) {
   return <GamesTemplate {...props} />
@@ -23,7 +24,7 @@ export async function getStaticProps() {
         title: game.name,
         slug: game.slug,
         developer: game.developers[0].name,
-        img: `http://localhost:1337${game.cover!.url}`,
+        img: getImageUrl(game.cover!.url),
         price: formatPrice(game.price)
       })),
       filterItems: exploreSidebarMocks

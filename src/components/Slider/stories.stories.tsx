@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Slider from '.'
 import { Settings } from 'react-slick'
@@ -17,9 +17,9 @@ const FakeSlide = styled.div`
 export default {
   title: 'Slider',
   component: Slider
-} as ComponentMeta<typeof Slider>
+} as Meta<typeof Slider>
 
-const Template: ComponentStory<typeof Slider> = (args) => (
+const Template: StoryFn<typeof Slider> = (args) => (
   <Slider {...args}>
     {[1, 2, 3, 4, 5, 6].map((number) => (
       <FakeSlide key={number}>{number}</FakeSlide>

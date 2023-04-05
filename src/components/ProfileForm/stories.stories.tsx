@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import ProfileForm from '.'
 import styled from 'styled-components'
@@ -12,9 +12,9 @@ const Container = styled.div`
 export default {
   title: 'Form/ProfileForm',
   component: ProfileForm
-} as ComponentMeta<typeof ProfileForm>
+} as Meta<typeof ProfileForm>
 
-const Template: ComponentStory<typeof ProfileForm> = () => (
+const Template: StoryFn<typeof ProfileForm> = () => (
   <Container>
     <ProfileForm />
   </Container>
