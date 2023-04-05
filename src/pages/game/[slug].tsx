@@ -1,6 +1,6 @@
+import highlightAdapter from 'adapters/highlight.adapter'
 import { recommendedGamesAdapter } from 'adapters/recommended.adapter'
-import gameCardSliderMock from 'components/GameCardSlider/data.mock'
-import highlightMock from 'components/Highlight/data.mock'
+import upcomingGamesAdapter from 'adapters/upcoming-games.adapter'
 import { initializeApollo } from 'graphql/client'
 import {
   GetGameBySlug,
@@ -8,8 +8,13 @@ import {
 } from 'graphql/generated/GetGameBySlug'
 import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
+import {
+  QueryUpcoming,
+  QueryUpcomingVariables
+} from 'graphql/generated/QueryUpcoming'
 import { GET_GAMES, GET_GAME_BY_SLUG } from 'graphql/queries/games'
 import { GET_RECOMMENDED } from 'graphql/queries/recommended'
+import { GET_UPCOMING } from 'graphql/queries/upcoming'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Game, { GameTemplateProps } from 'templates/Game'
@@ -39,6 +44,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // game by slug data
   const { data } = await apolloClient.query<
     GetGameBySlug,
     GetGameBySlugVariables
@@ -47,6 +53,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     variables: { slug: `${params?.slug}` }
   })
 
+  const [game] = data.games
+
+  // recommended games data
   const { data: recommended } = await apolloClient.query<QueryRecommended>({
     query: GET_RECOMMENDED
   })
@@ -55,7 +64,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true }
   }
 
-  const [game] = data.games
+  // upcoming games data
+  const today = new Date().toISOString().slice(0, 10)
+
+  const { data: upcoming } = await apolloClient.query<
+    QueryUpcoming,
+    QueryUpcomingVariables
+  >({
+    query: GET_UPCOMING,
+    variables: {
+      date: today
+    }
+  })
 
   return {
     props: {
@@ -81,8 +101,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         rating: game.rating,
         genres: game.categories.map(({ name }) => name)
       },
-      upcomingGames: gameCardSliderMock,
-      upcomingHighlight: highlightMock,
+      upcomingGames: upcomingGamesAdapter(upcoming.upcomingGames),
+      upcomingHighlight: highlightAdapter(
+        recommended.recommended?.section?.highlight
+      ),
       recommendedTitle: recommended.recommended?.section?.title,
       recommendedGames: recommendedGamesAdapter(
         recommended.recommended?.section?.games
