@@ -1,22 +1,36 @@
 import Cart, { CartProps } from 'templates/Cart'
 
 import cartListMock from 'components/CartList/data.mock'
-import gamesMock from 'components/GameCardSlider/data.mock'
-import higlightMock from 'components/Highlight/data.mock'
 import paymentOptionsMock from 'components/PaymentOptions/data.mock'
+import { initializeApollo } from 'graphql/client'
+import { QueryRecommended } from 'graphql/generated/QueryRecommended'
+import { GET_RECOMMENDED } from 'graphql/queries/recommended'
+import { recommendedGamesAdapter } from 'adapters/recommended.adapter'
+import highlightAdapter from 'adapters/highlight.adapter'
 
 export default function CartPage(props: CartProps) {
   return <Cart {...props} />
 }
 
 export async function getServerSideProps() {
+  const apolloClient = initializeApollo()
+
+  const { data } = await apolloClient.query<QueryRecommended>({
+    query: GET_RECOMMENDED
+  })
+
   return {
     props: {
       items: cartListMock,
-      total: '$ 430,00',
+      total: '$430,00',
       cards: paymentOptionsMock,
-      recommendedGames: gamesMock,
-      recommendedHighlight: higlightMock
+      recommendedTitle: data.recommended?.section?.title,
+      recommendedGames: recommendedGamesAdapter(
+        data.recommended?.section?.games
+      ),
+      recommendedHighlight: highlightAdapter(
+        data.recommended?.section?.highlight
+      )
     }
   }
 }
