@@ -6,9 +6,7 @@ import GameCard, { GameCardProps } from 'components/GameCard'
 import Grid from 'components/Grid'
 
 import * as S from './styles'
-import { useQuery } from '@apollo/client'
-import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
-import { GET_GAMES } from 'graphql/queries/games'
+import { useQueryGames } from 'graphql/queries/games'
 import getImageUrl from 'utils/getImageUrl'
 import formatPrice from 'utils/formatPrice'
 import useIsMounted from 'hooks/useIsMounted'
@@ -21,7 +19,7 @@ export type GameTemplateProps = {
 function Games({ filterItems }: GameTemplateProps) {
   const isComponentMounted = useIsMounted()
 
-  const { data, fetchMore } = useQuery<GetGames, GetGamesVariables>(GET_GAMES, {
+  const { data, fetchMore } = useQueryGames({
     variables: { limit: 15 }
   })
 
