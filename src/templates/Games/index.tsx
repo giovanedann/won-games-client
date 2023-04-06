@@ -19,7 +19,7 @@ export type GameTemplateProps = {
 function Games({ filterItems }: GameTemplateProps) {
   const isComponentMounted = useIsMounted()
 
-  const { data, fetchMore } = useQueryGames({
+  const { data, fetchMore, loading } = useQueryGames({
     variables: { limit: 15 }
   })
 
@@ -31,32 +31,37 @@ function Games({ filterItems }: GameTemplateProps) {
     fetchMore({ variables: { start: data?.games.length, limit: 15 } })
   }
 
-  return !isComponentMounted ? null : (
+  if (!isComponentMounted) return null
+
+  return (
     <Base>
       <S.Main>
         <ExploreSidebar items={filterItems} onFilter={handleFilter} />
-        <S.GamesSection>
-          <Grid>
-            {data?.games?.map((game) => (
-              <GameCard
-                key={game.slug + game.developers[0].name}
-                title={game.name}
-                slug={game.slug}
-                developer={game.developers[0].name}
-                img={getImageUrl(
-                  game.cover?.url ||
-                    '/uploads/No_image_available_38adfae762.png'
-                )}
-                price={formatPrice(game.price)}
-              />
-            ))}
-          </Grid>
+        {loading && <h1 style={{ color: '#fff' }}>Loading...</h1>}
+        {!loading && (
+          <S.GamesSection>
+            <Grid>
+              {data?.games?.map((game) => (
+                <GameCard
+                  key={game.slug + game.developers[0].name}
+                  title={game.name}
+                  slug={game.slug}
+                  developer={game.developers[0].name}
+                  img={getImageUrl(
+                    game.cover?.url ||
+                      '/uploads/No_image_available_38adfae762.png'
+                  )}
+                  price={formatPrice(game.price)}
+                />
+              ))}
+            </Grid>
 
-          <S.ShowMore role="button" onClick={handleShowMore}>
-            <S.ShowMoreText>Show more</S.ShowMoreText>
-            <MdKeyboardArrowDown size={35} />
-          </S.ShowMore>
-        </S.GamesSection>
+            <S.ShowMore role="button" onClick={handleShowMore}>
+              <S.ShowMoreText>Show more</S.ShowMoreText>
+              <MdKeyboardArrowDown size={35} />
+            </S.ShowMore>
+          </S.GamesSection>
+        )}
       </S.Main>
     </Base>
   )
