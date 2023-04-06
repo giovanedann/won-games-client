@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import exploreSidebarMocks from 'components/ExploreSidebar/data.mock'
-import gameCardSliderMock from 'components/GameCardSlider/data.mock'
 import renderWithTheme from 'utils/tests/renderWithTheme'
+import { MockedProvider } from '@apollo/client/testing'
 
 import Games from '.'
 
@@ -19,27 +19,14 @@ jest.mock('components/ExploreSidebar', () => ({
   }
 }))
 
-jest.mock('components/GameCard', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="game-card-mock" />
-  }
-}))
-
 describe('<Games />', () => {
-  it('should render sections', () => {
+  it('should render the loading state when starting the template', () => {
     renderWithTheme(
-      <Games
-        filterItems={exploreSidebarMocks}
-        games={[gameCardSliderMock[0]]}
-      />
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Games filterItems={exploreSidebarMocks} />
+      </MockedProvider>
     )
 
-    expect(screen.getByTestId('explore-sidebar-mock')).toBeInTheDocument()
-    expect(screen.getByTestId('game-card-mock')).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('button', { name: /show more/i })
-    ).toBeInTheDocument()
+    expect(screen.getByText(/loading\.../i)).toBeInTheDocument()
   })
 })
