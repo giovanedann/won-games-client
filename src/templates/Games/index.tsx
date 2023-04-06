@@ -18,7 +18,7 @@ export type GameTemplateProps = {
 }
 
 function Games({ filterItems }: GameTemplateProps) {
-  const { data } = useQuery<GetGames, GetGamesVariables>(GET_GAMES, {
+  const { data, fetchMore } = useQuery<GetGames, GetGamesVariables>(GET_GAMES, {
     variables: { limit: 15 }
   })
 
@@ -27,7 +27,7 @@ function Games({ filterItems }: GameTemplateProps) {
   }
 
   function handleShowMore() {
-    return
+    fetchMore({ variables: { start: data?.games.length, limit: 15 } })
   }
 
   return (
