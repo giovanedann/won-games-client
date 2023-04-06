@@ -18,9 +18,12 @@ export type GameTemplateProps = {
 }
 
 function Games({ filterItems }: GameTemplateProps) {
-  const { data, fetchMore } = useQuery<GetGames, GetGamesVariables>(GET_GAMES, {
-    variables: { limit: 15 }
-  })
+  const { data, fetchMore, loading } = useQuery<GetGames, GetGamesVariables>(
+    GET_GAMES,
+    {
+      variables: { limit: 15 }
+    }
+  )
 
   function handleFilter() {
     return
@@ -30,7 +33,7 @@ function Games({ filterItems }: GameTemplateProps) {
     fetchMore({ variables: { start: data?.games.length, limit: 15 } })
   }
 
-  return (
+  return loading ? null : (
     <Base>
       <S.Main>
         <ExploreSidebar items={filterItems} onFilter={handleFilter} />
