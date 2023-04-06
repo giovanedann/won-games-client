@@ -13,7 +13,7 @@ export const Content = styled.div`
   margin-top: ${({ theme }) => theme.spacings.large};
 `
 
-export const SectionFooter = styled.section`
+export const SectionFooter = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.large};
     padding-bottom: ${theme.spacings.xsmall};

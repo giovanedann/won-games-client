@@ -12,7 +12,7 @@ export const Main = styled(Container)`
   `}
 `
 
-export const GamesSection = styled.section``
+export const GamesSection = styled.div``
 
 export const ShowMore = styled.div`
   ${({ theme }) => css`

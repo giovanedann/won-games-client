@@ -6,13 +6,22 @@ import GameCard, { GameCardProps } from 'components/GameCard'
 import Grid from 'components/Grid'
 
 import * as S from './styles'
+import { useQuery } from '@apollo/client'
+import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
+import { GET_GAMES } from 'graphql/queries/games'
+import getImageUrl from 'utils/getImageUrl'
+import formatPrice from 'utils/formatPrice'
 
 export type GameTemplateProps = {
   games?: GameCardProps[]
   filterItems: ItemProps[]
 }
 
-function Games({ filterItems, games }: GameTemplateProps) {
+function Games({ filterItems }: GameTemplateProps) {
+  const { data } = useQuery<GetGames, GetGamesVariables>(GET_GAMES, {
+    variables: { limit: 15 }
+  })
+
   function handleFilter() {
     return
   }
@@ -28,8 +37,18 @@ function Games({ filterItems, games }: GameTemplateProps) {
 
         <S.GamesSection>
           <Grid>
-            {games?.map((game) => (
-              <GameCard key={game.title + game.developer} {...game} />
+            {data?.games?.map((game) => (
+              <GameCard
+                key={game.slug + game.developers[0].name}
+                title={game.name}
+                slug={game.slug}
+                developer={game.developers[0].name}
+                img={getImageUrl(
+                  game.cover?.url ||
+                    '/uploads/No_image_available_38adfae762.png'
+                )}
+                price={formatPrice(game.price)}
+              />
             ))}
           </Grid>
 
