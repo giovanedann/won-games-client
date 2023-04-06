@@ -11,6 +11,7 @@ import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
 import { GET_GAMES } from 'graphql/queries/games'
 import getImageUrl from 'utils/getImageUrl'
 import formatPrice from 'utils/formatPrice'
+import useIsMounted from 'hooks/useIsMounted'
 
 export type GameTemplateProps = {
   games?: GameCardProps[]
@@ -18,12 +19,11 @@ export type GameTemplateProps = {
 }
 
 function Games({ filterItems }: GameTemplateProps) {
-  const { data, fetchMore, loading } = useQuery<GetGames, GetGamesVariables>(
-    GET_GAMES,
-    {
-      variables: { limit: 15 }
-    }
-  )
+  const isComponentMounted = useIsMounted()
+
+  const { data, fetchMore } = useQuery<GetGames, GetGamesVariables>(GET_GAMES, {
+    variables: { limit: 15 }
+  })
 
   function handleFilter() {
     return
@@ -33,7 +33,7 @@ function Games({ filterItems }: GameTemplateProps) {
     fetchMore({ variables: { start: data?.games.length, limit: 15 } })
   }
 
-  return loading ? null : (
+  return !isComponentMounted ? null : (
     <Base>
       <S.Main>
         <ExploreSidebar items={filterItems} onFilter={handleFilter} />
