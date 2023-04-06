@@ -1,4 +1,5 @@
 import { QueryHome_sections } from 'graphql/generated/QueryHome'
+import formatPrice from 'utils/formatPrice'
 import getImageUrl from 'utils/getImageUrl'
 
 export default function sectionsAdapter(apiSections: QueryHome_sections) {
@@ -9,7 +10,7 @@ export default function sectionsAdapter(apiSections: QueryHome_sections) {
     img: getImageUrl(
       game.cover?.url ?? '/uploads/No_image_available_38adfae762.png'
     ),
-    price: game.price === 0 ? 'Free' : `$${game.price}`
+    price: game.price === 0 ? 'Free' : formatPrice(game.price)
   }))
 
   return { mostPopularGames }

@@ -1,4 +1,5 @@
 import { QueryRecommended_recommended_section_games } from 'graphql/generated/QueryRecommended'
+import formatPrice from 'utils/formatPrice'
 import getImageUrl from 'utils/getImageUrl'
 
 export type Game = {
@@ -21,6 +22,6 @@ export function recommendedGamesAdapter(
     img: getImageUrl(
       game.cover?.url ?? '/uploads/No_image_available_38adfae762.png'
     ),
-    price: game.price === 0 ? 'Free' : `$${game.price}`
+    price: game.price === 0 ? 'Free' : formatPrice(game.price)
   }))
 }
