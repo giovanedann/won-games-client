@@ -7,7 +7,7 @@ import { useApollo } from 'graphql/client'
 import { ApolloProvider } from '@apollo/client'
 
 function App({ Component, pageProps }: AppProps) {
-  const client = useApollo(pageProps)
+  const client = useApollo(pageProps.initialApolloState)
 
   return (
     <ApolloProvider client={client}>

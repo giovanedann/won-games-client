@@ -34,7 +34,6 @@ function Games({ filterItems }: GameTemplateProps) {
     <Base>
       <S.Main>
         <ExploreSidebar items={filterItems} onFilter={handleFilter} />
-
         <S.GamesSection>
           <Grid>
             {data?.games?.map((game) => (
