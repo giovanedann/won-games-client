@@ -38,7 +38,7 @@ function createApolloClient() {
       typePolicies: {
         Query: {
           fields: {
-            games: concatPagination()
+            games: concatPagination(['where', 'sort'])
           }
         }
       }
