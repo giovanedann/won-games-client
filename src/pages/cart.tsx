@@ -2,11 +2,11 @@ import Cart, { CartProps } from 'templates/Cart'
 
 import cartListMock from 'components/CartList/data.mock'
 import paymentOptionsMock from 'components/PaymentOptions/data.mock'
-import { initializeApollo } from 'graphql/client'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
 import { GET_RECOMMENDED } from 'graphql/queries/recommended'
 import { recommendedGamesAdapter } from 'adapters/recommended.adapter'
 import highlightAdapter from 'adapters/highlight.adapter'
+import { initializeApollo } from 'infra/apollo/client'
 
 export default function CartPage(props: CartProps) {
   return <Cart {...props} />
