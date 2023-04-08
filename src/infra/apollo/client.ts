@@ -1,6 +1,5 @@
 import {
   ApolloClient,
-  InMemoryCache,
   NormalizedCacheObject,
   from,
   HttpLink
@@ -9,7 +8,7 @@ import merge from 'deepmerge'
 import { onError } from '@apollo/client/link/error'
 import { isEqual } from 'lodash'
 import { useMemo } from 'react'
-import { concatPagination } from '@apollo/client/utilities'
+import apolloCache from './apolloCache'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
@@ -34,15 +33,7 @@ const httpLink = new HttpLink({
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            games: concatPagination(['where', 'sort'])
-          }
-        }
-      }
-    }),
+    cache: apolloCache,
     link: from([errorLink, httpLink])
   })
 }
