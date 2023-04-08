@@ -1,7 +1,6 @@
 import highlightAdapter from 'adapters/highlight.adapter'
 import { recommendedGamesAdapter } from 'adapters/recommended.adapter'
 import upcomingGamesAdapter from 'adapters/upcoming-games.adapter'
-import { initializeApollo } from 'graphql/client'
 import {
   GetGameBySlug,
   GetGameBySlugVariables
@@ -15,6 +14,7 @@ import {
 import { GET_GAMES, GET_GAME_BY_SLUG } from 'graphql/queries/games'
 import { GET_RECOMMENDED } from 'graphql/queries/recommended'
 import { GET_UPCOMING } from 'graphql/queries/upcoming'
+import { initializeApollo } from 'infra/apollo/client'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Game, { GameTemplateProps } from 'templates/Game'

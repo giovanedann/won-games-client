@@ -1,4 +1,5 @@
 import { QueryHome_freeGames } from 'graphql/generated/QueryHome'
+import formatPrice from 'utils/formatPrice'
 import getImageUrl from 'utils/getImageUrl'
 
 export type Game = {
@@ -19,6 +20,6 @@ export default function freeGamesAdapter(
     img: getImageUrl(
       game.cover?.url ?? '/uploads/No_image_available_38adfae762.png'
     ),
-    price: game.price === 0 ? 'Free' : `$${game.price}`
+    price: game.price === 0 ? 'Free' : formatPrice(game.price)
   }))
 }

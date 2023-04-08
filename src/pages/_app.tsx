@@ -3,11 +3,11 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import theme from 'styles/theme'
 import { ThemeProvider } from 'styled-components'
-import { useApollo } from 'graphql/client'
 import { ApolloProvider } from '@apollo/client'
+import { useApollo } from 'infra/apollo/client'
 
 function App({ Component, pageProps }: AppProps) {
-  const client = useApollo(pageProps)
+  const client = useApollo(pageProps.initialApolloState)
 
   return (
     <ApolloProvider client={client}>

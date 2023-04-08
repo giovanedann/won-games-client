@@ -1,6 +1,5 @@
 import {
   ApolloClient,
-  InMemoryCache,
   NormalizedCacheObject,
   from,
   HttpLink
@@ -9,6 +8,7 @@ import merge from 'deepmerge'
 import { onError } from '@apollo/client/link/error'
 import { isEqual } from 'lodash'
 import { useMemo } from 'react'
+import apolloCache from './apolloCache'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
@@ -33,7 +33,7 @@ const httpLink = new HttpLink({
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    cache: new InMemoryCache(),
+    cache: apolloCache,
     link: from([errorLink, httpLink])
   })
 }

@@ -1,5 +1,4 @@
 import Home, { HomeTemplateProps } from 'templates/Home'
-import { initializeApollo } from 'graphql/client'
 import { GET_HOME } from 'graphql/queries/home'
 import { QueryHome, QueryHomeVariables } from 'graphql/generated/QueryHome'
 import bannerAdapter from 'adapters/banners.adapter'
@@ -8,6 +7,7 @@ import upcomingGamesAdapter from 'adapters/upcoming-games.adapter'
 import freeGamesAdapter from 'adapters/free-games.adapter'
 import sectionsAdapter from 'adapters/sections.adapter'
 import highlightAdapter from 'adapters/highlight.adapter'
+import { initializeApollo } from 'infra/apollo/client'
 
 export default function Index(props: HomeTemplateProps) {
   return <Home {...props} />

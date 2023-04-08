@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styled, { css, keyframes } from 'styled-components'
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
     display: flex;

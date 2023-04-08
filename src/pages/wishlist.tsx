@@ -1,11 +1,11 @@
 import WishlistTemplate, { WishlistTemplateProps } from 'templates/Wishlist'
 
 import gamesMock from 'components/GameCardSlider/data.mock'
-import { initializeApollo } from 'graphql/client'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
 import { GET_RECOMMENDED } from 'graphql/queries/recommended'
 import { recommendedGamesAdapter } from 'adapters/recommended.adapter'
 import highlightAdapter from 'adapters/highlight.adapter'
+import { initializeApollo } from 'infra/apollo/client'
 
 export default function Wishlist(props: WishlistTemplateProps) {
   return <WishlistTemplate {...props} />
