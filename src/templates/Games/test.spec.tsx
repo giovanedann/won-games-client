@@ -1,10 +1,13 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import exploreSidebarMocks from 'components/ExploreSidebar/data.mock'
 import renderWithTheme from 'utils/tests/renderWithTheme'
 import { MockedProvider } from '@apollo/client/testing'
 
 import Games from '.'
-import { GET_GAMES } from 'graphql/queries/games'
+
+import { gamesMock, loadMoreGamesMock } from './mocks'
+import apolloCache from 'infra/apollo/apolloCache'
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -33,28 +36,7 @@ describe('<Games />', () => {
 
   it('should render the sections correctly', async () => {
     renderWithTheme(
-      <MockedProvider
-        mocks={[
-          {
-            request: { query: GET_GAMES, variables: { limit: 15 } },
-            result: {
-              data: {
-                games: [
-                  {
-                    name: 'Mocked game',
-                    slug: 'mocked-game',
-                    cover: { url: '/uploads/mocked-img-url.jpg' },
-                    developers: [{ name: 'Mocked developer' }],
-                    price: 65.99,
-                    __typename: 'Game'
-                  }
-                ]
-              }
-            }
-          }
-        ]}
-        addTypename={false}
-      >
+      <MockedProvider mocks={gamesMock} addTypename={false}>
         <Games filterItems={exploreSidebarMocks} />
       </MockedProvider>
     )
@@ -68,11 +50,31 @@ describe('<Games />', () => {
 
     expect(await screen.findByText(/mocked game/i)).toBeInTheDocument()
 
-    screen.debug()
     expect(
       screen.getByRole('button', {
         name: /show more/i
       })
     ).toBeInTheDocument()
+  })
+
+  it('should load more games when show more button is clicked', async () => {
+    const user = userEvent.setup()
+
+    renderWithTheme(
+      <MockedProvider mocks={loadMoreGamesMock} cache={apolloCache}>
+        <Games filterItems={exploreSidebarMocks} />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByText(/mocked game/i)).toBeInTheDocument()
+    expect(screen.queryByText(/load more game/i)).not.toBeInTheDocument()
+
+    await user.click(
+      await screen.findByRole('button', {
+        name: /show more/i
+      })
+    )
+
+    expect(await screen.findByText(/load more game/i)).toBeInTheDocument()
   })
 })
