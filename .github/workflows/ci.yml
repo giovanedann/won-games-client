@@ -14,16 +14,16 @@ jobs:
           node-version: 16.x
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Linting
-        run: yarn lint
+        run: npm run lint
 
       - name: Typechecking
-        run: yarn typecheck
+        run: npm run typecheck
 
       - name: Test
-        run: yarn test:coverage
+        run: npm run test:coverage
 
       - name: Storybook
-        run: yarn build-storybook
+        run: npm run build-storybook
