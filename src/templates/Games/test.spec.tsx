@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import exploreSidebarMocks from 'components/ExploreSidebar/data.mock'
 import renderWithTheme from 'utils/tests/renderWithTheme'
@@ -6,7 +6,7 @@ import { MockedProvider } from '@apollo/client/testing'
 
 import Games from '.'
 
-import { gamesMock, loadMoreGamesMock } from './mocks'
+import { emptyGamesMock, gamesMock, loadMoreGamesMock } from './mocks'
 import apolloCache from 'infra/apollo/apolloCache'
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter') // eslint-disable-line @typescript-eslint/no-var-requires
@@ -93,5 +93,19 @@ describe('<Games />', () => {
       pathname: '/games',
       query: { platforms: ['windows', 'linux'], sort_by: 'low-to-high' }
     })
+  })
+
+  it('should show the empty state when games is empty', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={emptyGamesMock} addTypename={false}>
+        <Games filterItems={exploreSidebarMocks} />
+      </MockedProvider>
+    )
+
+    await waitForElementToBeRemoved(screen.getByText(/loading\.../i))
+
+    expect(
+      screen.getByText(/we didn't find any games that matches this filter/i)
+    ).toBeInTheDocument()
   })
 })

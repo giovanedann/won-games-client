@@ -20,6 +20,17 @@ export const gamesMock = [
   }
 ]
 
+export const emptyGamesMock = [
+  {
+    request: { query: GET_GAMES, variables: { limit: 15, where: {} } },
+    result: {
+      data: {
+        games: []
+      }
+    }
+  }
+]
+
 export const loadMoreGamesMock = [
   gamesMock[0],
   {
