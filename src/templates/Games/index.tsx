@@ -36,6 +36,13 @@ function Games({ filterItems }: GameTemplateProps) {
     }
   })
 
+  if (!data) return <h1 style={{ color: '#fff' }}>Loading...</h1>
+
+  const { games, gamesConnection } = data
+
+  const hasMoreGamesToShow =
+    games.length < (gamesConnection?.values?.length ?? 0)
+
   function handleFilter(items: ParsedUrlQueryInput) {
     push({ pathname: '/games', query: items })
     return
@@ -83,7 +90,7 @@ function Games({ filterItems }: GameTemplateProps) {
                   alt="loading more games..."
                 />
               )}
-              {!loading && (
+              {!loading && hasMoreGamesToShow && (
                 <S.ShowMoreButton role="button" onClick={handleShowMore}>
                   <p>Show more</p>
                   <MdKeyboardArrowDown size={35} />
