@@ -16,6 +16,7 @@ import {
 } from 'utils/filter'
 import { useRouter } from 'next/router'
 import { ParsedUrlQueryInput } from 'querystring'
+import Empty from 'components/Empty'
 
 export type GameTemplateProps = {
   games?: GameCardProps[]
@@ -57,7 +58,8 @@ function Games({ filterItems }: GameTemplateProps) {
           onFilter={handleFilter}
         />
         {loading && <h1 style={{ color: '#fff' }}>Loading...</h1>}
-        {!loading && (
+
+        {!loading && data?.games?.length && (
           <S.GamesSection>
             <Grid>
               {data?.games?.map((game) => (
@@ -80,6 +82,14 @@ function Games({ filterItems }: GameTemplateProps) {
               <MdKeyboardArrowDown size={35} />
             </S.ShowMore>
           </S.GamesSection>
+        )}
+
+        {!loading && !data?.games?.length && (
+          <Empty
+            title="Oops :("
+            description="We didn't find any games that matches this filter"
+            hasLink
+          />
         )}
       </S.Main>
     </Base>
