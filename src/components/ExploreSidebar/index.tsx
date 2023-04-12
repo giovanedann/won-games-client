@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdClose, MdFilterList } from 'react-icons/md'
 
 import Heading from 'components/Heading'
@@ -38,6 +38,10 @@ function ExploreSidebar({
   const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(false)
   const [values, setValues] = useState<Values>(initialValues)
 
+  useEffect(() => {
+    onFilter(values)
+  }, [values]) // eslint-disable-line react-hooks/exhaustive-deps
+
   function handleRadioChange(name: string, value: string | boolean) {
     setValues((prevState) => ({ ...prevState, [name]: value }))
   }
@@ -49,8 +53,7 @@ function ExploreSidebar({
     })
   }
 
-  function handleFilter() {
-    onFilter(values)
+  function handleFilterMenu() {
     setAreFiltersOpen(false)
   }
 
@@ -115,9 +118,11 @@ function ExploreSidebar({
       </S.Content>
 
       <S.Footer>
-        <Button fullWidth size="medium" onClick={handleFilter}>
-          Filter
-        </Button>
+        {areFiltersOpen && (
+          <Button fullWidth size="medium" onClick={handleFilterMenu}>
+            Filter
+          </Button>
+        )}
       </S.Footer>
     </S.Wrapper>
   )
