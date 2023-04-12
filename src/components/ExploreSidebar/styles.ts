@@ -71,6 +71,10 @@ export const Footer = styled.div`
   flex-direction: column;
   position: relative;
 
+  ${media.greaterThan('medium')`
+    display: none;
+  `}
+
   ${({ theme }) => css`
     padding: ${theme.spacings.small};
 
