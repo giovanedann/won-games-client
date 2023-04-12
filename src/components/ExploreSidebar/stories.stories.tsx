@@ -31,7 +31,8 @@ Basic.parameters = {
 }
 
 Basic.args = {
-  items: exploreSidebarMocks
+  items: exploreSidebarMocks,
+  onFilter: (values) => console.log(values)
 }
 
 export const WithInitialValues = Template.bind({})
