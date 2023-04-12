@@ -10,7 +10,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "check": "yarn upgrade-interactive --latest",
     "prepare": "husky install",
-    "test": "jest --verbose",
+    "test": "jest",
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test --collect-coverage",
     "generate": "yarn plop --plopfile ./generators/plopfile.js",
