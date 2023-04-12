@@ -28,6 +28,7 @@ function Games({ filterItems }: GameTemplateProps) {
   const { push, query } = useRouter()
 
   const { data, fetchMore, loading } = useQueryGames({
+    notifyOnNetworkStatusChange: true,
     variables: {
       limit: 15,
       where: parseQueryStringToWhereJson({ queryString: query, filterItems }),
@@ -57,9 +58,7 @@ function Games({ filterItems }: GameTemplateProps) {
           items={filterItems}
           onFilter={handleFilter}
         />
-        {loading && <h1 style={{ color: '#fff' }}>Loading...</h1>}
-
-        {!loading && data?.games?.length && (
+        {data?.games?.length && (
           <S.GamesSection>
             <Grid>
               {data?.games?.map((game) => (
@@ -77,14 +76,24 @@ function Games({ filterItems }: GameTemplateProps) {
               ))}
             </Grid>
 
-            <S.ShowMore role="button" onClick={handleShowMore}>
-              <S.ShowMoreText>Show more</S.ShowMoreText>
-              <MdKeyboardArrowDown size={35} />
-            </S.ShowMore>
+            <S.ShowMoreContainer>
+              {loading && (
+                <S.Loader
+                  src="/img/animated-dots.svg"
+                  alt="loading more games..."
+                />
+              )}
+              {!loading && (
+                <S.ShowMoreButton role="button" onClick={handleShowMore}>
+                  <p>Show more</p>
+                  <MdKeyboardArrowDown size={35} />
+                </S.ShowMoreButton>
+              )}
+            </S.ShowMoreContainer>
           </S.GamesSection>
         )}
 
-        {!loading && !data?.games?.length && (
+        {!data?.games?.length && (
           <Empty
             title="Oops :("
             description="We didn't find any games that matches this filter"

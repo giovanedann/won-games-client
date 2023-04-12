@@ -14,14 +14,21 @@ export const Main = styled(Container)`
 
 export const GamesSection = styled.div``
 
-export const ShowMore = styled.div`
+export const ShowMoreContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+`
+
+export const ShowMoreButton = styled.div`
   ${({ theme }) => css`
-    color: ${theme.colors.white};
     text-align: center;
-    padding: ${theme.spacings.medium};
     text-transform: uppercase;
     font-weight: bold;
+    color: ${theme.colors.white};
     cursor: pointer;
+    padding: ${theme.spacings.medium};
 
     > svg {
       color: ${theme.colors.primary};
@@ -29,4 +36,6 @@ export const ShowMore = styled.div`
   `}
 `
 
-export const ShowMoreText = styled.p``
+export const Loader = styled.img`
+  width: 4rem;
+`
