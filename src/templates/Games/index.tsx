@@ -10,6 +10,12 @@ import { useQueryGames } from 'graphql/queries/games'
 import getImageUrl from 'utils/getImageUrl'
 import formatPrice from 'utils/formatPrice'
 import useIsMounted from 'hooks/useIsMounted'
+import {
+  parseQueryStringToFilter,
+  parseQueryStringToWhereJson
+} from 'utils/filter'
+import { useRouter } from 'next/router'
+import { ParsedUrlQueryInput } from 'querystring'
 
 export type GameTemplateProps = {
   games?: GameCardProps[]
@@ -18,12 +24,18 @@ export type GameTemplateProps = {
 
 function Games({ filterItems }: GameTemplateProps) {
   const isComponentMounted = useIsMounted()
+  const { push, query } = useRouter()
 
   const { data, fetchMore, loading } = useQueryGames({
-    variables: { limit: 15 }
+    variables: {
+      limit: 15,
+      where: parseQueryStringToWhereJson({ queryString: query, filterItems }),
+      sort: query.sort as string | null
+    }
   })
 
-  function handleFilter() {
+  function handleFilter(items: ParsedUrlQueryInput) {
+    push({ pathname: '/games', query: items })
     return
   }
 
@@ -36,7 +48,14 @@ function Games({ filterItems }: GameTemplateProps) {
   return (
     <Base>
       <S.Main>
-        <ExploreSidebar items={filterItems} onFilter={handleFilter} />
+        <ExploreSidebar
+          initialValues={parseQueryStringToFilter({
+            queryString: query,
+            filterItems
+          })}
+          items={filterItems}
+          onFilter={handleFilter}
+        />
         {loading && <h1 style={{ color: '#fff' }}>Loading...</h1>}
         {!loading && (
           <S.GamesSection>
