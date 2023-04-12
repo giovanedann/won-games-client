@@ -14,7 +14,11 @@ export const gamesMock = [
             price: 65.99,
             __typename: 'Game'
           }
-        ]
+        ],
+        gamesConnection: {
+          values: [{ id: '1' }, { id: '2' }],
+          __typeName: 'GameConnection'
+        }
       }
     }
   }
@@ -25,7 +29,11 @@ export const emptyGamesMock = [
     request: { query: GET_GAMES, variables: { limit: 15, where: {} } },
     result: {
       data: {
-        games: []
+        games: [],
+        gamesConnection: {
+          values: [],
+          __typeName: 'GameConnection'
+        }
       }
     }
   }
@@ -49,7 +57,11 @@ export const loadMoreGamesMock = [
             price: 30,
             __typename: 'Game'
           }
-        ]
+        ],
+        gamesConnection: {
+          values: [{ id: '1' }, { id: '2' }],
+          __typeName: 'GameConnection'
+        }
       }
     }
   }

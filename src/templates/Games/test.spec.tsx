@@ -75,6 +75,12 @@ describe('<Games />', () => {
     )
 
     expect(await screen.findByText(/load more game/i)).toBeInTheDocument()
+
+    expect(
+      screen.queryByRole('button', {
+        name: /show more/i
+      })
+    ).not.toBeInTheDocument()
   })
 
   it('should change the url filter when selecting a filter', async () => {
