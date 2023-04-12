@@ -7,6 +7,8 @@ import Checkbox from 'components/Checkbox'
 import Radio from 'components/Radio'
 
 import * as S from './styles'
+import { ParsedUrlQueryInput } from 'querystring'
+import { xor } from 'lodash'
 
 type Field = {
   label: string
@@ -20,9 +22,7 @@ export type ItemProps = {
   fields: Field[]
 }
 
-type Values = {
-  [field: string]: boolean | string
-}
+type Values = ParsedUrlQueryInput
 
 export type ExploreSidebarProps = {
   items: ItemProps[]
@@ -38,8 +38,15 @@ function ExploreSidebar({
   const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(false)
   const [values, setValues] = useState<Values>(initialValues)
 
-  function handleChange(name: string, value: string | boolean) {
+  function handleRadioChange(name: string, value: string | boolean) {
     setValues((prevState) => ({ ...prevState, [name]: value }))
+  }
+
+  function handleCheckboxChange(name: string, value: string) {
+    setValues((prevState) => {
+      const currentList = (prevState[name] as []) || []
+      return { ...prevState, [name]: xor(currentList, [value]) }
+    })
   }
 
   function handleFilter() {
@@ -81,7 +88,7 @@ function ExploreSidebar({
                   label={field.label}
                   labelFor={field.name}
                   isChecked={Boolean(values[field.name])}
-                  onCheck={(value) => handleChange(field.name, value)}
+                  onCheck={() => handleCheckboxChange(item.name, field.name)}
                 />
               ))}
 
@@ -95,8 +102,10 @@ function ExploreSidebar({
                   labelColor="white"
                   labelFor={field.name}
                   value={field.name}
-                  defaultChecked={field.name === values[item.name]}
-                  onChange={() => handleChange(item.name, field.name)}
+                  defaultChecked={
+                    String(field.name) === String(values[item.name])
+                  }
+                  onChange={() => handleRadioChange(item.name, field.name)}
                 />
               ))}
           </S.Items>
