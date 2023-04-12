@@ -20,7 +20,7 @@ describe('<ExploreSidebar />', () => {
       screen.getByRole('heading', { name: /sort by/i, level: 2 })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /system/i, level: 2 })
+      screen.getByRole('heading', { name: /platforms/i, level: 2 })
     ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: /genre/i, level: 2 })
@@ -83,12 +83,14 @@ describe('<ExploreSidebar />', () => {
     })
   })
 
-  it('should render the filter button', () => {
+  it('should not render the filter button on bigger screens', () => {
     renderWithTheme(
       <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
     )
 
-    expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
+    expect(
+      screen.queryByRole('button', { name: /filter/i })
+    ).not.toBeInTheDocument()
   })
 
   it('should start with the initial values', () => {
@@ -96,7 +98,7 @@ describe('<ExploreSidebar />', () => {
       <ExploreSidebar
         items={exploreSidebarMocks}
         onFilter={jest.fn}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
       />
     )
 
@@ -105,23 +107,20 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should call onFilter with the initial values', async () => {
-    const user = userEvent.setup()
     const filterHandler = jest.fn()
 
     renderWithTheme(
       <ExploreSidebar
         items={exploreSidebarMocks}
         onFilter={filterHandler}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
       />
     )
-
-    await user.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(filterHandler).toBeCalled()
     expect(filterHandler).toBeCalledTimes(1)
     expect(filterHandler).toBeCalledWith({
-      windows: true,
+      platforms: ['windows'],
       sort_by: 'low-to-high'
     })
   })
@@ -137,17 +136,15 @@ describe('<ExploreSidebar />', () => {
     await user.click(screen.getByRole('checkbox', { name: /under \$50/i }))
     await user.click(screen.getByRole('radio', { name: /high to low/i }))
     await user.click(screen.getByRole('checkbox', { name: /linux/i }))
+    await user.click(screen.getByRole('checkbox', { name: /windows/i }))
     await user.click(screen.getByRole('checkbox', { name: /mmorpg/i }))
 
-    await user.click(screen.getByRole('button', { name: /filter/i }))
-
-    expect(filterHandler).toBeCalled()
-    expect(filterHandler).toBeCalledTimes(1)
-    expect(filterHandler).toBeCalledWith({
-      linux: true,
+    expect(filterHandler).toHaveBeenCalledTimes(6) // initialValues + clicks
+    expect(filterHandler).toHaveBeenCalledWith({
+      platforms: ['linux', 'windows'],
       sort_by: 'high-to-low',
-      mmorpg: true,
-      'under-50': true
+      genre: ['mmorpg'],
+      price: ['under-50']
     })
   })
 
@@ -189,6 +186,7 @@ describe('<ExploreSidebar />', () => {
       `)
     }
 
+    // testing when clicking in the X button
     expect(modal).not.toHaveStyleRule('opacity', '1', variant)
 
     await user.click(screen.getByLabelText(/open filters menu/i))
@@ -196,6 +194,15 @@ describe('<ExploreSidebar />', () => {
     expect(modal).toHaveStyleRule('opacity', '1', variant)
 
     await user.click(screen.getByLabelText(/close filters menu/i))
+
+    expect(modal).not.toHaveStyleRule('opacity', '1', variant)
+
+    // testing when clicking the filter button
+    await user.click(screen.getByLabelText(/open filters menu/i))
+
+    expect(modal).toHaveStyleRule('opacity', '1', variant)
+
+    await user.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(modal).not.toHaveStyleRule('opacity', '1', variant)
   })

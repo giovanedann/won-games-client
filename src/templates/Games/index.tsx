@@ -10,6 +10,13 @@ import { useQueryGames } from 'graphql/queries/games'
 import getImageUrl from 'utils/getImageUrl'
 import formatPrice from 'utils/formatPrice'
 import useIsMounted from 'hooks/useIsMounted'
+import {
+  parseQueryStringToFilter,
+  parseQueryStringToWhereJson
+} from 'utils/filter'
+import { useRouter } from 'next/router'
+import { ParsedUrlQueryInput } from 'querystring'
+import Empty from 'components/Empty'
 
 export type GameTemplateProps = {
   games?: GameCardProps[]
@@ -18,12 +25,26 @@ export type GameTemplateProps = {
 
 function Games({ filterItems }: GameTemplateProps) {
   const isComponentMounted = useIsMounted()
+  const { push, query } = useRouter()
 
   const { data, fetchMore, loading } = useQueryGames({
-    variables: { limit: 15 }
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      limit: 15,
+      where: parseQueryStringToWhereJson({ queryString: query, filterItems }),
+      sort: query.sort as string | null
+    }
   })
 
-  function handleFilter() {
+  if (!data) return <h1 style={{ color: '#fff' }}>Loading...</h1>
+
+  const { games, gamesConnection } = data
+
+  const hasMoreGamesToShow =
+    games.length < (gamesConnection?.values?.length ?? 0)
+
+  function handleFilter(items: ParsedUrlQueryInput) {
+    push({ pathname: '/games', query: items })
     return
   }
 
@@ -36,9 +57,15 @@ function Games({ filterItems }: GameTemplateProps) {
   return (
     <Base>
       <S.Main>
-        <ExploreSidebar items={filterItems} onFilter={handleFilter} />
-        {loading && <h1 style={{ color: '#fff' }}>Loading...</h1>}
-        {!loading && (
+        <ExploreSidebar
+          initialValues={parseQueryStringToFilter({
+            queryString: query,
+            filterItems
+          })}
+          items={filterItems}
+          onFilter={handleFilter}
+        />
+        {data?.games?.length && (
           <S.GamesSection>
             <Grid>
               {data?.games?.map((game) => (
@@ -56,11 +83,29 @@ function Games({ filterItems }: GameTemplateProps) {
               ))}
             </Grid>
 
-            <S.ShowMore role="button" onClick={handleShowMore}>
-              <S.ShowMoreText>Show more</S.ShowMoreText>
-              <MdKeyboardArrowDown size={35} />
-            </S.ShowMore>
+            <S.ShowMoreContainer>
+              {loading && (
+                <S.Loader
+                  src="/img/animated-dots.svg"
+                  alt="loading more games..."
+                />
+              )}
+              {!loading && hasMoreGamesToShow && (
+                <S.ShowMoreButton role="button" onClick={handleShowMore}>
+                  <p>Show more</p>
+                  <MdKeyboardArrowDown size={35} />
+                </S.ShowMoreButton>
+              )}
+            </S.ShowMoreContainer>
           </S.GamesSection>
+        )}
+
+        {!data?.games?.length && (
+          <Empty
+            title="Oops :("
+            description="We didn't find any games that matches this filter"
+            hasLink
+          />
         )}
       </S.Main>
     </Base>

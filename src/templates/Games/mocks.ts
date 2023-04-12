@@ -2,7 +2,7 @@ import { GET_GAMES } from 'graphql/queries/games'
 
 export const gamesMock = [
   {
-    request: { query: GET_GAMES, variables: { limit: 15 } },
+    request: { query: GET_GAMES, variables: { limit: 15, where: {} } },
     result: {
       data: {
         games: [
@@ -14,7 +14,26 @@ export const gamesMock = [
             price: 65.99,
             __typename: 'Game'
           }
-        ]
+        ],
+        gamesConnection: {
+          values: [{ id: '1' }, { id: '2' }],
+          __typeName: 'GameConnection'
+        }
+      }
+    }
+  }
+]
+
+export const emptyGamesMock = [
+  {
+    request: { query: GET_GAMES, variables: { limit: 15, where: {} } },
+    result: {
+      data: {
+        games: [],
+        gamesConnection: {
+          values: [],
+          __typeName: 'GameConnection'
+        }
       }
     }
   }
@@ -23,7 +42,10 @@ export const gamesMock = [
 export const loadMoreGamesMock = [
   gamesMock[0],
   {
-    request: { query: GET_GAMES, variables: { limit: 15, start: 1 } },
+    request: {
+      query: GET_GAMES,
+      variables: { limit: 15, start: 1, where: {} }
+    },
     result: {
       data: {
         games: [
@@ -35,7 +57,11 @@ export const loadMoreGamesMock = [
             price: 30,
             __typename: 'Game'
           }
-        ]
+        ],
+        gamesConnection: {
+          values: [{ id: '1' }, { id: '2' }],
+          __typeName: 'GameConnection'
+        }
       }
     }
   }

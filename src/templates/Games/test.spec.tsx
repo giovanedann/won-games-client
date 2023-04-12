@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import exploreSidebarMocks from 'components/ExploreSidebar/data.mock'
 import renderWithTheme from 'utils/tests/renderWithTheme'
@@ -6,20 +6,23 @@ import { MockedProvider } from '@apollo/client/testing'
 
 import Games from '.'
 
-import { gamesMock, loadMoreGamesMock } from './mocks'
+import { emptyGamesMock, gamesMock, loadMoreGamesMock } from './mocks'
 import apolloCache from 'infra/apollo/apolloCache'
+
+const useRouter = jest.spyOn(require('next/router'), 'useRouter') // eslint-disable-line @typescript-eslint/no-var-requires
+const push = jest.fn()
+
+useRouter.mockImplementation(() => ({
+  push,
+  query: '',
+  asPath: '',
+  route: '/'
+}))
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
   default: function Mock({ children }: { children: React.ReactNode }) {
     return <div data-testid="base-mock">{children}</div>
-  }
-}))
-
-jest.mock('components/ExploreSidebar', () => ({
-  __esModule: true,
-  default: function Mock({ children }: { children: React.ReactNode }) {
-    return <div data-testid="explore-sidebar-mock">{children}</div>
   }
 }))
 
@@ -43,10 +46,6 @@ describe('<Games />', () => {
 
     // starts with loading until request is done
     expect(screen.getByText(/loading\.../i)).toBeInTheDocument()
-
-    expect(
-      await screen.findByTestId('explore-sidebar-mock')
-    ).toBeInTheDocument()
 
     expect(await screen.findByText(/mocked game/i)).toBeInTheDocument()
 
@@ -76,5 +75,43 @@ describe('<Games />', () => {
     )
 
     expect(await screen.findByText(/load more game/i)).toBeInTheDocument()
+
+    expect(
+      screen.queryByRole('button', {
+        name: /show more/i
+      })
+    ).not.toBeInTheDocument()
+  })
+
+  it('should change the url filter when selecting a filter', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(
+      <MockedProvider mocks={loadMoreGamesMock} cache={apolloCache}>
+        <Games filterItems={exploreSidebarMocks} />
+      </MockedProvider>
+    )
+
+    await user.click(await screen.findByRole('checkbox', { name: /windows/i }))
+    await user.click(await screen.findByRole('checkbox', { name: /linux/i }))
+    await user.click(await screen.findByLabelText(/low to high/i))
+
+    expect(push).toHaveBeenCalledWith({
+      pathname: '/games',
+      query: { platforms: ['windows', 'linux'], sort_by: 'low-to-high' }
+    })
+  })
+
+  it('should show the empty state when games is empty', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={emptyGamesMock} addTypename={false}>
+        <Games filterItems={exploreSidebarMocks} />
+      </MockedProvider>
+    )
+
+    await waitForElementToBeRemoved(screen.getByText(/loading\.../i))
+
+    expect(
+      screen.getByText(/we didn't find any games that matches this filter/i)
+    ).toBeInTheDocument()
   })
 })
