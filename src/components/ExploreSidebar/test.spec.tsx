@@ -20,7 +20,7 @@ describe('<ExploreSidebar />', () => {
       screen.getByRole('heading', { name: /sort by/i, level: 2 })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /system/i, level: 2 })
+      screen.getByRole('heading', { name: /platforms/i, level: 2 })
     ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: /genre/i, level: 2 })
@@ -96,7 +96,7 @@ describe('<ExploreSidebar />', () => {
       <ExploreSidebar
         items={exploreSidebarMocks}
         onFilter={jest.fn}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
       />
     )
 
@@ -112,7 +112,7 @@ describe('<ExploreSidebar />', () => {
       <ExploreSidebar
         items={exploreSidebarMocks}
         onFilter={filterHandler}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
       />
     )
 
@@ -121,7 +121,7 @@ describe('<ExploreSidebar />', () => {
     expect(filterHandler).toBeCalled()
     expect(filterHandler).toBeCalledTimes(1)
     expect(filterHandler).toBeCalledWith({
-      windows: true,
+      platforms: ['windows'],
       sort_by: 'low-to-high'
     })
   })
@@ -137,6 +137,7 @@ describe('<ExploreSidebar />', () => {
     await user.click(screen.getByRole('checkbox', { name: /under \$50/i }))
     await user.click(screen.getByRole('radio', { name: /high to low/i }))
     await user.click(screen.getByRole('checkbox', { name: /linux/i }))
+    await user.click(screen.getByRole('checkbox', { name: /windows/i }))
     await user.click(screen.getByRole('checkbox', { name: /mmorpg/i }))
 
     await user.click(screen.getByRole('button', { name: /filter/i }))
@@ -144,10 +145,10 @@ describe('<ExploreSidebar />', () => {
     expect(filterHandler).toBeCalled()
     expect(filterHandler).toBeCalledTimes(1)
     expect(filterHandler).toBeCalledWith({
-      linux: true,
+      platforms: ['linux', 'windows'],
       sort_by: 'high-to-low',
-      mmorpg: true,
-      'under-50': true
+      genre: ['mmorpg'],
+      price: ['under-50']
     })
   })
 

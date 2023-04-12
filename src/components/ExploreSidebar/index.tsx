@@ -87,7 +87,9 @@ function ExploreSidebar({
                   name={field.name}
                   label={field.label}
                   labelFor={field.name}
-                  isChecked={Boolean(values[field.name])}
+                  isChecked={(values[item.name] as string[])?.includes(
+                    field.name
+                  )}
                   onCheck={() => handleCheckboxChange(item.name, field.name)}
                 />
               ))}
