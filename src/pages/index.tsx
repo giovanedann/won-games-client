@@ -19,14 +19,15 @@ export async function getStaticProps() {
 
   const { data } = await apolloClient.query<QueryHome, QueryHomeVariables>({
     query: GET_HOME,
-    variables: { date: today }
+    variables: { date: today },
+    fetchPolicy: 'no-cache'
   })
 
   const { mostPopularGames } = sectionsAdapter(data.sections!)
 
   return {
+    revalidate: 20,
     props: {
-      revalidate: 60,
       banners: bannerAdapter(data.banners),
       newGamesTitle: data.sections?.newGames?.title,
       newGames: newGamesAdapter(data.newGames),
