@@ -9,6 +9,8 @@ const config = {
     '!<rootDir>/**/*.stories.tsx',
     '!<rootDir>/src/pages/**/*.tsx',
     '!<rootDir>/src/types/**/*.d.ts',
+    '!<rootDir>/src/graphql/**/*.ts',
+    '!<rootDir>/src/infra/**/*.ts',
     '!<rootDir>/*.d.ts',
     '!<rootDir>/src/styles/**/*.ts'
   ],
