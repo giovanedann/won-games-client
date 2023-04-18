@@ -21,7 +21,7 @@ const apiHighlight: QueryHome_sections_newGames_highlight = {
   title: 'highlight title'
 }
 
-describe('BannerAdapter', () => {
+describe('HighlightAdapter', () => {
   it('should return the right adapted object', () => {
     const expectedResult: HighlightProps = {
       buttonLabel: 'button label',
