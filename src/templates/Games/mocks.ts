@@ -7,6 +7,7 @@ export const gamesMock = [
       data: {
         games: [
           {
+            id: '1',
             name: 'Mocked game',
             slug: 'mocked-game',
             cover: { url: '/uploads/mocked-img-url.jpg' },
@@ -50,6 +51,7 @@ export const loadMoreGamesMock = [
       data: {
         games: [
           {
+            id: '2',
             name: 'Load more game',
             slug: 'load-more-game',
             cover: { url: '/uploads/load-more-games-img-url.jpg' },

@@ -50,7 +50,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     GetGameBySlugVariables
   >({
     query: GET_GAME_BY_SLUG,
-    variables: { slug: `${params?.slug}` }
+    variables: { slug: `${params?.slug}` },
+    fetchPolicy: 'no-cache'
   })
 
   const [game] = data.games
@@ -78,8 +79,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   })
 
   return {
+    revalidate: 60,
     props: {
-      revalidate: 60,
       coverImg: getImageUrl(
         game.cover?.src || '/uploads/No_image_available_38adfae762.png'
       ),
