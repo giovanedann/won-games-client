@@ -2,7 +2,21 @@ import { QueryHome_sections } from 'graphql/generated/QueryHome'
 import formatPrice from 'utils/formatPrice'
 import getImageUrl from 'utils/getImageUrl'
 
-export default function sectionsAdapter(apiSections: QueryHome_sections) {
+export type Game = {
+  title: string
+  slug: string
+  developer: string
+  img: string
+  price: string
+}
+
+export type SectionsAdapterResult = {
+  mostPopularGames?: Game[]
+}
+
+export default function sectionsAdapter(
+  apiSections: QueryHome_sections
+): SectionsAdapterResult {
   const mostPopularGames = apiSections.popularGames?.games.map((game) => ({
     title: game.name,
     slug: game.slug,
