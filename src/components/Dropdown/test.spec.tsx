@@ -28,4 +28,21 @@ describe('<Dropdown />', () => {
 
     expect(screen.queryByText(/content/i)).toBeVisible()
   })
+
+  it('should close the dropdown when clicking the overlay', async () => {
+    const user = userEvent.setup()
+
+    expect(screen.queryByText(/content/i)).not.toBeVisible()
+
+    await user.click(screen.getByLabelText(/toggle dropdown/))
+
+    expect(screen.queryByText(/content/i)).toBeVisible()
+
+    const overlay =
+      screen.getByText(/content/i).parentElement?.nextElementSibling
+
+    await user.click(overlay!)
+
+    expect(screen.queryByText(/content/i)).not.toBeVisible()
+  })
 })
