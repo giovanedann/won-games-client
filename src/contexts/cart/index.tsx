@@ -1,3 +1,4 @@
+import cartAdapter from 'adapters/cart.adapter'
 import { useQueryGames } from 'graphql/queries/games'
 import LocalStorage from 'infra/cache/LocalStorage'
 import {
@@ -8,8 +9,6 @@ import {
   useEffect,
   useMemo
 } from 'react'
-import formatPrice from 'utils/formatPrice'
-import getImageUrl from 'utils/getImageUrl'
 
 const CART_KEY = 'cartItems'
 
@@ -62,13 +61,7 @@ function CartProvider({ children }: CartProviderProps) {
   // memoized value to store the context data passed to the provider
   const providerValues: CartContextData = useMemo(
     () => ({
-      items:
-        data?.games?.map((game) => ({
-          id: game.id,
-          img: getImageUrl(game.cover?.url ?? ''),
-          title: game.name,
-          price: formatPrice(game.price)
-        })) ?? []
+      items: cartAdapter(data?.games)
     }),
     [data]
   )
