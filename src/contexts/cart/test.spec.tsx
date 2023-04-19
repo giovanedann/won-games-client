@@ -95,4 +95,24 @@ describe('Cart context', () => {
       JSON.stringify(['2'])
     )
   })
+
+  it('should clear the cart items', async () => {
+    const items = ['1', '2']
+    LocalStorage.set('cartItems', items)
+
+    const { result, waitForNextUpdate } = renderHookWithProvider()
+
+    await waitForNextUpdate()
+
+    expect(result.current.itemsQuantity).toBe(2)
+
+    act(() => {
+      result.current.clearCart()
+    })
+
+    expect(result.current.itemsQuantity).toBe(0)
+    expect(window.localStorage.getItem('WONGAMES_cartItems')).toBe(
+      JSON.stringify([])
+    )
+  })
 })
