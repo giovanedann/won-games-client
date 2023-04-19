@@ -2,10 +2,13 @@ import { screen, render } from 'utils/tests/render'
 import CartDropdown from '.'
 
 import cartListMock from 'components/CartList/data.mock'
+import { cartContextDefaultValues } from 'contexts/cart'
 
 describe('<CartDropdown />', () => {
   it('should render <CartIcon /> and its badge', () => {
-    render(<CartDropdown items={cartListMock} total="R$ 300,00" />)
+    render(<CartDropdown items={cartListMock} total="R$ 300,00" />, {
+      cartProviderProps: { ...cartContextDefaultValues, itemsQuantity: 2 }
+    })
 
     expect(screen.getByLabelText(/shopping cart/i)).toBeInTheDocument()
     expect(screen.getByText(`${cartListMock.length}`)).toBeInTheDocument()
