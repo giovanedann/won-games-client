@@ -1,6 +1,6 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import userEvent from '@testing-library/user-event'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import GameCard from '.'
 
 const props = {
@@ -13,7 +13,7 @@ const props = {
 
 describe('<GameCard />', () => {
   it('should render the right elements', () => {
-    renderWithTheme(<GameCard {...props} />)
+    render(<GameCard {...props} />)
 
     expect(
       screen.getByRole('heading', { level: 3, name: /devil may cry 5/i })
@@ -39,7 +39,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render the normal price without text decoration if no promotionalPrice', () => {
-    renderWithTheme(<GameCard {...props} />)
+    render(<GameCard {...props} />)
 
     expect(screen.getByText(/R\$ 235,00/i)).not.toHaveStyle({
       textDecoration: 'line-through'
@@ -47,7 +47,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render the normal price with a line through if promotionalPrice', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 120,00" />)
+    render(<GameCard {...props} promotionalPrice="R$ 120,00" />)
 
     expect(screen.getByText(/R\$ 235,00/i)).toHaveStyle({
       textDecoration: 'line-through'
@@ -55,7 +55,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render the card with both prices', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 120,00" />)
+    render(<GameCard {...props} promotionalPrice="R$ 120,00" />)
 
     const fullPrice = screen.getByText(/R\$ 235,00/i)
     expect(fullPrice).toBeInTheDocument()
@@ -68,7 +68,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render a filled heart icon when favorite is true', () => {
-    renderWithTheme(<GameCard {...props} favorite />)
+    render(<GameCard {...props} favorite />)
 
     expect(screen.getByLabelText(/remove from wishlist/i)).toBeInTheDocument()
   })
@@ -77,7 +77,7 @@ describe('<GameCard />', () => {
     const user = userEvent.setup()
     const favoriteHandler = jest.fn()
 
-    renderWithTheme(<GameCard {...props} onFav={favoriteHandler} />)
+    render(<GameCard {...props} onFav={favoriteHandler} />)
 
     await user.click(screen.getByLabelText(/favorite button/i))
 
@@ -86,7 +86,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render a ribbon', () => {
-    renderWithTheme(
+    render(
       <GameCard
         {...props}
         ribbon="Ribbon"

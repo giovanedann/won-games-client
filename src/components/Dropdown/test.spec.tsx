@@ -1,13 +1,13 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import Dropdown from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import userEvent from '@testing-library/user-event'
 
 describe('<Dropdown />', () => {
   beforeEach(() => {
     const title = <h1 aria-label="toggle dropdown">Dropdown</h1>
 
-    renderWithTheme(
+    render(
       <Dropdown title={title}>
         <p>Content</p>
       </Dropdown>

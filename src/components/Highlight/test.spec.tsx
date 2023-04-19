@@ -1,5 +1,5 @@
-import { screen } from '@testing-library/react'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+import { screen, render } from 'utils/tests/render'
+
 import Highlight from '.'
 import * as S from './styles'
 
@@ -14,7 +14,7 @@ const props = {
 
 describe('<Highlight />', () => {
   it('should render the right elements', () => {
-    renderWithTheme(<Highlight {...props} />)
+    render(<Highlight {...props} />)
 
     expect(
       screen.getByRole('heading', { level: 2, name: /title/i })
@@ -28,7 +28,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render the background image', () => {
-    const { container } = renderWithTheme(<Highlight {...props} />)
+    const { container } = render(<Highlight {...props} />)
 
     expect(container.firstChild).toHaveStyle({
       backgroundImage: `${props.backgroundImage}`
@@ -36,7 +36,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render the float image', () => {
-    renderWithTheme(<Highlight {...props} />)
+    render(<Highlight {...props} />)
 
     const titleRegExp = new RegExp(props.title, 'i')
 
@@ -44,7 +44,7 @@ describe('<Highlight />', () => {
   })
 
   it('should change alignment accordingly to alignment prop', () => {
-    const { rerender, container } = renderWithTheme(<Highlight {...props} />)
+    const { rerender, container } = render(<Highlight {...props} />)
 
     expect(container.firstChild).toHaveStyleRule(
       'grid-template-areas',

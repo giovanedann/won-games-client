@@ -1,10 +1,9 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import CartIcon from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
 
 describe('<CartIcon />', () => {
   it('should render the cart icon without quantity span if quantity is omitted or 0', () => {
-    renderWithTheme(<CartIcon />)
+    render(<CartIcon />)
 
     expect(screen.getByLabelText(/shopping cart icon/i)).toBeInTheDocument()
     expect(
@@ -13,7 +12,7 @@ describe('<CartIcon />', () => {
   })
 
   it('should render the cart item with quantity span if quantity is greater than 0', () => {
-    renderWithTheme(<CartIcon quantity={12} />)
+    render(<CartIcon quantity={12} />)
 
     expect(screen.getByLabelText(/shopping cart icon/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/cart items quantity/i)).toBeInTheDocument()

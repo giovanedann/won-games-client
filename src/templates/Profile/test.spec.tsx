@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+import { screen, render } from 'utils/tests/render'
 
 import Profile from '.'
 
@@ -24,7 +23,7 @@ describe('<Profile />', () => {
   })
 
   it('should render the right elements', () => {
-    renderWithTheme(
+    render(
       <Profile>
         <h1>Profile template</h1>
       </Profile>

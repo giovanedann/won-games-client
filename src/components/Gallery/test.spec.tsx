@@ -1,6 +1,6 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+import { screen, render } from 'utils/tests/render'
+
 import Gallery from '.'
 import userEvent from '@testing-library/user-event'
 import galleryMock from './data.mock'
@@ -21,7 +21,7 @@ describe('<Gallery />', () => {
   })
 
   it('should render the thumbnails as buttons', async () => {
-    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+    render(<Gallery items={galleryMock.slice(0, 2)} />)
 
     expect(
       screen.getByRole('button', { name: /Thumb - Gallery Image 1/i })
@@ -33,7 +33,7 @@ describe('<Gallery />', () => {
   })
 
   it('should open and close modal on click', async () => {
-    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+    render(<Gallery items={galleryMock.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
     const user = userEvent.setup()
@@ -55,7 +55,7 @@ describe('<Gallery />', () => {
   })
 
   it('should not close modal on any other key than ESC press', async () => {
-    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+    render(<Gallery items={galleryMock.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
     const user = userEvent.setup()
@@ -74,7 +74,7 @@ describe('<Gallery />', () => {
   })
 
   it('should close modal on ESC key press', async () => {
-    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+    render(<Gallery items={galleryMock.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
     const user = userEvent.setup()
@@ -94,7 +94,7 @@ describe('<Gallery />', () => {
   })
 
   it('should open modal with selected image', async () => {
-    renderWithTheme(<Gallery items={galleryMock.slice(0, 2)} />)
+    render(<Gallery items={galleryMock.slice(0, 2)} />)
 
     const user = userEvent.setup()
 

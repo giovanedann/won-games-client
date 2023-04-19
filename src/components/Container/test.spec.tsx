@@ -1,10 +1,11 @@
 import theme from 'styles/theme'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import Container from '.'
+import { render } from 'utils/tests/render'
 
 describe('<Container />', () => {
   it('should render the container with the right styles', () => {
-    const { container } = renderWithTheme(<Container />)
+    const { container } = render(<Container />)
 
     expect(container.firstChild).toHaveStyle({
       'max-width': theme.grid.container

@@ -1,13 +1,14 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import exploreSidebarMocks from 'components/ExploreSidebar/data.mock'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import { MockedProvider } from '@apollo/client/testing'
 
 import Games from '.'
 
 import { emptyGamesMock, gamesMock, loadMoreGamesMock } from './mocks'
 import apolloCache from 'infra/apollo/apolloCache'
+import { render } from 'utils/tests/render'
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter') // eslint-disable-line @typescript-eslint/no-var-requires
 const push = jest.fn()
@@ -28,7 +29,7 @@ jest.mock('templates/Base', () => ({
 
 describe('<Games />', () => {
   it('should render the loading state when starting the template', () => {
-    renderWithTheme(
+    render(
       <MockedProvider mocks={[]} addTypename={false}>
         <Games filterItems={exploreSidebarMocks} />
       </MockedProvider>
@@ -38,7 +39,7 @@ describe('<Games />', () => {
   })
 
   it('should render the sections correctly', async () => {
-    renderWithTheme(
+    render(
       <MockedProvider mocks={gamesMock} addTypename={false}>
         <Games filterItems={exploreSidebarMocks} />
       </MockedProvider>
@@ -59,7 +60,7 @@ describe('<Games />', () => {
   it('should load more games when show more button is clicked', async () => {
     const user = userEvent.setup()
 
-    renderWithTheme(
+    render(
       <MockedProvider mocks={loadMoreGamesMock} cache={apolloCache}>
         <Games filterItems={exploreSidebarMocks} />
       </MockedProvider>
@@ -85,7 +86,7 @@ describe('<Games />', () => {
 
   it('should change the url filter when selecting a filter', async () => {
     const user = userEvent.setup()
-    renderWithTheme(
+    render(
       <MockedProvider mocks={loadMoreGamesMock} cache={apolloCache}>
         <Games filterItems={exploreSidebarMocks} />
       </MockedProvider>
@@ -102,7 +103,7 @@ describe('<Games />', () => {
   })
 
   it('should show the empty state when games is empty', async () => {
-    renderWithTheme(
+    render(
       <MockedProvider mocks={emptyGamesMock} addTypename={false}>
         <Games filterItems={exploreSidebarMocks} />
       </MockedProvider>

@@ -1,17 +1,15 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import userEvent from '@testing-library/user-event'
 
 import ExploreSidebar from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import exploreSidebarMocks from './data.mock'
 import { Overlay } from './styles'
 import { css } from 'styled-components'
 
 describe('<ExploreSidebar />', () => {
   it('should render the headings', () => {
-    renderWithTheme(
-      <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
-    )
+    render(<ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />)
 
     expect(
       screen.getByRole('heading', { name: /price/i, level: 2 })
@@ -28,9 +26,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should render the prices checkboxes', () => {
-    renderWithTheme(
-      <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
-    )
+    render(<ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />)
 
     const prices = exploreSidebarMocks.find(({ title }) => title === 'Price')
 
@@ -42,9 +38,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should render the sort radios', () => {
-    renderWithTheme(
-      <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
-    )
+    render(<ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />)
 
     const sortBy = exploreSidebarMocks.find(({ title }) => title === 'Sort by')
 
@@ -56,9 +50,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should render the system checkboxes', () => {
-    renderWithTheme(
-      <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
-    )
+    render(<ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />)
 
     const systems = exploreSidebarMocks.find(({ title }) => title === 'System')
 
@@ -70,9 +62,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should render the genre checkboxes', () => {
-    renderWithTheme(
-      <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
-    )
+    render(<ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />)
 
     const genres = exploreSidebarMocks.find(({ title }) => title === 'Genre')
 
@@ -84,9 +74,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should not render the filter button on bigger screens', () => {
-    renderWithTheme(
-      <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
-    )
+    render(<ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />)
 
     expect(
       screen.queryByRole('button', { name: /filter/i })
@@ -94,7 +82,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should start with the initial values', () => {
-    renderWithTheme(
+    render(
       <ExploreSidebar
         items={exploreSidebarMocks}
         onFilter={jest.fn}
@@ -109,7 +97,7 @@ describe('<ExploreSidebar />', () => {
   it('should call onFilter with the initial values', async () => {
     const filterHandler = jest.fn()
 
-    renderWithTheme(
+    render(
       <ExploreSidebar
         items={exploreSidebarMocks}
         onFilter={filterHandler}
@@ -129,7 +117,7 @@ describe('<ExploreSidebar />', () => {
     const user = userEvent.setup()
     const filterHandler = jest.fn()
 
-    renderWithTheme(
+    render(
       <ExploreSidebar items={exploreSidebarMocks} onFilter={filterHandler} />
     )
 
@@ -150,9 +138,7 @@ describe('<ExploreSidebar />', () => {
 
   it('should check only one of the radios', async () => {
     const user = userEvent.setup()
-    renderWithTheme(
-      <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
-    )
+    render(<ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />)
 
     await user.click(screen.getByRole('radio', { name: /high to low/i }))
 
@@ -173,7 +159,7 @@ describe('<ExploreSidebar />', () => {
 
   it('should open and close the sidebar modal on mobile', async () => {
     const user = userEvent.setup()
-    const { container } = renderWithTheme(
+    const { container } = render(
       <ExploreSidebar items={exploreSidebarMocks} onFilter={jest.fn} />
     )
 
