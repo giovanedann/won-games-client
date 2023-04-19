@@ -66,8 +66,6 @@ describe('Cart context', () => {
   it('should add an item id to the cart items', async () => {
     const { result } = renderHookWithProvider()
 
-    expect(result.current.items).toStrictEqual([])
-
     act(() => {
       result.current.addToCart('1')
     })
@@ -75,6 +73,26 @@ describe('Cart context', () => {
     expect(result.current.itemsQuantity).toBe(1)
     expect(window.localStorage.getItem('WONGAMES_cartItems')).toBe(
       JSON.stringify(['1'])
+    )
+  })
+
+  it('should remove an item id from the cart items', async () => {
+    const items = ['1', '2']
+    LocalStorage.set('cartItems', items)
+
+    const { result, waitForNextUpdate } = renderHookWithProvider()
+
+    await waitForNextUpdate()
+
+    expect(result.current.itemsQuantity).toBe(2)
+
+    act(() => {
+      result.current.removeFromCart('1')
+    })
+
+    expect(result.current.itemsQuantity).toBe(1)
+    expect(window.localStorage.getItem('WONGAMES_cartItems')).toBe(
+      JSON.stringify(['2'])
     )
   })
 })
