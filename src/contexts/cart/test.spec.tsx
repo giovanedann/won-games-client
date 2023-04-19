@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 import { MockedProvider } from '@apollo/client/testing'
 import { cartItems, gamesMock } from './mocks'
 import { RenderResult } from '@testing-library/react-hooks'
+import { act } from '@testing-library/react'
 
 function hookWrapper({ children }: { children: ReactNode }) {
   return (
@@ -60,5 +61,20 @@ describe('Cart context', () => {
     expect(result.current.isItemInCart('3')).toBeFalsy()
     expect(result.current.isItemInCart('2')).toBeTruthy()
     expect(result.current.isItemInCart('1')).toBeTruthy()
+  })
+
+  it('should add an item id to the cart items', async () => {
+    const { result } = renderHookWithProvider()
+
+    expect(result.current.items).toStrictEqual([])
+
+    act(() => {
+      result.current.addToCart('1')
+    })
+
+    expect(result.current.itemsQuantity).toBe(1)
+    expect(window.localStorage.getItem('WONGAMES_cartItems')).toBe(
+      JSON.stringify(['1'])
+    )
   })
 })
