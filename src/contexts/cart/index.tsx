@@ -1,3 +1,4 @@
+import { useQueryGames } from 'graphql/queries/games'
 import LocalStorage from 'infra/cache/LocalStorage'
 import {
   useContext,
@@ -7,11 +8,20 @@ import {
   useEffect,
   useMemo
 } from 'react'
+import formatPrice from 'utils/formatPrice'
+import getImageUrl from 'utils/getImageUrl'
 
 const CART_KEY = 'cartItems'
 
+type CartItem = {
+  id: string
+  img: string
+  title: string
+  price: string
+}
+
 export type CartContextData = {
-  items: string[]
+  items: CartItem[]
 }
 
 export const cartContextDefaultValues: CartContextData = {
@@ -27,8 +37,10 @@ export type CartProviderProps = {
 }
 
 function CartProvider({ children }: CartProviderProps) {
+  // state to store the games ids
   const [items, setItems] = useState<string[]>([])
 
+  // useEffect to load the local storage games ids
   useEffect(() => {
     const localStorageGamesIds = LocalStorage.get(CART_KEY)
 
@@ -37,11 +49,28 @@ function CartProvider({ children }: CartProviderProps) {
     }
   }, [])
 
-  const providerValues = useMemo(
+  // request to query the game data from, where the ids are included in items array
+  const { data } = useQueryGames({
+    skip: !items.length,
+    variables: {
+      where: {
+        id: items
+      }
+    }
+  })
+
+  // memoized value to store the context data passed to the provider
+  const providerValues: CartContextData = useMemo(
     () => ({
-      items
+      items:
+        data?.games?.map((game) => ({
+          id: game.id,
+          img: getImageUrl(game.cover?.url ?? ''),
+          title: game.name,
+          price: formatPrice(game.price)
+        })) ?? []
     }),
-    [items]
+    [data]
   )
 
   return (
