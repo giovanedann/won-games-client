@@ -28,6 +28,7 @@ const apiSections: Partial<QueryHome_sections> = {
     games: [
       {
         __typename: 'Game',
+        id: '123',
         cover: { __typename: 'UploadFile', url: '/popular-game-1' },
         developers: [{ __typename: 'Developer', name: 'Santa Monica Studios' }],
         name: 'Popular game 1',

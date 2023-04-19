@@ -6,6 +6,7 @@ import getImageUrl from 'utils/getImageUrl'
 
 const apiGame: QueryHome_freeGames = {
   __typename: 'Game',
+  id: '213',
   cover: {
     __typename: 'UploadFile',
     url: '/cover_url'

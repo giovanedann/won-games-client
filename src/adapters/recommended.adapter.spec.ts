@@ -6,6 +6,7 @@ import { recommendedGamesAdapter } from './recommended.adapter'
 
 const apiGame: QueryRecommended_recommended_section_games = {
   __typename: 'Game',
+  id: '123',
   cover: {
     __typename: 'UploadFile',
     url: '/cover_url'

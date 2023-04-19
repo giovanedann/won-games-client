@@ -6,6 +6,7 @@ import newGamesAdapter from './new-games.adapter'
 
 const apiGame: QueryHome_newGames = {
   __typename: 'Game',
+  id: '123',
   cover: {
     __typename: 'UploadFile',
     url: '/cover_url'
