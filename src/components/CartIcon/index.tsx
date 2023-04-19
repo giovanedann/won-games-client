@@ -1,15 +1,14 @@
 import { MdShoppingCart } from 'react-icons/md'
 import * as S from './styles'
+import { useCart } from 'contexts/cart'
 
-type CartIconProps = {
-  quantity?: number
-}
+function CartIcon() {
+  const { itemsQuantity } = useCart()
 
-function CartIcon({ quantity = 0 }: CartIconProps) {
   return (
     <S.Wrapper>
-      {quantity > 0 && (
-        <S.Badge aria-label="cart items quantity">{quantity}</S.Badge>
+      {itemsQuantity > 0 && (
+        <S.Badge aria-label="cart items quantity">{itemsQuantity}</S.Badge>
       )}
 
       <MdShoppingCart aria-label="shopping cart icon" />
