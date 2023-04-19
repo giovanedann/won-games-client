@@ -9,17 +9,31 @@ const Container = styled.div`
   max-width: 800px;
 `
 
+type CartListArgs = {
+  items: typeof cartListMock
+  hasButton: boolean
+  totalPrice: string
+}
+
 export default {
   title: 'CartList',
   component: CartList,
   argTypes: {
     items: {
       type: 'symbol'
+    },
+    hasButton: {
+      control: {
+        type: 'boolean'
+      }
+    },
+    totalPrice: {
+      type: 'string'
     }
   }
-} as Meta<typeof CartList>
+} as Meta<CartListArgs>
 
-const Template: StoryFn<typeof CartList> = (args) => (
+const Template: StoryFn<CartListArgs> = (args) => (
   <Container>
     <CartList {...args} />
   </Container>
@@ -35,8 +49,8 @@ Basic.parameters = {
 
 Basic.args = {
   items: cartListMock,
-  total: 'R$ 330,00',
-  hasButton: false
+  hasButton: true,
+  totalPrice: '$ 430,00'
 }
 
 export const Empty = Template.bind({})
