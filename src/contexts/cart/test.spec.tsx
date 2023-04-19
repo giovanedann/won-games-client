@@ -15,7 +15,7 @@ function hookWrapper({ children }: { children: ReactNode }) {
 }
 
 describe('Cart context', () => {
-  it('should request the games by the localStorage saved ids on load', async () => {
+  it('should update the initial state with database data according to localStorage', async () => {
     const items = ['1', '2']
 
     LocalStorage.set('cartItems', items)
@@ -27,5 +27,7 @@ describe('Cart context', () => {
     await waitForNextUpdate()
 
     expect(result.current.items).toStrictEqual(cartItems)
+    expect(result.current.itemsQuantity).toEqual(2)
+    expect(result.current.totalPrice).toBe('$30.50')
   })
 })
