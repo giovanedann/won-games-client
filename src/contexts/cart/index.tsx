@@ -9,6 +9,7 @@ import {
   useEffect,
   useMemo
 } from 'react'
+import formatPrice from 'utils/formatPrice'
 
 const CART_KEY = 'cartItems'
 
@@ -21,10 +22,14 @@ type CartItem = {
 
 export type CartContextData = {
   items: CartItem[]
+  itemsQuantity: number
+  totalPrice: string
 }
 
 export const cartContextDefaultValues: CartContextData = {
-  items: []
+  items: [],
+  itemsQuantity: 0,
+  totalPrice: formatPrice(0)
 }
 
 export const CartContext = createContext<CartContextData>(
@@ -58,12 +63,18 @@ function CartProvider({ children }: CartProviderProps) {
     }
   })
 
+  const totalPrice = useMemo(() => {
+    return data?.games.reduce((total, game) => total + game.price, 0)
+  }, [data])
+
   // memoized value to store the context data passed to the provider
   const providerValues: CartContextData = useMemo(
     () => ({
-      items: cartAdapter(data?.games)
+      items: cartAdapter(data?.games),
+      itemsQuantity: items.length,
+      totalPrice: formatPrice(totalPrice ?? 0)
     }),
-    [data]
+    [data, totalPrice, items]
   )
 
   return (
