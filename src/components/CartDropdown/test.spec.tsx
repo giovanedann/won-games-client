@@ -6,8 +6,13 @@ import { cartContextDefaultValues } from 'contexts/cart'
 
 describe('<CartDropdown />', () => {
   it('should render <CartIcon /> and its badge', () => {
-    render(<CartDropdown items={cartListMock} total="R$ 300,00" />, {
-      cartProviderProps: { ...cartContextDefaultValues, itemsQuantity: 2 }
+    render(<CartDropdown />, {
+      cartProviderProps: {
+        ...cartContextDefaultValues,
+        items: cartListMock,
+        itemsQuantity: cartListMock.length,
+        totalPrice: '$430,00'
+      }
     })
 
     expect(screen.getByLabelText(/shopping cart/i)).toBeInTheDocument()
@@ -15,9 +20,16 @@ describe('<CartDropdown />', () => {
   })
 
   it('should render Dropdown content with cart items and total', () => {
-    render(<CartDropdown items={cartListMock} total="R$ 300,00" />)
+    render(<CartDropdown />, {
+      cartProviderProps: {
+        ...cartContextDefaultValues,
+        items: cartListMock,
+        itemsQuantity: cartListMock.length,
+        totalPrice: '$430,00'
+      }
+    })
 
-    expect(screen.getByText('R$ 300,00')).toBeInTheDocument()
+    expect(screen.getByText('$430,00')).toBeInTheDocument()
     expect(screen.getByText(`${cartListMock[0].title}`)).toBeInTheDocument()
   })
 })
