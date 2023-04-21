@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react'
+import { CartContextData } from 'contexts/cart'
 import { StoryFn, Meta } from '@storybook/react'
 
 import GameCard from '.'
@@ -20,13 +22,13 @@ export default {
       }
     }
   }
-} as Meta<typeof GameCard>
+} as Meta<typeof GameCard & CartContextData>
 
 const Wrapper = styled.div`
   width: 30rem;
 `
 
-const Template: StoryFn<typeof GameCard> = (args) => (
+const Template: StoryFn<typeof GameCard & CartContextData> = (args) => (
   <Wrapper>
     <GameCard {...args} />
   </Wrapper>
@@ -82,4 +84,12 @@ WithRibbon.parameters = {
   controls: {
     exclude: ['onFav']
   }
+}
+
+export const IsInCart = Template.bind({})
+
+IsInCart.args = {
+  ...Basic.args,
+  // @ts-ignore
+  isItemInCart: () => true
 }
