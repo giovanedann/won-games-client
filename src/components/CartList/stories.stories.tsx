@@ -55,6 +55,22 @@ export const Basic = {
   }
 }
 
+export const WithScroll = {
+  render: Template,
+
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: [...cartListMock, ...cartListMock, ...cartListMock],
+    hasButton: true,
+    totalPrice: '$ 430,00'
+  }
+}
+
 export const WithLoader = {
   render: Template,
 
