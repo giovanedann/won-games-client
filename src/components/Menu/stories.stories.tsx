@@ -1,5 +1,4 @@
-import React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import Menu from '.'
 
@@ -16,14 +15,13 @@ export default {
   }
 } as Meta<typeof Menu>
 
-const Template: StoryFn<typeof Menu> = (args) => <Menu {...args} />
+export const Basic = {
+  args: {},
 
-export const Basic = Template.bind({})
-
-Basic.args = {}
-Basic.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 }

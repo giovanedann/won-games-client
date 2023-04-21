@@ -1,61 +1,19 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import GameCardSlider from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
-import theme from 'styles/theme'
 
-const items = [
-  {
-    title: 'Population Zero',
-    slug: 'population-zero',
-    developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x140',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 215,00'
-  },
-  {
-    title: 'Population Zero',
-    slug: 'population-zero',
-    developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x141',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 215,00'
-  },
-  {
-    title: 'Population Zero',
-    slug: 'population-zero',
-    developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x142',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 215,00'
-  },
-  {
-    title: 'Population Zero',
-    slug: 'population-zero',
-    developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x143',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 215,00'
-  },
-  {
-    title: 'Population Zero',
-    slug: 'population-zero',
-    developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x144',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 215,00'
-  }
-]
+import theme from 'styles/theme'
+import items from './data.mock'
 
 describe('<GameCardSlider />', () => {
   it('should render with 4 visible items', () => {
-    const { container } = renderWithTheme(<GameCardSlider items={items} />)
+    const { container } = render(<GameCardSlider items={items} />)
 
     expect(container.getElementsByClassName('slick-active')).toHaveLength(4)
   })
 
   it('should render white arrows if color is white', () => {
-    renderWithTheme(<GameCardSlider items={items} color="white" />)
+    render(<GameCardSlider items={items} color="white" />)
 
     expect(screen.getByLabelText(/next games/i)).toHaveStyle({
       color: theme.colors.white

@@ -6,6 +6,7 @@ import newGamesAdapter from './new-games.adapter'
 
 const apiGame: QueryHome_newGames = {
   __typename: 'Game',
+  id: '123',
   cover: {
     __typename: 'UploadFile',
     url: '/cover_url'
@@ -19,6 +20,7 @@ const apiGame: QueryHome_newGames = {
 describe('NewGamesAdapter', () => {
   it('should return the right adapted object', () => {
     const expectedResult: GameCardProps = {
+      id: '123',
       developer: 'Rockstar Games',
       img: getImageUrl('/cover_url'),
       price: formatPrice(300),

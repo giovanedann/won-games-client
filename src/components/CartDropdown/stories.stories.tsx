@@ -11,19 +11,42 @@ const Container = styled.div`
   justify-content: flex-end;
 `
 
+type CartDropdownArgs = {
+  items: typeof cartListMock
+  totalPrice: string
+}
+
 export default {
   title: 'CartDropdown',
-  component: CartDropdown
-} as Meta<typeof CartDropdown>
+  component: CartDropdown,
+  argTypes: {
+    items: {
+      type: 'symbol'
+    },
+    totalPrice: {
+      type: 'string',
+      control: 'text'
+    }
+  }
+} as Meta<CartDropdownArgs>
 
-const Template: StoryFn<typeof CartDropdown> = (args) => (
+const Template: StoryFn<CartDropdownArgs> = () => (
   <Container>
-    <CartDropdown {...args} />
+    <CartDropdown />
   </Container>
 )
 
-export const Basic = Template.bind({})
-Basic.args = {
-  items: cartListMock,
-  total: 'R$ 250,00'
+export const Basic = {
+  render: Template,
+
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: cartListMock,
+    totalPrice: 'R$ 260,00'
+  }
 }

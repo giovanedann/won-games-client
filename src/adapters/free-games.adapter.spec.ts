@@ -6,6 +6,7 @@ import getImageUrl from 'utils/getImageUrl'
 
 const apiGame: QueryHome_freeGames = {
   __typename: 'Game',
+  id: '213',
   cover: {
     __typename: 'UploadFile',
     url: '/cover_url'
@@ -19,6 +20,7 @@ const apiGame: QueryHome_freeGames = {
 describe('FreeGamesAdapter', () => {
   it('should return the right adapted object', () => {
     const expectedResult: GameCardProps = {
+      id: '213',
       developer: 'Rockstar Games',
       img: getImageUrl('/cover_url'),
       price: formatPrice(300),

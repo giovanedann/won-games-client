@@ -1,5 +1,5 @@
-import { screen } from '@testing-library/react'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+import { screen, render } from 'utils/tests/render'
+
 import Footer from '.'
 
 const headings = ['contact', 'follow us', 'links', 'location']
@@ -20,7 +20,7 @@ const links = ['home', 'store', 'search']
 
 describe('<Footer />', () => {
   it('should render the right headings', () => {
-    renderWithTheme(<Footer />)
+    render(<Footer />)
 
     headings.forEach((headingName) => {
       const regExp = new RegExp(headingName, 'i')
@@ -30,14 +30,14 @@ describe('<Footer />', () => {
 
   it('should render the right contact info', () => {
     const emailRegExp = new RegExp(contact.email, 'i')
-    renderWithTheme(<Footer />)
+    render(<Footer />)
 
     expect(screen.getByText(emailRegExp)).toBeInTheDocument()
     expect(screen.getByText(contact.phone)).toBeInTheDocument()
   })
 
   it('should render all social media links with right links', () => {
-    renderWithTheme(<Footer />)
+    render(<Footer />)
 
     socials.forEach(({ name, link }) => {
       const regExp = new RegExp(name, 'i')
@@ -47,7 +47,7 @@ describe('<Footer />', () => {
   })
 
   it('should render all pagination links', () => {
-    renderWithTheme(<Footer />)
+    render(<Footer />)
 
     links.forEach((link) => {
       const regExp = new RegExp(link, 'i')

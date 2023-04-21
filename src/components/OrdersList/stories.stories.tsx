@@ -28,14 +28,16 @@ const Template: StoryFn<typeof OrdersList> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: ordersListMock
   }
-}
-
-Basic.args = {
-  items: ordersListMock
 }

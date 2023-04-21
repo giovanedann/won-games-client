@@ -1,6 +1,6 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import OrdersList from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import ordersListMock from './data.mock'
 
 jest.mock('components/Empty', () => ({
@@ -19,7 +19,7 @@ jest.mock('components/GameItem', () => ({
 
 describe('<OrdersList />', () => {
   it('should render the right items', () => {
-    renderWithTheme(<OrdersList items={ordersListMock} />)
+    render(<OrdersList items={ordersListMock} />)
 
     expect(
       screen.getByRole('heading', { name: /my orders/i, level: 2 })

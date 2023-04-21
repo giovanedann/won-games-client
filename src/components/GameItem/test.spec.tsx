@@ -1,6 +1,8 @@
-import { screen } from '@testing-library/react'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+import { screen, render } from 'utils/tests/render'
+
 import GameItem from '.'
+import { CartContextData, cartContextDefaultValues } from 'contexts/cart'
+import userEvent from '@testing-library/user-event'
 
 jest.mock('next/image', () => ({
   __esModule: true,
@@ -12,6 +14,7 @@ jest.mock('next/image', () => ({
 }))
 
 const props = {
+  id: '123',
   img: 'image-source',
   title: 'Red Dead Redemption 2',
   price: 'R$ 215,00'
@@ -24,7 +27,7 @@ describe('<GameItem />', () => {
   })
 
   it('should render the item', () => {
-    renderWithTheme(<GameItem {...props} />)
+    render(<GameItem {...props} />)
 
     expect(
       screen.getByRole('heading', { name: props.title })
@@ -41,7 +44,7 @@ describe('<GameItem />', () => {
   it('should render the item with download link and icon', () => {
     const downloadLink = 'https://link'
 
-    renderWithTheme(<GameItem {...props} downloadLink={downloadLink} />)
+    render(<GameItem {...props} downloadLink={downloadLink} />)
 
     expect(
       screen.getByRole('link', { name: `Get ${props.title} here` })
@@ -61,7 +64,7 @@ describe('<GameItem />', () => {
       purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
     }
 
-    renderWithTheme(<GameItem {...props} paymentInfo={paymentInfo} />)
+    render(<GameItem {...props} paymentInfo={paymentInfo} />)
 
     expect(screen.getByRole('img', { name: paymentInfo.flag })).toHaveAttribute(
       'src',
@@ -70,5 +73,25 @@ describe('<GameItem />', () => {
 
     expect(screen.getByText(paymentInfo.number)).toBeInTheDocument()
     expect(screen.getByText(paymentInfo.purchaseDate)).toBeInTheDocument()
+  })
+
+  it('should call removeFromCart if item is in cart', async () => {
+    const removeFromCart = jest.fn()
+    const user = userEvent.setup()
+
+    const cartProviderProps: CartContextData = {
+      ...cartContextDefaultValues,
+      isItemInCart: () => true,
+      removeFromCart
+    }
+
+    render(<GameItem {...props} />, {
+      cartProviderProps
+    })
+
+    await user.click(screen.getByText(/remove/i))
+
+    expect(removeFromCart).toHaveBeenCalled()
+    expect(removeFromCart).toHaveBeenCalledTimes(1)
   })
 })

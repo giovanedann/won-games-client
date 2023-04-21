@@ -1,6 +1,5 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import CardsList from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
 
 import paymentOptionsMock from 'components/PaymentOptions/data.mock'
 
@@ -15,7 +14,7 @@ jest.mock('next/image', () => ({
 
 describe('<CardsList />', () => {
   it('should render the card list', () => {
-    renderWithTheme(<CardsList cards={paymentOptionsMock} />)
+    render(<CardsList cards={paymentOptionsMock} />)
 
     expect(
       screen.getByRole('heading', { name: /my cards/i, level: 2 })

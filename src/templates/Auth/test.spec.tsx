@@ -1,17 +1,17 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import theme from 'styles/theme'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import Auth from '.'
 
 describe('<Auth />', () => {
   it('should render the logos', () => {
-    renderWithTheme(<Auth formTitle="Sign in">Auth</Auth>)
+    render(<Auth formTitle="Sign in">Auth</Auth>)
 
     expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(2)
   })
 
   it('should render the first logo white', () => {
-    renderWithTheme(<Auth formTitle="Sign in">Auth</Auth>)
+    render(<Auth formTitle="Sign in">Auth</Auth>)
 
     expect(
       screen.getAllByRole('img', { name: /won games/i })[0].parentElement
@@ -19,7 +19,7 @@ describe('<Auth />', () => {
   })
 
   it('should render the secoind logo black', () => {
-    renderWithTheme(<Auth formTitle="Sign in">Auth</Auth>)
+    render(<Auth formTitle="Sign in">Auth</Auth>)
 
     expect(
       screen.getAllByRole('img', { name: /won games/i })[1].parentElement
@@ -27,7 +27,7 @@ describe('<Auth />', () => {
   })
 
   it('should render the Banner heading', () => {
-    renderWithTheme(<Auth formTitle="Sign in">Auth</Auth>)
+    render(<Auth formTitle="Sign in">Auth</Auth>)
 
     expect(
       screen.getByRole('heading', {
@@ -37,7 +37,7 @@ describe('<Auth />', () => {
   })
 
   it('should render the Banner subtitle', () => {
-    renderWithTheme(<Auth formTitle="Sign in">Auth</Auth>)
+    render(<Auth formTitle="Sign in">Auth</Auth>)
 
     expect(
       screen.getByRole('heading', {
@@ -47,7 +47,7 @@ describe('<Auth />', () => {
   })
 
   it('should render the sign form with the title of formTitle prop', () => {
-    renderWithTheme(<Auth formTitle="Sign in">Auth</Auth>)
+    render(<Auth formTitle="Sign in">Auth</Auth>)
 
     expect(
       screen.getByRole('heading', { name: /sign in/i })
@@ -55,7 +55,7 @@ describe('<Auth />', () => {
   })
 
   it('should render the children', () => {
-    renderWithTheme(
+    render(
       <Auth formTitle="Sign in">
         <p>Children</p>
       </Auth>

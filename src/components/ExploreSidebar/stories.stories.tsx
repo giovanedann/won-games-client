@@ -21,27 +21,31 @@ const Template: StoryFn<typeof ExploreSidebar> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: exploreSidebarMocks,
+    onFilter: (values: any) => console.log(values) // eslint-disable-line @typescript-eslint/no-explicit-any
   }
 }
 
-Basic.args = {
-  items: exploreSidebarMocks,
-  onFilter: (values) => console.log(values)
-}
+export const WithInitialValues = {
+  render: Template,
 
-export const WithInitialValues = Template.bind({})
+  parameters: {
+    ...Basic.parameters
+  },
 
-WithInitialValues.parameters = {
-  ...Basic.parameters
-}
-
-WithInitialValues.args = {
-  ...Basic.args,
-  initialValues: { platforms: ['windows', 'linux'], sort_by: 'low-to-high' }
+  args: {
+    ...Basic.args,
+    initialValues: { platforms: ['windows', 'linux'], sort_by: 'low-to-high' }
+  }
 }

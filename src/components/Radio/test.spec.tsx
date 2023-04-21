@@ -1,18 +1,18 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import theme from 'styles/theme'
 import userEvent from '@testing-library/user-event'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import Radio from '.'
 
 describe('<Radio />', () => {
   it('should render without label', () => {
-    renderWithTheme(<Radio />)
+    render(<Radio />)
 
     expect(screen.queryByLabelText(/test radio/i)).not.toBeInTheDocument()
   })
 
   it('should render the black label by default', () => {
-    renderWithTheme(<Radio label="test radio" labelFor="check" value="test" />)
+    render(<Radio label="test radio" labelFor="check" value="test" />)
 
     const label = screen.getByText(/test radio/i)
     expect(label).toBeInTheDocument()
@@ -20,7 +20,7 @@ describe('<Radio />', () => {
   })
 
   it('should render the white label', () => {
-    renderWithTheme(
+    render(
       <Radio
         label="test radio"
         labelFor="check"
@@ -38,7 +38,7 @@ describe('<Radio />', () => {
     const checkHandler = jest.fn()
     const user = userEvent.setup()
 
-    renderWithTheme(
+    render(
       <Radio
         label="test radio"
         labelFor="check"
@@ -60,7 +60,7 @@ describe('<Radio />', () => {
   it('should be accessible with tab', async () => {
     const user = userEvent.setup()
 
-    renderWithTheme(<Radio label="test radio" labelFor="check" />)
+    render(<Radio label="test radio" labelFor="check" />)
 
     expect(document.body).toHaveFocus()
 

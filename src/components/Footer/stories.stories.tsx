@@ -20,12 +20,13 @@ const Template: StoryFn<typeof Footer> = () => (
   </StoryContainer>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
+  args: {},
 
-Basic.args = {}
-
-Basic.parameters = {
-  backgrounds: {
-    default: 'light'
+  parameters: {
+    backgrounds: {
+      default: 'light'
+    }
   }
 }

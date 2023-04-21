@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react'
+import { CartContextData } from 'contexts/cart'
 import { StoryFn, Meta } from '@storybook/react'
 
 import GameCard from '.'
@@ -20,66 +22,81 @@ export default {
       }
     }
   }
-} as Meta<typeof GameCard>
+} as Meta<typeof GameCard & CartContextData>
 
 const Wrapper = styled.div`
   width: 30rem;
 `
 
-const Template: StoryFn<typeof GameCard> = (args) => (
+const Template: StoryFn<typeof GameCard & CartContextData> = (args) => (
   <Wrapper>
     <GameCard {...args} />
   </Wrapper>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.args = {
-  title: 'Devil May Cry 5',
-  slug: 'devil-may-cry-5',
-  developer: 'Capcom',
-  img: 'https://images6.alphacoders.com/926/thumb-1920-926723.jpg',
-  price: 'R$ 235,00',
-  favorite: false
-}
+  args: {
+    title: 'Devil May Cry 5',
+    slug: 'devil-may-cry-5',
+    developer: 'Capcom',
+    img: 'https://images6.alphacoders.com/926/thumb-1920-926723.jpg',
+    price: 'R$ 235,00',
+    favorite: false
+  },
 
-Basic.parameters = {
-  controls: {
-    exclude: [
-      'promotionalPrice',
-      'onFav',
-      'ribbon',
-      'ribbonColor',
-      'ribbonSize'
-    ]
+  parameters: {
+    controls: {
+      exclude: [
+        'promotionalPrice',
+        'onFav',
+        'ribbon',
+        'ribbonColor',
+        'ribbonSize'
+      ]
+    }
   }
 }
 
-export const Promotional = Template.bind({})
+export const Promotional = {
+  render: Template,
 
-Promotional.args = {
-  ...Basic.args,
-  promotionalPrice: 'R$ 130,00'
-}
+  args: {
+    ...Basic.args,
+    promotionalPrice: 'R$ 130,00'
+  },
 
-Promotional.parameters = {
-  controls: {
-    exclude: ['onFav']
+  parameters: {
+    controls: {
+      exclude: ['onFav']
+    }
   }
 }
 
-export const WithRibbon = Template.bind({})
+export const WithRibbon = {
+  render: Template,
 
-WithRibbon.args = {
-  ...Basic.args,
-  promotionalPrice: 'R$ 130,00',
-  ribbon: '55% OFF',
-  ribbonColor: 'primary',
-  ribbonSize: 'small'
+  args: {
+    ...Basic.args,
+    promotionalPrice: 'R$ 130,00',
+    ribbon: '55% OFF',
+    ribbonColor: 'primary',
+    ribbonSize: 'small'
+  },
+
+  parameters: {
+    controls: {
+      exclude: ['onFav']
+    }
+  }
 }
 
-WithRibbon.parameters = {
-  controls: {
-    exclude: ['onFav']
+export const IsInCart = {
+  render: Template,
+
+  args: {
+    ...Basic.args,
+    isItemInCart: () => true
   }
 }

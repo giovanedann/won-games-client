@@ -28,6 +28,7 @@ const apiSections: Partial<QueryHome_sections> = {
     games: [
       {
         __typename: 'Game',
+        id: '123',
         cover: { __typename: 'UploadFile', url: '/popular-game-1' },
         developers: [{ __typename: 'Developer', name: 'Santa Monica Studios' }],
         name: 'Popular game 1',
@@ -43,6 +44,7 @@ describe('BannerAdapter', () => {
     const expectedResult: SectionsAdapterResult = {
       mostPopularGames: [
         {
+          id: '123',
           developer: 'Santa Monica Studios',
           img: getImageUrl('/popular-game-1'),
           price: formatPrice(300),

@@ -22,16 +22,18 @@ const Template: StoryFn<typeof GameCardSlider> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.args = {
-  items: items,
-  color: 'white'
-}
+  args: {
+    items: items,
+    color: 'white'
+  },
 
-Basic.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 }

@@ -21,14 +21,16 @@ const Template: StoryFn<typeof UserDropdown> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.args = {
-  username: 'Dante'
-}
+  args: {
+    username: 'Dante'
+  },
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 }

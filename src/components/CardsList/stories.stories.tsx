@@ -21,8 +21,10 @@ const Template: StoryFn<typeof CardsList> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.args = {
-  cards: paymentOptionsMock
+  args: {
+    cards: paymentOptionsMock
+  }
 }

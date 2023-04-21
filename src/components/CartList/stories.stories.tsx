@@ -9,45 +9,93 @@ const Container = styled.div`
   max-width: 800px;
 `
 
+type CartListArgs = {
+  items: typeof cartListMock
+  hasButton: boolean
+  totalPrice: string
+}
+
 export default {
   title: 'CartList',
   component: CartList,
   argTypes: {
     items: {
       type: 'symbol'
+    },
+    hasButton: {
+      control: {
+        type: 'boolean'
+      }
+    },
+    totalPrice: {
+      type: 'string'
     }
   }
-} as Meta<typeof CartList>
+} as Meta<CartListArgs>
 
-const Template: StoryFn<typeof CartList> = (args) => (
+const Template: StoryFn<CartListArgs> = (args) => (
   <Container>
     <CartList {...args} />
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: cartListMock,
+    hasButton: true,
+    totalPrice: '$ 430,00'
   }
 }
 
-Basic.args = {
-  items: cartListMock,
-  total: 'R$ 330,00',
-  hasButton: false
-}
+export const WithScroll = {
+  render: Template,
 
-export const Empty = Template.bind({})
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
 
-Empty.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  args: {
+    items: [...cartListMock, ...cartListMock, ...cartListMock],
+    hasButton: true,
+    totalPrice: '$ 430,00'
   }
 }
 
-Empty.args = {
-  items: [],
-  hasButton: false
+export const WithLoader = {
+  render: Template,
+
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    loading: true
+  }
+}
+
+export const Empty = {
+  render: Template,
+
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: [],
+    hasButton: false
+  }
 }

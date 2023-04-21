@@ -29,14 +29,19 @@ const Template: StoryFn<typeof Highlight> = (args) => (
   </Wrapper>
 )
 
-export const Basic = Template.bind({})
-Basic.args = {
-  ...item
+export const Basic = {
+  render: Template,
+
+  args: {
+    ...item
+  }
 }
 
-export const WithFloatImage = Template.bind({})
+export const WithFloatImage = {
+  render: Template,
 
-WithFloatImage.args = {
-  ...Basic.args,
-  floatImage: '/img/red-dead-float.png'
+  args: {
+    ...Basic.args,
+    floatImage: '/img/red-dead-float.png'
+  }
 }

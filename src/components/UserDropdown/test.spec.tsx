@@ -1,18 +1,18 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import UserDropdown from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import userEvent from '@testing-library/user-event'
 
 describe('<UserDropdown />', () => {
   it('should display the userme', () => {
-    renderWithTheme(<UserDropdown username="Dante" />)
+    render(<UserDropdown username="Dante" />)
 
     expect(screen.getByText(/dante/i)).toBeInTheDocument()
   })
 
   it('should display the menu options on username click', async () => {
     const user = userEvent.setup()
-    renderWithTheme(<UserDropdown username="Dante" />)
+    render(<UserDropdown username="Dante" />)
 
     expect(
       screen.queryByRole('link', { name: /my profile/i })

@@ -1,5 +1,5 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 
 import gamesMock from 'components/GameCardSlider/data.mock'
 import highlightMock from 'components/Highlight/data.mock'
@@ -7,11 +7,9 @@ import itemsMock from 'components/CartList/data.mock'
 import paymentOptionsMock from 'components/PaymentOptions/data.mock'
 
 import Cart from '.'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+import { cartContextDefaultValues } from 'contexts/cart'
 
 const props = {
-  items: itemsMock,
-  total: '$ 430,00',
   cards: paymentOptionsMock,
   recommendedHighlight: highlightMock,
   recommendedGames: gamesMock
@@ -31,13 +29,6 @@ jest.mock('components/Showcase', () => ({
   }
 }))
 
-jest.mock('components/CartList', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock Cart" />
-  }
-}))
-
 jest.mock('components/PaymentOptions', () => ({
   __esModule: true,
   default: function Mock() {
@@ -45,29 +36,36 @@ jest.mock('components/PaymentOptions', () => ({
   }
 }))
 
-jest.mock('components/Empty', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock Empty" />
-  }
-}))
-
 describe('<Cart />', () => {
   it('should render sections', () => {
-    renderWithTheme(<Cart {...props} />)
+    render(<Cart {...props} />, {
+      cartProviderProps: {
+        ...cartContextDefaultValues,
+        items: itemsMock,
+        itemsQuantity: itemsMock.length,
+        totalPrice: '$430,00'
+      }
+    })
 
     expect(
       screen.getByRole('heading', { name: /my cart/i })
     ).toBeInTheDocument()
-    expect(screen.getByTestId('Mock Cart')).toBeInTheDocument()
+    expect(screen.getByText(/\$430,00/i)).toBeInTheDocument()
     expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.queryByTestId('Mock Empty')).not.toBeInTheDocument()
   })
 
   it('should render empty section if there are no items', () => {
-    renderWithTheme(<Cart {...props} items={[]} />)
+    render(<Cart {...props} />, {
+      cartProviderProps: {
+        ...cartContextDefaultValues,
+        items: [],
+        itemsQuantity: 0,
+        totalPrice: '$430,00'
+      }
+    })
 
-    expect(screen.getByTestId('Mock Empty')).toBeInTheDocument()
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
   })
 })

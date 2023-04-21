@@ -1,12 +1,12 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import userEvent from '@testing-library/user-event'
 import theme from 'styles/theme'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import Checkbox from '.'
 
 describe('<Checkbox />', () => {
   it('should render with a label', () => {
-    renderWithTheme(<Checkbox label="My label" labelFor="mycheckbox" />)
+    render(<Checkbox label="My label" labelFor="mycheckbox" />)
 
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
     expect(screen.getByLabelText(/my label/i)).toBeInTheDocument()
@@ -14,20 +14,20 @@ describe('<Checkbox />', () => {
   })
 
   it('should render without a label', () => {
-    renderWithTheme(<Checkbox />)
+    render(<Checkbox />)
 
     expect(screen.queryByRole('label')).not.toBeInTheDocument()
   })
 
   it('should render with a white label by default', () => {
-    renderWithTheme(<Checkbox label="My label" labelFor="mycheckbox" />)
+    render(<Checkbox label="My label" labelFor="mycheckbox" />)
     expect(screen.getByText(/my label/i)).toHaveStyle({
       color: theme.colors.white
     })
   })
 
   it('should render with a black label', () => {
-    renderWithTheme(
+    render(
       <Checkbox label="My label" labelFor="mycheckbox" labelColor="black" />
     )
     expect(screen.getByText(/my label/i)).toHaveStyle({
@@ -39,7 +39,7 @@ describe('<Checkbox />', () => {
     const user = userEvent.setup()
     const checkHandler = jest.fn()
 
-    renderWithTheme(
+    render(
       <Checkbox
         label="My label"
         labelFor="mycheckbox"
@@ -59,7 +59,7 @@ describe('<Checkbox />', () => {
     const user = userEvent.setup()
     const checkHandler = jest.fn()
 
-    renderWithTheme(
+    render(
       <Checkbox label="My label" labelFor="mycheckbox" labelColor="black" />
     )
 
@@ -72,7 +72,7 @@ describe('<Checkbox />', () => {
     const user = userEvent.setup()
     const checkHandler = jest.fn()
 
-    renderWithTheme(
+    render(
       <Checkbox
         label="My label"
         labelFor="mycheckbox"
@@ -91,7 +91,7 @@ describe('<Checkbox />', () => {
   it('should be accessible with tab', async () => {
     const user = userEvent.setup()
 
-    renderWithTheme(
+    render(
       <Checkbox
         label="My label"
         labelFor="mycheckbox"

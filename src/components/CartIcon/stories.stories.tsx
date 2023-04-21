@@ -1,31 +1,35 @@
 import React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
+import { CartContextData } from 'contexts/cart'
 
 import CartIcon from '.'
+
+type CartIconArgs =
+  | { cartContextValue: Partial<CartContextData> }
+  | { itemsQuantity: number }
 
 export default {
   title: 'CartIcon',
   component: CartIcon,
   argTypes: {
-    quantity: {
-      type: 'number',
-      control: {
-        type: 'number'
-      }
+    itemsQuantity: {
+      control: { type: 'number' }
     }
   }
-} as Meta<typeof CartIcon>
+} as Meta<CartIconArgs>
 
-const Template: StoryFn<typeof CartIcon> = (args) => <CartIcon {...args} />
+const Template: StoryFn<CartIconArgs> = () => <CartIcon />
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    itemsQuantity: 0
   }
-}
-
-Basic.args = {
-  quantity: 0
 }

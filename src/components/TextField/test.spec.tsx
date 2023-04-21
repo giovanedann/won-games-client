@@ -1,25 +1,25 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import userEvent from '@testing-library/user-event'
 import { MdEmail } from 'react-icons/md'
 import theme from 'styles/theme'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import TextField from '.'
 
 describe('<TextField />', () => {
   it('should render the label', () => {
-    renderWithTheme(<TextField label="text" name="text" />)
+    render(<TextField label="text" name="text" />)
 
     expect(screen.getByLabelText(/text/i)).toBeInTheDocument()
   })
 
   it('should render without the label', () => {
-    renderWithTheme(<TextField name="text" />)
+    render(<TextField name="text" />)
 
     expect(screen.queryByLabelText(/text/i)).not.toBeInTheDocument()
   })
 
   it('should render the placeholder', () => {
-    renderWithTheme(<TextField name="text" placeholder="jane.doe@mail.com" />)
+    render(<TextField name="text" placeholder="jane.doe@mail.com" />)
 
     expect(
       screen.getByPlaceholderText(/jane.doe@mail.com/i)
@@ -30,7 +30,7 @@ describe('<TextField />', () => {
     const user = userEvent.setup()
     const inputHandler = jest.fn()
 
-    renderWithTheme(
+    render(
       <TextField
         label="text"
         name="text"
@@ -51,7 +51,7 @@ describe('<TextField />', () => {
 
   it('should be accessible by tab', async () => {
     const user = userEvent.setup()
-    renderWithTheme(<TextField name="text" placeholder="jane.doe@mail.com" />)
+    render(<TextField name="text" placeholder="jane.doe@mail.com" />)
 
     expect(document.body).toHaveFocus()
 
@@ -61,7 +61,7 @@ describe('<TextField />', () => {
   })
 
   it('should render with an icon', () => {
-    renderWithTheme(
+    render(
       <TextField
         name="text"
         placeholder="jane.doe@mail.com"
@@ -76,7 +76,7 @@ describe('<TextField />', () => {
   })
 
   it('should switch the order of elements based on the iconPosition prop', () => {
-    const { rerender } = renderWithTheme(
+    const { rerender } = render(
       <TextField
         name="text"
         placeholder="jane.doe@mail.com"
@@ -111,7 +111,7 @@ describe('<TextField />', () => {
     const user = userEvent.setup()
     const inputHandler = jest.fn()
 
-    renderWithTheme(
+    render(
       <TextField
         label="text"
         name="text"
@@ -132,9 +132,7 @@ describe('<TextField />', () => {
 
   it('should not be accessible by tab if disabled', async () => {
     const user = userEvent.setup()
-    renderWithTheme(
-      <TextField name="text" placeholder="jane.doe@mail.com" disabled />
-    )
+    render(<TextField name="text" placeholder="jane.doe@mail.com" disabled />)
 
     expect(document.body).toHaveFocus()
 
@@ -145,7 +143,7 @@ describe('<TextField />', () => {
   })
 
   it('should render with an error', () => {
-    renderWithTheme(
+    render(
       <TextField
         name="text"
         placeholder="jane.doe@mail.com"

@@ -28,26 +28,32 @@ const Template: StoryFn<typeof TextField> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-export const WithIcon = Template.bind({})
-
-export const WithError = Template.bind({})
-
-Basic.args = {
-  label: 'E-mail',
-  placeholder: 'jane.doe@email.com',
-  initialValue: '',
-  name: 'email',
-  disabled: false
+  args: {
+    label: 'E-mail',
+    placeholder: 'jane.doe@email.com',
+    initialValue: '',
+    name: 'email',
+    disabled: false
+  }
 }
 
-WithIcon.args = {
-  ...Basic.args,
-  icon: <MdEmail />
+export const WithIcon = {
+  render: Template,
+
+  args: {
+    ...Basic.args,
+    icon: <MdEmail />
+  }
 }
 
-WithError.args = {
-  ...WithIcon.args,
-  error: 'This e-mail already exists'
+export const WithError = {
+  render: Template,
+
+  args: {
+    ...WithIcon.args,
+    error: 'This e-mail already exists'
+  }
 }

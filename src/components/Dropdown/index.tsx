@@ -12,8 +12,8 @@ function Dropdown({ children, title }: DropdownProps) {
   return (
     <S.Wrapper isOpen={isOpen}>
       <S.Title onClick={() => setIsOpen((prev) => !prev)}>{title}</S.Title>
-
       <S.Content aria-hidden={!isOpen}>{children}</S.Content>
+      <S.Overlay aria-hidden={!isOpen} onClick={() => setIsOpen(false)} />
     </S.Wrapper>
   )
 }

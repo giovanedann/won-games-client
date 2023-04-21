@@ -1,6 +1,5 @@
-import React from 'react'
 import { MdOutlineAddShoppingCart } from 'react-icons/md'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import Button from '.'
 
@@ -36,47 +35,45 @@ export default {
   }
 } as Meta<typeof Button>
 
-const Template: StoryFn<typeof Button> = (args) => <Button {...args} />
-
-export const Basic = Template.bind({})
-
-Basic.args = {
-  children: 'Button',
-  size: 'medium',
-  fullWidth: false
+export const Basic = {
+  args: {
+    children: 'Button',
+    size: 'medium',
+    fullWidth: false
+  }
 }
 
-export const WithIcon = Template.bind({})
-
-WithIcon.args = {
-  children: 'With icon',
-  size: 'medium',
-  icon: <MdOutlineAddShoppingCart />,
-  fullWidth: false
+export const WithIcon = {
+  args: {
+    children: 'With icon',
+    size: 'medium',
+    icon: <MdOutlineAddShoppingCart />,
+    fullWidth: false
+  }
 }
 
-export const AsLink = Template.bind({})
-
-AsLink.args = {
-  children: 'As link',
-  size: 'medium',
-  fullWidth: false,
-  as: 'a',
-  href: '/link'
+export const AsLink = {
+  args: {
+    children: 'As link',
+    size: 'medium',
+    fullWidth: false,
+    as: 'a',
+    href: '/link'
+  }
 }
 
-export const Minimal = Template.bind({})
+export const Minimal = {
+  args: {
+    children: 'Button',
+    size: 'medium',
+    icon: <MdOutlineAddShoppingCart />,
+    fullWidth: false,
+    minimal: true
+  },
 
-Minimal.args = {
-  children: 'Button',
-  size: 'medium',
-  icon: <MdOutlineAddShoppingCart />,
-  fullWidth: false,
-  minimal: true
-}
-
-Minimal.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 }

@@ -1,11 +1,11 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/tests/render'
 import theme from 'styles/theme'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+
 import Heading from '.'
 
 describe('<Heading />', () => {
   it('should render a white text without borders by default', () => {
-    renderWithTheme(<Heading>Heading</Heading>)
+    render(<Heading>Heading</Heading>)
     const header = screen.getByRole('heading', { level: 2, name: /heading/i })
     expect(header).toHaveStyle({ color: theme.colors.white })
     expect(header).not.toHaveStyleRule('border-bottom')
@@ -13,13 +13,13 @@ describe('<Heading />', () => {
   })
 
   it('should render a white text when color is white', () => {
-    renderWithTheme(<Heading color="white">Heading</Heading>)
+    render(<Heading color="white">Heading</Heading>)
     const header = screen.getByRole('heading', { level: 2, name: /heading/i })
     expect(header).toHaveStyle({ color: theme.colors.white })
   })
 
   it('should render a left line on lineLeft true', () => {
-    renderWithTheme(<Heading lineLeft>Heading</Heading>)
+    render(<Heading lineLeft>Heading</Heading>)
     const header = screen.getByRole('heading', { level: 2, name: /heading/i })
     expect(header).toHaveStyle({
       'border-left': `0.7rem solid ${theme.colors.primary}`
@@ -27,7 +27,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a bottom line on lineBottom true', () => {
-    renderWithTheme(<Heading lineBottom>Heading</Heading>)
+    render(<Heading lineBottom>Heading</Heading>)
     const header = screen.getByRole('heading', { level: 2, name: /heading/i })
     expect(header).toHaveStyleRule(
       'border-bottom',
@@ -37,7 +37,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a heading with a small size', () => {
-    renderWithTheme(<Heading size="small">Heading</Heading>)
+    render(<Heading size="small">Heading</Heading>)
     const header = screen.getByRole('heading', { level: 2, name: /heading/i })
 
     expect(header).toHaveStyle({ 'font-size': theme.font.sizes.medium })
@@ -47,7 +47,7 @@ describe('<Heading />', () => {
   it('should render the bottom and left line according to lineColor', () => {
     let header
 
-    const { rerender } = renderWithTheme(
+    const { rerender } = render(
       <Heading lineBottom lineLeft lineColor="primary">
         Heading
       </Heading>
@@ -82,7 +82,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a huge heading', () => {
-    renderWithTheme(<Heading size="huge">Huge</Heading>)
+    render(<Heading size="huge">Huge</Heading>)
 
     expect(
       screen.getByRole('heading', { level: 2, name: /huge/i })

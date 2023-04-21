@@ -1,11 +1,11 @@
-import { screen } from '@testing-library/react'
-import renderWithTheme from 'utils/tests/renderWithTheme'
+import { screen, render } from 'utils/tests/render'
+
 import GameInfo from '.'
 import gameInfoMock from './data.mock'
 
 describe('<GameInfo />', () => {
   it('should render the game info', () => {
-    renderWithTheme(<GameInfo {...gameInfoMock} />)
+    render(<GameInfo {...gameInfoMock} />)
 
     expect(
       screen.getByRole('heading', { name: /borderlands 3/i })
@@ -19,7 +19,7 @@ describe('<GameInfo />', () => {
   })
 
   it('should render the action buttons', () => {
-    renderWithTheme(<GameInfo {...gameInfoMock} />)
+    render(<GameInfo {...gameInfoMock} />)
 
     expect(
       screen.getByRole('button', { name: /wishlist/i })

@@ -85,6 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         game.cover?.src || '/uploads/No_image_available_38adfae762.png'
       ),
       gameInfo: {
+        id: game.id,
         title: game.name,
         price: formatPrice(game.price),
         description: game.short_description

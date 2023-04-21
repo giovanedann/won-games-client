@@ -35,14 +35,16 @@ const Template: StoryFn<typeof PaymentOptions> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    cards: paymentOptionsMock
   }
-}
-
-Basic.args = {
-  cards: paymentOptionsMock
 }
