@@ -18,6 +18,7 @@ export default function sectionsAdapter(
   apiSections: QueryHome_sections
 ): SectionsAdapterResult {
   const mostPopularGames = apiSections.popularGames?.games.map((game) => ({
+    id: game.id,
     title: game.name,
     slug: game.slug,
     developer: game.developers[0].name,
