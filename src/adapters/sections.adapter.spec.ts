@@ -44,6 +44,7 @@ describe('BannerAdapter', () => {
     const expectedResult: SectionsAdapterResult = {
       mostPopularGames: [
         {
+          id: '123',
           developer: 'Santa Monica Studios',
           img: getImageUrl('/popular-game-1'),
           price: formatPrice(300),
