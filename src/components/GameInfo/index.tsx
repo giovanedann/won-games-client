@@ -1,17 +1,19 @@
-import { MdOutlineAddShoppingCart, MdFavoriteBorder } from 'react-icons/md'
+import { MdFavoriteBorder } from 'react-icons/md'
 import * as S from './styles'
 
 import Button from 'components/Button'
 import Heading from 'components/Heading'
 import Ribbon from 'components/Ribbon'
+import CartButton from 'components/CartButton'
 
 export type GameInfoProps = {
+  id: string
   title: string
   description: string
   price: string
 }
 
-function GameInfo({ description, price, title }: GameInfoProps) {
+function GameInfo({ id, description, price, title }: GameInfoProps) {
   return (
     <S.Wrapper>
       <Heading color="black" lineBottom>
@@ -26,9 +28,7 @@ function GameInfo({ description, price, title }: GameInfoProps) {
         <Button icon={<MdFavoriteBorder />} size="large" minimal>
           Wishlist
         </Button>
-        <Button icon={<MdOutlineAddShoppingCart />} size="large">
-          Add to cart
-        </Button>
+        <CartButton id={id} hasText size="large" />
       </S.ButtonsWrapper>
     </S.Wrapper>
   )

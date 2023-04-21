@@ -1,4 +1,5 @@
 const gameInfoMock = {
+  id: '1',
   title: 'Borderlands 3',
   price: '$215.00',
   description:
