@@ -20,6 +20,7 @@ const apiGame: QueryHome_upcomingGames = {
 describe('UpcomingGamesAdapter', () => {
   it('should return the right adapted object', () => {
     const expectedResult: GameCardProps = {
+      id: '123',
       developer: 'Rockstar Games',
       img: getImageUrl('/cover_url'),
       price: formatPrice(300),

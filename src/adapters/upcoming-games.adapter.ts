@@ -14,6 +14,7 @@ export default function upcomingGamesAdapter(
   apiNewGames: QueryHome_upcomingGames[]
 ): Game[] {
   return apiNewGames.map((game) => ({
+    id: game.id,
     title: game.name,
     slug: game.slug,
     developer: game.developers[0].name,

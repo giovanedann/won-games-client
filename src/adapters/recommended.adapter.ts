@@ -16,6 +16,7 @@ export function recommendedGamesAdapter(
   if (!apiNewGames) return []
 
   return apiNewGames.map((game) => ({
+    id: game.id,
     title: game.name,
     slug: game.slug,
     developer: game.developers[0].name,
