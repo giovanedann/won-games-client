@@ -74,3 +74,21 @@ export const Loading = styled.div`
     }
   `}
 `
+
+export const GamesList = styled.div`
+  max-height: 40rem;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.primary};
+    border-radius: 3px;
+  }
+`
