@@ -29,24 +29,10 @@ jest.mock('components/Showcase', () => ({
   }
 }))
 
-jest.mock('components/CartList', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock Cart" />
-  }
-}))
-
 jest.mock('components/PaymentOptions', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock PaymentOptions" />
-  }
-}))
-
-jest.mock('components/Empty', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock Empty" />
   }
 }))
 
@@ -64,7 +50,7 @@ describe('<Cart />', () => {
     expect(
       screen.getByRole('heading', { name: /my cart/i })
     ).toBeInTheDocument()
-    expect(screen.getByTestId('Mock Cart')).toBeInTheDocument()
+    expect(screen.getByText(/\$430,00/i)).toBeInTheDocument()
     expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.queryByTestId('Mock Empty')).not.toBeInTheDocument()
@@ -75,11 +61,11 @@ describe('<Cart />', () => {
       cartProviderProps: {
         ...cartContextDefaultValues,
         items: [],
-        itemsQuantity: itemsMock.length,
+        itemsQuantity: 0,
         totalPrice: '$430,00'
       }
     })
 
-    expect(screen.getByTestId('Mock Empty')).toBeInTheDocument()
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
   })
 })
