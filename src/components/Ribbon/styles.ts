@@ -46,6 +46,7 @@ export const Wrapper = styled.main<WrapperProps>`
   position: absolute;
   display: flex;
   align-items: center;
+  z-index: ${({ theme }) => theme.layers.overlay};
 
   &::before {
     content: '';

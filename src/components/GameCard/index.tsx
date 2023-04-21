@@ -1,11 +1,12 @@
-import Button from 'components/Button'
 import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
 import Image from 'next/image'
 import { ReactNode } from 'react'
-import { MdAddShoppingCart, MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
 import * as S from './styles'
+import CartButton from 'components/CartButton'
 
 export type GameCardProps = {
+  id: string
   slug: string
   title: string
   developer: string
@@ -20,6 +21,7 @@ export type GameCardProps = {
 }
 
 function GameCard({
+  id,
   slug,
   developer,
   img,
@@ -65,7 +67,7 @@ function GameCard({
         <S.BuyBox>
           {promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
           <S.Price>{promotionalPrice || price}</S.Price>
-          <Button icon={<MdAddShoppingCart />} size="small" />
+          <CartButton id={id} />
         </S.BuyBox>
       </S.Content>
     </S.Wrapper>
