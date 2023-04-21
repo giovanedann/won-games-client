@@ -33,7 +33,7 @@ export const Basic = {
 
   args: {
     items: exploreSidebarMocks,
-    onFilter: (values) => console.log(values)
+    onFilter: (values: any) => console.log(values) // eslint-disable-line @typescript-eslint/no-explicit-any
   }
 }
 

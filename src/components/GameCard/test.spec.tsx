@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import GameCard from '.'
 
 const props = {
+  id: '123',
   slug: 'devil-may-cry-5',
   title: 'Devil May Cry 5',
   developer: 'Capcom',
