@@ -1,5 +1,4 @@
-import React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import ProfileMenu from '.'
 
@@ -15,18 +14,14 @@ export default {
   }
 } as Meta<typeof ProfileMenu>
 
-const Template: StoryFn<typeof ProfileMenu> = (args) => (
-  <ProfileMenu {...args} />
-)
+export const Basic = {
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
 
-export const Basic = Template.bind({})
-
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  args: {
+    activeLink: '/profile/me'
   }
-}
-
-Basic.args = {
-  activeLink: '/profile/me'
 }

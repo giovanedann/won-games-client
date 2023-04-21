@@ -21,15 +21,17 @@ const Template: StoryFn<typeof BannerSlider> = (args) => (
   </Wrapper>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.args = {
-  items: items
-}
+  args: {
+    items: items
+  },
 
-Basic.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 }

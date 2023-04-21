@@ -49,15 +49,17 @@ const Template: StoryFn<typeof Radio> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.args = {
-  labelColor: 'white'
-}
+  args: {
+    labelColor: 'white'
+  },
 
-Basic.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 }

@@ -39,29 +39,33 @@ const Template: StoryFn<CartListArgs> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: cartListMock,
+    hasButton: true,
+    totalPrice: '$ 430,00'
   }
 }
 
-Basic.args = {
-  items: cartListMock,
-  hasButton: true,
-  totalPrice: '$ 430,00'
-}
+export const Empty = {
+  render: Template,
 
-export const Empty = Template.bind({})
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
 
-Empty.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  args: {
+    items: [],
+    hasButton: false
   }
-}
-
-Empty.args = {
-  items: [],
-  hasButton: false
 }

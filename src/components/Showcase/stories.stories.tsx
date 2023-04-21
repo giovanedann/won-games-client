@@ -31,24 +31,24 @@ Template.parameters = {
   }
 }
 
-export const Basic = Template.bind({})
-
-Basic.args = {
-  title: 'Most popular',
-  games: gamesMock,
-  highlight: highlightMock
+export const Basic = {
+  args: {
+    title: 'Most popular',
+    games: gamesMock,
+    highlight: highlightMock
+  }
 }
 
-export const WithoutHighlight = Template.bind({})
-
-WithoutHighlight.args = {
-  title: 'Most popular',
-  games: gamesMock
+export const WithoutHighlight = {
+  args: {
+    title: 'Most popular',
+    games: gamesMock
+  }
 }
 
-export const WithoutGames = Template.bind({})
-
-WithoutGames.args = {
-  title: 'Most popular',
-  highlight: highlightMock
+export const WithoutGames = {
+  args: {
+    title: 'Most popular',
+    highlight: highlightMock
+  }
 }

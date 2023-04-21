@@ -1,5 +1,4 @@
-import React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import Heading from '.'
 
@@ -44,15 +43,13 @@ export default {
   }
 } as Meta<typeof Heading>
 
-const Template: StoryFn<typeof Heading> = (args) => <Heading {...args} />
-
-export const Basic = Template.bind({})
-
-Basic.args = {
-  children: 'Heading',
-  color: 'black',
-  lineBottom: false,
-  lineLeft: false,
-  size: 'medium',
-  lineColor: 'primary'
+export const Basic = {
+  args: {
+    children: 'Heading',
+    color: 'black',
+    lineBottom: false,
+    lineLeft: false,
+    size: 'medium',
+    lineColor: 'primary'
+  }
 }

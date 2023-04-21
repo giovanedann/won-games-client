@@ -20,14 +20,16 @@ export default {
 
 const Template: StoryFn<CartIconArgs> = () => <CartIcon />
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    itemsQuantity: 0
   }
-}
-
-Basic.args = {
-  itemsQuantity: 0
 }

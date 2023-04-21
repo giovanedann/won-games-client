@@ -41,5 +41,7 @@ const Template: StoryFn<typeof Ribbon> = (args) => (
   </RibbonWrapper>
 )
 
-export const Basic = Template.bind({})
-Basic.args = {}
+export const Basic = {
+  render: Template,
+  args: {}
+}

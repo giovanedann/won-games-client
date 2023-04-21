@@ -35,10 +35,12 @@ const horizontalSettings: Settings = {
   slidesToScroll: 1
 }
 
-export const Horizontal = Template.bind({})
+export const Horizontal = {
+  render: Template,
 
-Horizontal.args = {
-  settings: { ...horizontalSettings }
+  args: {
+    settings: { ...horizontalSettings }
+  }
 }
 
 const verticalSettings: Settings = {
@@ -49,8 +51,10 @@ const verticalSettings: Settings = {
   slidesToShow: 1
 }
 
-export const Vertical = Template.bind({})
+export const Vertical = {
+  render: Template,
 
-Vertical.args = {
-  settings: { ...verticalSettings }
+  args: {
+    settings: { ...verticalSettings }
+  }
 }

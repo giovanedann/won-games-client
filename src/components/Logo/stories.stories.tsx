@@ -1,5 +1,4 @@
-import React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import Logo from '.'
 
@@ -28,12 +27,10 @@ export default {
   }
 } as Meta<typeof Logo>
 
-const Template: StoryFn<typeof Logo> = (args) => <Logo {...args} />
-
-export const Basic = Template.bind({})
-
-Basic.args = {
-  color: 'white',
-  size: 'normal',
-  hideOnMobile: false
+export const Basic = {
+  args: {
+    color: 'white',
+    size: 'normal',
+    hideOnMobile: false
+  }
 }

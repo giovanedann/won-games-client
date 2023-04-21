@@ -1,5 +1,4 @@
-import React from 'react'
-import { StoryFn, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import CartButton from '.'
 
@@ -13,10 +12,8 @@ export default {
   }
 } as Meta<typeof CartButton>
 
-const Template: StoryFn<typeof CartButton> = (args) => <CartButton {...args} />
-
-export const Basic = Template.bind({})
-
-Basic.args = {
-  id: 'id_123'
+export const Basic = {
+  args: {
+    id: 'id_123'
+  }
 }

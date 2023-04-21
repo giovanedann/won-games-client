@@ -33,15 +33,17 @@ const Template: StoryFn<typeof Checkbox> = (args) => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    color: 'white'
   }
-}
-
-Basic.args = {
-  color: 'white'
 }

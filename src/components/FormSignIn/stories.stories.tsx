@@ -20,4 +20,6 @@ const Template: StoryFn<typeof FormSignIn> = () => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template
+}

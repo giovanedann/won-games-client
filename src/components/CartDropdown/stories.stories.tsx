@@ -36,15 +36,17 @@ const Template: StoryFn<CartDropdownArgs> = () => (
   </Container>
 )
 
-export const Basic = Template.bind({})
+export const Basic = {
+  render: Template,
 
-Basic.parameters = {
-  backgrounds: {
-    default: 'won-dark'
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    items: cartListMock,
+    totalPrice: 'R$ 260,00'
   }
-}
-
-Basic.args = {
-  items: cartListMock,
-  totalPrice: 'R$ 260,00'
 }
