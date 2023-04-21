@@ -67,7 +67,7 @@ function GameCard({
         <S.BuyBox>
           {promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
           <S.Price>{promotionalPrice || price}</S.Price>
-          <CartButton id={id} />
+          <CartButton id={id} size="small" />
         </S.BuyBox>
       </S.Content>
     </S.Wrapper>
