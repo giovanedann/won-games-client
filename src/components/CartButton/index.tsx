@@ -1,13 +1,15 @@
-import Button from 'components/Button'
+import Button, { ButtonProps } from 'components/Button'
 import { useCart } from 'contexts/cart'
 import { MdAddShoppingCart, MdRemoveShoppingCart } from 'react-icons/md'
 
 type CartButtonProps = {
   id: string
-}
+  hasText?: boolean
+} & Pick<ButtonProps, 'size'>
 
-function CartButton({ id }: CartButtonProps) {
+function CartButton({ id, hasText, size }: CartButtonProps) {
   const { addToCart, isItemInCart, removeFromCart } = useCart()
+  const text = isItemInCart(id) ? 'Remove from cart' : 'Add to cart'
 
   return (
     <Button
@@ -18,9 +20,11 @@ function CartButton({ id }: CartButtonProps) {
           <MdAddShoppingCart title="add item to cart" />
         )
       }
-      size="small"
+      size={size}
       onClick={() => (isItemInCart(id) ? removeFromCart(id) : addToCart(id))}
-    />
+    >
+      {hasText && text}
+    </Button>
   )
 }
 
