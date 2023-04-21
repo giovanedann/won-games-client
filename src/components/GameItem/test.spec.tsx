@@ -1,6 +1,8 @@
 import { screen, render } from 'utils/tests/render'
 
 import GameItem from '.'
+import { CartContextData, cartContextDefaultValues } from 'contexts/cart'
+import userEvent from '@testing-library/user-event'
 
 jest.mock('next/image', () => ({
   __esModule: true,
@@ -12,6 +14,7 @@ jest.mock('next/image', () => ({
 }))
 
 const props = {
+  id: '123',
   img: 'image-source',
   title: 'Red Dead Redemption 2',
   price: 'R$ 215,00'
@@ -70,5 +73,25 @@ describe('<GameItem />', () => {
 
     expect(screen.getByText(paymentInfo.number)).toBeInTheDocument()
     expect(screen.getByText(paymentInfo.purchaseDate)).toBeInTheDocument()
+  })
+
+  it('should call removeFromCart if item is in cart', async () => {
+    const removeFromCart = jest.fn()
+    const user = userEvent.setup()
+
+    const cartProviderProps: CartContextData = {
+      ...cartContextDefaultValues,
+      isItemInCart: () => true,
+      removeFromCart
+    }
+
+    render(<GameItem {...props} />, {
+      cartProviderProps
+    })
+
+    await user.click(screen.getByText(/remove/i))
+
+    expect(removeFromCart).toHaveBeenCalled()
+    expect(removeFromCart).toHaveBeenCalledTimes(1)
   })
 })
