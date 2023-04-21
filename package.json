@@ -25,7 +25,7 @@
     "@apollo/client": "^3.7.12",
     "@types/lodash": "^4.14.194",
     "deepmerge": "^4.3.1",
-    "framer-motion": "^10.12.2",
+    "framer-motion": "^10.12.4",
     "fs-extra": "^11.1.1",
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",
@@ -53,8 +53,8 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^29.5.0",
-    "@types/node": "18.15.11",
+    "@types/jest": "^29.5.1",
+    "@types/node": "18.15.13",
     "@types/react": "18.0.37",
     "@types/react-slick": "^0.23.10",
     "@types/styled-components": "^5.1.26",
@@ -82,7 +82,7 @@
     "storybook": "^7.0.6",
     "styled-media-query": "^2.1.2",
     "typescript": "5.0.4",
-    "webpack": "^5.79.0"
+    "webpack": "^5.80.0"
   },
   "peerDependencies": {
     "webpack": "*"
