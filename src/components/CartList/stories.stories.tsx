@@ -55,6 +55,20 @@ export const Basic = {
   }
 }
 
+export const WithLoader = {
+  render: Template,
+
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
+
+  args: {
+    loading: true
+  }
+}
+
 export const Empty = {
   render: Template,
 
