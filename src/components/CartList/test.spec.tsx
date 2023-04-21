@@ -2,11 +2,11 @@ import { screen, render } from 'utils/tests/render'
 
 import CartList from '.'
 import cartListMock from './data.mock'
-import { cartContextDefaultValues } from 'contexts/cart'
+import { CartContextData, cartContextDefaultValues } from 'contexts/cart'
 
 describe('<CartList />', () => {
   it('should render the cart list', () => {
-    const cartProviderProps = {
+    const cartProviderProps: CartContextData = {
       ...cartContextDefaultValues,
       items: cartListMock,
       totalPrice: 'R$ 430,00'
@@ -21,7 +21,7 @@ describe('<CartList />', () => {
   })
 
   it('should render the button', () => {
-    const cartProviderProps = {
+    const cartProviderProps: CartContextData = {
       ...cartContextDefaultValues,
       items: cartListMock
     }
@@ -38,5 +38,18 @@ describe('<CartList />', () => {
 
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
     expect(screen.queryByText(/total/i)).not.toBeInTheDocument()
+  })
+
+  it('should render the loader', () => {
+    const cartProviderProps: CartContextData = {
+      ...cartContextDefaultValues,
+      loading: true
+    }
+
+    render(<CartList hasButton />, {
+      cartProviderProps
+    })
+
+    expect(screen.getByTitle(/loading\.../i)).toBeInTheDocument()
   })
 })
