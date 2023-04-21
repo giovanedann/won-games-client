@@ -15,6 +15,13 @@ export const Basic = {
   }
 }
 
+export const WithRemoveButton = {
+  args: {
+    ...Basic.args,
+    isItemInCart: () => true
+  }
+}
+
 export const WithPayment = {
   args: {
     img: 'https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png',
