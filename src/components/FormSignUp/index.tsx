@@ -5,11 +5,12 @@ import Button from 'components/Button'
 import TextField from 'components/TextField'
 
 import * as S from './styles'
-import { FormLink, FormWrapper } from 'components/Form'
+import { FormLink, FormLoader, FormWrapper } from 'components/Form'
 import { FormEvent, useState } from 'react'
 import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 import { useMutation } from '@apollo/client'
 import { MUTATION_REGISTER } from 'graphql/mutations/register'
+import { signIn } from 'next-auth/react'
 
 const FormSignUp = () => {
   const [signUpFormValues, setSignUpFormValues] =
@@ -20,7 +21,16 @@ const FormSignUp = () => {
     })
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
-  const [createUser] = useMutation(MUTATION_REGISTER)
+  const [createUser, { error, loading }] = useMutation(MUTATION_REGISTER, {
+    onCompleted: () => {
+      !error &&
+        signIn('credentials', {
+          email: signUpFormValues.email,
+          password: signUpFormValues.password,
+          callbackUrl: '/'
+        })
+    }
+  })
 
   function handleInputChange(
     field: keyof UsersPermissionsRegisterInput,
@@ -83,9 +93,9 @@ const FormSignUp = () => {
           size="large"
           type="submit"
           fullWidth
-          disabled={!doPasswordsMatch}
+          disabled={!doPasswordsMatch || loading}
         >
-          Sign up now
+          {!loading ? 'Sign Up' : <FormLoader />}
         </Button>
 
         <FormLink>
