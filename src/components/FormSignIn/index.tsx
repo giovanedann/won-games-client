@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Button from 'components/Button'
-import { FormLink, FormWrapper } from 'components/Form'
+import { FormLink, FormLoader, FormWrapper } from 'components/Form'
 import TextField from 'components/TextField'
 import Link from 'next/link'
 import { MdLockOutline, MdOutlineMail } from 'react-icons/md'
@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 type SignInData = { email: string; password: string }
 
 function FormSignIn() {
+  const [isLoading, setIsLoading] = useState(false)
   const [signInFormValues, setSignInFormValues] = useState<SignInData>({
     email: '',
     password: ''
@@ -26,6 +27,7 @@ function FormSignIn() {
   }
 
   async function handleSubmit(event: FormEvent) {
+    setIsLoading(true)
     event.preventDefault()
 
     const result = await signIn('credentials', {
@@ -37,6 +39,8 @@ function FormSignIn() {
     if (result?.url) {
       return push(result?.url as string)
     }
+
+    setIsLoading(false)
   }
 
   return (
@@ -59,8 +63,8 @@ function FormSignIn() {
 
         <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
 
-        <Button type="submit" size="large" fullWidth>
-          Sign In
+        <Button type="submit" size="large" fullWidth disabled={isLoading}>
+          {!isLoading ? 'Sign In' : <FormLoader />}
         </Button>
 
         <FormLink>
