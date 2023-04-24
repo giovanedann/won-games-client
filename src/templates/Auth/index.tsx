@@ -39,7 +39,7 @@ function Auth({ children, formTitle }: AuthProps) {
           <Link href="/">
             <Logo color="black" size="large" id="content" />
           </Link>
-          <Heading lineColor="secondary" lineLeft>
+          <Heading lineColor="secondary" color="black" lineLeft>
             {formTitle}
           </Heading>
           {children}
