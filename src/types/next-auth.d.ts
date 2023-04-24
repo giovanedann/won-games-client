@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth' // eslint-disable-line
+import { JWT } from 'next-auth/jwt' // eslint-disable-line
 
 declare module 'next-auth' {
   /**
@@ -14,5 +15,12 @@ declare module 'next-auth' {
     jwt: string
     username: string
     email: string
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string
+    jwt: string
   }
 }

@@ -11,6 +11,9 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: '/sign-in'
   },
+  session: {
+    strategy: 'jwt'
+  },
   providers: [
     CredentialsProvider({
       name: 'Sign-in',
@@ -40,9 +43,9 @@ export const authOptions: AuthOptions = {
     })
   ],
   callbacks: {
-    session: async ({ session, user }) => {
-      session.jwt = user.jwt
-      session.id = user.id
+    session: async ({ session, token }) => {
+      session.jwt = token.jwt
+      session.id = token.id
 
       return Promise.resolve(session)
     },
