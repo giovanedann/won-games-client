@@ -4,11 +4,13 @@ import {
   from,
   HttpLink
 } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import merge from 'deepmerge'
 import { onError } from '@apollo/client/link/error'
 import { isEqual } from 'lodash'
 import { useMemo } from 'react'
 import apolloCache from './apolloCache'
+import { Session } from 'next-auth'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
@@ -26,20 +28,29 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
-const httpLink = new HttpLink({
-  uri: 'http://localhost:1337/graphql'
-})
+function createApolloClient(session?: Session | null) {
+  const httpLink = new HttpLink({
+    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`
+  })
 
-function createApolloClient() {
+  const authLink = setContext((_, { headers }) => {
+    const authorization = session?.jwt ? `Bearer ${session.jwt}` : ''
+
+    return { headers: { ...headers, authorization } }
+  })
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     cache: apolloCache,
-    link: from([errorLink, httpLink])
+    link: from([errorLink, authLink.concat(httpLink)])
   })
 }
 
-export function initializeApollo(initialState = null) {
-  const _client = client ?? createApolloClient()
+export function initializeApollo(
+  initialState = null,
+  session?: Session | null
+) {
+  const _client = client ?? createApolloClient(session)
 
   if (initialState) {
     const existingCache = _client.extract()
@@ -65,22 +76,15 @@ export function initializeApollo(initialState = null) {
   return _client
 }
 
-export function addApolloState(
-  client: ApolloClient<NormalizedCacheObject>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pageProps: any
-) {
-  if (pageProps?.props) {
-    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
-  }
-
-  return pageProps
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useApollo(pageProps: any) {
+export function useApollo(pageProps: any, session?: Session) {
   const state = pageProps?.[APOLLO_STATE_PROP_NAME]
-  const store = useMemo(() => initializeApollo(state), [state])
+
+  const store = useMemo(
+    () => initializeApollo(state, session),
+    [state, session]
+  )
+
   return store
 }
 
