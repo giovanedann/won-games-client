@@ -20,6 +20,12 @@ const props: GameTemplateProps = {
   recommendedGames: gamesMock
 }
 
+jest.mock('next-auth/react', () => ({
+  useSession: jest.fn(() => {
+    return [{ session: null }]
+  })
+}))
+
 jest.mock('components/Menu', () => ({
   __esModule: true,
   default: function Mock() {

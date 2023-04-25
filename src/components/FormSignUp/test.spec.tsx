@@ -18,9 +18,7 @@ describe('<FormSignUp />', () => {
       screen.getByPlaceholderText(/^password$/i, { exact: true })
     ).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/confirm password/i)).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', { name: /sign up now/i })
-    ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /sign up/i })).toBeInTheDocument()
   })
 
   it('should render text and link to sign in', () => {

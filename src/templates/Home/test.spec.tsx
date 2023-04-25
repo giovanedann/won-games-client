@@ -20,6 +20,12 @@ const props = {
   freeHighlight: highlightMock
 }
 
+jest.mock('next-auth/react', () => ({
+  useSession: jest.fn(() => {
+    return [{ session: null }]
+  })
+}))
+
 jest.mock('components/Showcase', () => {
   return {
     __esModule: true,
