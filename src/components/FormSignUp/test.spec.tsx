@@ -48,6 +48,6 @@ describe('<FormSignUp />', () => {
 
     await user.type(screen.getByPlaceholderText(/confirm password/i), '1234')
 
-    expect(screen.getByText(/passwords not matching/i)).toBeInTheDocument()
+    expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument()
   })
 })
