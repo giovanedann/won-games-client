@@ -8,6 +8,7 @@ import * as S from './styles'
 import { FormEvent, useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { signInValidation } from 'validators/forms'
 
 type SignInData = { email: string; password: string }
 
@@ -43,6 +44,11 @@ function FormSignIn() {
     setIsLoading(false)
   }
 
+  const formErrors = signInValidation(signInFormValues)
+  const isFormValid = Object.values(formErrors).every((item) => !item)
+
+  console.log({ formErrors })
+
   return (
     <FormWrapper>
       <S.Form onSubmit={handleSubmit}>
@@ -52,6 +58,7 @@ function FormSignIn() {
           type="email"
           icon={<MdOutlineMail />}
           onInputChange={(value) => handleInputChange('email', value)}
+          error={formErrors['email']}
         />
         <TextField
           name="password"
@@ -59,11 +66,17 @@ function FormSignIn() {
           type="password"
           icon={<MdLockOutline />}
           onInputChange={(value) => handleInputChange('password', value)}
+          error={formErrors['password']}
         />
 
         <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
 
-        <Button type="submit" size="large" fullWidth disabled={isLoading}>
+        <Button
+          type="submit"
+          size="large"
+          fullWidth
+          disabled={isLoading || !isFormValid}
+        >
           {!isLoading ? 'Sign In' : <FormLoader />}
         </Button>
 

@@ -11,15 +11,19 @@ import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 import { useMutation } from '@apollo/client'
 import { MUTATION_REGISTER } from 'graphql/mutations/register'
 import { signIn } from 'next-auth/react'
+import { signUpValidation } from 'validators/forms'
+
+type SignUpData = UsersPermissionsRegisterInput & {
+  password_confirmation: string
+}
 
 const FormSignUp = () => {
-  const [signUpFormValues, setSignUpFormValues] =
-    useState<UsersPermissionsRegisterInput>({
-      email: '',
-      password: '',
-      username: ''
-    })
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [signUpFormValues, setSignUpFormValues] = useState<SignUpData>({
+    email: '',
+    password: '',
+    username: '',
+    password_confirmation: ''
+  })
 
   const [createUser, { error, loading }] = useMutation(MUTATION_REGISTER, {
     onCompleted: () => {
@@ -32,10 +36,7 @@ const FormSignUp = () => {
     }
   })
 
-  function handleInputChange(
-    field: keyof UsersPermissionsRegisterInput,
-    value: string
-  ) {
+  function handleInputChange(field: keyof SignUpData, value: string) {
     setSignUpFormValues((prev) => ({
       ...prev,
       [field]: value
@@ -54,7 +55,8 @@ const FormSignUp = () => {
     })
   }
 
-  const doPasswordsMatch = passwordConfirmation === signUpFormValues.password
+  const formErrors = signUpValidation(signUpFormValues)
+  const isFormValid = Object.values(formErrors).every((item) => !item)
 
   return (
     <FormWrapper>
@@ -65,6 +67,7 @@ const FormSignUp = () => {
           type="text"
           icon={<FiUserCheck />}
           onInputChange={(value) => handleInputChange('username', value)}
+          error={formErrors['username']}
         />
         <TextField
           name="email"
@@ -72,6 +75,7 @@ const FormSignUp = () => {
           type="email"
           icon={<MdOutlineMail />}
           onInputChange={(value) => handleInputChange('email', value)}
+          error={formErrors['email']}
         />
         <TextField
           name="password"
@@ -79,21 +83,24 @@ const FormSignUp = () => {
           type="password"
           icon={<MdLockOutline />}
           onInputChange={(value) => handleInputChange('password', value)}
+          error={formErrors['password']}
         />
         <TextField
           name="confirm-password"
           placeholder="Confirm password"
           type="password"
           icon={<MdLockOutline />}
-          onInputChange={(value) => setPasswordConfirmation(value)}
-          error={!doPasswordsMatch ? 'Passwords not matching' : undefined}
+          onInputChange={(value) =>
+            handleInputChange('password_confirmation', value)
+          }
+          error={formErrors['password_confirmation']}
         />
 
         <Button
           size="large"
           type="submit"
           fullWidth
-          disabled={!doPasswordsMatch || loading}
+          disabled={loading || !isFormValid}
         >
           {!loading ? 'Sign Up' : <FormLoader />}
         </Button>
