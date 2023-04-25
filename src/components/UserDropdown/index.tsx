@@ -2,6 +2,7 @@ import Dropdown from 'components/Dropdown'
 import { FiChevronDown } from 'react-icons/fi'
 import { MdAccountCircle, MdExitToApp, MdFavoriteBorder } from 'react-icons/md'
 import * as S from './styles'
+import { signOut } from 'next-auth/react'
 
 type UserDropdownProps = {
   username: string
@@ -29,7 +30,11 @@ function UserDropdown({ username }: UserDropdownProps) {
           <span>Wishlist</span>
         </S.StyledNextLink>
 
-        <S.StyledNextLink href="/logout" title="Sign out">
+        <S.StyledNextLink
+          href="/logout"
+          title="Sign out"
+          onClick={() => signOut()}
+        >
           <MdExitToApp />
           <span>Sign out</span>
         </S.StyledNextLink>
