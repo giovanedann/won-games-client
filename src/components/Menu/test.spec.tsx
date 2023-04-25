@@ -5,7 +5,7 @@ import Menu from '.'
 
 describe('<Menu />', () => {
   it('should render the menu icons and logo', () => {
-    render(<Menu />)
+    render(<Menu isLoading={false} username="username" />)
 
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/search/i)).toBeInTheDocument()
@@ -15,7 +15,7 @@ describe('<Menu />', () => {
 
   it('should open and close menu on menu icon click', async () => {
     const user = userEvent.setup()
-    render(<Menu />)
+    render(<Menu isLoading={false} username={null} />)
 
     const openedMenu = screen.getByRole('navigation', { hidden: true })
 
@@ -32,7 +32,7 @@ describe('<Menu />', () => {
   })
 
   it('should show register box and hide wishlist/account links when logged out', () => {
-    render(<Menu />)
+    render(<Menu isLoading={false} username={null} />)
 
     expect(screen.getByText(/log in now/i)).toBeInTheDocument()
     expect(screen.getByText(/sign up/i)).toBeInTheDocument()
@@ -41,11 +41,18 @@ describe('<Menu />', () => {
   })
 
   it('should show wish list and account links and hide register box when logged in', () => {
-    render(<Menu username="username" />)
+    render(<Menu isLoading={false} username="username" />)
 
     expect(screen.queryByText(/log in now/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/sign up/i)).not.toBeInTheDocument()
     expect(screen.getAllByText(/wishlist/i)).toHaveLength(2)
     expect(screen.getAllByText(/my profile/i)).toHaveLength(2)
+  })
+
+  it('should not show sign in button or user dropdown if loading', () => {
+    render(<Menu isLoading username="username" />)
+
+    expect(screen.queryByText(/sign in/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/my profile/i)).not.toBeInTheDocument()
   })
 })
