@@ -19,7 +19,8 @@ function FormSignIn() {
     email: '',
     password: ''
   })
-  const { push } = useRouter()
+
+  const { push, query } = useRouter()
 
   function handleInputChange(field: keyof SignInData, value: string) {
     setSignInFormValues((prev) => ({
@@ -36,7 +37,7 @@ function FormSignIn() {
     const result = await signIn('credentials', {
       ...signInFormValues,
       redirect: false,
-      callbackUrl: '/'
+      callbackUrl: `/${query?.callbackUrl ?? ''}`
     })
 
     if (result?.url) {
