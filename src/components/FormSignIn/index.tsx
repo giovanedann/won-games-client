@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import Button from 'components/Button'
-import { FormLink, FormLoader, FormWrapper } from 'components/Form'
+import { FormLink, FormLoader, FormWrapper, FormError } from 'components/Form'
 import TextField from 'components/TextField'
 import Link from 'next/link'
-import { MdLockOutline, MdOutlineMail } from 'react-icons/md'
+import { MdLockOutline, MdOutlineMail, MdErrorOutline } from 'react-icons/md'
 import * as S from './styles'
 import { FormEvent, useState } from 'react'
 import { signIn } from 'next-auth/react'
@@ -14,6 +14,7 @@ type SignInData = { email: string; password: string }
 
 function FormSignIn() {
   const [isLoading, setIsLoading] = useState(false)
+  const [formError, setFormError] = useState('')
   const [signInFormValues, setSignInFormValues] = useState<SignInData>({
     email: '',
     password: ''
@@ -28,6 +29,7 @@ function FormSignIn() {
   }
 
   async function handleSubmit(event: FormEvent) {
+    setFormError('') // reseting form error
     setIsLoading(true)
     event.preventDefault()
 
@@ -42,15 +44,21 @@ function FormSignIn() {
     }
 
     setIsLoading(false)
+
+    // if code reaches here, means that signIn failed (invalid credentials)
+    setFormError('Username or password is invalid')
   }
 
   const formErrors = signInValidation(signInFormValues)
   const isFormValid = Object.values(formErrors).every((item) => !item)
 
-  console.log({ formErrors })
-
   return (
     <FormWrapper>
+      {formError && (
+        <FormError>
+          <MdErrorOutline /> {formError}
+        </FormError>
+      )}
       <S.Form onSubmit={handleSubmit}>
         <TextField
           name="email"
