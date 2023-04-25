@@ -2,6 +2,14 @@ import { screen, render } from 'utils/tests/render'
 import theme from 'styles/theme'
 
 import ProfileMenu from '.'
+import userEvent from '@testing-library/user-event'
+
+const mockSignOut = jest.fn()
+
+jest.mock('next-auth/react', () => ({
+  ...jest.requireActual('next-auth/react'),
+  signOut: () => mockSignOut()
+}))
 
 describe('<ProfileMenu />', () => {
   it('should render all the links', () => {
@@ -28,5 +36,16 @@ describe('<ProfileMenu />', () => {
       background: theme.colors.white,
       color: theme.colors.black
     })
+  })
+
+  it('should call next auth signOut on Sign Out click', async () => {
+    const user = userEvent.setup()
+
+    render(<ProfileMenu />)
+
+    await user.click(screen.getByRole('link', { name: /sign out/i }))
+
+    expect(mockSignOut).toHaveBeenCalled()
+    expect(mockSignOut).toHaveBeenCalledTimes(1)
   })
 })
