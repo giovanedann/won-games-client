@@ -16,6 +16,30 @@ export const FormWrapper = styled.div`
   `}
 `
 
+export const FormError = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0.3rem;
+    text-align: center;
+    color: red;
+    font-size: ${theme.font.sizes.small};
+
+    svg {
+      width: 1.6rem;
+    }
+  `}
+`
+
+export const FormLoader = styled.img.attrs(() => ({
+  src: 'img/animated-dots.svg',
+  alt: 'Loading...'
+}))`
+  width: 4rem;
+`
+
 export const FormLink = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};

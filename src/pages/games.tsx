@@ -2,12 +2,17 @@ import { GetCategories } from 'graphql/generated/GetCategories'
 import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
 import { GET_CATEGORIES } from 'graphql/queries/categories'
 import { GET_GAMES } from 'graphql/queries/games'
+import useIsMounted from 'hooks/useIsMounted'
 import { initializeApollo } from 'infra/apollo/client'
 import { GetServerSidePropsContext } from 'next'
 import GamesTemplate, { GameTemplateProps } from 'templates/Games'
 import { parseQueryStringToWhereJson } from 'utils/filter'
 
 export default function GamesPage(props: GameTemplateProps) {
+  const isComponentMounted = useIsMounted()
+
+  if (!isComponentMounted) return null
+
   return <GamesTemplate {...props} />
 }
 

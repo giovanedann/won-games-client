@@ -2,6 +2,12 @@ import { screen, render } from 'utils/tests/render'
 
 import Profile from '.'
 
+jest.mock('next-auth/react', () => ({
+  useSession: jest.fn(() => {
+    return [{ session: null }]
+  })
+}))
+
 jest.mock('components/ProfileMenu', () => {
   return {
     __esModule: true,

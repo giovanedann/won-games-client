@@ -11,10 +11,11 @@ import CartDropdown from 'components/CartDropdown'
 import CartIcon from 'components/CartIcon'
 
 type MenuProps = {
-  username?: string
+  username: string | null
+  isLoading: boolean
 }
 
-function Menu({ username }: MenuProps) {
+function Menu({ username, isLoading }: MenuProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
@@ -36,60 +37,64 @@ function Menu({ username }: MenuProps) {
         <S.MenuLink href="/games">Explore</S.MenuLink>
       </MediaMatch>
 
-      <S.MenuGroup>
-        <S.IconWrapper>
-          <MdSearch aria-label="search" />
-        </S.IconWrapper>
+      {!isLoading && (
+        <>
+          <S.MenuGroup>
+            <S.IconWrapper>
+              <MdSearch aria-label="search" />
+            </S.IconWrapper>
 
-        <S.IconWrapper>
-          <MediaMatch greaterThan="medium">
-            <CartDropdown />
-          </MediaMatch>
+            <S.IconWrapper>
+              <MediaMatch greaterThan="medium">
+                <CartDropdown />
+              </MediaMatch>
 
-          <MediaMatch lessThan="medium">
-            <CartIcon aria-label="open shopping cart" />
-          </MediaMatch>
-        </S.IconWrapper>
+              <MediaMatch lessThan="medium">
+                <CartIcon aria-label="open shopping cart" />
+              </MediaMatch>
+            </S.IconWrapper>
 
-        <MediaMatch greaterThan="medium">
-          {!username && (
-            <Link href="/sign-in">
-              <Button>Sign in</Button>
-            </Link>
-          )}
+            <MediaMatch greaterThan="medium">
+              {!username && (
+                <Link href="/sign-in">
+                  <Button>Sign in</Button>
+                </Link>
+              )}
 
-          {username && <UserDropdown username={username} />}
-        </MediaMatch>
-      </S.MenuGroup>
+              {username && <UserDropdown username={username} />}
+            </MediaMatch>
+          </S.MenuGroup>
 
-      <S.OpenedMenu aria-hidden={!isOpen} isOpen={isOpen}>
-        <MdClose aria-label="close menu" onClick={() => setIsOpen(false)} />
+          <S.OpenedMenu aria-hidden={!isOpen} isOpen={isOpen}>
+            <MdClose aria-label="close menu" onClick={() => setIsOpen(false)} />
 
-        <S.MenuNav>
-          <S.MenuLink href="/">Home</S.MenuLink>
-          <S.MenuLink href="/games">Explore</S.MenuLink>
-          {Boolean(username) && (
-            <>
-              <S.MenuLink href="/profile/me">My profile</S.MenuLink>
-              <S.MenuLink href="/profile/wishlist">Wishlist</S.MenuLink>
-            </>
-          )}
-        </S.MenuNav>
+            <S.MenuNav>
+              <S.MenuLink href="/">Home</S.MenuLink>
+              <S.MenuLink href="/games">Explore</S.MenuLink>
+              {Boolean(username) && (
+                <>
+                  <S.MenuLink href="/profile/me">My profile</S.MenuLink>
+                  <S.MenuLink href="/profile/wishlist">Wishlist</S.MenuLink>
+                </>
+              )}
+            </S.MenuNav>
 
-        {!username && (
-          <S.RegisterBox>
-            <Link href="/sign-in">
-              <Button fullWidth size="large">
-                Log in now
-              </Button>
-            </Link>
-            <span>or</span>
-            <S.SignUp href="/sign-up" title="Sign Up">
-              Sign Up
-            </S.SignUp>
-          </S.RegisterBox>
-        )}
-      </S.OpenedMenu>
+            {!username && (
+              <S.RegisterBox>
+                <Link href="/sign-in">
+                  <Button fullWidth size="large">
+                    Log in now
+                  </Button>
+                </Link>
+                <span>or</span>
+                <S.SignUp href="/sign-up" title="Sign Up">
+                  Sign Up
+                </S.SignUp>
+              </S.RegisterBox>
+            )}
+          </S.OpenedMenu>
+        </>
+      )}
     </S.Wrapper>
   )
 }

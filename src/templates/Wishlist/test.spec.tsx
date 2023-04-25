@@ -12,6 +12,12 @@ const props = {
   games: gamesMock
 }
 
+jest.mock('next-auth/react', () => ({
+  useSession: jest.fn(() => {
+    return [{ session: null }]
+  })
+}))
+
 jest.mock('components/Showcase', () => ({
   __esModule: true,
   default: function Mock() {

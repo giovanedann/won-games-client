@@ -3,6 +3,13 @@ import UserDropdown from '.'
 
 import userEvent from '@testing-library/user-event'
 
+const mockSignOut = jest.fn()
+
+jest.mock('next-auth/react', () => ({
+  ...jest.requireActual('next-auth/react'),
+  signOut: () => mockSignOut()
+}))
+
 describe('<UserDropdown />', () => {
   it('should display the userme', () => {
     render(<UserDropdown username="Dante" />)
@@ -31,5 +38,17 @@ describe('<UserDropdown />', () => {
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /wishlist/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /sign out/i })).toBeInTheDocument()
+  })
+
+  it('should call next auth signOut on Sign Out click', async () => {
+    const user = userEvent.setup()
+
+    render(<UserDropdown username="Test" />)
+
+    await user.click(screen.getByText(/test/i))
+    await user.click(screen.getByRole('link', { name: /sign out/i }))
+
+    expect(mockSignOut).toHaveBeenCalled()
+    expect(mockSignOut).toHaveBeenCalledTimes(1)
   })
 })
