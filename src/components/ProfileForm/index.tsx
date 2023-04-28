@@ -4,7 +4,12 @@ import TextField from 'components/TextField'
 
 import * as S from './styles'
 
-function ProfileForm() {
+export type ProfileFormProps = {
+  username?: string
+  email?: string
+}
+
+function ProfileForm({ email, username }: ProfileFormProps) {
   return (
     <>
       <Heading lineBottom color="black" size="small">
@@ -13,18 +18,18 @@ function ProfileForm() {
 
       <S.Form>
         <TextField
-          name="name"
-          placeholder="Enter your name"
-          label="Name"
-          initialValue={'John Doe'}
+          name="username"
+          placeholder="Username"
+          label="username"
+          initialValue={username}
         />
 
         <TextField
           name="email"
-          initialValue={'johndoe@mail.com'}
           placeholder="Enter your e-mail"
           label="E-mail"
           type="email"
+          initialValue={email}
         />
 
         <TextField
