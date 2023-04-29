@@ -1,8 +1,10 @@
 import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 import {
   ForgotPasswordData,
+  ResetPasswordData,
   SignInData,
   forgotPasswordValidation,
+  resetPasswordValidation,
   signInValidation,
   signUpValidation
 } from '.'
@@ -122,6 +124,39 @@ describe('forgotPasswordValidation', () => {
 
     expect(forgotPasswordValidation(values)).toStrictEqual({
       email: '"email" must be a valid email'
+    })
+  })
+})
+
+describe('resetPasswordValidation', () => {
+  it('should return error on missing fields', () => {
+    expect(resetPasswordValidation({} as ResetPasswordData)).toStrictEqual({
+      password_confirmation: '"password_confirmation" is required',
+      password: '"password" is required'
+    })
+  })
+
+  it('should return error on empty fields', () => {
+    const values = {
+      password: '',
+      password_confirmation: ''
+    }
+
+    console.log({ validation: resetPasswordValidation(values) })
+
+    expect(resetPasswordValidation(values)).toStrictEqual({
+      password: '"password" is not allowed to be empty'
+    })
+  })
+
+  it('should return error if passwords do not match', () => {
+    const values = {
+      password: '123',
+      password_confirmation: '1234'
+    }
+
+    expect(resetPasswordValidation(values)).toStrictEqual({
+      password_confirmation: 'Passwords do not match'
     })
   })
 })
