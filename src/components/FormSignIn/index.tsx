@@ -79,7 +79,7 @@ function FormSignIn() {
         />
 
         <Link href="/forgot-password">
-          <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
+          <S.ForgotPassword>Forgot your password?</S.ForgotPassword>
         </Link>
 
         <Button
