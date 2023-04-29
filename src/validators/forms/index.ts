@@ -46,3 +46,14 @@ export function signInValidation(values: SignInData) {
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
+
+// Type to store the fields of Sign in form
+export type ForgotPasswordData = { email: string }
+
+// Function to validate the sign in schema
+export function forgotPasswordValidation(values: ForgotPasswordData) {
+  const { email } = fieldsValidations
+  const schema = Joi.object({ email })
+
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
