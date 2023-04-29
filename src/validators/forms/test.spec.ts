@@ -1,5 +1,11 @@
 import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
-import { SignInData, signInValidation, signUpValidation } from '.'
+import {
+  ForgotPasswordData,
+  SignInData,
+  forgotPasswordValidation,
+  signInValidation,
+  signUpValidation
+} from '.'
 
 describe('signInValidation', () => {
   it('should return error on missing fields', () => {
@@ -92,6 +98,30 @@ describe('signUpValidation', () => {
 
     expect(signUpValidation(values)).toStrictEqual({
       password_confirmation: 'Passwords do not match'
+    })
+  })
+})
+
+describe('forgotPasswordValidation', () => {
+  it('should return error on missing fields', () => {
+    expect(forgotPasswordValidation({} as ForgotPasswordData)).toStrictEqual({
+      email: '"email" is required'
+    })
+  })
+
+  it('should return error on empty fields', () => {
+    const values = { email: '' }
+
+    expect(forgotPasswordValidation(values)).toStrictEqual({
+      email: '"email" is not allowed to be empty'
+    })
+  })
+
+  it('should return error on invalid email', () => {
+    const values = { email: 'wrong_email' }
+
+    expect(forgotPasswordValidation(values)).toStrictEqual({
+      email: '"email" must be a valid email'
     })
   })
 })
