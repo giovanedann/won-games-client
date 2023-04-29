@@ -72,7 +72,7 @@ function FormForgotPassword() {
           fullWidth
           disabled={isLoading || !isFormValid}
         >
-          {!isLoading ? 'Sign In' : <FormLoader />}
+          {!isLoading ? 'Send e-mail' : <FormLoader />}
         </Button>
       </form>
     </FormWrapper>
