@@ -78,7 +78,9 @@ function FormSignIn() {
           error={formErrors['password']}
         />
 
-        <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
+        <Link href="/forgot-password">
+          <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
+        </Link>
 
         <Button
           type="submit"
