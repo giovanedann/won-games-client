@@ -1,3 +1,4 @@
+global.fetch = require('node-fetch')
 import { server } from '../src/utils/tests/server'
 
 beforeAll(() => {
