@@ -46,3 +46,28 @@ export function signInValidation(values: SignInData) {
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
+
+// Type to store the fields of Forgot Password form
+export type ForgotPasswordData = { email: string }
+
+// Function to validate the forgot password schema
+export function forgotPasswordValidation(values: ForgotPasswordData) {
+  const { email } = fieldsValidations
+  const schema = Joi.object({ email })
+
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
+
+// Type to store the fields of Forgot Password form
+export type ResetPasswordData = {
+  password: string
+  password_confirmation: string
+}
+
+// Function to validate the forgot password schema
+export function resetPasswordValidation(values: ResetPasswordData) {
+  const { password, password_confirmation } = fieldsValidations
+  const schema = Joi.object({ password, password_confirmation })
+
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}

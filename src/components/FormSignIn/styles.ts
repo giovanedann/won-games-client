@@ -3,7 +3,7 @@ import { lighten } from 'polished'
 
 export const Form = styled.form``
 
-export const ForgotPassword = styled.a`
+export const ForgotPassword = styled.p`
   ${({ theme }) => css`
     display: block;
     font-size: ${theme.font.sizes.small};

@@ -1,5 +1,13 @@
 import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
-import { SignInData, signInValidation, signUpValidation } from '.'
+import {
+  ForgotPasswordData,
+  ResetPasswordData,
+  SignInData,
+  forgotPasswordValidation,
+  resetPasswordValidation,
+  signInValidation,
+  signUpValidation
+} from '.'
 
 describe('signInValidation', () => {
   it('should return error on missing fields', () => {
@@ -91,6 +99,63 @@ describe('signUpValidation', () => {
     }
 
     expect(signUpValidation(values)).toStrictEqual({
+      password_confirmation: 'Passwords do not match'
+    })
+  })
+})
+
+describe('forgotPasswordValidation', () => {
+  it('should return error on missing fields', () => {
+    expect(forgotPasswordValidation({} as ForgotPasswordData)).toStrictEqual({
+      email: '"email" is required'
+    })
+  })
+
+  it('should return error on empty fields', () => {
+    const values = { email: '' }
+
+    expect(forgotPasswordValidation(values)).toStrictEqual({
+      email: '"email" is not allowed to be empty'
+    })
+  })
+
+  it('should return error on invalid email', () => {
+    const values = { email: 'wrong_email' }
+
+    expect(forgotPasswordValidation(values)).toStrictEqual({
+      email: '"email" must be a valid email'
+    })
+  })
+})
+
+describe('resetPasswordValidation', () => {
+  it('should return error on missing fields', () => {
+    expect(resetPasswordValidation({} as ResetPasswordData)).toStrictEqual({
+      password_confirmation: '"password_confirmation" is required',
+      password: '"password" is required'
+    })
+  })
+
+  it('should return error on empty fields', () => {
+    const values = {
+      password: '',
+      password_confirmation: ''
+    }
+
+    console.log({ validation: resetPasswordValidation(values) })
+
+    expect(resetPasswordValidation(values)).toStrictEqual({
+      password: '"password" is not allowed to be empty'
+    })
+  })
+
+  it('should return error if passwords do not match', () => {
+    const values = {
+      password: '123',
+      password_confirmation: '1234'
+    }
+
+    expect(resetPasswordValidation(values)).toStrictEqual({
       password_confirmation: 'Passwords do not match'
     })
   })
