@@ -1,22 +1,29 @@
-/* eslint-disable react/no-unescaped-entities */
-import Button from 'components/Button'
-import { FormLoader, FormWrapper, FormError } from 'components/Form'
-import TextField from 'components/TextField'
-import { MdOutlineMail, MdErrorOutline } from 'react-icons/md'
 import { FormEvent, useState } from 'react'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import {
+  MdOutlineMail,
+  MdErrorOutline,
+  MdCheckCircleOutline
+} from 'react-icons/md'
+
+import Button from 'components/Button'
+import {
+  FormLoader,
+  FormWrapper,
+  FormError,
+  FormSuccess
+} from 'components/Form'
+import TextField from 'components/TextField'
+
 import { ForgotPasswordData, forgotPasswordValidation } from 'validators/forms'
 
 function FormForgotPassword() {
   const [isLoading, setIsLoading] = useState(false)
+  const [requestSucceeded, setRequestSucceeded] = useState(false)
   const [formError, setFormError] = useState('')
   const [forgotPasswordValues, setForgotPasswordValues] =
     useState<ForgotPasswordData>({
       email: ''
     })
-
-  const { push, query } = useRouter()
 
   function handleInputChange(field: keyof ForgotPasswordData, value: string) {
     setForgotPasswordValues((prev) => ({
@@ -30,20 +37,27 @@ function FormForgotPassword() {
     setIsLoading(true)
     event.preventDefault()
 
-    const result = await signIn('credentials', {
-      ...forgotPasswordValues,
-      redirect: false,
-      callbackUrl: `/${query?.callbackUrl ?? ''}`
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/forgot-password`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(forgotPasswordValues)
+      }
+    )
 
-    if (result?.url) {
-      return push(result?.url as string)
-    }
+    const data = await response.json()
 
     setIsLoading(false)
 
-    // if code reaches here, means that signIn failed (invalid credentials)
-    setFormError('E-mail is invalid')
+    if (data.error) {
+      const { message } = data
+      const [errorMessage] = message.messages
+
+      setFormError(errorMessage.message)
+    } else {
+      setRequestSucceeded(true)
+    }
   }
 
   const formErrors = forgotPasswordValidation(forgotPasswordValues)
@@ -51,30 +65,41 @@ function FormForgotPassword() {
 
   return (
     <FormWrapper>
-      {formError && (
-        <FormError>
-          <MdErrorOutline /> {formError}
-        </FormError>
+      {requestSucceeded && (
+        <FormSuccess>
+          <MdCheckCircleOutline size={14} />
+          In a couple of minutes, you will receive an e-mail!
+        </FormSuccess>
       )}
 
-      <form onSubmit={handleSubmit}>
-        <TextField
-          name="email"
-          placeholder="E-mail"
-          type="email"
-          icon={<MdOutlineMail />}
-          onInputChange={(value) => handleInputChange('email', value)}
-          error={formErrors['email']}
-        />
-        <Button
-          type="submit"
-          size="large"
-          fullWidth
-          disabled={isLoading || !isFormValid}
-        >
-          {!isLoading ? 'Send e-mail' : <FormLoader />}
-        </Button>
-      </form>
+      {!requestSucceeded && (
+        <>
+          {formError && (
+            <FormError>
+              <MdErrorOutline /> {formError}
+            </FormError>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            <TextField
+              name="email"
+              placeholder="E-mail"
+              type="email"
+              icon={<MdOutlineMail />}
+              onInputChange={(value) => handleInputChange('email', value)}
+              error={formErrors['email']}
+            />
+            <Button
+              type="submit"
+              size="large"
+              fullWidth
+              disabled={isLoading || !isFormValid}
+            >
+              {!isLoading ? 'Send e-mail' : <FormLoader />}
+            </Button>
+          </form>
+        </>
+      )}
     </FormWrapper>
   )
 }

@@ -59,3 +59,19 @@ export const FormLink = styled.div`
     }
   `}
 `
+
+export const FormSuccess = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${({ theme }) => css`
+    text-align: center;
+    color: ${theme.colors.black};
+    font-size: ${theme.font.sizes.small};
+
+    svg {
+      color: ${theme.colors.secondary};
+    }
+  `}
+`
