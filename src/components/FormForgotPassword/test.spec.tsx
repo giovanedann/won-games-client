@@ -6,7 +6,7 @@ import { render, screen } from 'utils/tests/render'
 import FormForgotPassword from '.'
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
-const query = {}
+let query = {}
 
 useRouter.mockImplementation(() => ({ query }))
 
@@ -55,5 +55,12 @@ describe('<FormForgotPassword />', () => {
     expect(
       await screen.findByText(/this email does not exist/i)
     ).toBeInTheDocument()
+  })
+
+  it('should populate the email input with query e-mail', async () => {
+    query = { email: 'email@mail.com' }
+    render(<FormForgotPassword />)
+
+    expect(screen.getByPlaceholderText(/e-mail/i)).toHaveValue('email@mail.com')
   })
 })
