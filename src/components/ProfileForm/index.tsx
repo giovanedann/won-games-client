@@ -3,6 +3,7 @@ import Heading from 'components/Heading'
 import TextField from 'components/TextField'
 
 import * as S from './styles'
+import Link from 'next/link'
 
 export type ProfileFormProps = {
   username?: string
@@ -32,21 +33,17 @@ function ProfileForm({ email, username }: ProfileFormProps) {
           initialValue={email}
         />
 
-        <TextField
-          name="password"
-          placeholder="Old password"
-          label="Password"
-          type="password"
-        />
+        <S.ButtonsContainer>
+          <S.ResetButtonContainer>
+            <Link href={`/forgot-password?email=${email}`}>
+              <Button minimal size="large">
+                Reset password
+              </Button>
+            </Link>
+          </S.ResetButtonContainer>
 
-        <TextField
-          name="new_password"
-          placeholder="New password"
-          label="New password"
-          type="password"
-        />
-
-        <Button size="large">Save changes</Button>
+          <Button size="large">Save changes</Button>
+        </S.ButtonsContainer>
       </S.Form>
     </>
   )

@@ -15,14 +15,17 @@ import {
 import TextField from 'components/TextField'
 
 import { ForgotPasswordData, forgotPasswordValidation } from 'validators/forms'
+import { useRouter } from 'next/router'
 
 function FormForgotPassword() {
+  const { query } = useRouter()
+
   const [isLoading, setIsLoading] = useState(false)
   const [requestSucceeded, setRequestSucceeded] = useState(false)
   const [formError, setFormError] = useState('')
   const [forgotPasswordValues, setForgotPasswordValues] =
     useState<ForgotPasswordData>({
-      email: ''
+      email: (query.email as string) ?? ''
     })
 
   function handleInputChange(field: keyof ForgotPasswordData, value: string) {
@@ -85,6 +88,7 @@ function FormForgotPassword() {
               name="email"
               placeholder="E-mail"
               type="email"
+              initialValue={forgotPasswordValues.email}
               icon={<MdOutlineMail />}
               onInputChange={(value) => handleInputChange('email', value)}
               error={formErrors['email']}
