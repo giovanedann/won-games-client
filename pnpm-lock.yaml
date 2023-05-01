@@ -10,6 +10,9 @@ dependencies:
   deepmerge:
     specifier: ^4.3.1
     version: 4.3.1
+  dotenv:
+    specifier: ^16.0.3
+    version: 16.0.3
   framer-motion:
     specifier: ^10.12.4
     version: 10.12.4(react-dom@18.2.0)(react@18.2.0)
@@ -6910,7 +6913,6 @@ packages:
   /dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
-    dev: true
 
   /duplexify@3.7.1:
     resolution: {integrity: sha512-07z8uv2wMyS51kKhD1KsdXJg5WQ6t93RneqRxUHnskXVtlYYkLqM0gqStQZ3pj073g687jPCHrqNfCzawLYh5g==}
