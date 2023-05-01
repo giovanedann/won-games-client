@@ -39,7 +39,7 @@ export const handlers = [
     async (request, response, context) => {
       const { code } = await request.json()
 
-      if (code === 'wrong_code') {
+      if (code === 'invalid') {
         return response(
           context.status(400),
           context.json({
@@ -47,7 +47,7 @@ export const handlers = [
             message: {
               messages: [
                 {
-                  message: 'Incorrect code provided.'
+                  message: 'Invalid code.'
                 }
               ]
             }
