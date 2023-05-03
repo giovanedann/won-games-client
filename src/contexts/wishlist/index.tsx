@@ -1,5 +1,16 @@
+import wishlistGamesAdapter from 'adapters/wishlist-games.adapter'
 import { GameCardProps } from 'components/GameCard'
-import { ReactNode, createContext, useContext } from 'react'
+import { QueryWishlist_wishlists_games } from 'graphql/generated/QueryWishlist'
+import { useQueryWishlist } from 'hooks/useQueryWishlist'
+import { useSession } from 'next-auth/react'
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 
 export type WishlistContextData = {
   items: GameCardProps[]
@@ -26,8 +37,35 @@ type WishlistProviderProps = {
 }
 
 function WishlistProvider({ children }: WishlistProviderProps) {
+  const [wishlistItems, setWishlistItems] = useState<
+    QueryWishlist_wishlists_games[]
+  >([])
+
+  const session = useSession()
+
+  const { data, loading } = useQueryWishlist({
+    skip: !session.data?.user?.email,
+    context: { session },
+    variables: {
+      identifier: session.data?.user?.email as string
+    }
+  })
+
+  useEffect(() => {
+    setWishlistItems(data?.wishlists[0]?.games ?? [])
+  }, [data])
+
+  const wishlistProviderValue: WishlistContextData = useMemo(
+    () => ({
+      ...wishlistContextDefaultValues,
+      items: wishlistGamesAdapter(wishlistItems),
+      loading
+    }),
+    [loading, wishlistItems]
+  )
+
   return (
-    <WishlistContext.Provider value={wishlistContextDefaultValues}>
+    <WishlistContext.Provider value={wishlistProviderValue}>
       {children}
     </WishlistContext.Provider>
   )
