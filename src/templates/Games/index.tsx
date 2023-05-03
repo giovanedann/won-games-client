@@ -6,7 +6,6 @@ import GameCard, { GameCardProps } from 'components/GameCard'
 import Grid from 'components/Grid'
 
 import * as S from './styles'
-import { useQueryGames } from 'graphql/queries/games'
 import getImageUrl from 'utils/getImageUrl'
 import formatPrice from 'utils/formatPrice'
 import useIsMounted from 'hooks/useIsMounted'
@@ -17,6 +16,7 @@ import {
 import { useRouter } from 'next/router'
 import { ParsedUrlQueryInput } from 'querystring'
 import Empty from 'components/Empty'
+import { useQueryGames } from 'hooks/useQueryGames'
 
 export type GameTemplateProps = {
   games?: GameCardProps[]

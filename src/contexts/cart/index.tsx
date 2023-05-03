@@ -1,5 +1,5 @@
 import cartAdapter from 'adapters/cart.adapter'
-import { useQueryGames } from 'graphql/queries/games'
+import { useQueryGames } from 'hooks/useQueryGames'
 import LocalStorage from 'infra/cache/LocalStorage'
 import {
   useContext,
