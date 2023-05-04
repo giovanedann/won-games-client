@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react'
 import {
   ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -43,6 +44,7 @@ function WishlistProvider({ children }: WishlistProviderProps) {
 
   const session = useSession()
 
+  // hook to load the games
   const { data, loading } = useQueryWishlist({
     skip: !session.data?.user?.email,
     context: { session },
@@ -55,13 +57,25 @@ function WishlistProvider({ children }: WishlistProviderProps) {
     setWishlistItems(data?.wishlists[0]?.games ?? [])
   }, [data])
 
+  // memoized function to check if determined game is on wishlist items
+  const isInWishlist = useCallback(
+    (id: string) => {
+      const isItemInWishlist = wishlistItems.find((game) => game.id === id)
+
+      if (!isItemInWishlist) return false
+      return true
+    },
+    [wishlistItems]
+  )
+
   const wishlistProviderValue: WishlistContextData = useMemo(
     () => ({
       ...wishlistContextDefaultValues,
       items: wishlistGamesAdapter(wishlistItems),
-      loading
+      loading,
+      isInWishlist
     }),
-    [loading, wishlistItems]
+    [loading, wishlistItems, isInWishlist]
   )
 
   return (
