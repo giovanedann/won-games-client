@@ -1,9 +1,34 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { renderHook } from '@testing-library/react-hooks'
+import {
+  renderHook,
+  RenderResult,
+  WaitForNextUpdate
+} from '@testing-library/react-hooks'
 
 import { wishlistMock, wishlistItems } from './mocks'
-import { useWishlist, WishlistProvider } from '.'
+import { useWishlist, WishlistContextData, WishlistProvider } from '.'
 import { ReactNode } from 'react'
+
+function hookWrapper({ children }: { children: ReactNode }) {
+  return (
+    <MockedProvider mocks={[wishlistMock]}>
+      <WishlistProvider>{children}</WishlistProvider>
+    </MockedProvider>
+  )
+}
+
+type RenderHookWithProviderResult = {
+  result: RenderResult<WishlistContextData>
+  waitForNextUpdate: WaitForNextUpdate
+}
+
+function renderHookWithProvider(): RenderHookWithProviderResult {
+  const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+    wrapper: hookWrapper
+  })
+
+  return { result, waitForNextUpdate }
+}
 
 const validSessionMock = {
   data: {
@@ -20,20 +45,20 @@ jest.mock('next-auth/react', () => ({
 
 describe('useWishlist', () => {
   it('should return the wishlist items', async () => {
-    const wrapper = ({ children }: { children: ReactNode }) => {
-      return (
-        <MockedProvider mocks={[wishlistMock]}>
-          <WishlistProvider>{children}</WishlistProvider>
-        </MockedProvider>
-      )
-    }
-
-    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
-      wrapper
-    })
+    const { result, waitForNextUpdate } = renderHookWithProvider()
 
     await waitForNextUpdate()
 
     expect(result.current.items).toStrictEqual(wishlistItems)
+  })
+
+  it('should update loading status after loading the games', async () => {
+    const { result, waitForNextUpdate } = renderHookWithProvider()
+
+    expect(result.current.loading).toBeTruthy()
+
+    await waitForNextUpdate()
+
+    expect(result.current.loading).toBeFalsy()
   })
 })
