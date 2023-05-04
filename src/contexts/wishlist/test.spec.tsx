@@ -61,4 +61,14 @@ describe('useWishlist', () => {
 
     expect(result.current.loading).toBeFalsy()
   })
+
+  it('should check if game is on wishlist', async () => {
+    const { result, waitForNextUpdate } = renderHookWithProvider()
+
+    await waitForNextUpdate()
+
+    expect(result.current.isInWishlist('1')).toBeTruthy()
+    expect(result.current.isInWishlist('2')).toBeTruthy()
+    expect(result.current.isInWishlist('3')).toBeFalsy()
+  })
 })
