@@ -1,6 +1,13 @@
+import { useMutation } from '@apollo/client'
 import wishlistGamesAdapter from 'adapters/wishlist-games.adapter'
 import { GameCardProps } from 'components/GameCard'
+import { MutationCreateWishlist } from 'graphql/generated/MutationCreateWishlist'
+import { MutationUpdateWishlist } from 'graphql/generated/MutationUpdateWishlist'
 import { QueryWishlist_wishlists_games } from 'graphql/generated/QueryWishlist'
+import {
+  MUTATION_CREATE_WISHLIST,
+  MUTATION_UPDATE_WISHLIST
+} from 'graphql/mutations/wishlist'
 import { useQueryWishlist } from 'hooks/useQueryWishlist'
 import { useSession } from 'next-auth/react'
 import {
@@ -38,6 +45,10 @@ type WishlistProviderProps = {
 }
 
 function WishlistProvider({ children }: WishlistProviderProps) {
+  const [currentUserWishlistId, setCurrentUserWishlistId] = useState<
+    string | null
+  >(null)
+
   const [wishlistItems, setWishlistItems] = useState<
     QueryWishlist_wishlists_games[]
   >([])
@@ -53,8 +64,29 @@ function WishlistProvider({ children }: WishlistProviderProps) {
     }
   })
 
+  // mutation to create the wishlist if it does not exist
+  const [createWishlist, { loading: loadingWishlistCreation }] =
+    useMutation<MutationCreateWishlist>(MUTATION_CREATE_WISHLIST, {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.createWishlist?.wishlist?.games ?? [])
+        setCurrentUserWishlistId(data.createWishlist?.wishlist?.id ?? null)
+      }
+    })
+
+  // mutation to update the wishlist if the user already have one
+  const [updateWishlist, { loading: loadingWishlistUpdate }] =
+    useMutation<MutationUpdateWishlist>(MUTATION_UPDATE_WISHLIST, {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.updateWishlist?.wishlist?.games ?? [])
+      }
+    })
+
+  // useEffect to set the initial wishlist items and the current user wishlist id
   useEffect(() => {
     setWishlistItems(data?.wishlists[0]?.games ?? [])
+    setCurrentUserWishlistId(data?.wishlists[0]?.id ?? null)
   }, [data])
 
   // memoized function to check if determined game is on wishlist items
@@ -68,14 +100,54 @@ function WishlistProvider({ children }: WishlistProviderProps) {
     [wishlistItems]
   )
 
+  // memoized variable to store only the id of the games of the user wishlist
+  const wishlistGamesIds = useMemo(
+    () => wishlistItems.map((game) => game.id),
+    [wishlistItems]
+  )
+
+  // memoized function to set a new game id on the user wishlist
+  const addToWishlist = useCallback(
+    (gameId: string) => {
+      // if the currentUserWishlistId is null, means that the user does not have a wishlist, so a wishlist is created
+      if (!currentUserWishlistId) {
+        return createWishlist({
+          variables: {
+            input: { data: { games: [...wishlistGamesIds, gameId] } }
+          }
+        })
+      }
+
+      // if the currentUserWishlistId is not null, so, update the wishlist
+      if (currentUserWishlistId) {
+        return updateWishlist({
+          variables: {
+            where: { id: currentUserWishlistId },
+            data: { games: [...wishlistGamesIds, gameId] }
+          }
+        })
+      }
+    },
+    [updateWishlist, createWishlist, currentUserWishlistId, wishlistGamesIds]
+  )
+
+  // memoized value with the provider object value
   const wishlistProviderValue: WishlistContextData = useMemo(
     () => ({
       ...wishlistContextDefaultValues,
       items: wishlistGamesAdapter(wishlistItems),
-      loading,
-      isInWishlist
+      loading: loading || loadingWishlistCreation || loadingWishlistUpdate,
+      isInWishlist,
+      addToWishlist
     }),
-    [loading, wishlistItems, isInWishlist]
+    [
+      loading,
+      wishlistItems,
+      isInWishlist,
+      addToWishlist,
+      loadingWishlistCreation,
+      loadingWishlistUpdate
+    ]
   )
 
   return (
