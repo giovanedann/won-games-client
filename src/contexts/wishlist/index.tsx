@@ -119,14 +119,14 @@ function WishlistProvider({ children }: WishlistProviderProps) {
       }
 
       // if the currentUserWishlistId is not null, so, update the wishlist
-      if (currentUserWishlistId) {
-        return updateWishlist({
-          variables: {
+      return updateWishlist({
+        variables: {
+          input: {
             where: { id: currentUserWishlistId },
             data: { games: [...wishlistGamesIds, gameId] }
           }
-        })
-      }
+        }
+      })
     },
     [updateWishlist, createWishlist, currentUserWishlistId, wishlistGamesIds]
   )
