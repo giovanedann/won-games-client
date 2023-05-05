@@ -94,6 +94,34 @@ describe('useWishlist', () => {
 
     await waitForNextUpdate()
 
-    expect(result.current.items).toStrictEqual(mocks.createWishlistItem)
+    await waitFor(() => {
+      expect(result.current.items).toStrictEqual(mocks.createWishlistItem)
+    })
+  })
+
+  it('should update the user wishlist', async () => {
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <MockedProvider
+        mocks={[mocks.queryWishlistMock, mocks.updateWishlistMock]}
+      >
+        <WishlistProvider>{children}</WishlistProvider>
+      </MockedProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+      wrapper
+    })
+
+    await waitForNextUpdate()
+
+    act(() => {
+      result.current.addToWishlist('3')
+    })
+
+    await waitForNextUpdate()
+
+    await waitFor(() => {
+      expect(result.current.items).toStrictEqual(mocks.updateWishlistItems)
+    })
   })
 })
