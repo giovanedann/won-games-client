@@ -1,34 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MockedProvider } from '@apollo/client/testing'
-import {
-  renderHook,
-  RenderResult,
-  WaitForNextUpdate
-} from '@testing-library/react-hooks'
 
-import { wishlistMock, wishlistItems } from './mocks'
-import { useWishlist, WishlistContextData, WishlistProvider } from '.'
+import * as mocks from './mocks'
+import { useWishlist, WishlistProvider } from '.'
 import { ReactNode } from 'react'
-
-function hookWrapper({ children }: { children: ReactNode }) {
-  return (
-    <MockedProvider mocks={[wishlistMock]}>
-      <WishlistProvider>{children}</WishlistProvider>
-    </MockedProvider>
-  )
-}
-
-type RenderHookWithProviderResult = {
-  result: RenderResult<WishlistContextData>
-  waitForNextUpdate: WaitForNextUpdate
-}
-
-function renderHookWithProvider(): RenderHookWithProviderResult {
-  const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
-    wrapper: hookWrapper
-  })
-
-  return { result, waitForNextUpdate }
-}
+import { act, waitFor } from 'utils/tests/render'
+import { renderHook } from '@testing-library/react-hooks'
 
 const validSessionMock = {
   data: {
@@ -44,16 +21,36 @@ jest.mock('next-auth/react', () => ({
 }))
 
 describe('useWishlist', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('should return the wishlist items', async () => {
-    const { result, waitForNextUpdate } = renderHookWithProvider()
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <MockedProvider mocks={[mocks.queryWishlistMock]}>
+        <WishlistProvider>{children}</WishlistProvider>
+      </MockedProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+      wrapper
+    })
 
     await waitForNextUpdate()
 
-    expect(result.current.items).toStrictEqual(wishlistItems)
+    expect(result.current.items).toStrictEqual(mocks.queryWishlistItems)
   })
 
   it('should update loading status after loading the games', async () => {
-    const { result, waitForNextUpdate } = renderHookWithProvider()
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <MockedProvider mocks={[mocks.queryWishlistMock]}>
+        <WishlistProvider>{children}</WishlistProvider>
+      </MockedProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+      wrapper
+    })
 
     expect(result.current.loading).toBeTruthy()
 
@@ -63,12 +60,40 @@ describe('useWishlist', () => {
   })
 
   it('should check if game is on wishlist', async () => {
-    const { result, waitForNextUpdate } = renderHookWithProvider()
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <MockedProvider mocks={[mocks.queryWishlistMock]}>
+        <WishlistProvider>{children}</WishlistProvider>
+      </MockedProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+      wrapper
+    })
 
     await waitForNextUpdate()
 
     expect(result.current.isInWishlist('1')).toBeTruthy()
     expect(result.current.isInWishlist('2')).toBeTruthy()
     expect(result.current.isInWishlist('3')).toBeFalsy()
+  })
+
+  it('should create a new wishlist if the user does not have one', async () => {
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <MockedProvider mocks={[mocks.createWishlistMock]}>
+        <WishlistProvider>{children}</WishlistProvider>
+      </MockedProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+      wrapper
+    })
+
+    act(() => {
+      result.current.addToWishlist('3')
+    })
+
+    await waitForNextUpdate()
+
+    expect(result.current.items).toStrictEqual(mocks.createWishlistItem)
   })
 })
