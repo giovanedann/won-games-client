@@ -73,7 +73,7 @@ describe('<WishlistButton />', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('should call remove from wishlist context function if game is on wishlist', async () => {
+  it('should call removeFromWishlist context function if game is on wishlist', async () => {
     const user = userEvent.setup()
     const mockedRemoveFromWishlist = jest.fn()
 
@@ -94,5 +94,26 @@ describe('<WishlistButton />', () => {
     expect(mockedRemoveFromWishlist).toHaveBeenCalled()
     expect(mockedRemoveFromWishlist).toHaveBeenCalledTimes(1)
     expect(mockedRemoveFromWishlist).toHaveBeenCalledWith('1')
+  })
+
+  it('should call addToWishlist context function if game is on wishlist', async () => {
+    const user = userEvent.setup()
+    const mockedAddToWishlist = jest.fn()
+
+    const wishlistProviderValues: WishlistContextData = {
+      ...wishlistContextDefaultValues,
+      isInWishlist: () => false,
+      addToWishlist: mockedAddToWishlist
+    }
+
+    render(<WishlistButton id="3" />, {
+      wishlistProviderProps: wishlistProviderValues
+    })
+
+    await user.click(screen.getByRole('button', { name: /add to wishlist/i }))
+
+    expect(mockedAddToWishlist).toHaveBeenCalled()
+    expect(mockedAddToWishlist).toHaveBeenCalledTimes(1)
+    expect(mockedAddToWishlist).toHaveBeenCalledWith('3')
   })
 })
