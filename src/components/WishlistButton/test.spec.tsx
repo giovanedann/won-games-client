@@ -5,6 +5,7 @@ import {
   wishlistContextDefaultValues
 } from 'contexts/wishlist'
 import nextAuthReact, { SessionContextValue } from 'next-auth/react'
+import userEvent from '@testing-library/user-event'
 
 const validSessionMock = {
   data: {
@@ -70,5 +71,28 @@ describe('<WishlistButton />', () => {
     expect(
       screen.queryByRole('button', { name: /remove from wishlist/i })
     ).not.toBeInTheDocument()
+  })
+
+  it('should call remove from wishlist context function if game is on wishlist', async () => {
+    const user = userEvent.setup()
+    const mockedRemoveFromWishlist = jest.fn()
+
+    const wishlistProviderValues: WishlistContextData = {
+      ...wishlistContextDefaultValues,
+      isInWishlist: () => true,
+      removeFromWishlist: mockedRemoveFromWishlist
+    }
+
+    render(<WishlistButton id="1" />, {
+      wishlistProviderProps: wishlistProviderValues
+    })
+
+    await user.click(
+      screen.getByRole('button', { name: /remove from wishlist/i })
+    )
+
+    expect(mockedRemoveFromWishlist).toHaveBeenCalled()
+    expect(mockedRemoveFromWishlist).toHaveBeenCalledTimes(1)
+    expect(mockedRemoveFromWishlist).toHaveBeenCalledWith('1')
   })
 })
