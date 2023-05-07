@@ -28,7 +28,7 @@ export type WishlistContextData = {
   loading: boolean
 }
 
-const wishlistContextDefaultValues: WishlistContextData = {
+export const wishlistContextDefaultValues: WishlistContextData = {
   items: [],
   addToWishlist: () => null,
   isInWishlist: () => false,
