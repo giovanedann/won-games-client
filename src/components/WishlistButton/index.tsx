@@ -18,7 +18,7 @@ const ButtonIcon = ({ isFavorited }: { isFavorited: boolean }) => {
 
 function WishlistButton({
   id,
-  hasText = true,
+  hasText = false,
   size = 'small'
 }: WishlistButtonProps) {
   const { data } = useSession()

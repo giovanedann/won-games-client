@@ -20,14 +20,14 @@ jest.mock('next-auth/react', () => ({
   useSession: () => validSessionMock
 }))
 
-describe('<WishlistButton />', () => {
+describe('<WishlistButton hasText />', () => {
   it('should render the right text if game is not on wishlist', () => {
     const wishlistProviderValues: WishlistContextData = {
       ...wishlistContextDefaultValues,
       isInWishlist: () => false
     }
 
-    render(<WishlistButton id="1" />, {
+    render(<WishlistButton hasText id="1" />, {
       wishlistProviderProps: wishlistProviderValues
     })
 
@@ -42,7 +42,7 @@ describe('<WishlistButton />', () => {
       isInWishlist: () => true
     }
 
-    render(<WishlistButton id="1" />, {
+    render(<WishlistButton hasText id="1" />, {
       wishlistProviderProps: wishlistProviderValues
     })
 
@@ -64,7 +64,7 @@ describe('<WishlistButton />', () => {
       isInWishlist: () => true
     }
 
-    render(<WishlistButton id="1" />, {
+    render(<WishlistButton hasText id="1" />, {
       wishlistProviderProps: wishlistProviderValues
     })
 
@@ -83,7 +83,7 @@ describe('<WishlistButton />', () => {
       removeFromWishlist: mockedRemoveFromWishlist
     }
 
-    render(<WishlistButton id="1" />, {
+    render(<WishlistButton hasText id="1" />, {
       wishlistProviderProps: wishlistProviderValues
     })
 
@@ -106,7 +106,7 @@ describe('<WishlistButton />', () => {
       addToWishlist: mockedAddToWishlist
     }
 
-    render(<WishlistButton id="3" />, {
+    render(<WishlistButton hasText id="3" />, {
       wishlistProviderProps: wishlistProviderValues
     })
 
