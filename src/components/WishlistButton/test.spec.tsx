@@ -4,6 +4,7 @@ import {
   WishlistContextData,
   wishlistContextDefaultValues
 } from 'contexts/wishlist'
+import nextAuthReact, { SessionContextValue } from 'next-auth/react'
 
 const validSessionMock = {
   data: {
@@ -47,5 +48,27 @@ describe('<WishlistButton />', () => {
     expect(
       screen.getByRole('button', { name: /remove from wishlist/i })
     ).toBeInTheDocument()
+  })
+
+  it('should render nothing if user is not authenticated', () => {
+    jest.spyOn(nextAuthReact, 'useSession').mockImplementationOnce(
+      () =>
+        ({
+          data: null
+        } as SessionContextValue)
+    )
+
+    const wishlistProviderValues: WishlistContextData = {
+      ...wishlistContextDefaultValues,
+      isInWishlist: () => true
+    }
+
+    render(<WishlistButton id="1" />, {
+      wishlistProviderProps: wishlistProviderValues
+    })
+
+    expect(
+      screen.queryByRole('button', { name: /remove from wishlist/i })
+    ).not.toBeInTheDocument()
   })
 })
