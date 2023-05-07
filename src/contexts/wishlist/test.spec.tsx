@@ -99,10 +99,10 @@ describe('useWishlist', () => {
     })
   })
 
-  it('should update the user wishlist', async () => {
+  it('should add a game and update the user wishlist', async () => {
     const wrapper = ({ children }: { children: ReactNode }) => (
       <MockedProvider
-        mocks={[mocks.queryWishlistMock, mocks.updateWishlistMock]}
+        mocks={[mocks.queryWishlistMock, mocks.updateWishlistMockAddGame]}
       >
         <WishlistProvider>{children}</WishlistProvider>
       </MockedProvider>
@@ -122,6 +122,32 @@ describe('useWishlist', () => {
 
     await waitFor(() => {
       expect(result.current.items).toStrictEqual(mocks.updateWishlistItems)
+    })
+  })
+
+  it('should remove a game and update the user wishlist', async () => {
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <MockedProvider
+        mocks={[mocks.queryWishlistMock, mocks.updateWishlistMockRemoveGame]}
+      >
+        <WishlistProvider>{children}</WishlistProvider>
+      </MockedProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+      wrapper
+    })
+
+    await waitForNextUpdate()
+
+    act(() => {
+      result.current.removeFromWishlist('2')
+    })
+
+    await waitForNextUpdate()
+
+    await waitFor(() => {
+      expect(result.current.items).toStrictEqual([mocks.queryWishlistItems[0]])
     })
   })
 })

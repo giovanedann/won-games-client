@@ -62,8 +62,8 @@ export const createWishlistMock = {
   }
 }
 
-// mock of the create wishlist mutation
-export const updateWishlistMock = {
+// mock of the update wishlist mutation when adding a game
+export const updateWishlistMockAddGame = {
   request: {
     query: MUTATION_UPDATE_WISHLIST,
     context: { session: { jwt: 'jwt-123' } },
@@ -80,6 +80,30 @@ export const updateWishlistMock = {
         wishlist: {
           id: 1,
           games: [createGameMock('1'), createGameMock('2'), createGameMock('3')]
+        }
+      }
+    }
+  }
+}
+
+// mock of the update wishlist mutation when adding a game
+export const updateWishlistMockRemoveGame = {
+  request: {
+    query: MUTATION_UPDATE_WISHLIST,
+    context: { session: { jwt: 'jwt-123' } },
+    variables: {
+      input: {
+        where: { id: 1 },
+        data: { games: ['1'] }
+      }
+    }
+  },
+  result: {
+    data: {
+      updateWishlist: {
+        wishlist: {
+          id: 1,
+          games: [createGameMock('1')]
         }
       }
     }
