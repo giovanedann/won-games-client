@@ -22,19 +22,28 @@ function WishlistButton({
   size = 'small'
 }: WishlistButtonProps) {
   const { data } = useSession()
-  const { isInWishlist } = useWishlist()
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
+
+  if (!data) return null
 
   const buttonText = isInWishlist(id)
     ? 'Remove from wishlist'
     : 'Add to wishlist'
 
-  if (!data) return null
+  function handleWishlistButtonClick() {
+    if (!isInWishlist(id)) {
+      addToWishlist(id)
+    } else {
+      removeFromWishlist(id)
+    }
+  }
 
   return (
     <Button
       minimal
       size={size}
       icon={<ButtonIcon isFavorited={isInWishlist(id)} />}
+      onClick={handleWishlistButtonClick}
     >
       {hasText && buttonText}
     </Button>
