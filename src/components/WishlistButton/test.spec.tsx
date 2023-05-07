@@ -33,4 +33,19 @@ describe('<WishlistButton />', () => {
       screen.getByRole('button', { name: /add to wishlist/i })
     ).toBeInTheDocument()
   })
+
+  it('should render the right text if game is on wishlist', () => {
+    const wishlistProviderValues: WishlistContextData = {
+      ...wishlistContextDefaultValues,
+      isInWishlist: () => true
+    }
+
+    render(<WishlistButton id="1" />, {
+      wishlistProviderProps: wishlistProviderValues
+    })
+
+    expect(
+      screen.getByRole('button', { name: /remove from wishlist/i })
+    ).toBeInTheDocument()
+  })
 })
