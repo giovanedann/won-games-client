@@ -131,6 +131,25 @@ function WishlistProvider({ children }: WishlistProviderProps) {
     [updateWishlist, createWishlist, currentUserWishlistId, wishlistGamesIds]
   )
 
+  // memoized function to remove a game from the user wishlist
+  const removeFromWishlist = useCallback(
+    (gameId: string) => {
+      return updateWishlist({
+        variables: {
+          input: {
+            where: { id: currentUserWishlistId },
+            data: {
+              games: wishlistGamesIds.filter(
+                (wishlistGameId) => wishlistGameId !== gameId
+              )
+            }
+          }
+        }
+      })
+    },
+    [updateWishlist, currentUserWishlistId, wishlistGamesIds]
+  )
+
   // memoized value with the provider object value
   const wishlistProviderValue: WishlistContextData = useMemo(
     () => ({
@@ -138,7 +157,8 @@ function WishlistProvider({ children }: WishlistProviderProps) {
       items: wishlistGamesAdapter(wishlistItems),
       loading: loading || loadingWishlistCreation || loadingWishlistUpdate,
       isInWishlist,
-      addToWishlist
+      addToWishlist,
+      removeFromWishlist
     }),
     [
       loading,
@@ -146,7 +166,8 @@ function WishlistProvider({ children }: WishlistProviderProps) {
       isInWishlist,
       addToWishlist,
       loadingWishlistCreation,
-      loadingWishlistUpdate
+      loadingWishlistUpdate,
+      removeFromWishlist
     ]
   )
 
