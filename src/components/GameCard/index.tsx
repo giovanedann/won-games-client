@@ -1,9 +1,9 @@
 import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
 import Image from 'next/image'
 import { ReactNode } from 'react'
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
 import * as S from './styles'
 import CartButton from 'components/CartButton'
+import WishlistButton from 'components/WishlistButton'
 
 export type GameCardProps = {
   id: string
@@ -13,8 +13,6 @@ export type GameCardProps = {
   img: string
   price: string
   promotionalPrice?: string
-  favorite?: boolean
-  onFav?: () => void
   ribbon?: ReactNode
   ribbonColor?: RibbonColors
   ribbonSize?: RibbonSizes
@@ -27,8 +25,6 @@ function GameCard({
   img,
   price,
   title,
-  favorite = false,
-  onFav,
   promotionalPrice,
   ribbon,
   ribbonColor = 'primary',
@@ -56,12 +52,8 @@ function GameCard({
           </S.Info>
         </S.StyledNextLink>
 
-        <S.FavButton role="button" aria-label="favorite button" onClick={onFav}>
-          {favorite ? (
-            <MdFavorite aria-label="remove from wishlist" />
-          ) : (
-            <MdFavoriteBorder aria-label="add to wishlist" />
-          )}
+        <S.FavButton role="button" aria-label="favorite button">
+          <WishlistButton id={id} />
         </S.FavButton>
 
         <S.BuyBox>
