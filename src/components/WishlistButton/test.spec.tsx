@@ -1,3 +1,5 @@
+import 'session.mock'
+
 import { screen, render } from 'utils/tests/render'
 import WishlistButton from '.'
 import {
@@ -6,19 +8,6 @@ import {
 } from 'contexts/wishlist'
 import nextAuthReact, { SessionContextValue } from 'next-auth/react'
 import userEvent from '@testing-library/user-event'
-
-const validSessionMock = {
-  data: {
-    user: {
-      email: 'valid@mail.com'
-    }
-  }
-}
-
-jest.mock('next-auth/react', () => ({
-  ...jest.requireActual('next-auth/react'),
-  useSession: () => validSessionMock
-}))
 
 describe('<WishlistButton hasText />', () => {
   it('should render the right text if game is not on wishlist', () => {

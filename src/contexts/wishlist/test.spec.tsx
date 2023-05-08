@@ -1,3 +1,4 @@
+import 'session.mock'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MockedProvider } from '@apollo/client/testing'
 
@@ -6,19 +7,6 @@ import { useWishlist, WishlistProvider } from '.'
 import { ReactNode } from 'react'
 import { act, waitFor } from 'utils/tests/render'
 import { renderHook } from '@testing-library/react-hooks'
-
-const validSessionMock = {
-  data: {
-    user: {
-      email: 'valid@mail.com'
-    }
-  }
-}
-
-jest.mock('next-auth/react', () => ({
-  ...jest.requireActual('next-auth/react'),
-  useSession: () => validSessionMock
-}))
 
 describe('useWishlist', () => {
   afterEach(() => {
