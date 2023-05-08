@@ -5,11 +5,11 @@ import Wishlist from '.'
 
 import gamesMock from 'components/GameCardSlider/data.mock'
 import highlightMock from 'components/Highlight/data.mock'
+import { wishlistContextDefaultValues } from 'contexts/wishlist'
 
 const props = {
   recommendedHighlight: highlightMock,
-  recommendedGames: gamesMock,
-  games: gamesMock
+  recommendedGames: gamesMock
 }
 
 jest.mock('next-auth/react', () => ({
@@ -27,14 +27,19 @@ jest.mock('components/Showcase', () => ({
 
 describe('<Wishlist />', () => {
   it('should render correctly', () => {
-    render(<Wishlist {...props} />)
+    render(<Wishlist {...props} />, {
+      wishlistProviderProps: {
+        ...wishlistContextDefaultValues,
+        items: [gamesMock[0]]
+      }
+    })
 
     expect(
       screen.getByRole('heading', { name: /wishlist/i })
     ).toBeInTheDocument()
 
     expect(screen.getByText(/showcase mock/i)).toBeInTheDocument()
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(6)
+    expect(screen.getByText(/population zero/i)).toBeInTheDocument()
   })
 
   it('should render the Empty component when there are no games on wishlist', () => {
@@ -42,7 +47,13 @@ describe('<Wishlist />', () => {
       <Wishlist
         recommendedGames={props.recommendedGames}
         recommendedHighlight={props.recommendedHighlight}
-      />
+      />,
+      {
+        wishlistProviderProps: {
+          ...wishlistContextDefaultValues,
+          items: []
+        }
+      }
     )
 
     expect(screen.queryByText(/population 0/i)).not.toBeInTheDocument()
