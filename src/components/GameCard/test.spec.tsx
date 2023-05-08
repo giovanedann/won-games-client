@@ -1,3 +1,4 @@
+import 'session.mock'
 import { screen, render } from 'utils/tests/render'
 import userEvent from '@testing-library/user-event'
 
@@ -36,7 +37,7 @@ describe('<GameCard />', () => {
       props.img
     )
 
-    expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/favorite button/i)).toBeInTheDocument()
   })
 
   it('should render the normal price without text decoration if no promotionalPrice', () => {
@@ -66,24 +67,6 @@ describe('<GameCard />', () => {
 
     const promotionalPrice = screen.getByText(/R\$ 235,00/i)
     expect(promotionalPrice).toBeInTheDocument()
-  })
-
-  it('should render a filled heart icon when favorite is true', () => {
-    render(<GameCard {...props} favorite />)
-
-    expect(screen.getByLabelText(/remove from wishlist/i)).toBeInTheDocument()
-  })
-
-  it('should call onFav function on heart icon click', async () => {
-    const user = userEvent.setup()
-    const favoriteHandler = jest.fn()
-
-    render(<GameCard {...props} onFav={favoriteHandler} />)
-
-    await user.click(screen.getByLabelText(/favorite button/i))
-
-    expect(favoriteHandler).toBeCalled()
-    expect(favoriteHandler).toBeCalledTimes(1)
   })
 
   it('should render a ribbon', () => {

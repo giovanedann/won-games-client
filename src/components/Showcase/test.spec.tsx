@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'match-media-mock'
+import 'session.mock'
 import { screen, render } from 'utils/tests/render'
 import Showcase from '.'
 
