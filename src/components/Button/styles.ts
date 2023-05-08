@@ -98,6 +98,10 @@ export const Wrapper = styled.button<WrapperProps>`
     opacity: 0.9;
   }
 
+  &:focus {
+    outline: 1px dashed;
+  }
+
   ${({ theme, size, fullWidth, hasIcon, minimal, disabled }) => css`
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};

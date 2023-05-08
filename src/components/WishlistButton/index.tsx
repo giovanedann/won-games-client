@@ -1,6 +1,8 @@
 import Button, { ButtonProps } from 'components/Button'
+import Spinner from 'components/Spinner'
 import { useWishlist } from 'contexts/wishlist'
 import { useSession } from 'next-auth/react'
+import { useState } from 'react'
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md'
 
 export type WishlistButtonProps = Pick<ButtonProps, 'size'> & {
@@ -8,7 +10,17 @@ export type WishlistButtonProps = Pick<ButtonProps, 'size'> & {
   hasText?: boolean
 }
 
-const ButtonIcon = ({ isFavorited }: { isFavorited: boolean }) => {
+const ButtonIcon = ({
+  isFavorited,
+  isLoading
+}: {
+  isFavorited: boolean
+  isLoading: boolean
+}) => {
+  if (isLoading) {
+    return <Spinner />
+  }
+
   if (isFavorited) {
     return <MdFavorite />
   }
@@ -21,6 +33,8 @@ function WishlistButton({
   hasText = false,
   size = 'small'
 }: WishlistButtonProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const { data } = useSession()
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
 
@@ -30,19 +44,23 @@ function WishlistButton({
     ? 'Remove from wishlist'
     : 'Add to wishlist'
 
-  function handleWishlistButtonClick() {
+  async function handleWishlistButtonClick() {
+    setIsLoading(true)
+
     if (!isInWishlist(id)) {
-      addToWishlist(id)
+      await addToWishlist(id)
     } else {
-      removeFromWishlist(id)
+      await removeFromWishlist(id)
     }
+
+    setIsLoading(false)
   }
 
   return (
     <Button
       minimal
       size={size}
-      icon={<ButtonIcon isFavorited={isInWishlist(id)} />}
+      icon={<ButtonIcon isFavorited={isInWishlist(id)} isLoading={isLoading} />}
       onClick={handleWishlistButtonClick}
     >
       {hasText && buttonText}

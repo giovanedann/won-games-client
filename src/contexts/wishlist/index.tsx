@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client'
+import { FetchResult, useMutation } from '@apollo/client'
 import wishlistGamesAdapter from 'adapters/wishlist-games.adapter'
 import { GameCardProps } from 'components/GameCard'
 import { MutationCreateWishlist } from 'graphql/generated/MutationCreateWishlist'
@@ -23,16 +23,20 @@ import {
 export type WishlistContextData = {
   items: GameCardProps[]
   isInWishlist: (id: string) => boolean
-  addToWishlist: (id: string) => void
-  removeFromWishlist: (id: string) => void
+  addToWishlist: (
+    id: string
+  ) => Promise<FetchResult<MutationUpdateWishlist | MutationCreateWishlist>>
+  removeFromWishlist: (
+    id: string
+  ) => Promise<FetchResult<MutationUpdateWishlist>>
   loading: boolean
 }
 
 export const wishlistContextDefaultValues: WishlistContextData = {
   items: [],
-  addToWishlist: () => null,
+  addToWishlist: () => new Promise((resolve) => resolve({})),
   isInWishlist: () => false,
-  removeFromWishlist: () => null,
+  removeFromWishlist: () => new Promise((resolve) => resolve({})),
   loading: false
 }
 
