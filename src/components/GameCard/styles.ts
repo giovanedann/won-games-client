@@ -71,6 +71,7 @@ export const Title = styled.h3`
     line-height: ${theme.font.sizes.medium};
     font-weight: ${theme.font.bold};
     color: ${theme.colors.black};
+    max-width: 95%;
   `}
 `
 
