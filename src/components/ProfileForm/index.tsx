@@ -4,13 +4,16 @@ import TextField from 'components/TextField'
 
 import * as S from './styles'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 export type ProfileFormProps = {
   username?: string
   email?: string
 }
 
-function ProfileForm({ email, username }: ProfileFormProps) {
+function ProfileForm() {
+  const { data } = useSession()
+
   return (
     <>
       <Heading lineBottom color="black" size="small">
@@ -21,8 +24,8 @@ function ProfileForm({ email, username }: ProfileFormProps) {
         <TextField
           name="username"
           placeholder="Username"
-          label="username"
-          initialValue={username}
+          label="Username"
+          initialValue={data?.user?.name ?? ''}
         />
 
         <TextField
@@ -30,13 +33,13 @@ function ProfileForm({ email, username }: ProfileFormProps) {
           placeholder="Enter your e-mail"
           label="E-mail"
           type="email"
-          initialValue={email}
+          initialValue={data?.user?.email ?? ''}
           readOnly
         />
 
         <S.ButtonsContainer>
           <S.ResetButtonContainer>
-            <Link href={`/forgot-password?email=${email}`}>
+            <Link href={`/forgot-password?email=${data?.user?.email}`}>
               <Button minimal size="large">
                 Reset password
               </Button>
