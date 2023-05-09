@@ -20,6 +20,10 @@ export default function Me({ email, username }: ProfileFormProps) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await protectedRoute(context)
 
+  if (!session) {
+    return { props: {} }
+  }
+
   const apolloClient = initializeApollo(null, session)
 
   const { data } = await apolloClient.query<
@@ -28,7 +32,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   >({
     query: QUERY_PROFILE,
     variables: {
-      identifier: session?.id ?? ''
+      identifier: session.id
     }
   })
 
