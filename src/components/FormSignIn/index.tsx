@@ -37,7 +37,7 @@ function FormSignIn() {
     const result = await signIn('credentials', {
       ...signInFormValues,
       redirect: false,
-      callbackUrl: `/${query?.callbackUrl ?? ''}`
+      callbackUrl: `${query?.callbackUrl ?? ''}`
     })
 
     if (result?.url) {

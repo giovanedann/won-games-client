@@ -71,6 +71,7 @@ export const Title = styled.h3`
     line-height: ${theme.font.sizes.medium};
     font-weight: ${theme.font.bold};
     color: ${theme.colors.black};
+    max-width: 95%;
   `}
 `
 
@@ -86,7 +87,7 @@ export const FavButton = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.primary};
     position: absolute;
-    right: 0;
+    right: -1rem;
     top: -0.5rem;
     cursor: pointer;
 

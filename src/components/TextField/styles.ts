@@ -38,6 +38,14 @@ export const Input = styled.input<InputProps>`
       filter: none;
     }
   `}
+
+  ${({ readOnly }) =>
+    readOnly &&
+    css`
+      opacity: 0.3;
+      pointer-events: none;
+      cursor: not-allowed;
+    `}
 `
 
 export const Label = styled.label`

@@ -1,4 +1,5 @@
 import 'match-media-mock'
+import 'session.mock'
 import { screen, render } from 'utils/tests/render'
 import GameCardSlider from '.'
 

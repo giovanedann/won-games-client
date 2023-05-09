@@ -3,6 +3,7 @@ import formatPrice from 'utils/formatPrice'
 import getImageUrl from 'utils/getImageUrl'
 
 export type Game = {
+  id: string
   title: string
   slug: string
   developer: string

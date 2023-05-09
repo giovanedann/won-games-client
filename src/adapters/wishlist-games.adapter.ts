@@ -1,4 +1,4 @@
-import { QueryHome_freeGames } from 'graphql/generated/QueryHome'
+import { QueryWishlist_wishlists_games } from 'graphql/generated/QueryWishlist'
 import formatPrice from 'utils/formatPrice'
 import getImageUrl from 'utils/getImageUrl'
 
@@ -11,10 +11,10 @@ export type Game = {
   price: string
 }
 
-export default function freeGamesAdapter(
-  apiNewGames: QueryHome_freeGames[]
+export default function wishlistGamesAdapter(
+  apiWishlistGames: QueryWishlist_wishlists_games[]
 ): Game[] {
-  return apiNewGames.map((game) => ({
+  return apiWishlistGames.map((game) => ({
     id: game.id,
     title: game.name,
     slug: game.slug,

@@ -1,7 +1,9 @@
 import { ThemeProvider } from 'styled-components'
 import { CartContext, cartContextDefaultValues } from 'contexts/cart'
+import { WishlistContext, wishlistContextDefaultValues } from 'contexts/wishlist'
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
+import { SessionProvider } from 'next-auth/react'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -26,17 +28,33 @@ export const parameters = {
   }
 }
 
+const session = {
+  data: {
+    user: {
+      email: 'valid@mail.com'
+    }
+  }
+}
+
 export const decorators = [
   (Story, context) => (
-    <CartContext.Provider value={{
-      ...cartContextDefaultValues,
-      ...(context?.args?.cartContextValue || {}),
-      ...context.args
-    }}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles removeBg/>
-        <Story />
-      </ThemeProvider>
-    </CartContext.Provider>
+    <SessionProvider session={session}>
+      <CartContext.Provider value={{
+        ...cartContextDefaultValues,
+        ...(context?.args?.cartContextValue || {}),
+        ...context.args
+      }}>
+        <WishlistContext.Provider value={{
+        ...wishlistContextDefaultValues,
+        ...(context?.args?.wishlistContextValue || {}),
+        ...context.args
+        }}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyles removeBg/>
+            <Story />
+          </ThemeProvider>
+        </WishlistContext.Provider>
+      </CartContext.Provider>
+    </SessionProvider>
   ),
 ]

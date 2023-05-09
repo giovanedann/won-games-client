@@ -13,5 +13,10 @@ export default {
 
 const Template: StoryFn<typeof {{pascalCase name}}> = (args) => <{{pascalCase name}} {...args} />
 
-export const Basic = Template.bind({})
-Basic.args = {} // default values for your props
+export const Basic = {
+  render: Template,
+
+  args: {},
+
+  parameters: {}
+}

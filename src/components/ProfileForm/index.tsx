@@ -31,6 +31,7 @@ function ProfileForm({ email, username }: ProfileFormProps) {
           label="E-mail"
           type="email"
           initialValue={email}
+          readOnly
         />
 
         <S.ButtonsContainer>
