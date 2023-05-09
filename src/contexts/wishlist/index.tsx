@@ -62,7 +62,7 @@ function WishlistProvider({ children }: WishlistProviderProps) {
   // hook to load the games
   const { data, loading } = useQueryWishlist({
     skip: !session.data?.user?.email,
-    context: { session },
+    context: { session: session.data },
     variables: {
       identifier: session.data?.user?.email as string
     }
@@ -71,7 +71,7 @@ function WishlistProvider({ children }: WishlistProviderProps) {
   // mutation to create the wishlist if it does not exist
   const [createWishlist, { loading: loadingWishlistCreation }] =
     useMutation<MutationCreateWishlist>(MUTATION_CREATE_WISHLIST, {
-      context: { session },
+      context: { session: session.data },
       onCompleted: (data) => {
         setWishlistItems(data?.createWishlist?.wishlist?.games ?? [])
         setCurrentUserWishlistId(data.createWishlist?.wishlist?.id ?? null)
@@ -81,7 +81,7 @@ function WishlistProvider({ children }: WishlistProviderProps) {
   // mutation to update the wishlist if the user already have one
   const [updateWishlist, { loading: loadingWishlistUpdate }] =
     useMutation<MutationUpdateWishlist>(MUTATION_UPDATE_WISHLIST, {
-      context: { session },
+      context: { session: session.data },
       onCompleted: (data) => {
         setWishlistItems(data?.updateWishlist?.wishlist?.games ?? [])
       }
