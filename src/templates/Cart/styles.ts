@@ -15,11 +15,14 @@ export const Content = styled.div`
 
 export const Text = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.gray};
+    color: ${theme.colors.gray[100]};
+    text-align: center;
+
     a {
       color: ${theme.colors.primary};
       text-decoration: none;
     }
+
     svg {
       color: ${theme.colors.primary};
     }

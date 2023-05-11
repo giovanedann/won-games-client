@@ -10,6 +10,9 @@ import Base from 'templates/Base'
 
 import * as S from './styles'
 import { MdInfo } from 'react-icons/md'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 
 export type CartProps = CartListProps &
   Pick<PaymentOptionsProps, 'cards'> & {
@@ -25,6 +28,16 @@ const Cart = ({
   cards
 }: CartProps) => {
   const handlePayment = () => ({})
+  const { data } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    router.reload()
+  }, []) // eslint-disable-line
+
+  if (!data) {
+    return null
+  }
 
   return (
     <Base>
