@@ -1,6 +1,5 @@
 import 'session.mock'
 import { screen, render } from 'utils/tests/render'
-import userEvent from '@testing-library/user-event'
 
 import GameCard from '.'
 

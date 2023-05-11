@@ -2,7 +2,6 @@ import Container from 'components/Container'
 import Divider from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
-import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
 import CartList, { CartListProps } from 'components/CartList'
 import Heading from 'components/Heading'
 import Showcase from 'components/Showcase'
@@ -13,27 +12,28 @@ import { MdInfo } from 'react-icons/md'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import PaymentForm from 'components/PaymentForm'
 
-export type CartProps = CartListProps &
-  Pick<PaymentOptionsProps, 'cards'> & {
-    recommendedGames: GameCardProps[]
-    recommendedTitle?: string
-    recommendedHighlight: HighlightProps
-  }
+export type CartProps = CartListProps & {
+  recommendedGames: GameCardProps[]
+  recommendedTitle?: string
+  recommendedHighlight: HighlightProps
+}
 
 const Cart = ({
   recommendedGames,
   recommendedHighlight,
-  recommendedTitle,
-  cards
+  recommendedTitle
 }: CartProps) => {
-  const handlePayment = () => ({})
+  const handlePayment = () => ({}) // eslint-disable-line
   const { data } = useSession()
   const router = useRouter()
 
   useEffect(() => {
-    router.reload()
-  }, []) // eslint-disable-line
+    if (!data) {
+      router.reload()
+    }
+  }, [data]) // eslint-disable-line
 
   if (!data) {
     return null
@@ -49,7 +49,7 @@ const Cart = ({
         <S.Content>
           <CartList />
 
-          <PaymentOptions cards={cards} handlePayment={handlePayment} />
+          <PaymentForm />
         </S.Content>
 
         <S.Text>
