@@ -1,6 +1,5 @@
 import {
   MdAccountCircle,
-  MdCreditCard,
   MdExitToApp,
   MdFormatListBulleted
 } from 'react-icons/md'
@@ -24,15 +23,6 @@ function ProfileMenu({ activeLink }: ProfileMenuProps) {
       >
         <MdAccountCircle size={24} />
         <span>My profile</span>
-      </S.StyledLink>
-
-      <S.StyledLink
-        href="/profile/cards"
-        isActive={activeLink === '/profile/cards'}
-        title="my cards"
-      >
-        <MdCreditCard size={24} />
-        <span>My cards</span>
       </S.StyledLink>
 
       <S.StyledLink

@@ -1,30 +1,50 @@
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import { MdInfo } from 'react-icons/md'
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+
 import Container from 'components/Container'
 import Divider from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
-import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
 import CartList, { CartListProps } from 'components/CartList'
 import Heading from 'components/Heading'
 import Showcase from 'components/Showcase'
 import Base from 'templates/Base'
 
 import * as S from './styles'
-import { MdInfo } from 'react-icons/md'
+import PaymentForm from 'components/PaymentForm'
+import { Session } from 'next-auth'
 
-export type CartProps = CartListProps &
-  Pick<PaymentOptionsProps, 'cards'> & {
-    recommendedGames: GameCardProps[]
-    recommendedTitle?: string
-    recommendedHighlight: HighlightProps
-  }
+export type CartProps = {
+  session: Session
+  recommendedGames: GameCardProps[]
+  recommendedTitle?: string
+  recommendedHighlight: HighlightProps
+}
+
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`)
 
 const Cart = ({
   recommendedGames,
   recommendedHighlight,
   recommendedTitle,
-  cards
+  session
 }: CartProps) => {
-  const handlePayment = () => ({})
+  const { data } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!data) {
+      router.reload()
+    }
+  }, [data]) // eslint-disable-line
+
+  if (!data) {
+    return null
+  }
 
   return (
     <Base>
@@ -36,7 +56,9 @@ const Cart = ({
         <S.Content>
           <CartList />
 
-          <PaymentOptions cards={cards} handlePayment={handlePayment} />
+          <Elements stripe={stripe}>
+            <PaymentForm session={session} />
+          </Elements>
         </S.Content>
 
         <S.Text>
