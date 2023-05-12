@@ -10,8 +10,10 @@ import Button from 'components/Button'
 
 function PaymentForm() {
   const [error, setError] = useState<string | null>(null)
+  const [disabled, setDisabled] = useState<boolean>(true)
 
   function handleChange(event: StripeCardElementChangeEvent) {
+    setDisabled(event.empty)
     setError(event.error ? event.error.message : null)
   }
 
@@ -43,7 +45,11 @@ function PaymentForm() {
           Continue shopping
         </Button>
 
-        <Button fullWidth icon={<MdShoppingCart />}>
+        <Button
+          fullWidth
+          icon={<MdShoppingCart />}
+          disabled={!!error || disabled}
+        >
           Buy now
         </Button>
       </S.Footer>
