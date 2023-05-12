@@ -90,6 +90,12 @@ devDependencies:
   '@storybook/testing-library':
     specifier: ^0.1.0
     version: 0.1.0
+  '@stripe/react-stripe-js':
+    specifier: ^2.1.0
+    version: 2.1.0(@stripe/stripe-js@1.52.1)(react-dom@18.2.0)(react@18.2.0)
+  '@stripe/stripe-js':
+    specifier: ^1.52.1
+    version: 1.52.1
   '@testing-library/jest-dom':
     specifier: ^5.16.5
     version: 5.16.5
@@ -3987,6 +3993,23 @@ packages:
       '@types/babel__core': 7.20.0
       '@types/express': 4.17.17
       file-system-cache: 2.1.1
+    dev: true
+
+  /@stripe/react-stripe-js@2.1.0(@stripe/stripe-js@1.52.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Zb6Ycrj5QuhYkvtlvvLzo+cysUyA6wkx3zWHQ7uVnHRYRM/n1jtQD6VGBrdmptC8e8PJN6L091gBCyB5P0FqmA==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.44.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@stripe/stripe-js': 1.52.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
+
+  /@stripe/stripe-js@1.52.1:
+    resolution: {integrity: sha512-fza40OPSpGQlFxc5TZWiYC/6Lk89Sep1fLuv9ss33YS6lCAF8UZbfA1E6W+lwO4c7WRKZIZumHIEbPJfP/O9uw==}
     dev: true
 
   /@surma/rollup-plugin-off-main-thread@2.2.3:
