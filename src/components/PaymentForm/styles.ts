@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import * as ButtonStyles from 'components/Button/styles'
 
-export const Wrapper = styled.div``
+export const Wrapper = styled.form``
 
 export const Body = styled.div`
   ${({ theme }) => css`

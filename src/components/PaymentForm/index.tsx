@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { CardElement } from '@stripe/react-stripe-js'
 
@@ -10,6 +10,7 @@ import Button from 'components/Button'
 import { useCart } from 'contexts/cart'
 import { Session } from 'next-auth'
 import StripeService from 'services/StripeService'
+import { FormLoader } from 'components/Form'
 
 type PaymentFormProps = {
   session: Session
@@ -18,6 +19,7 @@ type PaymentFormProps = {
 function PaymentForm({ session }: PaymentFormProps) {
   const [error, setError] = useState<string | null>(null)
   const [disabled, setDisabled] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [clientSecret, setClientSecret] = useState<string>('') // eslint-disable-line
   const [areGamesFree, setAreGamesFree] = useState<boolean>(false)
 
@@ -56,12 +58,17 @@ function PaymentForm({ session }: PaymentFormProps) {
     }
   }
 
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+    setIsLoading(true)
+  }
+
   useEffect(() => {
     setPaymentMode()
   }, [items, session]) // eslint-disable-line
 
   return (
-    <S.Wrapper>
+    <S.Wrapper onSubmit={handleSubmit}>
       <S.Body>
         <Heading color="black" size="small" lineBottom>
           Payment
@@ -96,7 +103,8 @@ function PaymentForm({ session }: PaymentFormProps) {
 
         <Button
           fullWidth
-          icon={<MdShoppingCart />}
+          type="submit"
+          icon={isLoading ? <FormLoader /> : <MdShoppingCart />}
           disabled={!!error || disabled}
         >
           Buy now
