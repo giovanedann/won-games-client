@@ -11,6 +11,7 @@ import { useCart } from 'contexts/cart'
 import { Session } from 'next-auth'
 import StripeService from 'services/StripeService'
 import { FormLoader } from 'components/Form'
+import { useRouter } from 'next/router'
 
 type PaymentFormProps = {
   session: Session
@@ -27,6 +28,8 @@ function PaymentForm({ session }: PaymentFormProps) {
   const elements = useElements()
 
   const { items } = useCart()
+
+  const { push } = useRouter()
 
   // function to handle change of the payment card component
   function handleChange(event: StripeCardElementChangeEvent) {
@@ -65,6 +68,11 @@ function PaymentForm({ session }: PaymentFormProps) {
     event.preventDefault()
     setIsLoading(true)
 
+    if (areGamesFree) {
+      push('/success')
+      return
+    }
+
     // confirmation of payment
     const payload = await stripe?.confirmCardPayment(clientSecret, {
       payment_method: {
@@ -78,6 +86,7 @@ function PaymentForm({ session }: PaymentFormProps) {
     } else {
       setError(null)
       setIsLoading(false)
+      push('/success')
     }
   }
 
