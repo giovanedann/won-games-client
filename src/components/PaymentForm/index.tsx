@@ -1,7 +1,9 @@
+import { MdShoppingCart } from 'react-icons/md'
+import { CardElement } from '@stripe/react-stripe-js'
+
 import Heading from 'components/Heading'
 import * as S from './styles'
 import Button from 'components/Button'
-import { MdShoppingCart } from 'react-icons/md'
 
 function PaymentForm() {
   return (
@@ -10,6 +12,8 @@ function PaymentForm() {
         <Heading color="black" size="small" lineBottom>
           Payment
         </Heading>
+
+        <CardElement options={{ hidePostalCode: true }} />
       </S.Body>
       <S.Footer>
         <Button as="a" fullWidth minimal>
