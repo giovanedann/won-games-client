@@ -43,7 +43,7 @@ function PaymentForm({ session }: PaymentFormProps) {
       // create payment intent of the items
       const data = await StripeService.createPaymentIntent({
         items,
-        token: session.jwt
+        token: session?.jwt ?? ''
       })
 
       // if data.freeGames is true, change the state

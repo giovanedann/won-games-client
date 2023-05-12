@@ -33,7 +33,6 @@ const Cart = ({
   recommendedTitle,
   session
 }: CartProps) => {
-  const handlePayment = () => ({}) // eslint-disable-line
   const { data } = useSession()
   const router = useRouter()
 
