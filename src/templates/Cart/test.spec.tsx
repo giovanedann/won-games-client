@@ -8,10 +8,12 @@ import itemsMock from 'components/CartList/data.mock'
 
 import Cart from '.'
 import { cartContextDefaultValues } from 'contexts/cart'
+import { Session } from 'next-auth'
 
 const props = {
   recommendedHighlight: highlightMock,
-  recommendedGames: gamesMock
+  recommendedGames: gamesMock,
+  session: {} as Session
 }
 
 jest.mock('templates/Base', () => ({
