@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
-import { CardElement } from '@stripe/react-stripe-js'
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 
 import { MdShoppingCart, MdErrorOutline } from 'react-icons/md'
 
@@ -20,8 +20,11 @@ function PaymentForm({ session }: PaymentFormProps) {
   const [error, setError] = useState<string | null>(null)
   const [disabled, setDisabled] = useState<boolean>(true)
   const [isLoading, setIsLoading] = useState(false)
-  const [clientSecret, setClientSecret] = useState<string>('') // eslint-disable-line
+  const [clientSecret, setClientSecret] = useState<string>('')
   const [areGamesFree, setAreGamesFree] = useState<boolean>(false)
+
+  const stripe = useStripe()
+  const elements = useElements()
 
   const { items } = useCart()
 
@@ -61,6 +64,21 @@ function PaymentForm({ session }: PaymentFormProps) {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     setIsLoading(true)
+
+    // confirmation of payment
+    const payload = await stripe?.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements!.getElement(CardElement)!
+      }
+    })
+
+    if (payload?.error) {
+      setError(`Payment failed! ${payload.error.message}`)
+      setIsLoading(false)
+    } else {
+      setError(null)
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -103,7 +121,6 @@ function PaymentForm({ session }: PaymentFormProps) {
 
         <Button
           fullWidth
-          type="submit"
           icon={isLoading ? <FormLoader /> : <MdShoppingCart />}
           disabled={!!error || disabled}
         >
