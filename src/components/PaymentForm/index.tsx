@@ -23,7 +23,10 @@ function PaymentForm() {
         </Heading>
 
         <CardElement
-          options={{ hidePostalCode: true }}
+          options={{
+            hidePostalCode: true,
+            style: { base: { fontSize: '1.2rem' } }
+          }}
           onChange={handleChange}
         />
 
