@@ -9,6 +9,7 @@ import { HighlightProps } from 'components/Highlight'
 import * as S from './styles'
 import Container from 'components/Container'
 import { MdDone } from 'react-icons/md'
+import useIsMounted from 'hooks/useIsMounted'
 
 export type SuccessTemplateProps = {
   recommendedTitle: string
@@ -16,11 +17,15 @@ export type SuccessTemplateProps = {
   recommendedHighlight: HighlightProps
 }
 
-const Success = ({
+function Success({
   recommendedTitle,
   recommendedGames,
   recommendedHighlight
-}: SuccessTemplateProps) => {
+}: SuccessTemplateProps) {
+  const isComponentMounted = useIsMounted()
+
+  if (!isComponentMounted) return null
+
   return (
     <Base>
       <Container>
@@ -34,11 +39,10 @@ const Success = ({
           <S.Text>
             Wait for your payment details by email. Your game is now available
             for download inside your{' '}
-            <Link href="/profile/orders">
-              <a>Orders List</a>
-            </Link>
-            . Enjoy!
+            <Link href="/profile/orders">orders list.</Link>
           </S.Text>
+
+          <S.Enjoy>Enjoy!</S.Enjoy>
         </S.Wrapper>
       </Container>
 
