@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { CardElement } from '@stripe/react-stripe-js'
 
@@ -7,15 +7,57 @@ import { MdShoppingCart, MdErrorOutline } from 'react-icons/md'
 import Heading from 'components/Heading'
 import * as S from './styles'
 import Button from 'components/Button'
+import { useCart } from 'contexts/cart'
+import { Session } from 'next-auth'
+import StripeService from 'services/StripeService'
 
-function PaymentForm() {
+type PaymentFormProps = {
+  session: Session
+}
+
+function PaymentForm({ session }: PaymentFormProps) {
   const [error, setError] = useState<string | null>(null)
   const [disabled, setDisabled] = useState<boolean>(true)
+  const [clientSecret, setClientSecret] = useState<string>('') // eslint-disable-line
+  const [areGamesFree, setAreGamesFree] = useState<boolean>(false) // eslint-disable-line
 
+  const { items } = useCart()
+
+  // function to handle change of the payment card component
   function handleChange(event: StripeCardElementChangeEvent) {
     setDisabled(event.empty)
     setError(event.error ? event.error.message : null)
   }
+
+  // function to check if all games are free and set the payment mode
+  async function setPaymentMode() {
+    if (items.length) {
+      // create payment intent of the items
+      const data = await StripeService.createPaymentIntent({
+        items,
+        token: session.jwt
+      })
+
+      // if data.freeGames is true, change the state
+      if (data.freeGames) {
+        setAreGamesFree(true)
+        return
+      }
+
+      // on error, set error from server
+      if (data.error) {
+        setError(data.error)
+        return
+      }
+
+      // if code reaches here, the payment is valid, so we set the client secret
+      setClientSecret(data.client_secret)
+    }
+  }
+
+  useEffect(() => {
+    setPaymentMode()
+  }, [session]) // eslint-disable-line
 
   return (
     <S.Wrapper>

@@ -16,8 +16,10 @@ import Base from 'templates/Base'
 
 import * as S from './styles'
 import PaymentForm from 'components/PaymentForm'
+import { Session } from 'next-auth'
 
-export type CartProps = CartListProps & {
+export type CartProps = {
+  session: Session
   recommendedGames: GameCardProps[]
   recommendedTitle?: string
   recommendedHighlight: HighlightProps
@@ -28,7 +30,8 @@ const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`)
 const Cart = ({
   recommendedGames,
   recommendedHighlight,
-  recommendedTitle
+  recommendedTitle,
+  session
 }: CartProps) => {
   const handlePayment = () => ({}) // eslint-disable-line
   const { data } = useSession()
@@ -55,7 +58,7 @@ const Cart = ({
           <CartList />
 
           <Elements stripe={stripe}>
-            <PaymentForm />
+            <PaymentForm session={session} />
           </Elements>
         </S.Content>
 
