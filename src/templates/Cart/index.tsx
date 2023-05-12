@@ -1,3 +1,10 @@
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import { MdInfo } from 'react-icons/md'
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+
 import Container from 'components/Container'
 import Divider from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
@@ -8,10 +15,6 @@ import Showcase from 'components/Showcase'
 import Base from 'templates/Base'
 
 import * as S from './styles'
-import { MdInfo } from 'react-icons/md'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { useSession } from 'next-auth/react'
 import PaymentForm from 'components/PaymentForm'
 
 export type CartProps = CartListProps & {
@@ -19,6 +22,8 @@ export type CartProps = CartListProps & {
   recommendedTitle?: string
   recommendedHighlight: HighlightProps
 }
+
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`)
 
 const Cart = ({
   recommendedGames,
@@ -49,7 +54,9 @@ const Cart = ({
         <S.Content>
           <CartList />
 
-          <PaymentForm />
+          <Elements stripe={stripe}>
+            <PaymentForm />
+          </Elements>
         </S.Content>
 
         <S.Text>
