@@ -19,7 +19,7 @@ function PaymentForm({ session }: PaymentFormProps) {
   const [error, setError] = useState<string | null>(null)
   const [disabled, setDisabled] = useState<boolean>(true)
   const [clientSecret, setClientSecret] = useState<string>('') // eslint-disable-line
-  const [areGamesFree, setAreGamesFree] = useState<boolean>(false) // eslint-disable-line
+  const [areGamesFree, setAreGamesFree] = useState<boolean>(false)
 
   const { items } = useCart()
 
@@ -51,13 +51,14 @@ function PaymentForm({ session }: PaymentFormProps) {
       }
 
       // if code reaches here, the payment is valid, so we set the client secret
+      setAreGamesFree(false)
       setClientSecret(data.client_secret)
     }
   }
 
   useEffect(() => {
     setPaymentMode()
-  }, [session]) // eslint-disable-line
+  }, [items, session]) // eslint-disable-line
 
   return (
     <S.Wrapper>
@@ -65,15 +66,21 @@ function PaymentForm({ session }: PaymentFormProps) {
         <Heading color="black" size="small" lineBottom>
           Payment
         </Heading>
-
-        <CardElement
-          options={{
-            hidePostalCode: true,
-            style: { base: { fontSize: '1.2rem' } }
-          }}
-          onChange={handleChange}
-        />
-
+        {areGamesFree && (
+          <S.FreeGamesInfo>
+            Only free games in cart! Click buy and enjoy!
+          </S.FreeGamesInfo>
+        )}
+        {!areGamesFree}{' '}
+        {
+          <CardElement
+            options={{
+              hidePostalCode: true,
+              style: { base: { fontSize: '1.2rem' } }
+            }}
+            onChange={handleChange}
+          />
+        }
         {error && (
           <S.Error>
             <MdErrorOutline size={20} />
