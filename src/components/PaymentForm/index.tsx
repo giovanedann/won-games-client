@@ -1,17 +1,19 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { StripeCardElementChangeEvent, PaymentIntent } from '@stripe/stripe-js'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-
+import { Session } from 'next-auth'
+import { useRouter } from 'next/router'
 import { MdShoppingCart, MdErrorOutline } from 'react-icons/md'
 
-import Heading from 'components/Heading'
-import * as S from './styles'
 import Button from 'components/Button'
-import { useCart } from 'contexts/cart'
-import { Session } from 'next-auth'
-import StripeService from 'services/StripeService'
 import { FormLoader } from 'components/Form'
-import { useRouter } from 'next/router'
+import Heading from 'components/Heading'
+
+import { useCart } from 'contexts/cart'
+
+import StripeService from 'services/StripeService'
+
+import * as S from './styles'
 
 type PaymentFormProps = {
   session: Session
@@ -64,12 +66,28 @@ function PaymentForm({ session }: PaymentFormProps) {
     }
   }
 
+  // function to save the order on the database
+  async function saveOrder(paymentIntent?: PaymentIntent) {
+    const data = await StripeService.createPayment({
+      items,
+      paymentIntent,
+      token: session.jwt
+    })
+
+    return data
+  }
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     setIsLoading(true)
 
     if (areGamesFree) {
+      // saves the order on database
+      await saveOrder()
+
+      // redirects user to purchase success page
       push('/success')
+
       return
     }
 
@@ -85,6 +103,7 @@ function PaymentForm({ session }: PaymentFormProps) {
       setIsLoading(false)
     } else {
       setError(null)
+      await saveOrder(payload?.paymentIntent)
       setIsLoading(false)
       push('/success')
     }
