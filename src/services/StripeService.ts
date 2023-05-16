@@ -17,7 +17,7 @@ class StripeService {
   async createPaymentIntent({ items, token }: CreatePaymentIntentParams) {
     return HttpClient.post({
       route: '/orders/create-payment-intent',
-      body: JSON.stringify(items),
+      body: JSON.stringify({ cart: items }),
       token
     })
   }
