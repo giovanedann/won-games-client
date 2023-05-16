@@ -19,7 +19,22 @@ jest.mock('components/GameItem', () => ({
 
 describe('<OrdersList />', () => {
   it('should render the right items', () => {
-    render(<OrdersList items={ordersListMock} />)
+    render(
+      <OrdersList
+        items={[
+          {
+            games: ordersListMock,
+            id: '1',
+            paymentInfo: {
+              flag: 'flag',
+              img: 'img',
+              number: '1234',
+              purchaseDate: ''
+            }
+          }
+        ]}
+      />
+    )
 
     expect(
       screen.getByRole('heading', { name: /my orders/i, level: 2 })

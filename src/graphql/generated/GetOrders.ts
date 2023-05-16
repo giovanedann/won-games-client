@@ -41,5 +41,5 @@ export interface GetOrders {
 }
 
 export interface GetOrdersVariables {
-  identifier: string;
+  identifier?: string;
 }

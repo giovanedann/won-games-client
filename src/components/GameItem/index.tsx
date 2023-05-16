@@ -70,14 +70,16 @@ const GameItem = ({
           <p>{paymentInfo.purchaseDate}</p>
           <S.CardInfo>
             <span>{paymentInfo.number}</span>
-            <S.PaymentCardImageBox>
-              <Image
-                src={paymentInfo.img}
-                alt={paymentInfo.flag}
-                fill
-                loader={() => paymentInfo.img}
-              />
-            </S.PaymentCardImageBox>
+            {paymentInfo.img && (
+              <S.PaymentCardImageBox>
+                <Image
+                  src={paymentInfo.img}
+                  alt={paymentInfo.flag}
+                  fill
+                  loader={() => paymentInfo.img}
+                />
+              </S.PaymentCardImageBox>
+            )}
           </S.CardInfo>
         </S.PaymentContent>
       )}
