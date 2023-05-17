@@ -1,4 +1,3 @@
-import { GetOrders_orders } from 'graphql/generated/GetOrders'
 import getImageUrl from 'utils/getImageUrl'
 
 const ordersListMock = [

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import Link from 'next/link'
 import media from 'styled-media-query'
 
 export const Nav = styled.nav`
@@ -33,7 +32,7 @@ type StyledLinkProps = {
   isActive?: boolean
 }
 
-export const StyledLink = styled(Link)<StyledLinkProps>`
+export const StyledLink = styled.a<StyledLinkProps>`
   ${({ theme, isActive }) => css`
     text-decoration: none;
     display: flex;

@@ -44,3 +44,30 @@ export const StyledNextLink = styled(Link)`
     }
   `}
 `
+
+export const StyledLink = styled.a`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: ${theme.colors.white};
+    color: ${theme.colors.black};
+    padding: ${theme.spacings.xsmall} ${theme.spacings.small};
+    transition: background, color, ${theme.transitions.normal};
+
+    &:hover {
+      background: ${theme.colors.primary};
+      color: ${theme.colors.white};
+      cursor: pointer;
+    }
+
+    > svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+
+    > span {
+      margin-left: ${theme.spacings.xsmall};
+    }
+  `}
+`

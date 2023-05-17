@@ -6,6 +6,7 @@ import {
 
 import * as S from './styles'
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export type ActiveLinks = '/profile/me' | '/profile/cards' | '/profile/orders'
 
@@ -14,6 +15,13 @@ export type ProfileMenuProps = {
 }
 
 function ProfileMenu({ activeLink }: ProfileMenuProps) {
+  const { push } = useRouter()
+
+  async function handleSignOut() {
+    const data = await signOut({ redirect: false, callbackUrl: '/' })
+    push(data.url)
+  }
+
   return (
     <S.Nav>
       <S.StyledLink
@@ -34,7 +42,7 @@ function ProfileMenu({ activeLink }: ProfileMenuProps) {
         <span>My orders</span>
       </S.StyledLink>
 
-      <S.StyledLink href="/logout" onClick={() => signOut()}>
+      <S.StyledLink onClick={handleSignOut}>
         <MdExitToApp size={24} />
         <span>Sign out</span>
       </S.StyledLink>

@@ -3,12 +3,20 @@ import { FiChevronDown } from 'react-icons/fi'
 import { MdAccountCircle, MdExitToApp, MdFavoriteBorder } from 'react-icons/md'
 import * as S from './styles'
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 type UserDropdownProps = {
   username: string
 }
 
 function UserDropdown({ username }: UserDropdownProps) {
+  const { push } = useRouter()
+
+  async function handleSignOut() {
+    const data = await signOut({ redirect: false, callbackUrl: '/' })
+    push(data.url)
+  }
+
   return (
     <Dropdown
       title={
@@ -30,14 +38,10 @@ function UserDropdown({ username }: UserDropdownProps) {
           <span>Wishlist</span>
         </S.StyledNextLink>
 
-        <S.StyledNextLink
-          href="/logout"
-          title="Sign out"
-          onClick={() => signOut()}
-        >
+        <S.StyledLink title="Sign out" onClick={handleSignOut}>
           <MdExitToApp />
           <span>Sign out</span>
-        </S.StyledNextLink>
+        </S.StyledLink>
       </S.Nav>
     </Dropdown>
   )
