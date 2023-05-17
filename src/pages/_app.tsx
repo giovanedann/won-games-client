@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
                 <link rel="manifest" href="/manifest.json" />
                 <meta
                   name="description"
-                  content="The game store that will surpass Steam, Epic, and every other store!"
+                  content="The game store that will surpass Epic and Steam!"
                 />
               </Head>
               <GlobalStyles />
