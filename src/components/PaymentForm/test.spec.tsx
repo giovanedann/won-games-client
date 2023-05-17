@@ -3,6 +3,7 @@ import PaymentForm from '.'
 import { Session } from 'next-auth'
 import { CartContextData, cartContextDefaultValues } from 'contexts/cart'
 import cartListMock from 'components/CartList/data.mock'
+import StripeService from 'services/StripeService'
 
 // spies the next router useRouter hook
 const useRouter = jest.spyOn(require('next/router'), 'useRouter') // eslint-disable-line
@@ -71,5 +72,20 @@ describe('<PaymentForm />', () => {
     ).toBeInTheDocument()
 
     expect(screen.getByRole('button', { name: /buy now/i })).toBeDisabled()
+  })
+
+  it('should call createPaymentIntent on load when games are free', async () => {
+    jest
+      .spyOn(StripeService, 'createPaymentIntent')
+      .mockResolvedValueOnce({ freeGames: true })
+
+    render(<PaymentForm session={session} />, { cartProviderProps })
+
+    expect(StripeService.createPaymentIntent).toHaveBeenCalled()
+    expect(StripeService.createPaymentIntent).toHaveBeenCalledTimes(1)
+
+    expect(
+      await screen.findByText(/only free games in cart! click buy and enjoy!/i)
+    ).toBeInTheDocument()
   })
 })
