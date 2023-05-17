@@ -8,8 +8,10 @@ import Showcase from 'components/Showcase'
 import Base from 'templates/Base'
 
 import * as S from './styles'
+import { NextSeo } from 'next-seo'
 
 export type GameTemplateProps = {
+  slug?: string
   coverImg: string
   gameInfo: GameInfoProps
   gallery?: GalleryImageProps[]
@@ -23,6 +25,7 @@ export type GameTemplateProps = {
 }
 
 function Game({
+  slug,
   coverImg,
   gameInfo,
   gallery,
@@ -36,6 +39,22 @@ function Game({
 }: GameTemplateProps) {
   return (
     <Base>
+      <NextSeo
+        title={`${gameInfo.title} - Won Games`}
+        description={gameInfo.description}
+        canonical={`https://gsaes-won-games.vercel.app/game/${slug}`}
+        openGraph={{
+          url: `https://gsaes-won-games.vercel.app/game/${slug}`,
+          title: `${gameInfo.title} - Won Games`,
+          description: gameInfo.description,
+          images: [
+            {
+              url: coverImg,
+              alt: `${gameInfo.title}`
+            }
+          ]
+        }}
+      />
       <S.Cover src={coverImg} role="img" aria-label="cover" />
 
       <S.Main>
