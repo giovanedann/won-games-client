@@ -15,6 +15,11 @@ export default function Wishlist(props: WishlistTemplateProps) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await protectedRoute(context)
+
+  if (!session) {
+    return { props: {} }
+  }
+
   const apolloClient = initializeApollo()
 
   const { data } = await apolloClient.query<QueryRecommended>({
