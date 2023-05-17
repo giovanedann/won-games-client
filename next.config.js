@@ -24,7 +24,8 @@ const nextConfig = {
         pathname: '/uploads'
       }
     ],
-    formats: ['image/avif', 'image/webp']
+    formats: ['image/avif', 'image/webp'],
+    domains: ['localhost']
   }
 }
 

@@ -3,6 +3,7 @@ import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
 import { ReactNode } from 'react'
 import getImageUrl from 'utils/getImageUrl'
 import * as S from './styles'
+import Image from 'next/image'
 
 export type BannerProps = {
   img: string
@@ -27,7 +28,15 @@ function Banner({
 }: BannerProps) {
   return (
     <S.Wrapper>
-      <S.Image src={getImageUrl(img)} role="img" aria-label={title} />
+      <S.ImageWrapper>
+        <Image
+          src={getImageUrl(img)}
+          alt={`banner - ${title}`}
+          loader={() => getImageUrl(img)}
+          fill
+          style={{ objectFit: 'contain' }}
+        />
+      </S.ImageWrapper>
 
       <S.Caption>
         <S.Title>{title}</S.Title>
