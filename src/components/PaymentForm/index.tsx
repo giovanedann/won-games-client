@@ -14,6 +14,7 @@ import { useCart } from 'contexts/cart'
 import StripeService from 'services/StripeService'
 
 import * as S from './styles'
+import Link from 'next/link'
 
 type PaymentFormProps = {
   session: Session
@@ -143,9 +144,11 @@ function PaymentForm({ session }: PaymentFormProps) {
       </S.Body>
 
       <S.Footer>
-        <Button as="a" fullWidth minimal>
-          Continue shopping
-        </Button>
+        <Link href="/">
+          <Button fullWidth minimal>
+            Continue shopping
+          </Button>
+        </Link>
 
         <Button
           fullWidth

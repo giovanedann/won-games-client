@@ -19,7 +19,13 @@ export const Footer = styled.div`
     font-weight: ${theme.font.bold};
     padding: ${theme.spacings.small};
     display: flex;
+    gap: 1rem;
     align-items: center;
+
+    a {
+      width: 27rem;
+    }
+
     ${ButtonStyles.Wrapper} {
       padding-left: ${theme.spacings.xxsmall};
       padding-right: ${theme.spacings.xxsmall};
