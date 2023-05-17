@@ -1,6 +1,6 @@
 {
-  "name": "NextJS + TypeScript - Boilerplate",
-  "short_name": "Boilerplate",
+  "name": "Won Games",
+  "short_name": "Won Games",
   "icons": [
     {
       "src": "/img/icon-192.png",
@@ -13,9 +13,9 @@
       "sizes": "512x512"
     }
   ],
-  "background-color": "#06082B",
-  "description": "Boilerplate of a project configured with React, NextJS, Jest, Testing Library, Storybook and Styled Components!",
+  "background-color": "#06092B",
+  "description": "The game store that will surpass Epic and Steam!",
   "display": "fullscreen",
   "start_url": "/",
-  "theme_color": "#06082B"
+  "theme_color": "#06092B"
 }

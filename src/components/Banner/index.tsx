@@ -34,7 +34,7 @@ function Banner({
           alt={`banner - ${title}`}
           loader={() => getImageUrl(img)}
           fill
-          style={{ objectFit: 'contain' }}
+          style={{ objectFit: 'cover' }}
         />
       </S.ImageWrapper>
 

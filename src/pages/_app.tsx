@@ -7,9 +7,13 @@ import { SessionProvider } from 'next-auth/react'
 import GlobalStyles from 'styles/global'
 import Head from 'next/head'
 import theme from 'styles/theme'
+
 import { useApollo } from 'infra/apollo/client'
 import { CartProvider } from 'contexts/cart'
 import { WishlistProvider } from 'contexts/wishlist'
+import { DefaultSeo } from 'next-seo'
+
+import SEO from '../../next-seo.config'
 
 function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState)
@@ -27,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
                 <link rel="manifest" href="/manifest.json" />
                 <meta
                   name="description"
-                  content="The game store that will surpass Steam, Epic, and every other store!"
+                  content="The game store that will surpass Epic and Steam!"
                 />
               </Head>
               <GlobalStyles />
@@ -37,6 +41,7 @@ function App({ Component, pageProps }: AppProps) {
                 stopDelayMs={200}
                 height={5}
               />
+              <DefaultSeo {...SEO} />
               <Component {...pageProps} />
             </ThemeProvider>
           </WishlistProvider>

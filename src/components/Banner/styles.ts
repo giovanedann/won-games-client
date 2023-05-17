@@ -21,6 +21,7 @@ export const Wrapper = styled.div`
 
 export const ImageWrapper = styled.div`
   width: 100%;
+  position: relative;
   height: 23rem;
 
   ${media.greaterThan('medium')`

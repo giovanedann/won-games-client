@@ -16,9 +16,9 @@ describe('<CartButton />', () => {
 
     render(<CartButton hasText id="12345" />, { cartProviderProps })
 
-    expect(screen.getByTitle(/add item to cart/i)).toBeInTheDocument()
+    expect(screen.getByTitle(/add to cart/i)).toBeInTheDocument()
     expect(screen.getByText(/add to cart/i)).toBeInTheDocument()
-    await user.click(screen.getByTitle(/add item to cart/i))
+    await user.click(screen.getByTitle(/add to cart/i))
 
     expect(addToCart).toHaveBeenCalled()
     expect(addToCart).toHaveBeenCalledTimes(1)
@@ -36,9 +36,9 @@ describe('<CartButton />', () => {
 
     render(<CartButton hasText id="12345" />, { cartProviderProps })
 
-    expect(screen.getByTitle(/remove item from cart/i)).toBeInTheDocument()
+    expect(screen.getByTitle(/remove from cart/i)).toBeInTheDocument()
     expect(screen.getByText(/remove from cart/i)).toBeInTheDocument()
-    await user.click(screen.getByTitle(/remove item from cart/i))
+    await user.click(screen.getByTitle(/remove from cart/i))
 
     expect(removeFromCart).toHaveBeenCalled()
     expect(removeFromCart).toHaveBeenCalledTimes(1)

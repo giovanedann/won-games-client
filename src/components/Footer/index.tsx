@@ -7,7 +7,7 @@ function Footer() {
     <S.Wrapper>
       <Logo color="black" />
       <S.Content>
-        <S.Column>
+        <S.Column aria-label="contact">
           <S.FooterHeading
             color="black"
             size="small"
@@ -20,7 +20,7 @@ function Footer() {
           <a href="tel:99999999999">+55 99 99999-9999</a>
         </S.Column>
 
-        <S.Column>
+        <S.Column aria-labelledby="social-media">
           <S.FooterHeading
             color="black"
             lineColor="secondary"
@@ -30,7 +30,7 @@ function Footer() {
             Follow us
           </S.FooterHeading>
 
-          <nav aria-labelledby="social media">
+          <nav id="social-media">
             <a
               href="https://www.instagram.com/won-games"
               target="_blank"
@@ -62,7 +62,7 @@ function Footer() {
           </nav>
         </S.Column>
 
-        <S.Column>
+        <S.Column aria-labelledby="resources">
           <S.FooterHeading
             color="black"
             lineColor="secondary"
@@ -72,14 +72,14 @@ function Footer() {
             Links
           </S.FooterHeading>
 
-          <nav aria-labelledby="footer resources">
+          <nav id="resources">
             <Link href="/">Home</Link>
             <Link href="/games">Store</Link>
             <Link href="/search">Search</Link>
           </nav>
         </S.Column>
 
-        <S.Column aria-labelledby="footer-contact">
+        <S.Column aria-label="location">
           <S.FooterHeading
             color="black"
             lineColor="secondary"
