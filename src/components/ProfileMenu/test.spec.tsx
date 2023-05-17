@@ -4,11 +4,20 @@ import theme from 'styles/theme'
 import ProfileMenu from '.'
 import userEvent from '@testing-library/user-event'
 
-const mockSignOut = jest.fn()
+const mockSignOut = jest.fn(() => ({
+  url: 'url-link'
+}))
 
 jest.mock('next-auth/react', () => ({
   ...jest.requireActual('next-auth/react'),
   signOut: () => mockSignOut()
+}))
+
+const useRouter = jest.spyOn(require('next/router'), 'useRouter') // eslint-disable-line
+
+useRouter.mockImplementation(() => ({
+  query: {},
+  push: jest.fn()
 }))
 
 describe('<ProfileMenu />', () => {
@@ -20,7 +29,7 @@ describe('<ProfileMenu />', () => {
     ).toBeInTheDocument()
 
     expect(screen.getByRole('link', { name: /my orders/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /sign out/i })).toBeInTheDocument()
+    expect(screen.getByText(/sign out/i)).toBeInTheDocument()
   })
 
   it('should render with the active link coloured', () => {
@@ -37,7 +46,7 @@ describe('<ProfileMenu />', () => {
 
     render(<ProfileMenu />)
 
-    await user.click(screen.getByRole('link', { name: /sign out/i }))
+    await user.click(screen.getByText(/sign out/i))
 
     expect(mockSignOut).toHaveBeenCalled()
     expect(mockSignOut).toHaveBeenCalledTimes(1)

@@ -19,23 +19,13 @@ export const Wrapper = styled.div`
   `}
 `
 
-type ImageProps = {
-  src: string
-}
+export const ImageWrapper = styled.div`
+  width: 100%;
+  height: 23rem;
 
-export const Image = styled.div<ImageProps>`
-  ${({ theme, src }) => css`
-    width: 100%;
-    height: 23rem;
-    background-color: ${theme.colors.gray[100]};
-    background-image: url(${src});
-    background-position: center center;
-    background-size: cover;
-
-    ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
       height: 58rem;
     `}
-  `}
 `
 
 export const Caption = styled.div`

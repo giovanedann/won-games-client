@@ -30,7 +30,7 @@ export const WithPayment = {
     downloadLink: 'https://wongames.com/download/god-of-war-ragnarok',
     paymentInfo: {
       flag: 'mastercard',
-      img: 'img/credit-cards/master-card.png',
+      img: 'img/credit-cards/mastercard.png',
       number: '**** **** **** 4326',
       purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
     }

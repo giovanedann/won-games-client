@@ -24,5 +24,13 @@ describe('<OrdersList />', () => {
     expect(
       screen.getByRole('heading', { name: /my orders/i, level: 2 })
     ).toBeInTheDocument()
+
+    expect(screen.getAllByTestId('game-item-mock')).toHaveLength(2)
+  })
+
+  it('should render empty state', () => {
+    render(<OrdersList items={[]} />)
+
+    expect(screen.getByTestId('empty-mock')).toBeInTheDocument()
   })
 })

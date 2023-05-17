@@ -3,11 +3,20 @@ import UserDropdown from '.'
 
 import userEvent from '@testing-library/user-event'
 
-const mockSignOut = jest.fn()
+const mockSignOut = jest.fn(() => ({
+  url: 'url-link'
+}))
 
 jest.mock('next-auth/react', () => ({
   ...jest.requireActual('next-auth/react'),
   signOut: () => mockSignOut()
+}))
+
+const useRouter = jest.spyOn(require('next/router'), 'useRouter') // eslint-disable-line
+
+useRouter.mockImplementation(() => ({
+  query: {},
+  push: jest.fn()
 }))
 
 describe('<UserDropdown />', () => {
@@ -37,7 +46,7 @@ describe('<UserDropdown />', () => {
       screen.getByRole('link', { name: /my profile/i })
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /wishlist/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /sign out/i })).toBeInTheDocument()
+    expect(screen.getByText(/sign out/i)).toBeInTheDocument()
   })
 
   it('should call next auth signOut on Sign Out click', async () => {
@@ -46,7 +55,7 @@ describe('<UserDropdown />', () => {
     render(<UserDropdown username="Test" />)
 
     await user.click(screen.getByText(/test/i))
-    await user.click(screen.getByRole('link', { name: /sign out/i }))
+    await user.click(screen.getByText(/sign out/i))
 
     expect(mockSignOut).toHaveBeenCalled()
     expect(mockSignOut).toHaveBeenCalledTimes(1)

@@ -3,8 +3,17 @@ import theme from 'styles/theme'
 
 import Banner from '.'
 
+jest.mock('next/image', () => ({
+  __esModule: true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: (props: any) => {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img {...props} />
+  }
+}))
+
 const props = {
-  img: 'https://source.unsplash.com/user/willianjusten/1042x580',
+  img: 'url',
   title: 'Defy death',
   subtitle: '<p>Play the new <strong>CrashLands</strong> season</p>',
   buttonLabel: 'Buy now',

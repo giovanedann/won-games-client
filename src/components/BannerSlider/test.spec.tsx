@@ -2,9 +2,18 @@ import 'match-media-mock'
 import { screen, render } from 'utils/tests/render'
 import BannerSlider from '.'
 
+jest.mock('next/image', () => ({
+  __esModule: true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: (props: any) => {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img {...props} />
+  }
+}))
+
 const items = [
   {
-    img: 'https://source.unsplash.com/user/willianjusten/1042x580',
+    img: 'src1',
     title: 'Defy death 1',
     subtitle: '<p>Play the new <strong>CrashLands</strong> season',
     buttonLabel: 'Buy now',
@@ -12,7 +21,7 @@ const items = [
     ribbon: 'Bestselling'
   },
   {
-    img: 'https://source.unsplash.com/user/willianjusten/1042x582',
+    img: 'src2',
     title: 'Defy death 2',
     subtitle: '<p>Play the new <strong>CrashLands</strong> season',
     buttonLabel: 'Buy now',

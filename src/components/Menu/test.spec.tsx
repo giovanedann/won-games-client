@@ -3,6 +3,13 @@ import userEvent from '@testing-library/user-event'
 
 import Menu from '.'
 
+const useRouter = jest.spyOn(require('next/router'), 'useRouter') // eslint-disable-line
+
+useRouter.mockImplementation(() => ({
+  query: {},
+  push: jest.fn()
+}))
+
 describe('<Menu />', () => {
   it('should render the menu icons and logo', () => {
     render(<Menu isLoading={false} username="username" />)

@@ -1,25 +1,37 @@
 import { CartItem } from 'contexts/cart'
+import { PaymentIntent } from '@stripe/stripe-js'
+import HttpClient from 'infra/http/client'
 
 type CreatePaymentIntentParams = {
   items: CartItem[]
   token: string
 }
 
+type CreatePaymentParams = {
+  items: CartItem[]
+  paymentIntent?: PaymentIntent
+  token: string
+}
+
 class StripeService {
   async createPaymentIntent({ items, token }: CreatePaymentIntentParams) {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/orders/create-payment-intent`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ cart: items })
-      }
-    )
+    return HttpClient.post({
+      route: '/orders/create-payment-intent',
+      body: JSON.stringify({ cart: items }),
+      token
+    })
+  }
 
-    return await response.json()
+  async createPayment({ items, paymentIntent, token }: CreatePaymentParams) {
+    return HttpClient.post({
+      route: '/orders',
+      body: JSON.stringify({
+        cart: items,
+        paymentIntentId: paymentIntent?.id,
+        paymentMethod: paymentIntent?.payment_method
+      }),
+      token
+    })
   }
 }
 
