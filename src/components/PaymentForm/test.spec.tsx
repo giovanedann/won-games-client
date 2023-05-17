@@ -39,8 +39,9 @@ jest.mock('@stripe/react-stripe-js', () => ({
 
 describe('<PaymentForm />', () => {
   let session: Session
-  let cartProviderProps: CartContextData // eslint-disable-line
+  let cartProviderProps: CartContextData
 
+  // mocks the user session before each test, and set the provider props
   beforeEach(() => {
     session = {
       id: '123',
@@ -56,6 +57,9 @@ describe('<PaymentForm />', () => {
       items: cartListMock
     }
   })
+
+  // clear mocks to avoid spies accumulation of methods calls
+  afterEach(jest.clearAllMocks)
 
   it('should render the right elements', () => {
     render(<PaymentForm session={session} />)
@@ -86,6 +90,21 @@ describe('<PaymentForm />', () => {
 
     expect(
       await screen.findByText(/only free games in cart! click buy and enjoy!/i)
+    ).toBeInTheDocument()
+  })
+
+  it('should render an error if createPaymentIntent returns error', async () => {
+    jest
+      .spyOn(StripeService, 'createPaymentIntent')
+      .mockResolvedValueOnce({ error: 'Error creating payment intent' })
+
+    render(<PaymentForm session={session} />, { cartProviderProps })
+
+    expect(StripeService.createPaymentIntent).toHaveBeenCalled()
+    expect(StripeService.createPaymentIntent).toHaveBeenCalledTimes(1)
+
+    expect(
+      await screen.findByText(/error creating payment intent/i)
     ).toBeInTheDocument()
   })
 })
