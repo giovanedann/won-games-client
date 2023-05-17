@@ -19,25 +19,18 @@ jest.mock('components/GameItem', () => ({
 
 describe('<OrdersList />', () => {
   it('should render the right items', () => {
-    render(
-      <OrdersList
-        items={[
-          {
-            games: ordersListMock,
-            id: '1',
-            paymentInfo: {
-              flag: 'flag',
-              img: 'img',
-              number: '1234',
-              purchaseDate: ''
-            }
-          }
-        ]}
-      />
-    )
+    render(<OrdersList items={ordersListMock} />)
 
     expect(
       screen.getByRole('heading', { name: /my orders/i, level: 2 })
     ).toBeInTheDocument()
+
+    expect(screen.getAllByTestId('game-item-mock')).toHaveLength(2)
+  })
+
+  it('should render empty state', () => {
+    render(<OrdersList items={[]} />)
+
+    expect(screen.getByTestId('empty-mock')).toBeInTheDocument()
   })
 })
