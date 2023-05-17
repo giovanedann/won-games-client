@@ -13,15 +13,11 @@ function CartButton({ id, hasText, size }: CartButtonProps) {
 
   return (
     <Button
-      icon={
-        isItemInCart(id) ? (
-          <MdRemoveShoppingCart title="remove item from cart" />
-        ) : (
-          <MdAddShoppingCart title="add item to cart" />
-        )
-      }
+      icon={isItemInCart(id) ? <MdRemoveShoppingCart /> : <MdAddShoppingCart />}
       size={size}
       onClick={() => (isItemInCart(id) ? removeFromCart(id) : addToCart(id))}
+      title={text}
+      aria-label={text}
     >
       {hasText && text}
     </Button>
