@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/styles'
 import media from 'styled-media-query'
+import { lighten } from 'polished'
 
 export const FooterHeading = styled(HeadingStyles.Wrapper)`
   text-transform: uppercase;
@@ -26,15 +27,15 @@ export const Column = styled.div`
     a,
     span {
       display: block;
-      color: ${theme.colors.gray[400]};
+      color: ${theme.colors.gray[600]};
       text-decoration: none;
       margin-bottom: ${theme.spacings.xxsmall};
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.medium};
       transition: all 0.3s ease-in-out;
     }
 
     a:hover {
-      color: ${theme.colors.gray[600]};
+      color: ${lighten(0.25, theme.colors.gray[600])};
     }
   `}
 `
