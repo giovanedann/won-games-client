@@ -36,26 +36,30 @@ Cypress.Commands.add('testHomeShowcases', ({ name, highlight }) => {
   cy.visit('/')
 
   // gets the showcase by the title
-  cy.get(`[data-cy="${name}"]`).within(() => {
+  cy.getByDataCy(name).within(() => {
     const headingRegExp = new RegExp(name, 'i')
 
     cy.findByRole('heading', { name: headingRegExp }).should('exist')
 
     if (highlight) {
-      cy.get('[data-cy="highlight"]').should('exist')
+      cy.getByDataCy('highlight').should('exist')
 
-      cy.get('[data-cy="highlight"]').within(() => {
+      cy.getByDataCy('highlight').within(() => {
         cy.findByRole('link', { name: /buy now/i }).should('exist')
         cy.findByRole('link').should('have.attr', 'href')
       })
 
-      cy.get('[data-cy="game-card"]').should('have.length.gt', 1)
+      cy.getByDataCy('game-card').should('have.length.gt', 1)
     }
 
     if (!highlight) {
-      cy.get('[data-cy="highlight"]').should('not.exist')
+      cy.getByDataCy('highlight').should('not.exist')
 
-      cy.get('[data-cy="game-card"]').should('have.length.gt', 1)
+      cy.getByDataCy('game-card').should('have.length.gt', 1)
     }
   })
 })
+
+Cypress.Commands.add('getByDataCy', (selector, ...args) =>
+  cy.get(`[data-cy="${selector}"]`, ...args)
+)
