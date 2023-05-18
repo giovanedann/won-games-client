@@ -48,10 +48,14 @@ Cypress.Commands.add('testHomeShowcases', ({ name, highlight }) => {
         cy.findByRole('link', { name: /buy now/i }).should('exist')
         cy.findByRole('link').should('have.attr', 'href')
       })
+
+      cy.get('[data-cy="game-card"]').should('have.length.gt', 1)
     }
 
     if (!highlight) {
       cy.get('[data-cy="highlight"]').should('not.exist')
+
+      cy.get('[data-cy="game-card"]').should('have.length.gt', 1)
     }
   })
 })
