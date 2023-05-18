@@ -30,3 +30,28 @@ Cypress.Commands.add('testHomeBanner', () => {
       cy.findByText(/the ultimate devil hunter is back in style\./i)
     })
 })
+
+Cypress.Commands.add('testHomeShowcases', ({ name, highlight }) => {
+  // visit the home page
+  cy.visit('/')
+
+  // gets the showcase by the title
+  cy.get(`[data-cy="${name}"]`).within(() => {
+    const headingRegExp = new RegExp(name, 'i')
+
+    cy.findByRole('heading', { name: headingRegExp }).should('exist')
+
+    if (highlight) {
+      cy.get('[data-cy="highlight"]').should('exist')
+
+      cy.get('[data-cy="highlight"]').within(() => {
+        cy.findByRole('link', { name: /buy now/i }).should('exist')
+        cy.findByRole('link').should('have.attr', 'href')
+      })
+    }
+
+    if (!highlight) {
+      cy.get('[data-cy="highlight"]').should('not.exist')
+    }
+  })
+})

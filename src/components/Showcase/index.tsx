@@ -13,7 +13,7 @@ export type ShowcaseProps = {
 
 function Showcase({ games, highlight, title }: ShowcaseProps) {
   return (
-    <S.Wrapper>
+    <S.Wrapper data-cy={title?.toLowerCase() || 'showcase'}>
       {!!title && (
         <Heading lineLeft lineColor="secondary">
           {title}

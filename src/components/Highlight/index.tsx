@@ -21,7 +21,11 @@ function Highlight({
   floatImage
 }: HighlightProps) {
   return (
-    <S.Wrapper alignment={alignment} backgroundImage={backgroundImage}>
+    <S.Wrapper
+      alignment={alignment}
+      backgroundImage={backgroundImage}
+      data-cy="highlight"
+    >
       {floatImage && <S.FloatImage src={floatImage} alt={title} />}
       <S.Content>
         <S.Title>{title}</S.Title>
