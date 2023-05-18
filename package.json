@@ -15,6 +15,7 @@
     "test:coverage": "yarn test --collect-coverage",
     "test:e2e-open": "cypress open",
     "test:e2e-run": "cypress run",
+    "test:e2e": "start-server-and-test dev http://localhost:3000 test:e2e-open",
     "generate": "yarn plop --plopfile ./generators/plopfile.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
