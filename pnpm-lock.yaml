@@ -99,6 +99,9 @@ devDependencies:
   '@stripe/stripe-js':
     specifier: ^1.52.1
     version: 1.52.1
+  '@testing-library/cypress':
+    specifier: ^9.0.0
+    version: 9.0.0(cypress@12.12.0)
   '@testing-library/jest-dom':
     specifier: ^5.16.5
     version: 5.16.5
@@ -4067,6 +4070,17 @@ packages:
     resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
       tslib: 2.5.0
+
+  /@testing-library/cypress@9.0.0(cypress@12.12.0):
+    resolution: {integrity: sha512-c1XiCGeHGGTWn0LAU12sFUfoX3qfId5gcSE2yHode+vsyHDWraxDPALjVnHd4/Fa3j4KBcc5k++Ccy6A9qnkMA==}
+    engines: {node: '>=12', npm: '>=6'}
+    peerDependencies:
+      cypress: ^12.0.0
+    dependencies:
+      '@babel/runtime': 7.21.5
+      '@testing-library/dom': 8.20.0
+      cypress: 12.12.0
+    dev: true
 
   /@testing-library/dom@8.20.0:
     resolution: {integrity: sha512-d9ULIT+a4EXLX3UU8FBjauG9NnsZHkHztXoIcTsOKoOw030fyjheN9svkTULjJxtYag9DZz5Jz5qkWZDPxTFwA==}
