@@ -2,9 +2,9 @@ describe('Home page', () => {
   it('should render the home sections', () => {
     cy.testHomeBanner()
 
-    cy.testHomeShowcases({ name: 'new games' })
-    cy.testHomeShowcases({ name: 'popular games', highlight: true })
-    cy.testHomeShowcases({ name: 'upcoming games', highlight: true })
-    cy.testHomeShowcases({ name: 'free games' })
+    cy.findShowcase({ name: 'new games' })
+    cy.findShowcase({ name: 'popular games', highlight: true })
+    cy.findShowcase({ name: 'upcoming games', highlight: true })
+    cy.findShowcase({ name: 'free games' })
   })
 })

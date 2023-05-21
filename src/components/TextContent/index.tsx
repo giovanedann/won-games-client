@@ -8,7 +8,7 @@ export type TextContentProps = {
 
 function TextContent({ content, title }: TextContentProps) {
   return (
-    <S.Wrapper>
+    <S.Wrapper data-cy="content">
       {title && (
         <Heading lineLeft lineColor="secondary">
           {title}
