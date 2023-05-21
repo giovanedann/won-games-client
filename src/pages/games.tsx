@@ -7,6 +7,7 @@ import { initializeApollo } from 'infra/apollo/client'
 import { GetServerSidePropsContext } from 'next'
 import GamesTemplate, { GameTemplateProps } from 'templates/Games'
 import { parseQueryStringToWhereJson } from 'utils/filter'
+import { platformFields, priceFields, sortFields } from 'utils/filter/fields'
 
 export default function GamesPage(props: GameTemplateProps) {
   const isComponentMounted = useIsMounted()
@@ -27,35 +28,21 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     title: 'Price',
     name: 'price_lte',
     type: 'radio',
-    fields: [
-      { label: 'Free', name: 0 },
-      { label: 'Under $50', name: 50 },
-      { label: 'Under $100', name: 100 },
-      { label: 'Under $150', name: 150 },
-      { label: 'Under $250', name: 250 },
-      { label: 'Under $500', name: 500 }
-    ]
+    fields: priceFields
   }
 
   const filterPlatforms = {
     title: 'Platforms',
     name: 'platforms',
     type: 'checkbox',
-    fields: [
-      { label: 'Windows', name: 'windows' },
-      { label: 'Linux', name: 'linux' },
-      { label: 'Mac OS', name: 'mac' }
-    ]
+    fields: platformFields
   }
 
   const filterSort = {
     title: 'Sort by price',
     name: 'sort',
     type: 'radio',
-    fields: [
-      { label: 'Lowest to highest', name: 'price:asc' },
-      { label: 'Highest to lowest', name: 'price:desc' }
-    ]
+    fields: sortFields
   }
 
   const filterCategories = {
