@@ -41,17 +41,15 @@ describe('Games (explore) page', () => {
 
   it('should order games by price', () => {
     cy.findByRole('button', { name: /show more/i }).click()
+
     cy.findByText(/lowest to highest/i).click()
+
     cy.location('href').should('contain', 'sort=price%3Aasc')
 
     cy.getByDataCy('game-card')
       .first()
       .within(() => {
-        cy.findByText(/^\$\d+(\.\d{1,2})?/)
-          .invoke('text') // transforms the previou chained value into a text
-          .then(($el) => $el.replace('$', '')) // removes the dollar
-          .then(parseFloat) // transforms the string into a number
-          .should('eq', 0) // checks if is 0
+        cy.shouldBeEqualTo(0)
       })
 
     cy.findByText(/highest to lowest/i).click()
@@ -60,11 +58,7 @@ describe('Games (explore) page', () => {
     cy.getByDataCy('game-card')
       .first()
       .within(() => {
-        cy.findByText(/^\$\d+(\.\d{1,2})?/)
-          .invoke('text') // transforms the previou chained value into a text
-          .then(($el) => $el.replace('$', '')) // removes the dollar
-          .then(parseFloat) // transforms the string into a number
-          .should('be.gt', 0) // checks if is greater than 0
+        cy.shouldBeGreaterThan(0)
       })
   })
 })

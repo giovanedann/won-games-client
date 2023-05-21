@@ -60,3 +60,27 @@ Cypress.Commands.add('findShowcase', ({ name, highlight }) => {
 Cypress.Commands.add('getByDataCy', (selector, ...args) =>
   cy.get(`[data-cy="${selector}"]`, ...args)
 )
+
+Cypress.Commands.add('shouldBeLessThan', (price) => {
+  cy.findByText(/^\$\d+(\.\d{1,2})?/)
+    .invoke('text') // transforms the previou chained value into a text
+    .then(($el) => $el.replace('$', '')) // removes the dollar
+    .then(parseFloat) // transforms the string into a number
+    .should('be.lt', price) // checks if is less than 0
+})
+
+Cypress.Commands.add('shouldBeGreaterThan', (price) => {
+  cy.findByText(/^\$\d+(\.\d{1,2})?/)
+    .invoke('text') // transforms the previou chained value into a text
+    .then(($el) => $el.replace('$', '')) // removes the dollar
+    .then(parseFloat) // transforms the string into a number
+    .should('be.gt', price) // checks if is greater than 0
+})
+
+Cypress.Commands.add('shouldBeEqualTo', (price) => {
+  cy.findByText(/^\$\d+(\.\d{1,2})?/)
+    .invoke('text') // transforms the previou chained value into a text
+    .then(($el) => $el.replace('$', '')) // removes the dollar
+    .then(parseFloat) // transforms the string into a number
+    .should('eq', price) // checks if is equal to 0
+})

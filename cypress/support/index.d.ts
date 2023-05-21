@@ -14,6 +14,15 @@ declare global {
 
       // custom command to test home page showcases
       getByDataCy: (selector: string) => Chainable<JQuery<HTMLElement | null>>
+
+      // custom command to check if game price is less than some value
+      shouldBeLessThan: (price: number) => Chainable<AUTWindow>
+
+      // custom command to check if game price is greater than some value
+      shouldBeGreaterThan: (price: number) => Chainable<AUTWindow>
+
+      // custom command to check if game price is equal to some value
+      shouldBeEqualTo: (price: number) => Chainable<AUTWindow>
     }
   }
 }
