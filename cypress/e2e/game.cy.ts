@@ -1,7 +1,9 @@
 describe('Game/[slug] page', () => {
-  it('should render the game sections', () => {
+  beforeEach(() => {
     cy.visit('/game/the-witcher-3-wild-hunt')
+  })
 
+  it('should render the game sections', () => {
     cy.getByDataCy('game-info').within(() => {
       // check game heading
       cy.findByRole('heading', { name: /the witcher 3: wild hunt/i }).should(
@@ -56,11 +58,54 @@ describe('Game/[slug] page', () => {
       cy.findByText('Role-playing / Fantasy / Adventure').should('exist')
     })
 
+    // checks the upcoming games showcase
     cy.findShowcase({ name: 'upcoming games', highlight: true })
 
+    // checks the recommended games showcase
     cy.findShowcase({
       name: 'based on your purchases',
       highlight: false
+    })
+  })
+
+  it('should add and remove a game from cart', () => {
+    // clicks the add to cart button
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', { name: /add to cart/i }).click()
+      cy.findByRole('button', { name: /add to cart/i }).should('not.exist')
+      cy.findByRole('button', { name: /remove from cart/i }).should('exist')
+    })
+
+    // clicks the header shopping cart icon
+    cy.findAllByLabelText(/shopping cart icon/i)
+      .first()
+      .click()
+
+    // finds the cart list
+    cy.getByDataCy('cart-list').within(() => {
+      // check if the game in on the cart list
+      cy.findByRole('heading', { name: /the witcher 3: wild hunt/i }).should(
+        'exist'
+      )
+
+      // click on remove button to check if the item is removed from the cart list
+      cy.findByText(/remove/i).click()
+
+      // check if the game in not on the cart list anymore
+      cy.findByRole('heading', { name: /the witcher 3: wild hunt/i }).should(
+        'not.exist'
+      )
+    })
+
+    // checks if the button label has changed
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', { name: /add to cart/i }).should('exist')
+      cy.findByRole('button', { name: /remove from cart/i }).should('not.exist')
+    })
+
+    // checks the empty component is rendered on cart list
+    cy.getByDataCy('cart-list').within(() => {
+      cy.findByText(/your cart is empty/i).should('exist')
     })
   })
 })
