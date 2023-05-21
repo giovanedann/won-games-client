@@ -46,6 +46,8 @@ describe('Games (explore) page', () => {
 
     cy.location('href').should('contain', 'sort=price%3Aasc')
 
+    cy.wait(1000)
+
     cy.getByDataCy('game-card')
       .first()
       .within(() => {
@@ -53,12 +55,39 @@ describe('Games (explore) page', () => {
       })
 
     cy.findByText(/highest to lowest/i).click()
+
     cy.location('href').should('contain', 'sort=price%3Adesc')
+
+    cy.wait(1000)
 
     cy.getByDataCy('game-card')
       .first()
       .within(() => {
         cy.shouldBeGreaterThan(0)
+      })
+  })
+
+  it('should order games by price range', () => {
+    cy.findByText(/highest to lowest/i).click()
+
+    cy.findByText(/^under \$50$/i).click()
+
+    cy.wait(1000)
+
+    cy.getByDataCy('game-card')
+      .first()
+      .within(() => {
+        cy.shouldBeLessThan(50)
+      })
+
+    cy.findByText(/under \$150/i).click()
+
+    cy.wait(1000)
+
+    cy.getByDataCy('game-card')
+      .first()
+      .within(() => {
+        cy.shouldBeLessThan(150)
       })
   })
 })
