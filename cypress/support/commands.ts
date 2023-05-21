@@ -31,10 +31,7 @@ Cypress.Commands.add('testHomeBanner', () => {
     })
 })
 
-Cypress.Commands.add('testHomeShowcases', ({ name, highlight }) => {
-  // visit the home page
-  cy.visit('/')
-
+Cypress.Commands.add('findShowcase', ({ name, highlight }) => {
   // gets the showcase by the title
   cy.getByDataCy(name).within(() => {
     const headingRegExp = new RegExp(name, 'i')

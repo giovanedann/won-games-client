@@ -10,9 +10,7 @@ declare global {
       testHomeBanner: () => Chainable<AUTWindow>
 
       // custom command to test home page showcases
-      testHomeShowcases: (
-        attributes: ShowcaseAttributes
-      ) => Chainable<AUTWindow>
+      findShowcase: (attributes: ShowcaseAttributes) => Chainable<AUTWindow>
 
       // custom command to test home page showcases
       getByDataCy: (selector: string) => Chainable<JQuery<HTMLElement | null>>
