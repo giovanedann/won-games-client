@@ -6,9 +6,11 @@ import {
 } from '../../src/utils/filter/fields'
 
 describe('Games (explore) page', () => {
-  it('should render filters columns', () => {
+  beforeEach(() => {
     cy.visit('/games')
+  })
 
+  it('should render filters columns', () => {
     cy.findByRole('heading', { name: /sort by price/i }).should('exist')
     cy.findByRole('heading', { name: /^price/i }).should('exist')
     cy.findByRole('heading', { name: /platforms/i }).should('exist')
@@ -29,5 +31,11 @@ describe('Games (explore) page', () => {
     categoriesFields.map(({ label }) => {
       cy.findByText(label).should('exist')
     })
+  })
+
+  it('should show more games if show more is clicked', () => {
+    cy.getByDataCy('game-card').should('have.length', 15)
+    cy.findByRole('button', { name: /show more/i }).click()
+    cy.getByDataCy('game-card').should('have.length', 30)
   })
 })
