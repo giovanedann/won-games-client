@@ -1,11 +1,18 @@
+import { createUser } from '../support/utils'
+
 describe('SignUp workflow', () => {
   it('should sign up', () => {
     cy.visit('/sign-up')
 
-    cy.findByPlaceholderText(/username/i).type('wongames')
-    cy.findByPlaceholderText(/email/i).type('wongames@wongames.com')
-    cy.findByPlaceholderText(/^password/i).type('123456')
-    cy.findByPlaceholderText(/confirm password/i).type('123456')
-    cy.findByRole('button', { name: /sign up now/i }).click()
+    const user = createUser()
+
+    cy.findByPlaceholderText(/username/i).type(user.username)
+    cy.findByPlaceholderText(/e-mail/i).type(user.email)
+    cy.findByPlaceholderText(/^password/i).type(user.password)
+    cy.findByPlaceholderText(/confirm password/i).type(user.password)
+    cy.findByRole('button', { name: /sign up/i }).click()
+
+    cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+    cy.findByText(user.username).should('exist')
   })
 })
