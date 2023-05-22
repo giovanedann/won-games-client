@@ -45,11 +45,13 @@ const FormSignUp = () => {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+    // eslint-disable-next-line
+    const { password_confirmation, ...userData } = signUpFormValues
 
     createUser({
       variables: {
         input: {
-          ...signUpFormValues
+          ...userData
         }
       }
     })
