@@ -7,8 +7,9 @@ export type User = {
 }
 
 export function createUser(): User {
-  const username = faker.person.firstName()
-  const email = `${username}e2e@wongames.com`
+  const username = faker.person.fullName()
+  const emailStart = username.split(' ').join('').toLowerCase()
+  const email = `${emailStart}e2e@wongames.com`
   const password = faker.internet.password()
 
   return { username, email, password }
