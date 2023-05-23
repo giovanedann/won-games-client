@@ -28,6 +28,9 @@ declare global {
 
       // custom command to sign up
       signUp: (user: User) => Chainable<AUTWindow>
+
+      // custom command to sign in
+      signIn: () => Chainable<AUTWindow>
     }
   }
 }
