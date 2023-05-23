@@ -93,11 +93,14 @@ Cypress.Commands.add('signUp', (user) => {
   cy.findByRole('button', { name: /sign up/i }).click()
 })
 
-Cypress.Commands.add('signIn', () => {
-  cy.findByPlaceholderText(/e-mail/i).type('e2e@wongames.com')
-  cy.findByPlaceholderText(/password/i).type('123456')
-  cy.findByRole('button', { name: /sign in/i }).click()
-})
+Cypress.Commands.add(
+  'signIn',
+  (username = 'e2e@wongames.com', password = '123456') => {
+    cy.findByPlaceholderText(/e-mail/i).type(username)
+    cy.findByPlaceholderText(/password/i).type(password)
+    cy.findByRole('button', { name: /sign in/i }).click()
+  }
+)
 
 Cypress.Commands.add('addItemToCartByIndex', (gameIndex) => {
   cy.getByDataCy('game-card')
