@@ -114,3 +114,19 @@ Cypress.Commands.add('removeItemFromCartByIndex', (gameIndex) => {
       cy.findByRole('button', { name: /remove from cart/i }).click()
     })
 })
+
+Cypress.Commands.add('addItemToWishlistByIndex', (gameIndex) => {
+  cy.getByDataCy('game-card')
+    .eq(gameIndex)
+    .within(() => {
+      cy.findByLabelText(/add to wishlist/i).click()
+    })
+})
+
+Cypress.Commands.add('removeItemFromWishlistByIndex', (gameIndex) => {
+  cy.getByDataCy('game-card')
+    .eq(gameIndex)
+    .within(() => {
+      cy.findByLabelText(/remove from wishlist/i).click()
+    })
+})

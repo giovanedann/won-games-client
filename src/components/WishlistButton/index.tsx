@@ -60,6 +60,7 @@ function WishlistButton({
     <Button
       minimal
       size={size}
+      aria-label={buttonText}
       icon={<ButtonIcon isFavorited={isInWishlist(id)} isLoading={isLoading} />}
       onClick={handleWishlistButtonClick}
     >
