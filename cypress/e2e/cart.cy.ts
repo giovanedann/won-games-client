@@ -4,25 +4,13 @@ describe('Cart', () => {
     cy.visit('/')
 
     // search for a game card and clicks the add to cart button
-    cy.getByDataCy('game-card')
-      .eq(0)
-      .within(() => {
-        cy.findByRole('button', { name: /add to cart/i }).click()
-      })
+    cy.addItemToCartByIndex(0)
 
     // search for another game card and clicks the add to cart button
-    cy.getByDataCy('game-card')
-      .eq(1)
-      .within(() => {
-        cy.findByRole('button', { name: /add to cart/i }).click()
-      })
+    cy.addItemToCartByIndex(1)
 
     // search for another game card and clicks the add to cart button
-    cy.getByDataCy('game-card')
-      .eq(2)
-      .within(() => {
-        cy.findByRole('button', { name: /add to cart/i }).click()
-      })
+    cy.addItemToCartByIndex(2)
 
     // verifies if the cart icon on header have the added items length number
     cy.findAllByLabelText(/cart items/i)
@@ -41,25 +29,13 @@ describe('Cart', () => {
       .click()
 
     // search for the first added game and remove it from the cart
-    cy.getByDataCy('game-card')
-      .eq(0)
-      .within(() => {
-        cy.findByRole('button', { name: /remove from cart/i }).click()
-      })
+    cy.removeItemFromCartByIndex(0)
 
     // search for the second added game and remove it from the cart
-    cy.getByDataCy('game-card')
-      .eq(1)
-      .within(() => {
-        cy.findByRole('button', { name: /remove from cart/i }).click()
-      })
+    cy.removeItemFromCartByIndex(1)
 
     // search for the thord added game and remove it from the cart
-    cy.getByDataCy('game-card')
-      .eq(2)
-      .within(() => {
-        cy.findByRole('button', { name: /remove from cart/i }).click()
-      })
+    cy.removeItemFromCartByIndex(2)
 
     // verifies if the cart icon on header does not have any number on it
     cy.findAllByLabelText(/cart items/i).should('not.exist')
