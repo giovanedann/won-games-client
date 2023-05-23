@@ -1,5 +1,6 @@
 import { GetOrders_orders } from 'graphql/generated/GetOrders'
 import formatPrice from 'utils/formatPrice'
+import getImageUrl from 'utils/getImageUrl'
 
 export default function ordersAdapter(orders: GetOrders_orders[]) {
   return orders
@@ -25,7 +26,9 @@ export default function ordersAdapter(orders: GetOrders_orders[]) {
             title: game.name,
             downloadLink:
               'https://wongames.com/game/download/yuYT56Tgh431LkjhNBgdf',
-            img: `http://localhost:1337${game.cover?.url}`,
+            img: getImageUrl(
+              game.cover?.url ?? '/uploads/No_image_available_38adfae762.png'
+            ),
             price: formatPrice(game.price)
           }))
         }
