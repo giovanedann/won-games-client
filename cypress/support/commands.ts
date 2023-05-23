@@ -92,3 +92,9 @@ Cypress.Commands.add('signUp', (user) => {
   cy.findByPlaceholderText(/confirm password/i).type(user.password)
   cy.findByRole('button', { name: /sign up/i }).click()
 })
+
+Cypress.Commands.add('signIn', () => {
+  cy.findByPlaceholderText(/e-mail/i).type('e2e@wongames.com')
+  cy.findByPlaceholderText(/password/i).type('123456')
+  cy.findByRole('button', { name: /sign in/i }).click()
+})
