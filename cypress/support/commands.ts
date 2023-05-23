@@ -84,3 +84,11 @@ Cypress.Commands.add('shouldBeEqualTo', (price) => {
     .then(parseFloat) // transforms the string into a number
     .should('eq', price) // checks if is equal to 0
 })
+
+Cypress.Commands.add('signUp', (user) => {
+  cy.findByPlaceholderText(/username/i).type(user.username)
+  cy.findByPlaceholderText(/e-mail/i).type(user.email)
+  cy.findByPlaceholderText(/^password/i).type(user.password)
+  cy.findByPlaceholderText(/confirm password/i).type(user.password)
+  cy.findByRole('button', { name: /sign up/i }).click()
+})

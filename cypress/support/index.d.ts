@@ -1,3 +1,5 @@
+import { User } from './utils'
+
 export type ShowcaseAttributes = {
   name: string
   highlight?: boolean
@@ -23,6 +25,9 @@ declare global {
 
       // custom command to check if game price is equal to some value
       shouldBeEqualTo: (price: number) => Chainable<AUTWindow>
+
+      // custom command to sign up
+      signUp: (user: User) => Chainable<AUTWindow>
     }
   }
 }
