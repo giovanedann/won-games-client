@@ -1,4 +1,4 @@
-describe('Wishlist', () => {
+describe('Wishlist page', () => {
   it('should add and remove games from wishlist', () => {
     // goes to the wishlist page without auth
     cy.visit('/wishlist')

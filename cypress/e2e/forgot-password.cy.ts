@@ -1,4 +1,4 @@
-describe('Forgot Password', () => {
+describe('Forgot Password page', () => {
   // Happy Path
   it('should fill the input and receive a success message', () => {
     // intercepts the post request to mock the success response of the forgot password

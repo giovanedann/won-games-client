@@ -1,4 +1,4 @@
-describe('SignIn workflow', () => {
+describe('SignIn page', () => {
   it('should sign in and sign out', () => {
     cy.visit('/sign-in')
 

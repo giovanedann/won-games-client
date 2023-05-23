@@ -30,7 +30,7 @@ declare global {
       signUp: (user: User) => Chainable<AUTWindow>
 
       // custom command to sign in
-      signIn: () => Chainable<AUTWindow>
+      signIn: (username: string, password: string) => Chainable<AUTWindow>
 
       // custom command to add items to cart by index
       addItemToCartByIndex: (gameIndex: number) => Chainable<AUTWindow>

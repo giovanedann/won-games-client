@@ -114,6 +114,10 @@ function PaymentForm({ session }: PaymentFormProps) {
     setPaymentMode()
   }, [items, session]) // eslint-disable-line
 
+  useEffect(() => {
+    if (areGamesFree) setDisabled(false)
+  }, [areGamesFree])
+
   return (
     <S.Wrapper onSubmit={handleSubmit}>
       <S.Body>
@@ -125,8 +129,7 @@ function PaymentForm({ session }: PaymentFormProps) {
             Only free games in cart! Click buy and enjoy!
           </S.FreeGamesInfo>
         )}
-        {!areGamesFree}{' '}
-        {
+        {!areGamesFree && (
           <CardElement
             options={{
               hidePostalCode: true,
@@ -134,7 +137,7 @@ function PaymentForm({ session }: PaymentFormProps) {
             }}
             onChange={handleChange}
           />
-        }
+        )}
         {error && (
           <S.Error>
             <MdErrorOutline size={20} />

@@ -1,6 +1,6 @@
 import { createUser } from '../support/utils'
 
-describe('SignUp workflow', () => {
+describe('SignUp page', () => {
   it('should sign up', () => {
     cy.visit('/sign-up')
 
