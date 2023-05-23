@@ -31,6 +31,12 @@ declare global {
 
       // custom command to sign in
       signIn: () => Chainable<AUTWindow>
+
+      // custom command to add items to cart by index
+      addItemToCartByIndex: (gameIndex: number) => Chainable<AUTWindow>
+
+      // custom command to remove items to cart by index
+      removeItemFromCartByIndex: (gameIndex: number) => Chainable<AUTWindow>
     }
   }
 }
