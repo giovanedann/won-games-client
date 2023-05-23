@@ -37,6 +37,12 @@ declare global {
 
       // custom command to remove items to cart by index
       removeItemFromCartByIndex: (gameIndex: number) => Chainable<AUTWindow>
+
+      // custom command to add items to cart by index
+      addItemToWishlistByIndex: (gameIndex: number) => Chainable<AUTWindow>
+
+      // custom command to remove items to cart by index
+      removeItemFromWishlistByIndex: (gameIndex: number) => Chainable<AUTWindow>
     }
   }
 }
