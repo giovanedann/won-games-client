@@ -1,4 +1,4 @@
-describe('Cart', () => {
+describe('Cart workflow', () => {
   it('should add and remove items from cart', () => {
     // go to home page
     cy.visit('/')

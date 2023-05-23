@@ -1,4 +1,4 @@
-describe('Reset Password', () => {
+describe('Reset Password page', () => {
   it('should show error if password does not match', () => {
     cy.visit('/reset-password?code=123456')
 
