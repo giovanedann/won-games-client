@@ -55,7 +55,7 @@
     "@storybook/addon-links": "^7.0.9",
     "@storybook/addon-mdx-gfm": "^7.0.9",
     "@storybook/addon-viewport": "^7.0.9",
-    "@storybook/nextjs": "^7.0.9",
+    "@storybook/nextjs": "^7.0.22",
     "@storybook/react": "^7.0.9",
     "@storybook/testing-library": "^0.1.0",
     "@stripe/react-stripe-js": "^2.1.0",
