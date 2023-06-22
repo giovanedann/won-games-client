@@ -25,7 +25,7 @@
     "generate-gql-types": "yarn schema:download && yarn schema:convert && yarn codegen"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.14",
+    "@apollo/client": "^3.7.16",
     "@types/lodash": "^4.14.194",
     "deepmerge": "^4.3.1",
     "dotenv": "^16.0.3",
