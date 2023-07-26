@@ -1,12 +1,16 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@apollo/client':
     specifier: ^3.7.14
     version: 3.7.14(graphql@15.8.0)(react-dom@18.2.0)(react@18.2.0)
   '@types/lodash':
-    specifier: ^4.14.194
-    version: 4.14.194
+    specifier: ^4.14.196
+    version: 4.14.196
   deepmerge:
     specifier: ^4.3.1
     version: 4.3.1
@@ -3245,7 +3249,7 @@ packages:
       '@storybook/preview-api': 7.0.9
       '@storybook/theming': 7.0.9(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.9
-      '@types/lodash': 4.14.194
+      '@types/lodash': 4.14.196
       color-convert: 2.0.1
       dequal: 2.0.3
       lodash: 4.17.21
@@ -4409,8 +4413,8 @@ packages:
       '@types/node': 18.16.3
     dev: true
 
-  /@types/lodash@4.14.194:
-    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
+  /@types/lodash@4.14.196:
+    resolution: {integrity: sha512-22y3o88f4a94mKljsZcanlNWPzO0uBsBdzLAngf2tp533LzZcQzb6+eZPJ+vCTt+bqF2XnvT9gejTLsAcJAJyQ==}
 
   /@types/mdast@3.0.11:
     resolution: {integrity: sha512-Y/uImid8aAwrEA24/1tcRZwpxX3pIFTSilcNDKSPn+Y2iDywSEachzRuvgAYYLR3wpGXAsMbv5lvKLDZLeYPAw==}
